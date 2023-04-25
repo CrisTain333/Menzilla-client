@@ -11,6 +11,9 @@ const nextConfig = {
             }
         ]
     },
+    eslint: {
+        dirs: ['pages', 'libs', 'Config', 'Helpers', 'styles', 'common', 'Components', 'modules']
+    },
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')]
     },

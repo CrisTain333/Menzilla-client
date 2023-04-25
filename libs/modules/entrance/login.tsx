@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
+import LoginBanner from '../../../public/images/loginBanner.jpg';
+import Link from 'next/link';
 
 const Login = () => {
     return (
@@ -84,9 +86,11 @@ const Login = () => {
 
                         <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
                             <p>Don`&apos;`t have an account?</p>
-                            <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
-                                Register
-                            </button>
+                            <Link href="/auth/register">
+                                <button className="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">
+                                    Register
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -96,8 +100,8 @@ const Login = () => {
                             height={500}
                             width={500}
                             alt="loginImage"
-                            className="rounded-2xl h-96"
-                            src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+                            className="rounded-2xl"
+                            src={LoginBanner}
                         />
                     </div>
                 </div>

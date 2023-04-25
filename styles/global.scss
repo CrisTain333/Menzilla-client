@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-mode='dark'] body {
+    background-color: #121212;
+    // background-color: #121212;
+    // background-color: #0a1929;
+}
+
+[data-mode='dark'] ::-webkit-scrollbar {
+    width: 10px;
+}
+[data-mode='dark'] ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #121212;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2);
+}
+[data-mode='dark'] ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #363636;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+    box-shadow: inset 0 0 6px 262626;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #a4a4a4;
+}
+
+.container {
+    margin-inline: auto;
+    padding-inline: 24px;
+    max-width: 1300px !important;
+}
+::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+.card-shine {
+    $dot-size: 1px;
+    $dot-space: 30px;
+    isolation: isolate;
+    --dot-color: rgb(189, 189, 189);
+    --middle-color: rgb(70, 70, 70);
+    &::before {
+        content: '';
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        background: linear-gradient(90deg, var(--paper) ($dot-space - $dot-size), transparent 1%)
+                center,
+            linear-gradient(var(--paper) ($dot-space - $dot-size), transparent 1%) center,
+            var(--dot-color);
+        background-size: $dot-space $dot-space;
+        z-index: -1;
+    }
+    &::after {
+        background: linear-gradient(transparent, var(--middle-color), transparent);
+        height: 70px;
+        width: 1px;
+        position: absolute;
+        left: -1px;
+        content: '';
+        transition: top 600ms ease, opacity 600ms ease;
+        top: 65%;
+        opacity: 0;
+    }
+    &:hover {
+        &::after {
+            top: 10%;
+            opacity: 1;
+        }
+    }
+}
+[data-mode='dark'] .card-shine {
+    --dot-color: rgb(60, 60, 60);
+    --middle-color: mediumslateblue;
+}
+// [data-mode='dark'] {
+//     input,
+//     textarea {
+//         background-color: var(--input-bg) !important;
+//         color: white;
+//     }
+// }
+.active-selection {
+    background-color: lightgray;
+}
+
+[data-mode='dark'] .active-selection {
+    background-color: rgb(64, 64, 64);
+}
+
+:root {
+    --default-color: rgba(0, 0, 0, 0.87);
+    --default-bg: rgba(0, 0, 0, 0.08);
+
+    --primary-color: rgb(255, 255, 255);
+    --primary-bg: rgb(25, 118, 210);
+
+    --error-color: #fff;
+    --error-bg: rgb(211, 47, 47);
+
+    --info-color: #fff;
+    --info-bg: rgb(2, 136, 209);
+
+    --success-color: #fff;
+    --success-bg: rgb(46, 125, 50);
+
+    --warning-color: #fff;
+    --warning-bg: rgb(237, 108, 2);
+}
+
+[data-mode='dark'] {
+    ::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+    shadow-sm {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+    }
+    shadow {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    }
+    shadow-md {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+    }
+    shadow-lg {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+    }
+    shadow-xl {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+    }
+    shadow-2xl {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px,
+            rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
+    }
+    --default-color: #fff;
+    --default-bg: rgba(255, 255, 255, 0.16);
+
+    --primary-color: rgba(0, 0, 0, 0.87);
+    --primary-bg: rgb(144, 202, 249);
+
+    --error-color: #fff;
+    --error-bg: rgb(244, 67, 54);
+
+    --info-color: rgba(0, 0, 0, 0.87);
+    --info-bg: rgb(41, 182, 246);
+
+    --success-color: rgba(0, 0, 0, 0.87);
+    --success-bg: rgb(102, 187, 106);
+
+    --warning-color: rgba(0, 0, 0, 0.87);
+    --warning-bg: rgb(255, 167, 38);
+}

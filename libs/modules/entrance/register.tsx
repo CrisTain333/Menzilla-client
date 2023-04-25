@@ -1,42 +1,38 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import LoginBanner from '../../../public/images/loginBanner.jpg';
 
 const Register = () => {
     return (
         <div>
-            <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+            <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
                 {/* <!-- login container --> */}
-                <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+                <div className="bg-gray-100 flex rounded-md shadow-lg max-w-3xl p-5 items-center mx-5">
                     {/* <!-- form --> */}
-                    <div className="w-full px-10">
-                        <h2 className="font-bold text-2xl  text-center text-transparent  bg-clip-text bg-gradient-to-r from-[#ff6a94]  to-[#ff6992]">
-                            Register
-                        </h2>
+                    <div className="w-full px-2 md:px-10">
+                        <h2 className="font-bold text-2xl  text-center">Register</h2>
 
                         <form action="" className="flex flex-col gap-3">
-                            <div className="flex space-x-5  mt-5">
-                                <div className="w-1/2">
-                                    <label htmlFor="" className="font-medium text-sm p-2">
+                            <div className="flex flex-col md:flex-row  md:space-x-5  mt-5">
+                                <div className="">
+                                    <label htmlFor="" className="font-medium text-sm p-2 ">
                                         Name
                                     </label>{' '}
                                     <br />
                                     <input
-                                        className="p-2 mt-1 rounded-sm border"
+                                        className="p-2 mt-1 rounded-sm border w-full "
                                         type="text"
                                         name="name"
                                         placeholder="Your name"
                                     />
                                 </div>
-                                <div className="w-1/2">
+                                <div className="">
                                     <label htmlFor="" className="font-medium text-sm p-2">
                                         Email
                                     </label>
 
                                     <br />
                                     <input
-                                        className="p-2 mt-1 rounded-sm border"
+                                        className="p-2 mt-1 rounded-sm border w-full "
                                         type="email"
                                         name="email"
                                         placeholder="Email"

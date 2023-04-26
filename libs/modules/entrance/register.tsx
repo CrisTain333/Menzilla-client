@@ -1,5 +1,7 @@
+import { registerUser } from '@/libs/Api';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -7,17 +9,40 @@ const Register = () => {
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
     };
+    const handleRegisterUser = async (event: any) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const password = form.password.value;
+        const data = {
+            name,
+            email,
+            phone,
+            password
+        };
+        try {
+            const res = await registerUser(data);
+            if (res?.status !== 201) {
+                return toast.error(res?.message);
+            }
+            toast.success(res?.message);
+        } catch (error) {
+            toast.error('Some thing went wrong');
+        }
+    };
 
     return (
         <div>
-            <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
+            <section className="min-h-screen flex items-center justify-center ">
                 {/* <!-- login container --> */}
                 <div className="bg-gray-100 flex rounded-md shadow-lg max-w-3xl p-5 items-center mx-5">
                     {/* <!-- form --> */}
                     <div className="w-full px-2 md:px-10">
                         <h2 className="font-bold text-2xl  text-center">Register</h2>
 
-                        <form action="" className="flex flex-col gap-3">
+                        <form onSubmit={handleRegisterUser} className="flex flex-col gap-3">
                             <div className="flex flex-col md:flex-row  md:space-x-5  mt-5">
                                 <div className="">
                                     <label htmlFor="" className="font-medium text-sm p-2 ">
@@ -115,9 +140,10 @@ const Register = () => {
                                     )}
                                 </span>
                             </div>
+                            {/* error div  */}
                             <div className="flex items-center justify-center">
                                 {' '}
-                                <button className="bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] w-auto rounded-md text-white py-2 px-3 hover:scale-105 duration-300 mt-5">
+                                <button className="bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] w-auto rounded-md text-white py-2 px-3 hover:scale-105 duration-300 mt-3">
                                     Register
                                 </button>
                             </div>

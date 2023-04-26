@@ -29,15 +29,15 @@ const Register = () => {
             }
             toast.success(res?.message);
         } catch (error) {
-            toast.error('Some thing went wrong');
+            toast.error('Something went wrong');
         }
     };
 
     return (
         <div>
-            <section className="min-h-screen flex items-center justify-center ">
+            <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
                 {/* <!-- login container --> */}
-                <div className="bg-gray-100 flex rounded-md shadow-lg max-w-3xl p-5 items-center mx-5">
+                <div className="bg-gray-100 flex rounded-sm shadow-lg max-w-3xl p-5 items-center mx-5">
                     {/* <!-- form --> */}
                     <div className="w-full px-2 md:px-10">
                         <h2 className="font-bold text-2xl  text-center">Register</h2>
@@ -54,6 +54,7 @@ const Register = () => {
                                         type="text"
                                         name="name"
                                         placeholder="Your name"
+                                        required
                                     />
                                 </div>
                                 <div className="">
@@ -66,6 +67,7 @@ const Register = () => {
                                         className="p-2 mt-1 rounded-sm border w-full "
                                         type="email"
                                         name="email"
+                                        required
                                         placeholder="Email"
                                     />
                                 </div>
@@ -79,6 +81,7 @@ const Register = () => {
                                     <input
                                         className="p-2 mt-1 rounded-sm border w-full"
                                         type="number"
+                                        required
                                         name="phone"
                                         placeholder="Your name"
                                     />
@@ -92,6 +95,8 @@ const Register = () => {
                                     className="p-2 rounded-sm mt-1 border w-full"
                                     type={isVisible ? 'text' : 'password'}
                                     name="password"
+                                    required
+                                    minLength={6}
                                     placeholder="Password"
                                 />
                                 <span

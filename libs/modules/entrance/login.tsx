@@ -5,10 +5,15 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { login } from '@/libs/Api';
 import { useRouter } from 'next/router';
+import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Login = () => {
+    const { login, currentUser } = useAuth();
     const [isVisible, setIsVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const router = useRouter();
+    console.log(currentUser);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -16,6 +21,8 @@ const Login = () => {
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
+        setIsLoading(true);
+        setError(null);
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -24,16 +31,15 @@ const Login = () => {
             password
         };
 
-        try {
-            const res = await login(data);
-            if (res?.status !== 201) {
-                return toast.error(res?.message);
-            }
-            toast.success(res?.message);
-            localStorage.setItem('accessToken', res?.token);
+        const loginError = await login(data);
+        if (loginError) {
+            toast.error(loginError);
+            setError(loginError);
+            setIsLoading(false);
+        } else {
+            toast.success('Logged in successfully');
+            setIsLoading(false);
             router.push('/');
-        } catch (error) {
-            toast.error('something went wrong');
         }
     };
     return (
@@ -110,6 +116,9 @@ const Login = () => {
                                     )}
                                 </span>
                             </div>
+                            {error && (
+                                <p className="mb-2 text-center text-[16px] text-red-600">{error}</p>
+                            )}
                             <button className="bg-gradient-to-r from-[#ff6a94] to-[#ff6992]  rounded-sm text-white py-2 hover:scale-105 duration-300">
                                 Login
                             </button>

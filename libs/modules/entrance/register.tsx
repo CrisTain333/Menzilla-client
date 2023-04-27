@@ -57,6 +57,7 @@ const Register = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className="">
                                     <label htmlFor="" className="font-medium text-sm p-2">
                                         Email

@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     }
                 }
                 toastOptions={{
-                    duration: 2000,
+                    duration: 4000,
                     success: {
                         iconTheme: {
                             primary: '#4caf50',

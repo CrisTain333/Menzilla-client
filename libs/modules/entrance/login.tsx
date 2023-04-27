@@ -2,12 +2,36 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import LoginBanner from '../../../public/images/loginBanner.jpg';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+import { login } from '@/libs/Api';
 
 const Login = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
+    };
+
+    const handleLogin = async (e: any) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const data = {
+            email,
+            password
+        };
+
+        try {
+            const res = await login(data);
+            if (res?.status !== 201) {
+                return toast.error(res?.message);
+            }
+            toast.success(res?.message);
+            localStorage.setItem('accessToken', res?.token);
+        } catch (error) {
+            toast.error('something went wrong');
+        }
     };
     return (
         <div>
@@ -23,7 +47,7 @@ const Login = () => {
                             If you are already a member, easily log in
                         </p>
 
-                        <form action="" className="flex flex-col gap-4">
+                        <form onSubmit={handleLogin} className="flex flex-col gap-4">
                             <input
                                 className="p-2 mt-8 rounded-sm border"
                                 type="email"

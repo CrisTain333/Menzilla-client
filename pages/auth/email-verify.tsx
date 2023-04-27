@@ -105,7 +105,7 @@ const VerifyEmail = () => {
                 onClick={redirectToLogin}
                 className="px-3 py-2  bg-gradient-to-br from-[#8af7aa] to-[#11bd9e] rounded-md my-3 text-white"
             >
-                Go To Home page
+                Login now
             </button>
         </div>
     );

@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 
 const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState<any>(false);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -27,14 +28,53 @@ const Register = () => {
             if (res?.status !== 201) {
                 return toast.error(res?.message);
             }
+            setRegisterSuccess(data);
             toast.success(res?.message);
         } catch (error) {
             toast.error('Something went wrong');
         }
     };
 
-    return (
-        <div>
+    return registerSuccess ? (
+        <>
+            <div className=" p-6 shadow-md w-full max-w-lg mx-auto mt-10">
+                <div className="flex items-center justify-center">
+                    <div className="bg-gray-200 rounded-[100%] p-5 shrink-0 w-[88px] h-[88px]">
+                        <i className="ri-mail-unread-fill text-blue-500 text-5xl"></i>
+                        {/* <RiMailLine className="text-white text-5xl" /> */}
+                    </div>
+                </div>
+                <div className="mt-4 text-center">
+                    <h2 className="text-gray-800 text-2xl font-bold mb-5 dark:text-gray-200">
+                        Verify your email address
+                    </h2>
+                    <p className="text-gray-600 text-md dark:text-gray-300 mb-10">
+                        Hey <span className="font-bold">{registerSuccess?.name || 'Coder'}</span>,
+                        We
+                        {`'`}ve send an email to{' '}
+                        <span className="text-blue-400">
+                            {registerSuccess?.email || 'verify@fuc.com'}
+                        </span>{' '}
+                        to verify your email address and activate your account. The link in the
+                        email will expire in 24 hours.
+                    </p>
+                    <p className="text-gray-400 text-mb mt-5 dark:text-gray-300">
+                        <span
+                            className="text-blue-500 cursor-pointer"
+                            // onClick={handleNotReceiveEmail}
+                        >
+                            Click here
+                        </span>{' '}
+                        if you did not receive an email. If you find any issue, feel free to{' '}
+                        {/* <span className="text-blue-500 cursor-pointer" onClick={handleContactUs}>
+                            Contact Us
+                        </span> */}
+                    </p>
+                </div>
+            </div>
+        </>
+    ) : (
+        <>
             <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
                 {/* <!-- login container --> */}
                 <div className="bg-gray-100 flex rounded-sm shadow-lg max-w-3xl p-5 items-center mx-5">
@@ -209,7 +249,7 @@ const Register = () => {
                     </div> */}
                 </div>
             </section>
-        </div>
+        </>
     );
 };
 

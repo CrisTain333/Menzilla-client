@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import LoginBanner from '../../../public/images/loginBanner.jpg';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { login } from '@/libs/Api';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/libs/Context/AuthProvider';
 
@@ -13,7 +12,6 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
-    console.log(currentUser);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);

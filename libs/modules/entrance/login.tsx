@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/libs/Context/AuthProvider';
+import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 
 const Login = () => {
     const { login, currentUser } = useAuth();
@@ -50,9 +51,9 @@ const Login = () => {
                         <h2 className="font-bold text-2xl text-transparent  bg-clip-text bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] text-center">
                             Login
                         </h2>
-                        <p className="text-xs mt-4 text-[#002D74]">
-                            If you are already a member, easily log in
-                        </p>
+                        {error && (
+                            <p className="my-2 text-center text-[16px] text-red-600">{error}</p>
+                        )}
 
                         <form onSubmit={handleLogin} className="flex flex-col gap-4">
                             <input
@@ -114,11 +115,9 @@ const Login = () => {
                                     )}
                                 </span>
                             </div>
-                            {error && (
-                                <p className="mb-2 text-center text-[16px] text-red-600">{error}</p>
-                            )}
+
                             <button className="bg-gradient-to-r from-[#ff6a94] to-[#ff6992]  rounded-sm text-white py-2 hover:scale-105 duration-300">
-                                Login
+                                {isLoading ? <SmallLoader /> : 'Login'}
                             </button>
                         </form>
 

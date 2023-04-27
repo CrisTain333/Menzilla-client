@@ -26,7 +26,7 @@ const VerifyEmail = () => {
                 setPageLoading(false);
             } else if (response?.data?.status === 500) {
                 setError(true);
-                setErrorMessage('Activation Link Expired');
+                setErrorMessage('Account Activation Link Expired');
                 setPageLoading(false);
             } else if (response?.data) {
                 setPageLoading(false);

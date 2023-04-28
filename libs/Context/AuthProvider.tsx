@@ -35,13 +35,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setIsLoading(true);
             getUserData(token)
                 .then((userData) => {
+                    console.log(userData);
                     setUserFetched(true);
                     setCurrentUser(userData);
                     setIsLoading(false);
                 })
                 .catch((e) => {
                     setIsLoading(false);
-                    // console.log('error', e);
                 });
         }
     }, []);
@@ -71,15 +71,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     const getUserData = async (token: string) => {
-        // try {
-        //     const response = await axios.get(`${BACKEND_BASE_URL}/auth/user`, {
-        //         headers: { Authorization: `Bearer ${token}` }
-        //     });
-        //     // console.log(response.data);
-        //     return response.data.data;
-        // } catch (e) {
-        //     logout();
-        // }
+        try {
+            const response = await axiosInstance.get(`/user/me`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response?.data?.user;
+        } catch (e) {
+            logout();
+        }
     };
 
     const value: AuthContextValue = {

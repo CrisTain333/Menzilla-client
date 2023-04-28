@@ -1,4 +1,5 @@
 import { registerUser } from '@/libs/Api';
+import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -6,12 +7,14 @@ import { toast } from 'react-hot-toast';
 const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
     };
     const handleRegisterUser = async (event: any) => {
         event.preventDefault();
+        setIsLoading(true);
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
@@ -26,12 +29,15 @@ const Register = () => {
         try {
             const res = await registerUser(data);
             if (res?.status !== 201) {
+                setIsLoading(false);
                 return toast.error(res?.message);
             }
             setRegisterSuccess(data);
             toast.success(res?.message);
+            setIsLoading(false);
         } catch (error) {
             toast.error('Something went wrong');
+            setIsLoading(false);
         }
     };
 
@@ -190,7 +196,7 @@ const Register = () => {
                             <div className="flex items-center justify-center">
                                 {' '}
                                 <button className="bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] w-auto rounded-md text-white py-2 px-3 hover:scale-105 duration-300 mt-3">
-                                    Register
+                                    {isLoading ? <SmallLoader /> : 'Register'}
                                 </button>
                             </div>
                         </form>

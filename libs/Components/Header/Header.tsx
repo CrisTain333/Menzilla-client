@@ -1,12 +1,13 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
-import React, { useState } from 'react';
+import Image from 'next/image';
+import React from 'react';
 
 const Header = () => {
     const { currentUser } = useAuth();
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-base-100 shadow-md">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -59,45 +60,83 @@ const Header = () => {
                             </li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <a className="flex items-center justify-center font-semibold text-2xl">
+                        <img
+                            src="https://i.ibb.co/108mmbG/Pngtree-mv-vm-letter-vector-logo-5249394-removebg-preview.png"
+                            alt=""
+                            className="h-10"
+                        />
+                        <span className="font-sans font-bold">enzilla</span>
+                    </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li>
-                            <a>Item 1</a>
-                        </li>
-                        <li tabIndex={0}>
-                            <a>
-                                Parent
-                                <svg
-                                    className="fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
+                    <form className="w-[50vw]">
+                        <div className="flex">
+                            <div className="relative w-full">
+                                <input
+                                    type="search"
+                                    id="search-dropdown"
+                                    className="block p-[1.2rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
+                                    placeholder="Search Mockups, Logos, Design Templates..."
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                 >
-                                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                                </svg>
-                            </a>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Submenu 1</a>
-                                </li>
-                                <li>
-                                    <a>Submenu 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>Item 3</a>
-                        </li>
-                    </ul>
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                        ></path>
+                                    </svg>
+                                    <span className="sr-only">Search</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end space-x-3">
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle hover:bg-white">
+                            <div className="indicator">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                                    />
+                                </svg>
+                                <span className="badge badge-sm indicator-item">8</span>
+                            </div>
+                        </label>
+                    </div>
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                <Image
+                                    alt="user_Profile"
+                                    height={300}
+                                    width={300}
+                                    className="h-10"
+                                    src={currentUser?.profilePicture}
+                                />
                             </div>
                         </label>
                         <ul

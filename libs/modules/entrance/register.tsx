@@ -28,6 +28,7 @@ const Register = () => {
         };
         try {
             const res = await registerUser(data);
+            console.log(res);
             if (res?.status !== 201) {
                 setIsLoading(false);
                 return toast.error(res?.message);
@@ -43,15 +44,15 @@ const Register = () => {
 
     return registerSuccess ? (
         <>
-            <div className=" p-6 shadow-md w-full max-w-lg mx-auto mt-10">
-                <div className="flex items-center justify-center">
+            <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">
+                <div className=" flex items-center justify-center">
                     <div className="bg-gray-200 rounded-[100%] p-5 shrink-0 w-[88px] h-[88px]">
                         <i className="ri-mail-unread-fill text-blue-500 text-5xl"></i>
                         {/* <RiMailLine className="text-white text-5xl" /> */}
                     </div>
                 </div>
                 <div className="mt-4 text-center">
-                    <h2 className="text-gray-800 text-2xl font-bold mb-5 dark:text-gray-200">
+                    <h2 className="text-gray-800 text-2xl font-bold mb-5">
                         Verify your email address
                     </h2>
                     <p className="text-gray-600 text-md dark:text-gray-300 mb-10">
@@ -81,7 +82,7 @@ const Register = () => {
         </>
     ) : (
         <>
-            <section className="bg-gray-50 min-h-screen flex items-center justify-center ">
+            <section className=" min-h-screen flex items-center justify-center ">
                 {/* <!-- login container --> */}
                 <div className="bg-gray-100 flex rounded-sm shadow-lg max-w-3xl p-5 items-center mx-5">
                     {/* <!-- form --> */}

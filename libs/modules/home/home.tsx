@@ -1,4 +1,5 @@
 import Banner from '@/libs/Components/Banner/Banner';
+import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
 import Categories from '@/libs/Components/Home/Category/Category';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import React from 'react';
@@ -11,6 +12,7 @@ const Home = () => {
                 <div className="main_div">
                     <Banner />
                     <Categories />
+                    <BestDeals />
                 </div>
             </HeaderAndFooter>
         </div>

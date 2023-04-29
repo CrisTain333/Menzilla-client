@@ -7,10 +7,8 @@ interface LayoutProps {
 const HeaderAndFooter = ({ children }: LayoutProps) => {
     return (
         <div>
-            <div>
-                <Header />
-            </div>
-            {children}
+            <Header />
+            <div className="w-[90%] mx-auto mt-10">{children}</div>
         </div>
     );
 };

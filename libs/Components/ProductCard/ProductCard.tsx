@@ -1,4 +1,6 @@
+import styles from '@/styles/styles';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const ProductCard = ({ data }: any) => {
@@ -13,11 +15,11 @@ const ProductCard = ({ data }: any) => {
                         src={data?.image_Url[0]?.url}
                         alt="product image"
                     />
-                    <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
-                        39% OFF
-                    </span>
                 </a>
                 <div className="mt-4 px-5 pb-5">
+                    <Link href={`/shop/preview/${data?.shop._id}`}>
+                        <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+                    </Link>
                     <a href="#">
                         <h5 className="text-xl tracking-tight text-slate-900 text-fix">
                             {data?.name}
@@ -74,14 +76,18 @@ const ProductCard = ({ data }: any) => {
                                 {data?.rating}
                             </span>
                         </div>
-                        <p className="mt-2">
-                            <span className="text-3xl font-bold text-slate-900">
-                                ${data?.discount_price}
-                            </span>
-                            <span className="text-sm text-slate-900 line-through">
-                                ${data?.price}
-                            </span>
-                        </p>
+                        <div className="mt-2">
+                            <div className="y-2 flex items-center justify-end">
+                                <div>
+                                    <span className="text-3xl font-bold text-slate-900">
+                                        ${data?.discount_price}
+                                    </span>
+                                    <span className="text-sm text-slate-900 line-through">
+                                        ${data?.price}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <a
                         href="#"

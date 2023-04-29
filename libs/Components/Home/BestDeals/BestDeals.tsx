@@ -8,18 +8,18 @@ const BestDeals = () => {
 
     useEffect(() => {
         const d = productData && productData.sort((a, b) => b.total_sell - a.total_sell);
-        const bestFive = d.slice(0, 5);
+        const bestFive = d.slice(0, 8);
         setData(bestFive);
     }, []);
 
     return (
         <div>
             <div>
-                <div className={`${styles.section}`}>
+                <div>
                     <div>
                         <h1 className="text-4xl text-center font-bold">Best Deals</h1>
                     </div>
-                    <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12 border-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-5  mb-12 border-0">
                         {data && data.length !== 0 && (
                             <>
                                 {data &&

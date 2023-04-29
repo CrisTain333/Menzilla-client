@@ -5,23 +5,20 @@ import React, { useState } from 'react';
 
 const Header = () => {
     const { currentUser } = useAuth();
+    const [searchTerm, setSearchTerm] = useState('');
     const [searchData, setSearchData] = useState<any>(null);
-    const [searchValue, setSearchValue] = useState();
 
-    const handleSearch = (e: any) => {
-        e.preventDefault();
+    const handleSearchChange = (e: any) => {
         const term = e.target.value;
-        setSearchValue(term);
+        setSearchTerm(term);
 
-        const filteredProduct =
+        const filteredProducts =
             productData &&
-            productData?.filter((product) =>
-                product?.name?.toLowerCase()?.includes(term?.toLowerCase())
+            productData.filter((product) =>
+                product.name.toLowerCase().includes(term.toLowerCase())
             );
-
-        setSearchData(filteredProduct);
+        setSearchData(filteredProducts);
     };
-
     return (
         <div>
             <div className="navbar bg-base-100 shadow-md">
@@ -93,8 +90,8 @@ const Header = () => {
                                 <input
                                     type="search"
                                     id="search-dropdown"
-                                    value={searchData}
-                                    onChange={handleSearch}
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
                                     className="block p-[1.2rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
                                     placeholder="Search Mockups, Logos, Design Templates..."
                                     required

@@ -223,7 +223,7 @@ export const categoriesData = [
         id: 6,
         title: 'Gifts',
         subTitle: '',
-        image_Url: 'https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg'
+        image_Url: 'https://i.ibb.co/BBH4RJ2/Pngtree-e-commerce-business-gift-box-5913543.png'
     },
     {
         id: 7,

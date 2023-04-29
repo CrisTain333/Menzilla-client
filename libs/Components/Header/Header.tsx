@@ -125,7 +125,7 @@ const Header = () => {
                                     {searchData && searchData.length !== 0 ? (
                                         <>
                                             {' '}
-                                            <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2">
+                                            <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
                                                 {searchData &&
                                                     searchData.map((i: any, index: any) => {
                                                         return (

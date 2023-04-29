@@ -1,4 +1,5 @@
 import Banner from '@/libs/Components/Banner/Banner';
+import Categories from '@/libs/Components/Home/Category/Category';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import React from 'react';
 
@@ -9,6 +10,7 @@ const Home = () => {
                 {/* MAIN DIV  */}
                 <div className="main_div">
                     <Banner />
+                    <Categories />
                 </div>
             </HeaderAndFooter>
         </div>

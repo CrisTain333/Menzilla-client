@@ -17,8 +17,8 @@ const Home = () => {
                         <div className="col-span-6">
                             <div>
                                 <Carousel
-                                    infiniteLoop={true}
-                                    autoPlay={true}
+                                    // infiniteLoop={true}
+                                    // autoPlay={true}
                                     interval={5000}
                                     showArrows={false}
                                     showStatus={false}
@@ -32,7 +32,7 @@ const Home = () => {
                                             width={2000}
                                         />
                                     </div>
-                                    <div>
+                                    <div className="relative ">
                                         <Image
                                             src={Banner2}
                                             alt="banner_1"
@@ -40,6 +40,28 @@ const Home = () => {
                                             height={2000}
                                             width={2000}
                                         />
+                                        <div className="text-start absolute top-12 left-16 ">
+                                            <p className="text-red-500 text-base font-medium ">
+                                                SUPERCHARGED FOR PROS
+                                            </p>
+
+                                            <h2 className="text-5xl font-bold mt-5">
+                                                Special Sale
+                                            </h2>
+
+                                            <p className="text-xl font-semibold mt-5 font-sans">
+                                                From $999.00 or $41.62/mo.
+                                            </p>
+                                            <p className="text-xl font-semibold mt-3 font-sans">
+                                                For 24 mo. Footnote $
+                                            </p>
+
+                                            <div className="mt-10">
+                                                <button className="py-2 px-3 rounded-md text-lg bg-[#1C2B35] text-white">
+                                                    Buy Now
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </Carousel>
                             </div>

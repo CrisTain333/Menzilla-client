@@ -1,13 +1,17 @@
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { AiOutlineEye } from 'react-icons/ai';
+import ProductDetails from '../Home/ProductDetails/ProductDetails';
 
 const ProductCard = ({ data }: any) => {
+    const [showProductDetails, setShowProductDetails] = useState(false);
+
     return (
         <div>
             <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-                <a className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="#">
+                <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
                     <Image
                         height={300}
                         width={300}
@@ -15,7 +19,16 @@ const ProductCard = ({ data }: any) => {
                         src={data?.image_Url[0]?.url}
                         alt="product image"
                     />
-                </a>
+                    <span className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium">
+                        <AiOutlineEye
+                            size={22}
+                            className="cursor-pointer"
+                            onClick={() => setShowProductDetails(!showProductDetails)}
+                            color="#333"
+                            title="Quick view"
+                        />
+                    </span>
+                </div>
                 <div className="mt-4 px-5 pb-5">
                     <Link href={`/shop/preview/${data?.shop._id}`}>
                         <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
@@ -76,18 +89,14 @@ const ProductCard = ({ data }: any) => {
                                 {data?.rating}
                             </span>
                         </div>
-                        <div className="mt-2">
-                            <div className="y-2 flex items-center justify-end">
-                                <div>
-                                    <span className="text-3xl font-bold text-slate-900">
-                                        ${data?.discount_price}
-                                    </span>
-                                    <span className="text-sm text-slate-900 line-through">
-                                        ${data?.price}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <p className="mt-2">
+                            <span className="text-3xl font-bold text-slate-900">
+                                ${data?.discount_price}
+                            </span>
+                            <span className="text-sm text-slate-900 line-through">
+                                ${data?.price}
+                            </span>
+                        </p>
                     </div>
                     <a
                         href="#"
@@ -111,6 +120,8 @@ const ProductCard = ({ data }: any) => {
                     </a>
                 </div>
             </div>
+
+            {showProductDetails && <ProductDetails />}
         </div>
     );
 };

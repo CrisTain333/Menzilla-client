@@ -1,11 +1,12 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { productData } from '@/libs/common/constant/Data';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Header = () => {
     const { currentUser } = useAuth();
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState();
     const [searchData, setSearchData] = useState<any>(null);
 
     const handleSearchChange = (e: any) => {
@@ -121,19 +122,27 @@ const Header = () => {
                                 {searchData && searchData.length !== 0 ? (
                                     <>
                                         {' '}
-                                        <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-auto top-11 p-2">
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
-                                            <p>Hello</p>
+                                        <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2">
+                                            {searchData &&
+                                                searchData.map((i: any, index: any) => {
+                                                    return (
+                                                        <Link
+                                                            href={`/product/${i._id}`}
+                                                            key={index}
+                                                        >
+                                                            <div className="w-full flex items-start py-2">
+                                                                <Image
+                                                                    src={i?.image_Url[0]?.url}
+                                                                    alt=""
+                                                                    className="w-[40px] h-[40px] mr-[10px]"
+                                                                    height={200}
+                                                                    width={200}
+                                                                />
+                                                                <h1>{i.name}</h1>
+                                                            </div>
+                                                        </Link>
+                                                    );
+                                                })}
                                         </div>
                                     </>
                                 ) : null}

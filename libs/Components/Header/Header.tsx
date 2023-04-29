@@ -1,9 +1,26 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
+import { productData } from '@/libs/common/constant/Data';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Header = () => {
     const { currentUser } = useAuth();
+    const [searchData, setSearchData] = useState<any>(null);
+    const [searchValue, setSearchValue] = useState();
+
+    const handleSearch = (e: any) => {
+        e.preventDefault();
+        const term = e.target.value;
+        setSearchValue(term);
+
+        const filteredProduct =
+            productData &&
+            productData?.filter((product) =>
+                product?.name?.toLowerCase()?.includes(term?.toLowerCase())
+            );
+
+        setSearchData(filteredProduct);
+    };
 
     return (
         <div>
@@ -76,6 +93,8 @@ const Header = () => {
                                 <input
                                     type="search"
                                     id="search-dropdown"
+                                    value={searchData}
+                                    onChange={handleSearch}
                                     className="block p-[1.2rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
                                     placeholder="Search Mockups, Logos, Design Templates..."
                                     required
@@ -101,6 +120,26 @@ const Header = () => {
                                     </svg>
                                     <span className="sr-only">Search</span>
                                 </button>
+                                {/* Search result dropdown */}
+                                {searchData && searchData.length !== 0 ? (
+                                    <>
+                                        {' '}
+                                        <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-auto top-11 p-2">
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                            <p>Hello</p>
+                                        </div>
+                                    </>
+                                ) : null}
                             </div>
                         </div>
                     </form>

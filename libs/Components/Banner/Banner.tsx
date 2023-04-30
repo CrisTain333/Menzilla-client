@@ -106,19 +106,26 @@ const Banner = () => {
                                     height={2000}
                                     width={2000}
                                 />
-                                <div className="text-start absolute top-5 left-3 md:top-8">
-                                    <p className="text-red-500 text-xs font-semibold ">
+                                <div className="text-start absolute top-14 left-5 md:top-8 md:left-3">
+                                    <p className="text-red-500 text-base md:text-xs font-semibold ">
                                         New Arrival
                                     </p>
 
-                                    <h2 className="text-xl font-bold mt-2">Buy Ipad Air </h2>
+                                    <h2 className="text-2xl md:text-xl font-bold mt-2">
+                                        Buy Ipad Air{' '}
+                                    </h2>
 
-                                    <p className="text-xs  font-semibold mt-4">From $999.00 or</p>
-                                    <p className="text-xs font-semibold"> $41.62 For 24 mo.</p>
+                                    <p className="text-base md:text-xs  font-semibold mt-4">
+                                        From $999.00 or
+                                    </p>
+                                    <p className="text-base md:text-xs font-semibold">
+                                        {' '}
+                                        $41.62 For 24 mo.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-span-6">
+                        <div className="col-span-12 md:col-span-6">
                             <div className="relative">
                                 <Image
                                     src={iPad_Banner}
@@ -127,19 +134,26 @@ const Banner = () => {
                                     height={2000}
                                     width={2000}
                                 />
-                                <div className="text-start absolute top-5 left-3 md:top-8">
-                                    <p className="text-red-500 text-xs font-semibold ">
+                                <div className="text-start absolute top-14 left-5 md:top-8 md:left-3 ">
+                                    <p className="text-red-500 text-base md:text-xs font-semibold">
                                         New Arrival
                                     </p>
 
-                                    <h2 className="text-xl font-bold mt-2">Buy Ipad Air </h2>
+                                    <h2 className="text-2xl md:text-xl font-bold mt-2">
+                                        Buy Ipad Air{' '}
+                                    </h2>
 
-                                    <p className="text-xs  font-semibold mt-4">From $999.00 or</p>
-                                    <p className="text-xs font-semibold"> $41.62 For 24 mo.</p>
+                                    <p className="text-base md:text-xs  font-semibold mt-4">
+                                        From $999.00 or
+                                    </p>
+                                    <p className="text-base md:text-xs  font-semibold">
+                                        {' '}
+                                        $41.62 For 24 mo.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-span-6">
+                        <div className="col-span-12 md:col-span-6">
                             <div className="relative">
                                 <Image
                                     src={watch_Banner}
@@ -148,17 +162,25 @@ const Banner = () => {
                                     height={2000}
                                     width={2000}
                                 />
-                                <div className="text-start absolute top-5 left-3 md:top-8">
-                                    <p className="text-red-500 text-xs font-semibold ">15% OFF</p>
+                                <div className="text-start absolute top-14 left-5 md:top-8 md:left-3 ">
+                                    <p className="text-red-500 text-base md:text-xs font-semibold">
+                                        15% OFF
+                                    </p>
 
-                                    <h2 className="text-xl font-bold mt-2">Smartwatch 7 </h2>
+                                    <h2 className="text-2xl md:text-xl font-bold mt-2">
+                                        Smartwatch 7{' '}
+                                    </h2>
 
-                                    <p className="text-xs  font-semibold mt-4">Shop The latest</p>
-                                    <p className="text-xs font-semibold">Styles and colors</p>
+                                    <p className="text-base md:text-xs  font-semibold mt-4">
+                                        Shop The latest
+                                    </p>
+                                    <p className="text-base md:text-xs font-semibold">
+                                        Styles and colors
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-span-6">
+                        <div className="col-span-12 md:col-span-6">
                             <div className="relative">
                                 <Image
                                     src={earphone_Banner}
@@ -167,17 +189,21 @@ const Banner = () => {
                                     height={2000}
                                     width={2000}
                                 />
-                                <div className="text-start absolute top-5 left-3 md:top-8 flex-wrap">
-                                    <p className="text-red-500 text-xs font-semibold ">
+                                <div className="  text-start absolute top-14 left-5 md:top-8 md:left-3 ">
+                                    <p className="text-red-500 text-base md:text-xs font-semibold">
                                         FREE ENGRAVING
                                     </p>
 
-                                    <h2 className="text-xl font-bold mt-2">AirPods Max</h2>
+                                    <h2 className="text-2xl md:text-xl font-bold mt-2">
+                                        AirPods Max
+                                    </h2>
 
-                                    <p className="text-xs  font-semibold mt-4">
+                                    <p className="text-base md:text-xs  font-semibold mt-4">
                                         High-fidelity playback
                                     </p>
-                                    <p className="text-xs font-semibold">& ultra-low distortion</p>
+                                    <p className="text-base md:text-xs font-semibold">
+                                        & ultra-low distortion
+                                    </p>
                                 </div>
                             </div>
                         </div>

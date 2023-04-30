@@ -93,11 +93,17 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                         </div>
                                         <div className="flex">
                                             <div className="quantity-field">
-                                                <button className="value-button decrease-button">
+                                                <button
+                                                    className="value-button decrease-button"
+                                                    onClick={decrementCount}
+                                                >
                                                     -
                                                 </button>
-                                                <div className="number">0</div>
-                                                <button className="value-button increase-button">
+                                                <div className="number">{count}</div>
+                                                <button
+                                                    className="value-button increase-button"
+                                                    onClick={incrementCount}
+                                                >
                                                     +
                                                 </button>
                                             </div>

@@ -16,6 +16,7 @@ const Banner = () => {
                 <div className="col-span-12 md:col-span-6">
                     <div>
                         <Carousel
+                            showThumbs={false}
                             infiniteLoop={true}
                             autoPlay={true}
                             interval={10000}

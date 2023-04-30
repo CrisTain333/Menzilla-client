@@ -22,7 +22,7 @@ const Header = () => {
     };
     return (
         <div>
-            <div className=" bg-[#1C2B35] shadow-md">
+            <div className="  shadow-md">
                 <div className=" navbar w-[90%] mx-auto">
                     <div className="navbar-start">
                         <div className="dropdown">
@@ -78,13 +78,13 @@ const Header = () => {
                         </div>
                         <a className="flex items-center justify-center font-semibold text-2xl">
                             <Image
-                                src="https://i.ibb.co/108mmbG/Pngtree-mv-vm-letter-vector-logo-5249394-removebg-preview.png"
+                                src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
                                 alt=""
                                 className="w-12 "
                                 width={200}
                                 height={200}
                             />
-                            <span className="font-sans font-bold text-white ml-1">enzilla</span>
+                            <span className="font-sans font-bold text-black ml-1">enzilla</span>
                         </a>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -96,7 +96,7 @@ const Header = () => {
                                         id="search-dropdown"
                                         value={searchTerm}
                                         onChange={handleSearchChange}
-                                        className="block p-[0.7rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
+                                        className="block p-[0.7rem] w-full z-20 text-sm text-gray-900  rounded-r-lg bg-gray-200 rounded-l-lg"
                                         placeholder="Search Mockups, Logos, Design Templates..."
                                         required
                                     />

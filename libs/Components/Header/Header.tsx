@@ -22,7 +22,7 @@ const Header = () => {
     };
     return (
         <div>
-            <div className="  shadow-md">
+            <div className="fixed top-0 w-full z-50 bg-white  shadow-md">
                 <div className=" navbar w-[90%] mx-auto">
                     <div className="navbar-start">
                         <div className="dropdown">
@@ -84,7 +84,9 @@ const Header = () => {
                                 width={200}
                                 height={200}
                             />
-                            <span className="font-sans font-bold text-black ml-1">enzilla</span>
+                            <span className="font-sans font-bold text-black ml-[0.4px]">
+                                enzilla
+                            </span>
                         </a>
                     </div>
                     <div className="navbar-center hidden lg:flex">

@@ -9,7 +9,7 @@ const HeaderAndFooter = ({ children }: LayoutProps) => {
     return (
         <div>
             <Header />
-            <div className="w-[90%] mx-auto mt-10">{children}</div>
+            <div className="w-[90%] mx-auto mt-20">{children}</div>
             <Footer />
         </div>
     );

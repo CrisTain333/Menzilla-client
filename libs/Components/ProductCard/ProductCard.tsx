@@ -11,7 +11,7 @@ const ProductCard = ({ data }: any) => {
 
     return (
         <div>
-            <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+            <div className="relative m-10 flex w-full mx-auto max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
                 <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
                     <Image
                         height={300}

@@ -8,7 +8,7 @@ import { useAuth } from '@/libs/Context/AuthProvider';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 
 const Login = () => {
-    const { login, currentUser } = useAuth();
+    const { login } = useAuth();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

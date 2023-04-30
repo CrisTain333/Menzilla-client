@@ -1,4 +1,5 @@
 import Banner from '@/libs/Components/Banner/Banner';
+import SimpleNav from '@/libs/Components/Header/SimpleNav';
 import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
 import Categories from '@/libs/Components/Home/Category/Category';
 import Sponsor from '@/libs/Components/Home/Sponser/Sponser';

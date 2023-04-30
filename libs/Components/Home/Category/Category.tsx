@@ -176,15 +176,19 @@ const Categories = () => {
         <>
             <div className={`${styles.section} hidden sm:block`}>
                 <div
-                    className={`branding my-16 flex justify-between w-full shadow-sm bg-white p-5 rounded-md`}
+                    className={`branding my-16 grid grid-cols-12 w-full shadow-sm bg-white p-5 rounded-md gap-5`}
                 >
                     {brandingData &&
                         brandingData.map((i: any, index: any) => (
-                            <div className="flex items-start" key={index}>
-                                {i.icon}
-                                <div className="px-3">
-                                    <h3 className="font-bold text-sm md:text-base">{i.title}</h3>
-                                    <p className="text-xs md:text-sm">{i.Description}</p>
+                            <div className="col-span-3 md:col-span-6 lg:col-span-3" key={index}>
+                                <div className="flex items-center justify-around">
+                                    <span> {i.icon}</span>
+                                    <div className="px-3">
+                                        <h3 className="font-bold text-sm md:text-base">
+                                            {i.title}
+                                        </h3>
+                                        <p className="text-xs md:text-sm">{i.Description}</p>
+                                    </div>
                                 </div>
                             </div>
                         ))}

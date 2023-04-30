@@ -31,6 +31,7 @@ const VerifyEmail = () => {
             } else if (response?.data) {
                 setPageLoading(false);
             }
+            setPageLoading(false);
         } catch (e: any) {
             setPageLoading(false);
             setErrorMessage(e?.message);
@@ -45,7 +46,7 @@ const VerifyEmail = () => {
     return pageLoading ? (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-70 z-50">
             <div className="relative overflow-hidden">
-                <span className="text-5xl  space-x-3 font-black load">
+                <span className="text-6xl  space-x-3 font-bold load">
                     <span>M</span>
                     <span>e</span>
                     <span>N</span>

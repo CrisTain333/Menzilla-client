@@ -13,7 +13,7 @@ const HeaderAndFooter = ({ children }: LayoutProps) => {
             <div className="mt-14">
                 <SimpleNav />
             </div>
-            <div className="w-[90%] mx-auto mt-24">{children}</div>
+            <div className="w-[90%] mx-auto mt-14">{children}</div>
             <Footer />
         </div>
     );

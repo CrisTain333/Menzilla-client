@@ -96,13 +96,13 @@ const Header = () => {
                                         id="search-dropdown"
                                         value={searchTerm}
                                         onChange={handleSearchChange}
-                                        className="block p-[1.2rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
+                                        className="block p-[0.7rem] w-full z-20 text-sm text-gray-900  rounded-r-lg"
                                         placeholder="Search Mockups, Logos, Design Templates..."
                                         required
                                     />
                                     <button
                                         type="submit"
-                                        className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-[#ff9900] rounded-r-lg border border-[#ff9900]"
+                                        className="absolute top-0 right-0 p-[0.66rem] text-sm font-medium text-white bg-[#ff9900] rounded-r-lg border border-[#ff9900]"
                                     >
                                         <svg
                                             aria-hidden="true"

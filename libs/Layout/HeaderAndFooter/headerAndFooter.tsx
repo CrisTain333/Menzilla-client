@@ -1,3 +1,4 @@
+import { Footer } from '@/libs/Components/Footer/Footer';
 import Header from '@/libs/Components/Header/Header';
 import React, { ReactNode } from 'react';
 
@@ -9,6 +10,7 @@ const HeaderAndFooter = ({ children }: LayoutProps) => {
         <div>
             <Header />
             <div className="w-[90%] mx-auto mt-10">{children}</div>
+            <Footer />
         </div>
     );
 };

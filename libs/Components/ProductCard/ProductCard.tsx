@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 import ProductDetails from '../Home/ProductDetails/ProductDetails';
+import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
@@ -19,7 +20,10 @@ const ProductCard = ({ data }: any) => {
                         src={data?.image_Url[0]?.url}
                         alt="product image"
                     />
-                    <span className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium">
+                    <label
+                        htmlFor="ProductDetails"
+                        className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium"
+                    >
                         <AiOutlineEye
                             size={22}
                             className="cursor-pointer"
@@ -27,7 +31,7 @@ const ProductCard = ({ data }: any) => {
                             color="#333"
                             title="Quick view"
                         />
-                    </span>
+                    </label>
                 </div>
                 <div className="mt-4 px-5 pb-5">
                     <Link href={`/shop/preview/${data?.shop._id}`}>
@@ -121,7 +125,7 @@ const ProductCard = ({ data }: any) => {
                 </div>
             </div>
 
-            {showProductDetails && <ProductDetails />}
+            {showProductDetails && <ProductDetailsModal />}
         </div>
     );
 };

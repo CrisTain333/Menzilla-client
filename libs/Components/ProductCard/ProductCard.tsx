@@ -98,7 +98,7 @@ const ProductCard = ({ data }: any) => {
                             <span className="text-3xl font-bold text-slate-900">
                                 ${data?.discount_price}
                             </span>
-                            <span className="text-sm text-slate-900 line-through">
+                            <span className="text-sm text-red-500 line-through">
                                 ${data?.price}
                             </span>
                         </p>

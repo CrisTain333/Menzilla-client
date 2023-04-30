@@ -2,6 +2,7 @@ import React from 'react';
 import { categoriesData } from '../../../common/constant/Data';
 import styles from '../../../../styles/styles';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Categories = () => {
     // const navigate = useNavigate();
@@ -175,7 +176,7 @@ const Categories = () => {
         <>
             <div className={`${styles.section} hidden sm:block`}>
                 <div
-                    className={`branding my-12 flex justify-between w-full shadow-sm bg-white p-5 rounded-md`}
+                    className={`branding my-16 flex justify-between w-full shadow-sm bg-white p-5 rounded-md`}
                 >
                     {brandingData &&
                         brandingData.map((i: any, index: any) => (
@@ -204,7 +205,9 @@ const Categories = () => {
                                     onClick={() => handleSubmit(i)}
                                 >
                                     <h5 className={`text-[18px] leading-[1.3]`}>{i.title}</h5>
-                                    <img
+                                    <Image
+                                        height={400}
+                                        width={400}
                                         src={i.image_Url}
                                         className="w-[120px] object-cover"
                                         alt=""

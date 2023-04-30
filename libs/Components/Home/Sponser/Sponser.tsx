@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const Sponsor = () => {
@@ -12,7 +13,9 @@ const Sponsor = () => {
                     </div>
                     <div className="sm:py-6 px-8 sm:24 flex flex-wrap items-center">
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16 "
                                 src="https://cdn-icons-png.flaticon.com/128/3800/3800024.png"
                                 alt="Adidas"
@@ -20,7 +23,9 @@ const Sponsor = () => {
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl ">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16"
                                 src="https://cdn-icons-png.flaticon.com/128/187/187902.png"
                                 alt="Chanel"
@@ -28,7 +33,9 @@ const Sponsor = () => {
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16"
                                 src="https://cdn-icons-png.flaticon.com/128/3845/3845877.png"
                                 alt="Nike"
@@ -36,7 +43,9 @@ const Sponsor = () => {
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16"
                                 src="https://cdn-icons-png.flaticon.com/128/732/732242.png"
                                 alt="Toyota"
@@ -44,7 +53,9 @@ const Sponsor = () => {
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16"
                                 src="https://cdn-icons-png.flaticon.com/128/187/187868.png"
                                 alt="Toyota"
@@ -52,7 +63,9 @@ const Sponsor = () => {
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-                            <img
+                            <Image
+                                height={400}
+                                width={400}
                                 className="focus:outline-none w-12 sm:w-16"
                                 src="https://cdn-icons-png.flaticon.com/128/685/685680.png"
                                 alt="Toyota"

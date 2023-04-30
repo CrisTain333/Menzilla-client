@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
-import ProductDetails from '../Home/ProductDetails/ProductDetails';
 import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
+    const [productData, setProductData] = useState<any>(null);
 
     return (
         <div>
@@ -23,6 +23,7 @@ const ProductCard = ({ data }: any) => {
                     <label
                         htmlFor="ProductDetails"
                         className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium"
+                        onClick={() => setProductData(data)}
                     >
                         <AiOutlineEye
                             size={22}
@@ -125,7 +126,12 @@ const ProductCard = ({ data }: any) => {
                 </div>
             </div>
 
-            {showProductDetails && <ProductDetailsModal />}
+            {showProductDetails && productData && (
+                <ProductDetailsModal
+                    setShowProductDetails={setShowProductDetails}
+                    data={productData}
+                />
+            )}
         </div>
     );
 };

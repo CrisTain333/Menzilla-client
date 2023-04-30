@@ -2,6 +2,7 @@ import React from 'react';
 import { GrApps } from 'react-icons/gr';
 import { AiOutlineAppstore, AiFillCaretDown } from 'react-icons/ai';
 import Link from 'next/link';
+import { categoriesData } from '@/libs/common/constant/Data';
 
 const SimpleNav = () => {
     return (
@@ -29,14 +30,18 @@ const SimpleNav = () => {
 
                                         <ul
                                             tabIndex={0}
-                                            className="dropdown-content menu p-2 mt-48 shadow bg-base-100 rounded-md w-60 -ml-5 text-black"
+                                            className="dropdown-content menu p-2 mt-[29rem] shadow bg-base-100 rounded-md w-60 -ml-5 text-black"
                                         >
-                                            <li>
-                                                <a>Item 1</a>
-                                            </li>
-                                            <li>
-                                                <a>Item 2</a>
-                                            </li>
+                                            {categoriesData?.map((e: any, i: any) => {
+                                                return (
+                                                    <li
+                                                        key={i}
+                                                        className="my-2 text-sm font-semibold"
+                                                    >
+                                                        {e?.title}
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </div>
                                 </div>

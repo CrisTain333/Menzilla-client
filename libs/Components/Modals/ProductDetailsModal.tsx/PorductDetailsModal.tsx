@@ -2,17 +2,10 @@ import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import {
-    AiFillHeart,
-    AiOutlineHeart,
-    AiOutlineMessage,
-    AiOutlineShoppingCart
-} from 'react-icons/ai';
+import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
-    console.log(data);
     const [count, setCount] = useState(1);
-    const [click, setClick] = useState(false);
 
     const decrementCount = () => {
         if (count > 1) {
@@ -42,7 +35,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                 />
 
                                 <div>
-                                    <div className="flex ml-5 -mt-4">
+                                    <div className="flex ml-5 -mt-2">
                                         <Link
                                             href={`/shop/preview/${data.shop._id}`}
                                             className="flex"
@@ -83,11 +76,13 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                 </p>
                                 <div className="mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                                     <div className="flex justify-between">
-                                        <div className="flex">
-                                            <h4 className={`${styles.productDiscountPrice}`}>
+                                        <div className="flex items-center">
+                                            <h4 className={`text-xl font-bold`}>
                                                 {data?.discount_price}$
                                             </h4>
-                                            <h3 className={`${styles.price}`}>
+                                            <h3
+                                                className={`${styles.price} text-gray-500 font-semibold ml-1`}
+                                            >
                                                 {data?.price ? data.price + '$' : null}
                                             </h3>
                                         </div>
@@ -121,7 +116,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                         </div>
                         <RxCross1
                             size={20}
-                            className="absolute right-2 top-3 z-50"
+                            className="absolute right-2 top-3 z-50 cursor-pointer"
                             onClick={() => setShowProductDetails(false)}
                         />
                     </>

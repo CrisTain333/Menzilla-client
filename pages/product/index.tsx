@@ -1,9 +1,10 @@
+import Product from '@/libs/modules/product/product';
 import React from 'react';
 
 const index = () => {
     return (
         <div>
-            <p>Product Page</p>
+            <Product />
         </div>
     );
 };

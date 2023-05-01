@@ -1,8 +1,8 @@
 import React from 'react';
-import { GrApps } from 'react-icons/gr';
 import { AiOutlineAppstore, AiFillCaretDown } from 'react-icons/ai';
 import Link from 'next/link';
 import { categoriesData } from '@/libs/common/constant/Data';
+import Image from 'next/image';
 
 const SimpleNav = () => {
     return (
@@ -30,16 +30,19 @@ const SimpleNav = () => {
 
                                         <ul
                                             tabIndex={0}
-                                            className="dropdown-content menu p-2 mt-[37rem] shadow bg-base-100 -z-50 rounded-md w-64 -ml-6 text-black"
+                                            className="dropdown-content menu p-2 mt-[37rem] shadow bg-base-100 -z-50 rounded-md w-64 -ml-6 text-black "
                                         >
                                             {categoriesData?.map((e: any, i: any) => {
                                                 return (
-                                                    <li
+                                                    <Link
+                                                        href={`/product?category=${e?.title}`}
                                                         key={i}
-                                                        className="my-2 text-lg py-1 px-1    rounded-md hover:bg-gray-100 font-medium"
+                                                        tabIndex={0}
                                                     >
-                                                        {e?.title}
-                                                    </li>
+                                                        <li className="my-2 text-lg py-1 px-1    rounded-md hover:bg-gray-100 font-medium">
+                                                            {e?.title}
+                                                        </li>
+                                                    </Link>
                                                 );
                                             })}
                                         </ul>

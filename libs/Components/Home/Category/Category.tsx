@@ -200,7 +200,7 @@ const Categories = () => {
                     {categoriesData &&
                         categoriesData.map((i) => {
                             const handleSubmit = (i: any) => {
-                                router.push(`/products?category=${i.title}`);
+                                router.push(`/product?category=${i.title}`);
                             };
                             return (
                                 <div

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Header = () => {
-    const { currentUser } = useAuth();
+    const { currentUser, logout } = useAuth();
     const [searchTerm, setSearchTerm] = useState();
     const [searchData, setSearchData] = useState<any>(null);
 
@@ -211,8 +211,8 @@ const Header = () => {
                                 <li>
                                     <a>Settings</a>
                                 </li>
-                                <li>
-                                    <a>Logout</a>
+                                <li onClick={logout}>
+                                    <p>Logout</p>
                                 </li>
                             </ul>
                         </div>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginBanner from '../../../public/images/loginBanner.jpg';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
@@ -8,7 +8,7 @@ import { useAuth } from '@/libs/Context/AuthProvider';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 
 const Login = () => {
-    const { login } = useAuth();
+    const { login, currentUser } = useAuth();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -41,6 +41,13 @@ const Login = () => {
             router.push('/');
         }
     };
+
+    useEffect(() => {
+        if (currentUser) {
+            router.push('/');
+        }
+    }, [currentUser]);
+
     return (
         <div>
             <section className=" min-h-screen flex items-center justify-center">

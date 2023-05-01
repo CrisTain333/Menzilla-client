@@ -1,10 +1,14 @@
 import { registerUser } from '@/libs/Api';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
+import { useAuth } from '@/libs/Context/AuthProvider';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
 const Register = () => {
+    const { currentUser } = useAuth();
+    const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +32,6 @@ const Register = () => {
         };
         try {
             const res = await registerUser(data);
-            console.log(res);
             if (res?.status !== 201) {
                 setIsLoading(false);
                 return toast.error(res?.message);
@@ -41,6 +44,12 @@ const Register = () => {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (currentUser) {
+            router.push('/');
+        }
+    }, [currentUser]);
 
     return registerSuccess ? (
         <>

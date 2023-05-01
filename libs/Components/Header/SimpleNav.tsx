@@ -5,9 +5,11 @@ import { BiMenuAltLeft } from 'react-icons/bi';
 import Link from 'next/link';
 import { categoriesData } from '@/libs/common/constant/Data';
 import DropDown from './Dropdown/DropDown';
+import { useAuth } from '@/libs/Context/AuthProvider';
 
 const SimpleNav = () => {
     const [dropDown, setDropDown] = useState(false);
+    const { currentUser } = useAuth();
     return (
         <div>
             <header className="p-5  bg-[#1C2B35] text-white">
@@ -85,6 +87,17 @@ const SimpleNav = () => {
                                     FAQ
                                 </Link>
                             </li>
+                            {currentUser && (
+                                <li className="flex">
+                                    <Link
+                                        rel="noopener noreferrer"
+                                        href="/faq"
+                                        className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

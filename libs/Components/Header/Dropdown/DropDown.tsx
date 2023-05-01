@@ -7,10 +7,9 @@ const DropDown = ({ setDropDown, categoriesData }: any) => {
     const submitHandle = (i: any) => {
         navigate.push(`/product?category=${i.title}`);
         setDropDown(false);
-        window.location.reload();
     };
     return (
-        <div className="pb-5 w-68 bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
+        <div className="pb-5 w-64 -ml-6 bg-[#fff] absolute z-30 rounded-b-md shadow-md">
             {categoriesData &&
                 categoriesData.map((i: any, index: any) => (
                     <div

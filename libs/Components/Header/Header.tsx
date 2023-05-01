@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Header = () => {
-    const { currentUser } = useAuth();
+    const { currentUser, isLoading } = useAuth();
     const [searchTerm, setSearchTerm] = useState();
     const [searchData, setSearchData] = useState<any>(null);
 
@@ -182,13 +182,17 @@ const Header = () => {
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
-                                    <Image
-                                        alt="user_Profile"
-                                        height={300}
-                                        width={300}
-                                        className="h-10"
-                                        src={currentUser?.profilePicture}
-                                    />
+                                    {!currentUser ? (
+                                        <div className="w-[45px] h-[45px] animate-pulse bg-slate-400  rounded-full"></div>
+                                    ) : (
+                                        <Image
+                                            alt="user_Profile"
+                                            height={300}
+                                            width={300}
+                                            className="h-10"
+                                            src={currentUser?.profilePicture}
+                                        />
+                                    )}
                                 </div>
                             </label>
                             <ul

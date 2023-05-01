@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { BACKEND_BASE_URL } from '../Config/const';
 import axiosInstance from '../common/utils/axios';
 
 interface AuthContextValue {
@@ -35,7 +34,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setIsLoading(true);
             getUserData(token)
                 .then((userData) => {
-                    console.log(userData);
                     setUserFetched(true);
                     setCurrentUser(userData);
                     setIsLoading(false);

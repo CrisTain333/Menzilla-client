@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Header = () => {
-    const { currentUser, isLoading } = useAuth();
+    const { currentUser } = useAuth();
     const [searchTerm, setSearchTerm] = useState();
     const [searchData, setSearchData] = useState<any>(null);
 

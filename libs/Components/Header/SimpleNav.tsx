@@ -2,7 +2,6 @@ import React from 'react';
 import { AiOutlineAppstore, AiFillCaretDown } from 'react-icons/ai';
 import Link from 'next/link';
 import { categoriesData } from '@/libs/common/constant/Data';
-import Image from 'next/image';
 
 const SimpleNav = () => {
     return (

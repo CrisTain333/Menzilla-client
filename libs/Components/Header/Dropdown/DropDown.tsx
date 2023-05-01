@@ -5,12 +5,12 @@ import React from 'react';
 const DropDown = ({ setDropDown, categoriesData }: any) => {
     const navigate = useRouter();
     const submitHandle = (i: any) => {
-        navigate.push(`/products?category=${i.title}`);
+        navigate.push(`/product?category=${i.title}`);
         setDropDown(false);
         window.location.reload();
     };
     return (
-        <div className="pb-4 w-68 bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
+        <div className="pb-5 w-68 bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
             {categoriesData &&
                 categoriesData.map((i: any, index: any) => (
                     <div
@@ -29,7 +29,7 @@ const DropDown = ({ setDropDown, categoriesData }: any) => {
                             }}
                             alt=""
                         />
-                        <h3 className="m-3 cursor-pointer select-none">{i.title}</h3>
+                        <h3 className="m-3 cursor-pointer select-none text-black">{i.title}</h3>
                     </div>
                 ))}
         </div>

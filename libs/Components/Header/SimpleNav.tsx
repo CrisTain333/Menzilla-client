@@ -36,7 +36,8 @@ const SimpleNav = () => {
                                                         onClick={() => setDropDown(!dropDown)}
                                                     />
                                                 </span>
-
+                                            </div>
+                                            <div>
                                                 {dropDown ? (
                                                     <DropDown
                                                         categoriesData={categoriesData}

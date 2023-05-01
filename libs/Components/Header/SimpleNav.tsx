@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineAppstore, AiFillCaretDown } from 'react-icons/ai';
 import Link from 'next/link';
 import { categoriesData } from '@/libs/common/constant/Data';
+import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
+import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { BiMenuAltLeft } from 'react-icons/bi';
+import DropDown from './Dropdown/DropDown';
 
 const SimpleNav = () => {
+    const [dropDown, setDropDown] = useState(false);
     return (
         <div>
             <header className="p-5  bg-[#1C2B35] text-white">
@@ -16,7 +21,7 @@ const SimpleNav = () => {
                                         className="flex w-60  items-center px-4 py-2 -mb-1 border-r-2 mr-2 border  justify-between  border-gray-600 mt-1 dropdown cursor-pointer"
                                         tabIndex={0}
                                     >
-                                        <div className="flex items-center">
+                                        {/* <div className="flex items-center">
                                             <span className="text-white mr-1">
                                                 {' '}
                                                 <AiOutlineAppstore size={25} className="" />
@@ -44,7 +49,31 @@ const SimpleNav = () => {
                                                     </Link>
                                                 );
                                             })}
-                                        </ul>
+                                        </ul> */}
+                                        <div onClick={() => setDropDown(!dropDown)}>
+                                            <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
+                                                <BiMenuAltLeft
+                                                    size={30}
+                                                    className="absolute top-3 left-2"
+                                                />
+                                                <button
+                                                    className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+                                                >
+                                                    All Categories
+                                                </button>
+                                                <IoIosArrowDown
+                                                    size={20}
+                                                    className="absolute right-2 top-4 cursor-pointer"
+                                                    onClick={() => setDropDown(!dropDown)}
+                                                />
+                                                {dropDown ? (
+                                                    <DropDown
+                                                        categoriesData={categoriesData}
+                                                        setDropDown={setDropDown}
+                                                    />
+                                                ) : null}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </li>

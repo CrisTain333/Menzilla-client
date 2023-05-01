@@ -76,7 +76,10 @@ const Header = () => {
                                 </li>
                             </ul>
                         </div>
-                        <a className="flex items-center justify-center font-semibold text-2xl">
+                        <Link
+                            href="/"
+                            className="flex items-center justify-center font-semibold text-2xl"
+                        >
                             <Image
                                 src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
                                 alt=""
@@ -87,7 +90,7 @@ const Header = () => {
                             <span className="font-sans font-bold text-black ml-[0.4px]">
                                 enzilla
                             </span>
-                        </a>
+                        </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <form className="w-[50vw]">

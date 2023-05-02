@@ -3,12 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import {
-    AiFillHeart,
-    AiOutlineHeart,
-    AiOutlineMessage,
-    AiOutlineShoppingCart
-} from 'react-icons/ai';
+import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import { BiMessageDots } from 'react-icons/bi';
 
 const ProductDetail = ({ data }: any) => {
     const [count, setCount] = useState(1);
@@ -109,38 +105,21 @@ const ProductDetail = ({ data }: any) => {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div>
-                                            {click ? (
-                                                <AiFillHeart
-                                                    size={30}
-                                                    className="cursor-pointer"
-                                                    onClick={() => setClick(!click)}
-                                                    color={click ? 'red' : '#333'}
-                                                    title="Remove from wishlist"
-                                                />
-                                            ) : (
-                                                <AiOutlineHeart
-                                                    size={30}
-                                                    className="cursor-pointer"
-                                                    onClick={() => setClick(!click)}
-                                                    color={click ? 'red' : '#333'}
-                                                    title="Add to wishlist"
-                                                />
-                                            )}
-                                        </div>
                                     </div>
                                     <div
-                                        className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+                                        className={` !mt-6 !rounded !h-11 flex items-center justify-start`}
                                     >
                                         <span className=" bg-[#ff9900] py-2 px-3 rounded-sm text-white flex items-center">
                                             Add to cart <AiOutlineShoppingCart className="ml-1" />
                                         </span>
                                     </div>
                                     <div className="flex items-center pt-8">
-                                        <img
+                                        <Image
+                                            height={400}
+                                            width={400}
                                             src={data.shop.shop_avatar.url}
                                             alt=""
-                                            className="w-[50px] h-[50px] rounded-full mr-2"
+                                            className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
                                         />
                                         <div className="pr-8">
                                             <h3 className={`${styles.shop_name} pb-1 pt-1`}>
@@ -151,11 +130,11 @@ const ProductDetail = ({ data }: any) => {
                                             </h5>
                                         </div>
                                         <div
-                                            className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+                                            className={`bg-gradient-to-r from-[#f74d7d]  to-[#fd7a9d] py-2 rounded-sm px-3`}
                                             onClick={handleMessageSubmit}
                                         >
                                             <span className="text-white flex items-center">
-                                                Send Message <AiOutlineMessage className="ml-1" />
+                                                Send Message <BiMessageDots className="ml-1" />
                                             </span>
                                         </div>
                                     </div>

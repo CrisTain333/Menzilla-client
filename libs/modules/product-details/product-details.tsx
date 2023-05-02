@@ -1,9 +1,10 @@
 import React from 'react';
 
-const ProductDetails = ({ slugId }: any) => {
+const ProductDetails = ({ data }: any) => {
+    console.log(data);
     return (
         <div>
-            <p>{slugId}</p>
+            <p>{data?.name}</p>
         </div>
     );
 };

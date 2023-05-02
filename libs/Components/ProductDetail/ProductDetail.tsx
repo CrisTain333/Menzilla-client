@@ -32,12 +32,12 @@ const ProductDetail = ({ data }: any) => {
                 {data ? (
                     <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
                         <div className="w-full py-5">
-                            <div className="block w-full 800px:flex">
+                            <div className="block w-full md:flex">
                                 <div className="w-full 800px:w-[50%]">
                                     <Image
                                         src={data.image_Url[select].url}
                                         alt=""
-                                        className="w-[35%] mx-auto rounded-md  my-5"
+                                        className="w-[90%] mx-auto rounded-md  my-5"
                                         height={500}
                                         width={500}
                                     />
@@ -130,7 +130,7 @@ const ProductDetail = ({ data }: any) => {
                                             </h5>
                                         </div>
                                         <div
-                                            className={`bg-gradient-to-r from-[#f74d7d]  to-[#fd7a9d] py-2 rounded-sm px-3`}
+                                            className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm`}
                                             onClick={handleMessageSubmit}
                                         >
                                             <span className="text-white flex items-center">
@@ -234,10 +234,12 @@ const ProductDetailsInfo = ({ data }: any) => {
                 <div className="w-full block 800px:flex p-5">
                     <div className="w-full 800px:w-[50%]">
                         <div className="flex items-center">
-                            <img
+                            <Image
                                 src={data.shop.shop_avatar.url}
-                                className="w-[50px] h-[50px] rounded-full"
-                                alt=""
+                                className="w-12 h-12 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
+                                alt="shopImage"
+                                height={500}
+                                width={500}
                             />
                             <div className="pl-3">
                                 <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>

@@ -13,13 +13,16 @@ const ProductCard = ({ data }: any) => {
         <div>
             <div className="relative m-10 flex w-full mx-auto max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
                 <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
-                    <Image
-                        height={300}
-                        width={300}
-                        className="object-cover"
-                        src={data?.image_Url[0]?.url}
-                        alt="product image"
-                    />
+                    <Link href={`/product/${data?.name}`} className="cursor-pointer">
+                        <Image
+                            height={300}
+                            width={300}
+                            className="object-cover"
+                            src={data?.image_Url[0]?.url}
+                            alt="product image"
+                        />
+                    </Link>
+
                     <label
                         htmlFor="ProductDetails"
                         className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium"

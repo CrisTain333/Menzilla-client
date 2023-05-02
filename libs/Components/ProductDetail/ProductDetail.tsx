@@ -3,12 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiMessageDots } from 'react-icons/bi';
 
 const ProductDetail = ({ data }: any) => {
     const [count, setCount] = useState(1);
-    const [click, setClick] = useState(false);
     const [select, setSelect] = useState(0);
     const router = useRouter();
 
@@ -28,9 +27,9 @@ const ProductDetail = ({ data }: any) => {
 
     return (
         <div>
-            <div className="bg-white">
+            <div className="">
                 {data ? (
-                    <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
+                    <div className={``}>
                         <div className="w-full py-5">
                             <div className="block w-full md:flex">
                                 <div className="w-full 800px:w-[50%]">

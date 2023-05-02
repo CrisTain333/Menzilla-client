@@ -1,4 +1,5 @@
 import styles from '@/styles/styles';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -37,41 +38,50 @@ const ProductDetail = ({ data }: any) => {
                         <div className="w-full py-5">
                             <div className="block w-full 800px:flex">
                                 <div className="w-full 800px:w-[50%]">
-                                    <img
+                                    <Image
                                         src={data.image_Url[select].url}
                                         alt=""
-                                        className="w-[80%]"
+                                        className="w-[35%] mx-auto rounded-md  my-5"
+                                        height={500}
+                                        width={500}
                                     />
-                                    <div className="w-full flex">
+                                    <div className="w-full flex space-x-5">
                                         <div
                                             className={`${
-                                                select === 0 ? 'border' : 'null'
-                                            } cursor-pointer`}
+                                                select === 0 ? 'border border-[#ff9900]' : 'null'
+                                            } cursor-pointer rounded-md shadow-sm p-2`}
                                         >
-                                            <img
+                                            <Image
                                                 src={data?.image_Url[0].url}
                                                 alt=""
-                                                className="h-[200px]"
+                                                className="w-32 "
                                                 onClick={() => setSelect(0)}
+                                                height={500}
+                                                width={500}
                                             />
                                         </div>
                                         <div
                                             className={`${
-                                                select === 1 ? 'border' : 'null'
-                                            } cursor-pointer`}
+                                                select === 1 ? 'border border-[#ff9900]' : 'null'
+                                            } cursor-pointer rounded-md shadow-sm p-2`}
                                         >
-                                            <img
+                                            <Image
                                                 src={data?.image_Url[1].url}
                                                 alt=""
-                                                className="h-[200px]"
+                                                className="w-32 "
                                                 onClick={() => setSelect(1)}
+                                                height={500}
+                                                width={500}
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="w-full 800px:w-[50%] pt-5">
-                                    <h1 className={`${styles.productTitle}`}>{data.name}</h1>
-                                    <p>{data.description}</p>
+                                    <h1 className={`font-bold text-lg my-2`}>{data.name}</h1>
+                                    <p className="text-justify leading-8 font-medium">
+                                        {' '}
+                                        {data.description}
+                                    </p>
                                     <div className="flex pt-3">
                                         <h4 className={`${styles.productDiscountPrice}`}>
                                             {data.discount_price}$
@@ -82,22 +92,22 @@ const ProductDetail = ({ data }: any) => {
                                     </div>
 
                                     <div className="flex items-center mt-12 justify-between pr-3">
-                                        <div>
-                                            <button
-                                                className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
-                                                onClick={decrementCount}
-                                            >
-                                                -
-                                            </button>
-                                            <span className="bg-gray-200 text-gray-800 font-medium px-4 py-[11px]">
-                                                {count}
-                                            </span>
-                                            <button
-                                                className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
-                                                onClick={incrementCount}
-                                            >
-                                                +
-                                            </button>
+                                        <div className="flex">
+                                            <div className="quantity-field">
+                                                <button
+                                                    className="value-button decrease-button"
+                                                    onClick={decrementCount}
+                                                >
+                                                    -
+                                                </button>
+                                                <div className="number">{count}</div>
+                                                <button
+                                                    className="value-button increase-button"
+                                                    onClick={incrementCount}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
                                         </div>
                                         <div>
                                             {click ? (
@@ -122,7 +132,7 @@ const ProductDetail = ({ data }: any) => {
                                     <div
                                         className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
                                     >
-                                        <span className="text-white flex items-center">
+                                        <span className=" bg-[#ff9900] py-2 px-3 rounded-sm text-white flex items-center">
                                             Add to cart <AiOutlineShoppingCart className="ml-1" />
                                         </span>
                                     </div>

@@ -108,7 +108,7 @@ const Cart = () => {
                                         <option>Standard shipping - $10.00</option>
                                     </select>
                                 </div>
-                                <div className="py-10">
+                                <div className="py-5">
                                     <label
                                         htmlFor="promo"
                                         className="font-semibold inline-block mb-3 text-sm uppercase"
@@ -118,11 +118,11 @@ const Cart = () => {
                                     <input
                                         type="text"
                                         id="promo"
-                                        placeholder="Enter your code"
-                                        className="p-2 text-sm w-full"
+                                        placeholder="Enter your promo code"
+                                        className="p-2 text-sm w-full border-b-2"
                                     />
                                 </div>
-                                <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+                                <button className="bg-[#ff9900] px-5 py-2 text-sm text-white uppercase ">
                                     Apply
                                 </button>
                                 <div className="border-t mt-8">
@@ -130,7 +130,7 @@ const Cart = () => {
                                         <span>Total cost</span>
                                         <span>$600</span>
                                     </div>
-                                    <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                                    <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
                                         Checkout
                                     </button>
                                 </div>

@@ -160,7 +160,7 @@ const Header = () => {
                     </div>
                     <div className="navbar-end space-x-3">
                         <div className="dropdown dropdown-end">
-                            <Link href="/cart">
+                            <Link href="/product/cart">
                                 <label
                                     tabIndex={0}
                                     className="btn btn-ghost btn-circle  hover:bg-white"

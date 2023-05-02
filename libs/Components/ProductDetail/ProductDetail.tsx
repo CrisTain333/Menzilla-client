@@ -155,12 +155,12 @@ const ProductDetailsInfo = ({ data }: any) => {
     const [active, setActive] = useState(1);
 
     return (
-        <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
-            <div className="w-full flex justify-between border-b pt-10 pb-2">
+        <div className="bg-slate-50 px-3 800px:px-14 py-2 rounded">
+            <div className="w-full flex justify-between border-b  pt-10 pb-3">
                 <div className="relative">
                     <h5
                         className={
-                            'text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]'
+                            'text-[#000] text-lg px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]'
                         }
                         onClick={() => setActive(1)}
                     >
@@ -193,7 +193,7 @@ const ProductDetailsInfo = ({ data }: any) => {
             </div>
             {active === 1 ? (
                 <>
-                    <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
+                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
                         Product details are a crucial part of any eCommerce website or online
                         marketplace. These details help the potential customers to make an informed
                         decision about the product they are interested in buying. A well-written
@@ -203,7 +203,7 @@ const ProductDetailsInfo = ({ data }: any) => {
                         relevant information that can help language, and be honest and transparent
                         about the products features and limitations.
                     </p>
-                    <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
+                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
                         customers to understand the product better. The product details section
                         should also include high-quality images and videos of the product, as well
                         as customer reviews and ratings. When writing product details, it is
@@ -212,7 +212,7 @@ const ProductDetailsInfo = ({ data }: any) => {
                         simple language. The tone of the product details should be persuasive,
                         highlighting the unique features of the
                     </p>
-                    <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
+                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
                         customers to understand the product better. The product details section
                         should also include high-quality images and videos of the product, as well
                         as customer reviews and ratings. When writing product details, it is

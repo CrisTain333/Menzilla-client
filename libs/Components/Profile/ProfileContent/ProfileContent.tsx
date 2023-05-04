@@ -25,11 +25,11 @@ const ProfileContent = ({ active }: any) => {
     };
 
     return (
-        <div className="w-[90%] mx-auto ">
+        <div className="w-full">
             {/* profile */}
             {active === 1 && (
                 <>
-                    <div className="shadow-md w-[90%] mx-auto rounded-md">
+                    <div className="shadow-md w-[90%] mx-auto rounded-md p-2">
                         <div className="flex justify-center w-full">
                             <div className="relative">
                                 {isLoading ? (

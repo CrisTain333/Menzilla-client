@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineCamera, AiOutlineDelete } from 'react-icons/ai';
 
-// import { DataGrid } from '@mui/x-data-grid';
-// import { Button } from '@mui/material';
-import { MdOutlineTrackChanges } from 'react-icons/md';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
-import Link from 'next/link';
 import Image from 'next/image';
 import AllOrders from '../AllOrder/AllOrder';
 import AllRefundOrders from '../AllRefundOrders/AllRefundOrders';
 import TrackOrder from '../TrackOrder/TrackOrder';
+import PaymentMethod from '../PaymentMethod/PaymentMethod';
 
 const ProfileContent = ({ active }: any) => {
     const { currentUser } = useAuth();
@@ -149,7 +146,7 @@ const ProfileContent = ({ active }: any) => {
                 </div>
             )}
 
-            {/* Track order */}
+            {/* Payment method */}
             {active === 6 && (
                 <div>
                     <PaymentMethod />
@@ -162,36 +159,6 @@ const ProfileContent = ({ active }: any) => {
                     <Address />
                 </div>
             )}
-        </div>
-    );
-};
-
-const PaymentMethod = () => {
-    return (
-        <div className="w-full px-5">
-            <div className="flex w-full items-center justify-between">
-                <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2">Payment Methods</h1>
-                <div className={`${styles.button} !rounded-md`}>
-                    <span className="text-[#fff]">Add New</span>
-                </div>
-            </div>
-            <br />
-            <div className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10">
-                <div className="flex items-center">
-                    <img
-                        src="https://bonik-react.vercel.app/assets/images/payment-methods/Visa.svg"
-                        alt=""
-                    />
-                    <h5 className="pl-5 font-[600] text-[12px] md:text-[unset]">Shahriar Sajeeb</h5>
-                </div>
-                <div className="pl-8 flex items-center">
-                    <h6 className="text-[12px] md:text-[unset]">1234 **** *** ****</h6>
-                    <h5 className="pl-6 text-[12px] md:text-[unset]">08/2022</h5>
-                </div>
-                <div className="min-w-[10%] flex items-center justify-between pl-8">
-                    <AiOutlineDelete size={25} className="cursor-pointer" />
-                </div>
-            </div>
         </div>
     );
 };

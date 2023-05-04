@@ -7,7 +7,7 @@ import { TbAddressBook } from 'react-icons/tb';
 import { RxPerson } from 'react-icons/rx';
 import { useRouter } from 'next/router';
 
-const ProductSidebar = ({ setActive, active }: any) => {
+const ProfileSideBar = ({ setActive, active }: any) => {
     const { logout } = useAuth();
     const router = useRouter();
 
@@ -97,4 +97,4 @@ const ProductSidebar = ({ setActive, active }: any) => {
     );
 };
 
-export default ProductSidebar;
+export default ProfileSideBar;

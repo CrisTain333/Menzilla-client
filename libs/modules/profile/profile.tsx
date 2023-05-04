@@ -1,51 +1,22 @@
 import React, { useState } from 'react';
-import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+
 import HeaderOnly from '@/libs/Layout/HeaderOnly/HeaderOnly';
-import Link from 'next/link';
 
-const { Content, Sider } = Layout;
+import ProfileContent from '@/libs/Components/Profile/ProfileContent/ProfileContent';
+import ProfileSideBar from '@/libs/Components/Profile/ProfileSidebar/ProductSidebar';
+import styles from '@/styles/styles';
 
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[]
-): MenuItem {
-    return {
-        key,
-        icon,
-        children,
-        label
-    } as MenuItem;
-}
-
-const items: MenuItem[] = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5')
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />)
-];
 const Profile = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    const [active, setActive] = useState(1);
     return (
         <div className="min-h-screen">
             <HeaderOnly>
-                <p>Hello</p>
+                <div className={`flex bg-[#f5f5f5] py-10`}>
+                    <div className="w-[50px] md:w-[335px] sticky md:mt-0 mt-[18%]">
+                        <ProfileSideBar active={active} setActive={setActive} />
+                    </div>
+                    <ProfileContent active={active} />
+                </div>
             </HeaderOnly>
         </div>
     );

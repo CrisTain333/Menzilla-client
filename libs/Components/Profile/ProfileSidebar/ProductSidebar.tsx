@@ -15,7 +15,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
         logout();
     };
     return (
-        <div className="w-full bg-white text-black shadow-sm rounded-[10px] p-4 pt-8">
+        <div className="w-full bg-white text-black rounded-[10px] p-4 pt-8 shadow-md">
             <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(1)}

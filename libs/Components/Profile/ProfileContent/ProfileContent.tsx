@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
-
+import { RxUpdate } from 'react-icons/rx';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import Address from '../Address/Address';
 
 const ProfileContent = ({ active }: any) => {
-    const { currentUser } = useAuth();
+    const { currentUser, isLoading } = useAuth();
 
     const [name, setName] = useState(currentUser && currentUser?.name);
     const [email, setEmail] = useState(currentUser && currentUser?.email);
@@ -29,99 +29,113 @@ const ProfileContent = ({ active }: any) => {
             {/* profile */}
             {active === 1 && (
                 <>
-                    <div className="flex justify-center w-full">
-                        <div className="relative">
-                            <Image
-                                src={`${currentUser?.profilePicture || ''}`}
-                                className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
-                                alt="profilePicture"
-                                height={500}
-                                width={500}
-                            />
-                            <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
-                                <AiOutlineCamera />
+                    <div className="shadow-md w-[90%] mx-auto rounded-md">
+                        <div className="flex justify-center w-full">
+                            <div className="relative">
+                                {isLoading ? (
+                                    <div className="w-36 h-36 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
+                                ) : (
+                                    <Image
+                                        src={`${currentUser?.profilePicture || ''}`}
+                                        className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
+                                        alt="profilePicture"
+                                        height={500}
+                                        width={500}
+                                    />
+                                )}
+
+                                <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
+                                    <AiOutlineCamera />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div className="w-full px-5">
-                        <form onSubmit={handleSubmit}>
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block font-semibold pb-2">Full Name</label>
-                                    <input
-                                        type="text"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
+                        <br />
+                        <br />
+                        <div className="w-full px-5">
+                            <form onSubmit={handleSubmit}>
+                                <div className="w-full md:flex block pb-3">
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block font-semibold pb-2">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
+                                            required
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Email Address</label>
+                                        <input
+                                            type="text"
+                                            className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Email Address</label>
-                                    <input
-                                        type="text"
-                                        className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                            </div>
 
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Phone Number</label>
-                                    <input
-                                        type="number"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={phoneNumber}
-                                        onChange={(e: any) => setPhoneNumber(e.target.value)}
-                                    />
+                                <div className="w-full md:flex block pb-3">
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Phone Number</label>
+                                        <input
+                                            type="number"
+                                            className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
+                                            required
+                                            value={phoneNumber}
+                                            onChange={(e: any) => setPhoneNumber(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Zip Code</label>
+                                        <input
+                                            type="number"
+                                            className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
+                                            required
+                                            value={zipCode}
+                                            onChange={(e: any) => setZipCode(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Zip Code</label>
-                                    <input
-                                        type="number"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={zipCode}
-                                        onChange={(e: any) => setZipCode(e.target.value)}
-                                    />
-                                </div>
-                            </div>
 
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Address 1</label>
-                                    <input
-                                        type="address"
-                                        className={`${styles.input} !w-[95%]`}
-                                        required
-                                        value={address1}
-                                        onChange={(e) => setAddress1(e.target.value)}
-                                    />
+                                <div className="w-full md:flex block pb-3">
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Address 1</label>
+                                        <input
+                                            type="address"
+                                            className={`${styles.input} !w-[95%]`}
+                                            required
+                                            value={address1}
+                                            onChange={(e) => setAddress1(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Address 2</label>
+                                        <input
+                                            type="address"
+                                            className={`${styles.input} !w-[95%]`}
+                                            required
+                                            value={address2}
+                                            onChange={(e) => setAddress2(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Address 2</label>
-                                    <input
-                                        type="address"
-                                        className={`${styles.input} !w-[95%]`}
-                                        required
-                                        value={address2}
-                                        onChange={(e) => setAddress2(e.target.value)}
-                                    />
+                                <div className="flex justify-center items-center pb-4">
+                                    <button
+                                        className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-[3px] mt-8 cursor-pointer flex justify-center items-center text-base font-semibold`}
+                                        type="submit"
+                                    >
+                                        Update
+                                        <span className="text-white">
+                                            <RxUpdate size={18} className="ml-1" />
+                                        </span>
+                                    </button>
                                 </div>
-                            </div>
-                            <input
-                                className={`w-[250px] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
-                                required
-                                value="Update"
-                                type="submit"
-                            />
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </>
             )}

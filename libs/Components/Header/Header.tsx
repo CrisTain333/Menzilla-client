@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Header = () => {
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, isLoading } = useAuth();
     const [searchTerm, setSearchTerm] = useState();
     const [searchData, setSearchData] = useState<any>(null);
 
@@ -189,21 +189,23 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
-                                    {!currentUser ? (
-                                        <div className="w-[45px] h-[45px] animate-pulse bg-slate-400  rounded-full"></div>
-                                    ) : (
-                                        <Image
-                                            alt="user_Profile"
-                                            height={300}
-                                            width={300}
-                                            className="h-10"
-                                            src={currentUser?.profilePicture}
-                                        />
-                                    )}
-                                </div>
-                            </label>
+                            {isLoading ? (
+                                <div className="w-11 h-11 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
+                            ) : (
+                                currentUser && (
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
+                                            <Image
+                                                alt="user_Profile"
+                                                height={300}
+                                                width={300}
+                                                className="h-10"
+                                                src={currentUser?.profilePicture}
+                                            />
+                                        </div>
+                                    </label>
+                                )
+                            )}
                             <ul
                                 tabIndex={0}
                                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52"

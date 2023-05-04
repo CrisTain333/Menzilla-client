@@ -17,7 +17,7 @@ const AllOrders = () => {
 
     return (
         <div className="shadow-md w-[90%] mx-auto">
-            <div className="pl-5 pr-2 pt-1">
+            <div className="pl-5 pr-2 pt-1 pb-5">
                 <div className="overflow-x-auto scrollbar-hide">
                     <table className="table table-compact w-full">
                         <thead>

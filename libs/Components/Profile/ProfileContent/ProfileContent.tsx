@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete } from 'react-icons/ai';
 
-import { DataGrid } from '@mui/x-data-grid';
-import { Button } from '@mui/material';
+// import { DataGrid } from '@mui/x-data-grid';
+// import { Button } from '@mui/material';
 import { MdOutlineTrackChanges } from 'react-icons/md';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
@@ -177,70 +177,12 @@ const AllOrders = () => {
         }
     ];
 
-    const columns: any[] = [
-        { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
-
-        {
-            field: 'status',
-            headerName: 'Status',
-            minWidth: 130,
-            flex: 0.7
-        },
-        {
-            field: 'itemsQty',
-            headerName: 'Items Qty',
-            type: 'number',
-            minWidth: 130,
-            flex: 0.7
-        },
-
-        {
-            field: 'total',
-            headerName: 'Total',
-            type: 'number',
-            minWidth: 130,
-            flex: 0.8
-        },
-
-        {
-            field: ' ',
-            flex: 1,
-            minWidth: 150,
-            headerName: '',
-            type: 'number',
-            sortable: false,
-            renderCell: (params: any) => {
-                return (
-                    <>
-                        <Link href={`/order/${params.id}`}>
-                            <Button>
-                                <AiOutlineArrowRight size={20} />
-                            </Button>
-                        </Link>
-                    </>
-                );
-            }
-        }
-    ];
-
-    const row: any[] = [];
-
-    orders &&
-        orders.forEach((item) => {
-            row.push({
-                id: item._id,
-                itemsQty: item.orderItems.length,
-                total: 'US$ ' + item.totalPrice,
-                status: item.orderStatus
-            });
-        });
-
     return (
         <div className="pl-5 pr-2 pt-1">
             <div className="overflow-x-auto">
                 <table className="table table-compact w-full">
                     <thead>
-                        <tr>
+                        <tr className="lowercase">
                             <th>OrderId</th>
                             <th>status</th>
                             <th>itemsQty</th>
@@ -249,19 +191,24 @@ const AllOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Littel, Schaden and Vandervort</td>
-                            <td>
-                                <Link href={`/order/`}>
-                                    <Button>
-                                        <AiOutlineArrowRight size={20} />
-                                    </Button>
-                                </Link>
-                            </td>
-                        </tr>
+                        {orders &&
+                            orders?.map((e: any, i: any) => {
+                                return (
+                                    <tr key={i}>
+                                        <th>{e?._id}</th>
+                                        <td> {e?.orderStatus}</td>
+                                        <td>{'US$ ' + e?.totalPrice}</td>
+                                        <td>{e?.orderItems?.length}</td>
+                                        <td>
+                                            <Link href={`/order/${e?._id}`}>
+                                                <button className="text-blue-500 border p-2">
+                                                    <AiOutlineArrowRight size={20} />
+                                                </button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                     </tbody>
                 </table>
             </div>
@@ -324,9 +271,9 @@ const AllRefundOrders = () => {
                 return (
                     <>
                         <Link href={`/order/${params.id}`}>
-                            <Button>
+                            <button>
                                 <AiOutlineArrowRight size={20} />
-                            </Button>
+                            </button>
                         </Link>
                     </>
                 );
@@ -348,7 +295,7 @@ const AllRefundOrders = () => {
 
     return (
         <div className="pl-8 pt-1">
-            <DataGrid
+            {/* <DataGrid
                 rows={row}
                 columns={columns}
                 initialState={{
@@ -359,7 +306,7 @@ const AllRefundOrders = () => {
                     }
                 }}
                 pageSizeOptions={[5]}
-            />
+            /> */}
         </div>
     );
 };
@@ -417,9 +364,9 @@ const TrackOrder = () => {
                 return (
                     <>
                         <Link href={`/order/${params.id}`}>
-                            <Button>
+                            <button>
                                 <MdOutlineTrackChanges size={20} />
-                            </Button>
+                            </button>
                         </Link>
                     </>
                 );
@@ -441,7 +388,7 @@ const TrackOrder = () => {
 
     return (
         <div className="pl-8 pt-1">
-            <DataGrid
+            {/* <DataGrid
                 rows={row}
                 columns={columns}
                 initialState={{
@@ -452,7 +399,7 @@ const TrackOrder = () => {
                     }
                 }}
                 pageSizeOptions={[5]}
-            />
+            /> */}
         </div>
     );
 };

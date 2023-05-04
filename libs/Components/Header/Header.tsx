@@ -4,7 +4,6 @@ import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 
 import { RxCross1 } from 'react-icons/rx';

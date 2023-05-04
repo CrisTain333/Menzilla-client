@@ -136,7 +136,7 @@ const Header = () => {
                                         <span className="sr-only">Search</span>
                                     </button>
                                     {/* Search result dropdown */}
-                                    {searchData && searchData.length !== 0 ? (
+                                    {searchData && searchData?.length !== 0 ? (
                                         <>
                                             {' '}
                                             <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
@@ -190,7 +190,7 @@ const Header = () => {
                                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                                             />
                                         </svg>
-                                        <span className="badge badge-sm bg-[#ff9900] border-none indicator-item">
+                                        <span className="badge badge-sm bg-[#ff9900] border-none indicator-item ">
                                             0
                                         </span>
                                     </div>
@@ -198,10 +198,10 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="dropdown dropdown-end">
-                            {isLoading ? (
-                                <div className="w-11 h-11 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
-                            ) : (
-                                currentUser && (
+                            {/* // <div className="w-11 h-11 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div> */}
+
+                            {currentUser ? (
+                                <>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
                                             <Image
@@ -213,8 +213,17 @@ const Header = () => {
                                             />
                                         </div>
                                     </label>
-                                )
+                                </>
+                            ) : (
+                                <>
+                                    <Link href="/auth/login">
+                                        <button className="bg-[#ff9900] p-2 rounded-md text-white px-4">
+                                            Login
+                                        </button>
+                                    </Link>
+                                </>
                             )}
+
                             <ul
                                 tabIndex={0}
                                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52"
@@ -235,7 +244,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* header sidebar */}
+                {/* small Device sidebar */}
                 {open && (
                     <div
                         onClick={() => setOpen(false)}

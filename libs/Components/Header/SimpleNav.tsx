@@ -91,7 +91,7 @@ const SimpleNav = () => {
                                 <li className="flex">
                                     <Link
                                         rel="noopener noreferrer"
-                                        href="/faq"
+                                        href="/profile"
                                         className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
                                     >
                                         Dashboard

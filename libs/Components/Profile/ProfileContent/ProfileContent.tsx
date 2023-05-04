@@ -24,14 +24,14 @@ const ProfileContent = ({ active }: any) => {
     };
 
     return (
-        <div className="w-full ">
+        <div className="w-[90%] mx-auto ">
             {/* profile */}
             {active === 1 && (
                 <>
                     <div className="flex justify-center w-full">
                         <div className="relative">
                             <Image
-                                src={`${currentUser?.profilePicture}`}
+                                src={`${currentUser?.profilePicture || ''}`}
                                 className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
                                 alt="profilePicture"
                                 height={500}
@@ -48,7 +48,7 @@ const ProfileContent = ({ active }: any) => {
                         <form onSubmit={handleSubmit}>
                             <div className="w-full md:flex block pb-3">
                                 <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Full Name</label>
+                                    <label className="block font-semibold pb-2">Full Name</label>
                                     <input
                                         type="text"
                                         className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
@@ -177,19 +177,14 @@ const AllOrders = () => {
         }
     ];
 
-    const columns = [
+    const columns: any[] = [
         { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
 
         {
             field: 'status',
             headerName: 'Status',
             minWidth: 130,
-            flex: 0.7,
-            cellClassName: (params: any) => {
-                return params.getValue(params.id, 'status') === 'Delivered'
-                    ? 'greenColor'
-                    : 'redColor';
-            }
+            flex: 0.7
         },
         {
             field: 'itemsQty',
@@ -241,19 +236,31 @@ const AllOrders = () => {
         });
 
     return (
-        <div className="pl-8 pt-1">
-            <DataGrid
-                rows={row}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 5
-                        }
-                    }
-                }}
-                pageSizeOptions={[5]}
-            />
+        <div className="pl-5 pr-2 pt-1">
+            <div className="overflow-x-auto">
+                <table className="table table-compact w-full">
+                    <thead>
+                        <tr>
+                            <th>OrderId</th>
+                            <th>status</th>
+                            <th>itemsQty</th>
+                            <th>total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>Cy Ganderton</td>
+                            <td>Quality Control Specialist</td>
+                            <td>Littel, Schaden and Vandervort</td>
+                            <td>Canada</td>
+                            <td>12/16/2020</td>
+                            <td>Blue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

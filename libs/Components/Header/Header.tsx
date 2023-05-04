@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { IoIosArrowForward } from 'react-icons/io';
 
 import { RxCross1 } from 'react-icons/rx';
 import Navbar from './Navbar';
@@ -252,7 +253,7 @@ const Header = () => {
                                 </div>
                                 <RxCross1
                                     size={30}
-                                    className="ml-4 mt-5"
+                                    className="ml-4 mt-5 cursor-pointer"
                                     onClick={() => setOpen(false)}
                                 />
                             </div>
@@ -274,10 +275,12 @@ const Header = () => {
                                             return (
                                                 <Link key={index} href={`/product/${Product_name}`}>
                                                     <div className="flex items-center">
-                                                        <img
+                                                        <Image
                                                             src={i.image_Url[0].url}
-                                                            alt=""
-                                                            className="w-[50px] mr-2"
+                                                            alt="productImage"
+                                                            height={500}
+                                                            width={500}
+                                                            className="w-12 mr-2"
                                                         />
                                                         <h5>{i.name}</h5>
                                                     </div>
@@ -291,43 +294,11 @@ const Header = () => {
                             <Navbar />
                             <div className={`${styles.button} ml-4 !rounded-[4px]`}>
                                 <Link href="/shop-create">
-                                    <h1 className="text-[#fff] flex items-center">
+                                    <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-sm">
                                         Become Seller
-                                        {/* <IoIosArrowForward className="ml-1" /> */}
+                                        <IoIosArrowForward className="ml-1" />
                                     </h1>
                                 </Link>
-                            </div>
-                            <br />
-                            <br />
-                            <br />
-
-                            <div className="flex w-full justify-center">
-                                {currentUser ? (
-                                    <div>
-                                        <Link href="/profile">
-                                            <img
-                                                src={`${currentUser?.profilePicture}`}
-                                                alt=""
-                                                className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
-                                            />
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <Link
-                                            href="/login"
-                                            className="text-[18px] pr-[10px] text-[#000000b7]"
-                                        >
-                                            Login /
-                                        </Link>
-                                        <Link
-                                            href="/sign-up"
-                                            className="text-[18px] text-[#000000b7]"
-                                        >
-                                            Sign up
-                                        </Link>
-                                    </>
-                                )}
                             </div>
                         </div>
                     </div>

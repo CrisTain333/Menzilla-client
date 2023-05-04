@@ -9,10 +9,10 @@ const HeaderOnly = ({ children }: LayoutProps) => {
     return (
         <div>
             <Header />
-            <div className="mt-14">
+            <div className="hidden md:block mt-14">
                 <SimpleNav />
             </div>
-            <div className="w-[90%] mx-auto mt-14">{children}</div>
+            <div className="w-[90%] mx-auto mt-20 md:mt-10">{children}</div>
         </div>
     );
 };

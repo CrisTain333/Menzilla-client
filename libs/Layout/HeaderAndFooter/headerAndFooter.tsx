@@ -11,9 +11,11 @@ const HeaderAndFooter = ({ children }: LayoutProps) => {
         <div>
             <Header />
             <div className="mt-14">
-                <SimpleNav />
+                <div className="hidden md:block">
+                    <SimpleNav />
+                </div>
             </div>
-            <div className="w-[90%] mx-auto mt-10">{children}</div>
+            <div className="w-[90%] mx-auto mt-20 md:mt-10">{children}</div>
             <Footer />
         </div>
     );

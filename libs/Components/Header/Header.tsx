@@ -237,7 +237,9 @@ const Header = () => {
 
                 {/* header sidebar */}
                 {open && (
-                    <div className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0`}>
+                    <div
+                        className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0 transition-all duration-300 block md:hidden`}
+                    >
                         <div className="fixed w-[60%] bg-[#fff] h-screen top-0 left-0 z-10 overflow-y-scroll">
                             <div className="w-full justify-between flex pr-3">
                                 <div>

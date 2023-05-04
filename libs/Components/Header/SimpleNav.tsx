@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AiOutlineHeart, AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { BiMenuAltLeft } from 'react-icons/bi';
 import Link from 'next/link';
@@ -14,7 +13,7 @@ const SimpleNav = () => {
         <div>
             <header className="p-5  bg-[#1C2B35] text-white">
                 <div className="w-[90%] mx-auto">
-                    <div className="container flex justify-start h-10 mx-auto  md:space-x-8">
+                    <div className="container flex justify-between h-10 mx-auto  md:space-x-8">
                         <ul className="items-stretch hidden space-x-3 md:flex justify-center ">
                             <li className="flex">
                                 <div className="flex border-r-2 pr-2">
@@ -25,11 +24,7 @@ const SimpleNav = () => {
                                                     size={30}
                                                     className="absolute top-3 left-2"
                                                 />
-                                                {/* <button
-                                                    className={`h-[100%] w-full flex justify-between items-center pl-10 text-white font-sans text-lg font-[500] select-none rounded-t-md`}
-                                                >
-                                                    
-                                                </button> */}
+
                                                 <span className="h-[90%] flex justify-between items-center ml-10">
                                                     All Categories
                                                     <IoIosArrowDown
@@ -99,6 +94,15 @@ const SimpleNav = () => {
                                 </li>
                             )}
                         </ul>
+
+                        <div className="flex items-center">
+                            <Link href="/create-shop">
+                                <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-md mt-2">
+                                    Become Seller
+                                    <IoIosArrowForward className="ml-1" />
+                                </h1>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </header>

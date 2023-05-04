@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { RxUpdate } from 'react-icons/rx';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -125,13 +124,10 @@ const ProfileContent = ({ active }: any) => {
                                 </div>
                                 <div className="flex justify-center items-center pb-4">
                                     <button
-                                        className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-[3px] mt-8 cursor-pointer flex justify-center items-center text-base font-semibold`}
+                                        className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
                                         type="submit"
                                     >
                                         Update
-                                        <span className="text-white">
-                                            <RxUpdate size={18} className="ml-1" />
-                                        </span>
                                     </button>
                                 </div>
                             </form>

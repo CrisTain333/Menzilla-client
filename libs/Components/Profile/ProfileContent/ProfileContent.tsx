@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete } from 'react-icons/ai';
 
-import { DataGrid } from '@material-ui/data-grid';
-import { Button } from '@material-ui/core';
+import { DataGrid } from '@mui/x-data-grid';
+import { Button } from '@mui/material';
 import { MdOutlineTrackChanges } from 'react-icons/md';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
+import Link from 'next/link';
 
 const ProfileContent = ({ active }: any) => {
     const { currentUser } = useAuth();
@@ -73,7 +74,7 @@ const ProfileContent = ({ active }: any) => {
                                         className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                         required
                                         value={phoneNumber}
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        onChange={(e: any) => setPhoneNumber(e.target.value)}
                                     />
                                 </div>
                                 <div className=" w-[100%] 800px:w-[50%]">
@@ -83,7 +84,7 @@ const ProfileContent = ({ active }: any) => {
                                         className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                         required
                                         value={zipCode}
-                                        onChange={(e) => setZipCode(e.target.value)}
+                                        onChange={(e: any) => setZipCode(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -181,7 +182,7 @@ const AllOrders = () => {
             headerName: 'Status',
             minWidth: 130,
             flex: 0.7,
-            cellClassName: (params) => {
+            cellClassName: (params: any) => {
                 return params.getValue(params.id, 'status') === 'Delivered'
                     ? 'greenColor'
                     : 'redColor';
@@ -210,10 +211,10 @@ const AllOrders = () => {
             headerName: '',
             type: 'number',
             sortable: false,
-            renderCell: (params) => {
+            renderCell: (params: any) => {
                 return (
                     <>
-                        <Link to={`/order/${params.id}`}>
+                        <Link href={`/order/${params.id}`}>
                             <Button>
                                 <AiOutlineArrowRight size={20} />
                             </Button>
@@ -224,7 +225,7 @@ const AllOrders = () => {
         }
     ];
 
-    const row = [];
+    const row: any[] = [];
 
     orders &&
         orders.forEach((item) => {
@@ -241,9 +242,14 @@ const AllOrders = () => {
             <DataGrid
                 rows={row}
                 columns={columns}
-                pageSize={10}
-                disableSelectionOnClick
-                autoHeight
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5
+                        }
+                    }
+                }}
+                pageSizeOptions={[5]}
             />
         </div>
     );
@@ -271,7 +277,7 @@ const AllRefundOrders = () => {
             headerName: 'Status',
             minWidth: 130,
             flex: 0.7,
-            cellClassName: (params) => {
+            cellClassName: (params: any) => {
                 return params.getValue(params.id, 'status') === 'Delivered'
                     ? 'greenColor'
                     : 'redColor';
@@ -300,10 +306,10 @@ const AllRefundOrders = () => {
             headerName: '',
             type: 'number',
             sortable: false,
-            renderCell: (params) => {
+            renderCell: (params: any) => {
                 return (
                     <>
-                        <Link to={`/order/${params.id}`}>
+                        <Link href={`/order/${params.id}`}>
                             <Button>
                                 <AiOutlineArrowRight size={20} />
                             </Button>
@@ -314,7 +320,7 @@ const AllRefundOrders = () => {
         }
     ];
 
-    const row = [];
+    const row: any[] = [];
 
     orders &&
         orders.forEach((item) => {
@@ -331,9 +337,14 @@ const AllRefundOrders = () => {
             <DataGrid
                 rows={row}
                 columns={columns}
-                pageSize={10}
-                autoHeight
-                disableSelectionOnClick
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5
+                        }
+                    }
+                }}
+                pageSizeOptions={[5]}
             />
         </div>
     );
@@ -360,7 +371,7 @@ const TrackOrder = () => {
             headerName: 'Status',
             minWidth: 130,
             flex: 0.7,
-            cellClassName: (params) => {
+            cellClassName: (params: any) => {
                 return params.getValue(params.id, 'status') === 'Delivered'
                     ? 'greenColor'
                     : 'redColor';
@@ -388,10 +399,10 @@ const TrackOrder = () => {
             headerName: '',
             type: 'number',
             sortable: false,
-            renderCell: (params) => {
+            renderCell: (params: any) => {
                 return (
                     <>
-                        <Link to={`/order/${params.id}`}>
+                        <Link href={`/order/${params.id}`}>
                             <Button>
                                 <MdOutlineTrackChanges size={20} />
                             </Button>
@@ -402,7 +413,7 @@ const TrackOrder = () => {
         }
     ];
 
-    const row = [];
+    const row: any[] = [];
 
     orders &&
         orders.forEach((item) => {
@@ -419,9 +430,14 @@ const TrackOrder = () => {
             <DataGrid
                 rows={row}
                 columns={columns}
-                pageSize={10}
-                disableSelectionOnClick
-                autoHeight
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5
+                        }
+                    }
+                }}
+                pageSizeOptions={[5]}
             />
         </div>
     );

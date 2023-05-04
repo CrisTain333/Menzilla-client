@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useAuth } from '@/libs/Context/AuthProvider';
-import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 

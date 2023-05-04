@@ -15,13 +15,17 @@ const ProfileSideBar = ({ setActive, active }: any) => {
         logout();
     };
     return (
-        <div className="w-full bg-white shadow-sm rounded-[10px] p-4 pt-8">
+        <div className="w-full bg-white text-black shadow-sm rounded-[10px] p-4 pt-8">
             <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(1)}
             >
-                <RxPerson size={20} color={active === 1 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 1 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <RxPerson size={20} color={active === 1 ? 'red' : 'black'} />
+                <span
+                    className={`pl-3 ${
+                        active === 1 ? 'text-[red]' : 'text-[black]'
+                    } md:block hidden`}
+                >
                     Profile
                 </span>
             </div>
@@ -30,7 +34,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(2)}
             >
                 <HiOutlineShoppingBag size={20} color={active === 2 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 2 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 2 ? 'text-[red]' : ''} md:block hidden`}>
                     Orders
                 </span>
             </div>
@@ -39,7 +43,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(3)}
             >
                 <HiOutlineReceiptRefund size={20} color={active === 3 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 3 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 3 ? 'text-[red]' : ''} md:block hidden`}>
                     Refunds
                 </span>
             </div>
@@ -49,7 +53,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(4) || router.push('/inbox')}
             >
                 <AiOutlineMessage size={20} color={active === 4 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 4 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 4 ? 'text-[red]' : ''} md:block hidden`}>
                     Inbox
                 </span>
             </div>
@@ -59,7 +63,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(5)}
             >
                 <MdOutlineTrackChanges size={20} color={active === 5 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 5 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 5 ? 'text-[red]' : ''} md:block hidden`}>
                     Track Order
                 </span>
             </div>
@@ -69,7 +73,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(6)}
             >
                 <AiOutlineCreditCard size={20} color={active === 6 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 6 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 6 ? 'text-[red]' : ''} md:block hidden`}>
                     Payment Methods
                 </span>
             </div>
@@ -79,7 +83,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={() => setActive(7)}
             >
                 <TbAddressBook size={20} color={active === 7 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 7 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 7 ? 'text-[red]' : ''} md:block hidden`}>
                     Address
                 </span>
             </div>
@@ -89,7 +93,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 onClick={logoutHandler}
             >
                 <AiOutlineLogin size={20} color={active === 8 ? 'red' : ''} />
-                <span className={`pl-3 ${active === 8 ? 'text-[red]' : ''} 800px:block hidden`}>
+                <span className={`pl-3 ${active === 8 ? 'text-[red]' : ''} md:block hidden`}>
                     Log out
                 </span>
             </div>

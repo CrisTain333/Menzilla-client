@@ -198,21 +198,50 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="dropdown dropdown-end">
-                            {/* // <div className="w-11 h-11 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div> */}
-
                             {currentUser ? (
                                 <>
-                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
-                                            <Image
-                                                alt="user_Profile"
-                                                height={300}
-                                                width={300}
-                                                className="h-10"
-                                                src={currentUser?.profilePicture}
-                                            />
-                                        </div>
-                                    </label>
+                                    {isLoading ? (
+                                        <>
+                                            <div className="w-11 h-11 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <label
+                                                tabIndex={0}
+                                                className="btn btn-ghost btn-circle avatar"
+                                            >
+                                                <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
+                                                    <Image
+                                                        alt="user_Profile"
+                                                        height={300}
+                                                        width={300}
+                                                        className="h-10"
+                                                        src={currentUser?.profilePicture}
+                                                    />
+                                                </div>
+                                            </label>
+
+                                            <ul
+                                                tabIndex={0}
+                                                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52"
+                                            >
+                                                <li>
+                                                    <Link
+                                                        href="/profile"
+                                                        className="justify-between"
+                                                    >
+                                                        Profile
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <a>Settings</a>
+                                                </li>
+                                                <li onClick={logout}>
+                                                    <p>Logout</p>
+                                                </li>
+                                            </ul>
+                                        </>
+                                    )}
                                 </>
                             ) : (
                                 <>
@@ -223,23 +252,6 @@ const Header = () => {
                                     </Link>
                                 </>
                             )}
-
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52"
-                            >
-                                <li>
-                                    <Link href="/profile" className="justify-between">
-                                        Profile
-                                    </Link>
-                                </li>
-                                <li>
-                                    <a>Settings</a>
-                                </li>
-                                <li onClick={logout}>
-                                    <p>Logout</p>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

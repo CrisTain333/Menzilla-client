@@ -109,6 +109,19 @@
         background: none;
     }
 
+    .anime {
+        transform: translateY(130%);
+        transition-timing-function: ease-in;
+        transition: 0.2s;
+    }
+    .anime {
+        transition: 0.25s;
+        transition-timing-function: ease-out;
+
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     /*
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

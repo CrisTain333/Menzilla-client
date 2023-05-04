@@ -55,7 +55,7 @@ const ProductSidebar = ({ setActive, active }: any) => {
             </div>
 
             <div
-                className="flex items-center cursor-pointer w-full mb-8"
+                className="flex items-center cursor-pointer w-full mb-8 "
                 onClick={() => setActive(5)}
             >
                 <MdOutlineTrackChanges size={20} color={active === 5 ? 'red' : ''} />

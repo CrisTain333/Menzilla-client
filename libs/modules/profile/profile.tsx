@@ -9,7 +9,7 @@ import styles from '@/styles/styles';
 const Profile = () => {
     const [active, setActive] = useState(1);
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen ">
             <HeaderOnly>
                 <div className={`flex bg-[#f5f5f5] py-10`}>
                     <div className="w-[50px] md:w-[335px] sticky md:mt-0 mt-[18%]">

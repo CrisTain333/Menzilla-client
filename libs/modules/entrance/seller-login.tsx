@@ -1,5 +1,6 @@
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import styles from '@/styles/styles';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 const SellerLogin = () => {
@@ -13,11 +14,22 @@ const SellerLogin = () => {
     const handleSubmit = () => {};
     return (
         <div>
-            <p>Seller Login</p>
             <div>
-                <div className="shadow-md w-[95%]   md:w-[40%] mx-auto rounded-md p-2 my-20">
-                    <div className="my-4">
-                        <h1 className="text-3xl font-bold text-center">Seller Login</h1>
+                <div className="shadow-md w-[95%]   md:w-[30%] mx-auto rounded-md p-2 my-20">
+                    <div className="">
+                        <div className="flex justify-center items-center">
+                            <Image
+                                src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
+                                width={400}
+                                className="w-12"
+                                height={500}
+                                alt="Icon"
+                            />
+                            <span className="font-sans font-bold text-black ml-[0.4px]">
+                                enzilla
+                            </span>
+                        </div>
+                        <h1 className="text-3xl font-bold text-center my-5">Seller Login</h1>
                     </div>
                     <br />
                     <br />

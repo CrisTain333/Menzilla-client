@@ -15,16 +15,16 @@ const SellerLogin = () => {
         <div>
             <p>Seller Login</p>
             <div>
-                <div className="shadow-md w-[95%]  md:w-[50%] mx-auto rounded-md p-2 my-5">
+                <div className="shadow-md w-[95%]   md:w-[40%] mx-auto rounded-md p-2 my-20">
                     <div className="my-4">
                         <h1 className="text-3xl font-bold text-center">Seller Login</h1>
                     </div>
                     <br />
                     <br />
-                    <div className="w-full px-5">
+                    <div className="w-full  px-5">
                         <form onSubmit={handleSubmit}>
                             <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
+                                <div className=" w-[100%]">
                                     <label className="block pb-2 font-semibold">
                                         Email Address
                                     </label>
@@ -38,7 +38,7 @@ const SellerLogin = () => {
                                 </div>
                             </div>
                             <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
+                                <div className=" w-[100%]">
                                     <label className="block pb-2 font-semibold">Password</label>
                                     <div className="relative">
                                         <input

@@ -9,11 +9,11 @@ export const registerUser = async (userData: any) => {
     }
 };
 
-// export const login = async (userData: any) => {
-//     try {
-//         const response = await axiosInstance.post(`/auth/login`, userData);
-//         return response.data;
-//     } catch (err) {
-//         return { err };
-//     }
-// };
+export const shopRegister = async (shopData: object) => {
+    try {
+        const response = await axiosInstance.post(`/shop/register`, shopData);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

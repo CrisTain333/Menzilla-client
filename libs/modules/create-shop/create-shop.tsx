@@ -5,12 +5,19 @@ import axiosInstance from '@/libs/common/utils/axios';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [selectedImage, setSelectedImage] = useState();
+    const [selectedImage, setSelectedImage] = useState<any>();
+    const [isLoading, setIsLoading] = useState(false);
 
+    // handle Select image
     const imageChange = (e: any) => {
         if (e.target.files && e.target.files.length > 0) {
             setSelectedImage(e.target.files[0]);
         }
+    };
+
+    // Remove selected Image
+    const handleCancel = () => {
+        setSelectedImage('');
     };
 
     const handleShowPassword = () => {
@@ -36,8 +43,6 @@ const CreateShop = () => {
         formData.append('address', address);
         formData.append('password', password);
 
-        console.log(formData);
-
         const res = await axiosInstance.post('/shop/register', formData);
         console.log(res);
     };
@@ -49,14 +54,29 @@ const CreateShop = () => {
                 </div>
                 <div className="flex justify-center w-full">
                     <div className="flex justify-center items-center">
-                        <div>
+                        <div className="relative">
                             <Image
-                                src="https://i.ibb.co/XXZXrbb/shop.png"
+                                src={
+                                    selectedImage
+                                        ? URL.createObjectURL(selectedImage)
+                                        : 'https://i.ibb.co/XXZXrbb/shop.png'
+                                }
                                 className="w-20 h-20 rounded object-cover"
                                 alt="profilePicture"
                                 height={500}
                                 width={500}
                             />
+                            {selectedImage && (
+                                <button
+                                    disabled={isLoading}
+                                    className={`absolute cursor-pointer font-bold top-5 -left-7 ${
+                                        isLoading && 'cursor-not-allowed'
+                                    }`}
+                                    onClick={handleCancel}
+                                >
+                                    ✕
+                                </button>
+                            )}
                         </div>
                         <div>
                             <label
@@ -70,6 +90,7 @@ const CreateShop = () => {
                                 onChange={imageChange}
                                 className="hidden"
                                 type="file"
+                                required
                                 name="shopProfile"
                                 id="shopProfileUpload"
                             />
@@ -96,7 +117,6 @@ const CreateShop = () => {
                                 <input
                                     type="email"
                                     className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
-                                    required
                                     name="email"
                                     placeholder="Email address"
                                 />
@@ -145,6 +165,7 @@ const CreateShop = () => {
                                         type={isVisible ? 'text' : 'password'}
                                         name="password"
                                         placeholder="Password"
+                                        required
                                     />
                                     <span
                                         onClick={handleShowPassword}

@@ -17,7 +17,7 @@ const SellerLogin = () => {
             <div>
                 <div className="shadow-md w-[95%]   md:w-[30%] mx-auto rounded-md p-2 my-20">
                     <div className="">
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center mb-3">
                             <Image
                                 src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
                                 width={400}
@@ -29,11 +29,9 @@ const SellerLogin = () => {
                                 enzilla
                             </span>
                         </div>
-                        <h1 className="text-3xl font-bold text-center my-5">Seller Login</h1>
+                        <h1 className="text-3xl font-bold text-center mt-2">Seller Login</h1>
                     </div>
-                    <br />
-                    <br />
-                    <div className="w-full  px-5">
+                    <div className="w-full  px-5 mt-8">
                         <form onSubmit={handleSubmit}>
                             <div className="w-full md:flex block pb-3">
                                 <div className=" w-[100%]">

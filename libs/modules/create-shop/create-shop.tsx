@@ -1,15 +1,46 @@
 import React, { useState } from 'react';
 import styles from '@/styles/styles';
 import Image from 'next/image';
+import axiosInstance from '@/libs/common/utils/axios';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [selectedImage, setSelectedImage] = useState();
+
+    const imageChange = (e: any) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedImage(e.target.files[0]);
+        }
+    };
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const form = e.target;
+        const shopName = form.name.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const zipCode = form.zip.value;
+        const address = form.address.value;
+        const password = form.password.value;
+        const file: any = selectedImage;
+        const formData = new FormData();
+        formData.append('shopProfile', file);
+        formData.append('shopName', shopName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('zipCode', zipCode);
+        formData.append('address', address);
+        formData.append('password', password);
+
+        console.log(formData);
+
+        const res = await axiosInstance.post('/shop/register', formData);
+        console.log(res);
+    };
     return (
         <div>
             <div className="shadow-md w-[95%]  md:w-[50%] mx-auto rounded-md p-2 my-5">
@@ -28,9 +59,20 @@ const CreateShop = () => {
                             />
                         </div>
                         <div>
-                            <button className="px-5 py-2 ml-3 font-medium  text-black transition-all duration-300 border-slate-800 border rounded-md hover:bg-slate-800 hover:text-white text-sm">
+                            <label
+                                htmlFor="shopProfileUpload"
+                                className="px-5 py-2 ml-3 font-medium  text-black transition-all duration-300 border-slate-800 border rounded-md hover:bg-slate-800 hover:text-white text-sm"
+                            >
                                 Upload Shop Profile
-                            </button>
+                            </label>
+
+                            <input
+                                onChange={imageChange}
+                                className="hidden"
+                                type="file"
+                                name="shopProfile"
+                                id="shopProfileUpload"
+                            />
                         </div>
                     </div>
                 </div>
@@ -45,6 +87,7 @@ const CreateShop = () => {
                                     type="text"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                     required
+                                    name="name"
                                     placeholder="Enter shope name"
                                 />
                             </div>
@@ -54,6 +97,7 @@ const CreateShop = () => {
                                     type="email"
                                     className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
                                     required
+                                    name="email"
                                     placeholder="Email address"
                                 />
                             </div>
@@ -64,6 +108,7 @@ const CreateShop = () => {
                                 <label className="block pb-2 font-semibold">Phone Number</label>
                                 <input
                                     type="number"
+                                    name="phone"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                     required
                                     placeholder="shop phone number"
@@ -73,6 +118,7 @@ const CreateShop = () => {
                                 <label className="block pb-2 font-semibold">Zip Code</label>
                                 <input
                                     type="number"
+                                    name="zip"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                     required
                                     placeholder="Enter zip code"
@@ -85,6 +131,7 @@ const CreateShop = () => {
                                 <label className="block pb-2 font-semibold">Address</label>
                                 <input
                                     type="text"
+                                    name="address"
                                     className={`${styles.input} !w-[95%]`}
                                     required
                                     placeholder="Shop address"

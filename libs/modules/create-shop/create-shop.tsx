@@ -61,8 +61,6 @@ const CreateShop = () => {
         }
     };
 
-    console.log(registerSuccess);
-
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">
             <div className=" flex items-center justify-center">

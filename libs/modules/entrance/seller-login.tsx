@@ -15,6 +15,7 @@ const SellerLogin = () => {
     };
 
     const handleSubmit = async (e: any) => {
+        setIsLoading(true);
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
@@ -26,13 +27,16 @@ const SellerLogin = () => {
         try {
             const res = await axiosInstance.post('/shop/login', data);
             if (res?.data?.status !== 201) {
+                setIsLoading(false);
                 return toast.error(res?.data?.message);
             }
             const token = res?.data?.token;
             localStorage.setItem('shop_Access_Token', token);
             toast.success(res?.data?.message);
+            setIsLoading(false);
         } catch (error) {
             toast.error('something went wrong');
+            setIsLoading(false);
         }
     };
     return (

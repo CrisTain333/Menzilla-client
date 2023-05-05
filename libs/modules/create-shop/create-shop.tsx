@@ -49,10 +49,10 @@ const CreateShop = () => {
         try {
             const res = await axiosInstance.post('/shop/register', formData);
             if (res?.data?.status !== 201) {
-                setRegisterSuccess(formData);
                 setIsLoading(false);
                 return toast.error(res?.data?.message);
             }
+            setRegisterSuccess(formData);
             toast.success(res?.data?.message);
             setIsLoading(false);
         } catch (error) {
@@ -60,6 +60,9 @@ const CreateShop = () => {
             toast.error('some thing went wrong ');
         }
     };
+
+    console.log(registerSuccess);
+
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">
             <div className=" flex items-center justify-center">
@@ -72,12 +75,8 @@ const CreateShop = () => {
                 <h2 className="text-gray-800 text-2xl font-bold mb-5">Verify your email address</h2>
                 <p className="text-gray-600 text-md dark:text-gray-300 mb-10">
                     Hey <span className="font-bold">{registerSuccess?.name || 'Coder'}</span>, We
-                    {`'`}ve send an email to{' '}
-                    <span className="text-blue-400">
-                        {registerSuccess?.email || 'verify@fuc.com'}
-                    </span>{' '}
-                    to verify your email address and activate your account. The link in the email
-                    will expire in 24 hours.
+                    {`'`}ve send an email to verify your email address and activate your account.
+                    The link in the email will expire in 24 hours.
                 </p>
                 <p className="text-gray-400 text-mb mt-5 dark:text-gray-300">
                     <span

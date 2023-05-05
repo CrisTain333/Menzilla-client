@@ -4,6 +4,7 @@ import Image from 'next/image';
 import axiosInstance from '@/libs/common/utils/axios';
 import { toast } from 'react-hot-toast';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
+import Link from 'next/link';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -263,6 +264,7 @@ const CreateShop = () => {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="flex justify-center items-center pb-4">
                                 <button
                                     className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
@@ -277,6 +279,18 @@ const CreateShop = () => {
                                         'Register'
                                     )}
                                 </button>
+                            </div>
+
+                            <div className="my-2  text-start ml-2">
+                                <span className="font-semibold text-sm">
+                                    All ready an seller
+                                    <Link
+                                        className="text-blue-700 underline  ml-2"
+                                        href="/auth/seller-login"
+                                    >
+                                        login
+                                    </Link>
+                                </span>
                             </div>
                         </form>
                     </div>

@@ -1,6 +1,7 @@
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import styles from '@/styles/styles';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const SellerLogin = () => {
@@ -11,7 +12,9 @@ const SellerLogin = () => {
         setIsVisible(!isVisible);
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+    };
     return (
         <div>
             <div>
@@ -29,7 +32,7 @@ const SellerLogin = () => {
                                 enzilla
                             </span>
                         </div>
-                        <h1 className="text-3xl font-bold text-center mt-2">Seller Login</h1>
+                        <h1 className="text-2xl font-bold text-center mt-2">Seller Login</h1>
                     </div>
                     <div className="w-full  px-5 mt-8">
                         <form onSubmit={handleSubmit}>
@@ -40,7 +43,7 @@ const SellerLogin = () => {
                                     </label>
                                     <input
                                         type="email"
-                                        className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
+                                        className={`${styles.input} mb-1 md:mb-0`}
                                         name="email"
                                         placeholder="Email address"
                                         required
@@ -52,7 +55,7 @@ const SellerLogin = () => {
                                     <label className="block pb-2 font-semibold">Password</label>
                                     <div className="relative">
                                         <input
-                                            className={`${styles.input} !w-[95%]`}
+                                            className={`${styles.input}`}
                                             type={isVisible ? 'text' : 'password'}
                                             name="password"
                                             placeholder="Password"
@@ -108,7 +111,7 @@ const SellerLogin = () => {
                             </div>
                             <div className="flex justify-center items-center pb-4">
                                 <button
-                                    className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
+                                    className={`w-full h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-5 cursor-pointer flex justify-center items-center text-base `}
                                     type="submit"
                                 >
                                     {isLoading ? (
@@ -119,6 +122,18 @@ const SellerLogin = () => {
                                         'Login'
                                     )}
                                 </button>
+                            </div>
+
+                            <div className="my-2">
+                                <span className="font-semibold text-sm">
+                                    Don&apos;t have an seller account
+                                    <Link
+                                        className="text-blue-700 underline  ml-2"
+                                        href="/create-shop"
+                                    >
+                                        register
+                                    </Link>
+                                </span>
                             </div>
                         </form>
                     </div>

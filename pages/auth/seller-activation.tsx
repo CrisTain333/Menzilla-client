@@ -40,7 +40,7 @@ const VerifyEmail = () => {
     };
 
     const redirectToLogin = () => {
-        router.push('/auth/login');
+        router.push('/auth/seller-login');
     };
 
     return pageLoading ? (

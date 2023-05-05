@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import axiosInstance from '@/libs/common/utils/axios';
+import { toast } from 'react-hot-toast';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -43,8 +44,15 @@ const CreateShop = () => {
         formData.append('address', address);
         formData.append('password', password);
 
-        const res = await axiosInstance.post('/shop/register', formData);
-        console.log(res);
+        try {
+            const res = await axiosInstance.post('/shop/register', formData);
+            if (res?.data?.status !== 201) {
+                return toast.error(res?.data?.message);
+            }
+            toast.success(res?.data?.message);
+        } catch (error) {
+            toast.error('some thing went wrong ');
+        }
     };
     return (
         <div>
@@ -90,7 +98,6 @@ const CreateShop = () => {
                                 onChange={imageChange}
                                 className="hidden"
                                 type="file"
-                                required
                                 name="shopProfile"
                                 id="shopProfileUpload"
                             />
@@ -107,7 +114,6 @@ const CreateShop = () => {
                                 <input
                                     type="text"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                    required
                                     name="name"
                                     placeholder="Enter shope name"
                                 />
@@ -130,7 +136,6 @@ const CreateShop = () => {
                                     type="number"
                                     name="phone"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                    required
                                     placeholder="shop phone number"
                                 />
                             </div>
@@ -140,7 +145,6 @@ const CreateShop = () => {
                                     type="number"
                                     name="zip"
                                     className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                    required
                                     placeholder="Enter zip code"
                                 />
                             </div>
@@ -153,7 +157,6 @@ const CreateShop = () => {
                                     type="text"
                                     name="address"
                                     className={`${styles.input} !w-[95%]`}
-                                    required
                                     placeholder="Shop address"
                                 />
                             </div>
@@ -165,7 +168,6 @@ const CreateShop = () => {
                                         type={isVisible ? 'text' : 'password'}
                                         name="password"
                                         placeholder="Password"
-                                        required
                                     />
                                     <span
                                         onClick={handleShowPassword}

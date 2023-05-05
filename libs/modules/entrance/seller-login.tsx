@@ -1,8 +1,10 @@
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
+import axiosInstance from '@/libs/common/utils/axios';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -12,8 +14,26 @@ const SellerLogin = () => {
         setIsVisible(!isVisible);
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const data = {
+            email,
+            password
+        };
+
+        try {
+            const res = await axiosInstance.post('/shop/login', data);
+            if (res?.data?.status !== 201) {
+                return toast.error(res?.data?.message);
+            }
+            const token = res?.data?.token;
+            localStorage.setItem('shop_Access_Token', token);
+            toast.success(res?.data?.message);
+        } catch (error) {
+            toast.error('something went wrong');
+        }
     };
     return (
         <div>

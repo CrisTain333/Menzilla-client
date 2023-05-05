@@ -17,3 +17,11 @@ export const shopRegister = async (shopData: object) => {
         return { error };
     }
 };
+export const shopLogin = async (loginDetails: object) => {
+    try {
+        const response = await axiosInstance.post(`/shop/login`, loginDetails);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

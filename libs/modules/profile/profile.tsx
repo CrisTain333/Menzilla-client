@@ -6,18 +6,12 @@ import ProfileContent from '@/libs/Components/Profile/ProfileContent/ProfileCont
 import ProfileSideBar from '@/libs/Components/Profile/ProfileSidebar/ProductSidebar';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { useRouter } from 'next/router';
+import withAuth from '@/libs/common/Helper/private/withAuth';
 
 const Profile = () => {
     const { currentUser, isLoading } = useAuth();
     const [active, setActive] = useState(1);
     const router = useRouter();
-    console.log(router);
-
-    // if (isLoading) {
-    //     return <p>Loading .....</p>;
-    // } else {
-
-    // }
 
     useEffect((): any => {
         const tokenStoragePath = 'accessToken';

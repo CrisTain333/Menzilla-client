@@ -5,17 +5,18 @@ import React from 'react';
 
 const index = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { isSeller, sellerLogin } = useSeller();
+    const { isSeller, currentSeller } = useSeller();
     // eslint-disable-next-line prettier/prettier, react-hooks/rules-of-hooks
     const router = useRouter();
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     React.useEffect(() => {
         if (isSeller === true) {
-            router.push('/');
+            if (currentSeller !== null) {
+                router.push(`/shop/${currentSeller?._id}`);
+            }
         }
-        // window.location.reload();
-    }, [isSeller, router]);
+    }, [isSeller, router, currentSeller]);
 
     return (
         <div>

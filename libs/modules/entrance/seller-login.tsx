@@ -36,7 +36,6 @@ const SellerLogin = () => {
         } else {
             toast.success('Logged in successfully');
             setIsLoading(false);
-            window.location.reload();
         }
     };
 

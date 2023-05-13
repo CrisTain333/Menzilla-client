@@ -35,11 +35,10 @@ const SellerLogin = () => {
             setIsLoading(false);
         } else {
             toast.success('Logged in successfully');
-            router.push('/shop');
             setIsLoading(false);
+            window.location.reload();
         }
     };
-
 
     return (
         <div>

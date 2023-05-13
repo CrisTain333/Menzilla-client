@@ -13,7 +13,7 @@ const CreateShop = () => {
     const [selectedImage, setSelectedImage] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
-    const { currentSeller, sellerLogin } = useSeller();
+    const { currentSeller, isSeller } = useSeller();
     const router = useRouter();
 
     // handle Select image
@@ -68,7 +68,7 @@ const CreateShop = () => {
     };
 
     React.useEffect(() => {
-        if (currentSeller !== null) {
+        if (isSeller === true) {
             router.push('/');
         }
     }, [currentSeller, router]);

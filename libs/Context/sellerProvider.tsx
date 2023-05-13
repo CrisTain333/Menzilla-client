@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 interface IAuthContextValue {
-    currentUser: any;
+    currentSeller: any;
     isLoading: boolean;
-    login: () => Promise<string | null>;
-    logout: () => void;
+    sellerLogin: (sellerData: any) => Promise<string | null>;
+    sellerLogout: () => void;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -30,7 +30,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
         const token = localStorage.getItem(tokenStoragePath);
         if (token && !sellerFetched) {
             setIsLoading(true);
-            getUserData(token)
+            getSellerData(token)
                 .then((userData) => {
                     setSellerFetched(true);
                     setCurrentSeller(userData);
@@ -61,30 +61,30 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
-    const logout = () => {
-        setCurrentUser(null);
+    const sellerLogout = () => {
+        setCurrentSeller(null);
         localStorage.removeItem(tokenStoragePath);
     };
 
-    const getUserData = async (token: string) => {
+    const getSellerData = async (token: string) => {
         try {
-            const response = await axiosInstance.get(`/user/me`, {
+            const response = await axiosInstance.get(`/shop/seller`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return response?.data?.user;
         } catch (e) {
-            logout();
+            sellerLogout();
         }
     };
 
-    const value: AuthContextValue = {
-        currentUser,
+    const value: IAuthContextValue = {
+        currentSeller,
         isLoading,
-        login,
-        logout
+        sellerLogin,
+        sellerLogout
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export default sellerProvider;
+export default SellerProvider;

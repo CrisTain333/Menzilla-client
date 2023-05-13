@@ -4,7 +4,7 @@ import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
 const SellerLogin = () => {
@@ -13,12 +13,6 @@ const SellerLogin = () => {
     const [error, setError] = useState<string | null>(null);
     const { currentSeller, sellerLogin } = useSeller();
     const router = useRouter();
-
-    React.useEffect((): any => {
-        if (currentSeller) {
-            router.push('/');
-        }
-    }, [currentSeller]);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -41,9 +35,18 @@ const SellerLogin = () => {
             setIsLoading(false);
         } else {
             toast.success('Logged in successfully');
+            router.push('/shop');
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (currentSeller !== null) {
+            router.push('/');
+        }
+        // window.location.reload();
+    }, [currentSeller, router]);
+
     return (
         <div>
             <div>

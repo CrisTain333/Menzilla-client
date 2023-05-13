@@ -16,12 +16,6 @@ const CreateShop = () => {
     const { currentSeller, sellerLogin } = useSeller();
     const router = useRouter();
 
-    React.useEffect((): any => {
-        if (currentSeller) {
-            router.push('/');
-        }
-    }, [currentSeller]);
-
     // handle Select image
     const imageChange = (e: any) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -72,6 +66,12 @@ const CreateShop = () => {
             toast.error('some thing went wrong ');
         }
     };
+
+    React.useEffect(() => {
+        if (currentSeller !== null) {
+            router.push('/');
+        }
+    }, [currentSeller, router]);
 
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">

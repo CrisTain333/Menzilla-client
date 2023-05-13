@@ -1,6 +1,5 @@
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import { useSeller } from '@/libs/Context/sellerProvider';
-import axiosInstance from '@/libs/common/utils/axios';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,9 +10,7 @@ const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { currentSeller, sellerLogin } = useSeller();
-
-    console.log(currentSeller);
+    const { sellerLogin } = useSeller();
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);

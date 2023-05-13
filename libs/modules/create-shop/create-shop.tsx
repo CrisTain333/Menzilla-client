@@ -5,12 +5,23 @@ import axiosInstance from '@/libs/common/utils/axios';
 import { toast } from 'react-hot-toast';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import Link from 'next/link';
+import { useSeller } from '@/libs/Context/sellerProvider';
+import { useRouter } from 'next/router';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
+    const { currentSeller, sellerLogin } = useSeller();
+    const router = useRouter();
+
+    React.useEffect((): any => {
+        if (currentSeller) {
+            router.push('/');
+        }
+    }, [currentSeller]);
+
     // handle Select image
     const imageChange = (e: any) => {
         if (e.target.files && e.target.files.length > 0) {

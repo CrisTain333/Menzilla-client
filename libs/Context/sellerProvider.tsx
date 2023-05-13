@@ -3,8 +3,10 @@ import axiosInstance from '../common/utils/axios';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
+    // eslint-disable-next-line no-unused-vars
     sellerLogin: (sellerData: any) => Promise<string | null>;
     sellerLogout: () => void;
+    isSeller: boolean;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -24,6 +26,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const tokenStoragePath = 'seller_Token';
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [currentSeller, setCurrentSeller] = useState<any>(null);
+    const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
 
     useEffect(() => {
@@ -34,12 +37,14 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setSellerFetched(true);
                     setCurrentSeller(userData);
+                    setIsSeller(true);
                     setIsLoading(false);
                 })
-                .catch((e) => {
+                .catch(() => {
                     setIsLoading(false);
                 });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const sellerLogin = async (sellerData: any) => {
@@ -48,6 +53,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentSeller(response?.data?.seller);
+                setIsSeller(true);
                 return null;
             } else {
                 return 'Wrong Credential';
@@ -63,6 +69,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
 
     const sellerLogout = () => {
         setCurrentSeller(null);
+        setIsSeller(false);
         localStorage.removeItem(tokenStoragePath);
     };
 
@@ -78,6 +85,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     };
 
     const value: IAuthContextValue = {
+        isSeller,
         currentSeller,
         isLoading,
         sellerLogin,

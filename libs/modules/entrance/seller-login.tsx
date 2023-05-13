@@ -1,4 +1,5 @@
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
+import { useSeller } from '@/libs/Context/sellerProvider';
 import axiosInstance from '@/libs/common/utils/axios';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -9,6 +10,10 @@ import { toast } from 'react-hot-toast';
 const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const { currentSeller, sellerLogin } = useSeller();
+
+    console.log(currentSeller);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -24,18 +29,13 @@ const SellerLogin = () => {
             password
         };
 
-        try {
-            const res = await axiosInstance.post('/shop/login', data);
-            if (res?.data?.status !== 201) {
-                setIsLoading(false);
-                return toast.error(res?.data?.message);
-            }
-            const token = res?.data?.token;
-            localStorage.setItem('shop_Access_Token', token);
-            toast.success(res?.data?.message);
+        const loginError = await sellerLogin(data);
+        if (loginError) {
+            toast.error(loginError);
+            setError(loginError);
             setIsLoading(false);
-        } catch (error) {
-            toast.error('something went wrong');
+        } else {
+            toast.success('Logged in successfully');
             setIsLoading(false);
         }
     };
@@ -58,6 +58,7 @@ const SellerLogin = () => {
                         </div>
                         <h1 className="text-2xl font-bold text-center mt-2">Seller Login</h1>
                     </div>
+
                     <div className="w-full  px-5 mt-8">
                         <form onSubmit={handleSubmit}>
                             <div className="w-full md:flex block pb-3">
@@ -133,6 +134,9 @@ const SellerLogin = () => {
                                     </div>
                                 </div>
                             </div>
+                            {error && (
+                                <p className="my-2 text-center text-[16px] text-red-600">{error}</p>
+                            )}
                             <div className="flex justify-center items-center pb-4">
                                 <button
                                     className={`w-full h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-5 cursor-pointer flex justify-center items-center text-base `}

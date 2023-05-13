@@ -5,12 +5,17 @@ import axiosInstance from '@/libs/common/utils/axios';
 import { toast } from 'react-hot-toast';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import Link from 'next/link';
+import { useSeller } from '@/libs/Context/sellerProvider';
+import { useRouter } from 'next/router';
 
 const CreateShop = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
+    const { currentSeller, isSeller } = useSeller();
+    const router = useRouter();
+
     // handle Select image
     const imageChange = (e: any) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -61,6 +66,12 @@ const CreateShop = () => {
             toast.error('some thing went wrong ');
         }
     };
+
+    React.useEffect(() => {
+        if (isSeller === true) {
+            router.push('/');
+        }
+    }, [currentSeller, router]);
 
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">

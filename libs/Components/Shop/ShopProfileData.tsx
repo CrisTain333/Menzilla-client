@@ -2,11 +2,9 @@ import { productData } from '@/libs/common/constant/Data';
 import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
-import styles from '@/styles/styles';
 import { RxDashboard } from 'react-icons/rx';
 
 const ShopProfileData = ({ isOwner }: any) => {
-    console.log(isOwner);
     const [active, setActive] = React.useState(1);
     return (
         <div className="w-full">

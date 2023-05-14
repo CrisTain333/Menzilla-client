@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { TbEdit } from 'react-icons/tb';
 import { BiLogIn } from 'react-icons/bi';
+import moment from 'moment';
 
 const ShopInfo = ({ isOwner }: any) => {
     const { currentSeller, isLoading } = useSeller();
@@ -46,7 +47,7 @@ const ShopInfo = ({ isOwner }: any) => {
                     <div className="p-3">
                         <h5 className="font-[600]">Joined On</h5>
                         <h4 className="text-[#000000b0]">
-                            {currentSeller?.createdAt?.slice(0, 10)}
+                            {moment(currentSeller?.createdAt).format('MMM Do YY')}
                         </h4>
                     </div>
                     {isOwner && (

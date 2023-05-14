@@ -3,7 +3,6 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 

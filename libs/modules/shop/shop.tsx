@@ -12,7 +12,7 @@ const Shop = () => {
         if (!token && !currentSeller && !isSeller) {
             router.push('/auth/seller-login');
         }
-    }, [currentSeller, isSeller]);
+    }, [currentSeller, isSeller, router]);
 
     return <div>Shop {currentSeller?.name}</div>;
 };

@@ -44,13 +44,6 @@ const SellerLogin = () => {
     };
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    React.useEffect(() => {
-        if (isSeller === true) {
-            if (currentSeller !== null) {
-                router.push(`/shop?shop_id=${currentSeller?._id}`);
-            }
-        }
-    }, [isSeller, router, currentSeller]);
 
     return (
         <div>

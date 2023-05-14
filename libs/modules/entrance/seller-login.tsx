@@ -3,6 +3,7 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -11,7 +12,7 @@ const SellerLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { sellerLogin } = useSeller();
-    // const router = useRouter();
+    const router = useRouter();
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -34,8 +35,13 @@ const SellerLogin = () => {
             setIsLoading(false);
         } else {
             toast.success('Logged in successfully');
-            window.location.reload();
+            router.push('/dashboard');
+            const tokenStoragePath = 'seller_Access_Token';
+
             setIsLoading(false);
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         }
     };
 

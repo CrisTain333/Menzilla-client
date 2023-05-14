@@ -7,6 +7,7 @@ interface IAuthContextValue {
     sellerLogin: (sellerData: any) => Promise<string | null>;
     sellerLogout: () => void;
     isSeller: boolean;
+    getSellerData: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -23,7 +24,7 @@ export function useSeller() {
 }
 
 export function SellerProvider({ children }: AuthProviderProps) {
-    const tokenStoragePath = 'seller_Token';
+    const tokenStoragePath = 'seller_Access_Token';
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [currentSeller, setCurrentSeller] = useState<any>(null);
     const [isSeller, setIsSeller] = useState(false);
@@ -89,7 +90,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         currentSeller,
         isLoading,
         sellerLogin,
-        sellerLogout
+        sellerLogout,
+        getSellerData
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

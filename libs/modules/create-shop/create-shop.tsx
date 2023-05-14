@@ -69,7 +69,7 @@ const CreateShop = () => {
 
     React.useEffect(() => {
         if (isSeller === true) {
-            router.push('/');
+            router.push('/shop');
         }
     }, [currentSeller, router]);
 
@@ -89,13 +89,13 @@ const CreateShop = () => {
                     The link in the email will expire in 24 hours.
                 </p>
                 <p className="text-gray-400 text-mb mt-5 dark:text-gray-300">
+                    After verify your email{' '}
                     <span
                         className="text-blue-500 cursor-pointer"
                         // onClick={handleNotReceiveEmail}
                     >
-                        Click here
+                        <Link href="/auth/seller-login">Login</Link>
                     </span>{' '}
-                    if you did not receive an email. If you find any issue, feel free to{' '}
                     {/* <span className="text-blue-500 cursor-pointer" onClick={handleContactUs}>
                             Contact Us
                         </span> */}

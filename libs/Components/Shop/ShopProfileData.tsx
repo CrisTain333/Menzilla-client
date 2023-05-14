@@ -3,8 +3,10 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
 import styles from '@/styles/styles';
+import { RxDashboard } from 'react-icons/rx';
 
 const ShopProfileData = ({ isOwner }: any) => {
+    console.log(isOwner);
     const [active, setActive] = React.useState(1);
     return (
         <div className="w-full">
@@ -40,11 +42,16 @@ const ShopProfileData = ({ isOwner }: any) => {
                     </div>
                 </div>
                 <div>
-                    {isOwner && (
+                    {isOwner === true && (
                         <div>
                             <Link href="/dashboard">
-                                <div className={`${styles.button} !rounded-[4px] h-[42px]`}>
-                                    <span className="text-[#fff]">Go Dashboard</span>
+                                <div
+                                    className={`text-center bg-[#ff9900] text-white rounded-md cursor-pointer text-base py-2 w-full px-7 flex justify-center items-center`}
+                                >
+                                    <span>
+                                        <RxDashboard size={20} />
+                                    </span>
+                                    <span className="ml-2">Dashboard</span>
                                 </div>
                             </Link>
                         </div>

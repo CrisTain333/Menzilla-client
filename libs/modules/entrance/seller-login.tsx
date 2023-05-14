@@ -11,7 +11,7 @@ const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { sellerLogin } = useSeller();
+    const { sellerLogin, getSellerData, isSeller, currentSeller } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {
@@ -37,13 +37,20 @@ const SellerLogin = () => {
             toast.success('Logged in successfully');
             router.push('/dashboard');
             const tokenStoragePath = 'seller_Access_Token';
-
+            const token = localStorage?.getItem(tokenStoragePath);
+            getSellerData(token);
             setIsLoading(false);
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         }
     };
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useEffect(() => {
+        if (isSeller === true) {
+            if (currentSeller !== null) {
+                router.push(`/shop?shop_id=${currentSeller?._id}`);
+            }
+        }
+    }, [isSeller, router, currentSeller]);
 
     return (
         <div>

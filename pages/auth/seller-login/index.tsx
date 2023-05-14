@@ -6,17 +6,14 @@ import React from 'react';
 const index = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isSeller, currentSeller } = useSeller();
-    // eslint-disable-next-line prettier/prettier, react-hooks/rules-of-hooks
-    const router = useRouter();
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter();
+    // eslint-disable-next-line prettier/prettier, react-hooks/rules-of-hooks
     React.useEffect(() => {
         if (isSeller === true) {
-            if (currentSeller !== null) {
-                router.push(`/shop/${currentSeller?._id}`);
-            }
+            router.push(`/dashboard`);
         }
-    }, [isSeller, router, currentSeller]);
+    }, [currentSeller, router, isSeller]);
 
     return (
         <div>

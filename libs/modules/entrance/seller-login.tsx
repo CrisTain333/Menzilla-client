@@ -4,14 +4,14 @@ import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { isSeller, sellerLogin } = useSeller();
+    const { sellerLogin } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {
@@ -35,7 +35,11 @@ const SellerLogin = () => {
             setIsLoading(false);
         } else {
             toast.success('Logged in successfully');
-            router.push('/shop');
+            router.push('/dashboard');
+            window.location.reload();
+            // const tokenStoragePath = 'seller_Access_Token';
+            // const token = localStorage?.getItem(tokenStoragePath);
+            // getSellerData(token);
             setIsLoading(false);
         }
     };

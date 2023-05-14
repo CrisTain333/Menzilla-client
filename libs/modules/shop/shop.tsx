@@ -1,31 +1,22 @@
-import { useSeller } from '@/libs/Context/sellerProvider';
-import { useRouter } from 'next/router';
+import ShopInfo from '@/libs/Components/Shop/ShopInfo';
+import ShopProfileData from '@/libs/Components/Shop/ShopProfileData';
 import React from 'react';
 
 const Shop = () => {
-    const { currentSeller } = useSeller();
-    const router = useRouter();
-
-    React.useEffect((): any => {
-        const tokenStoragePath = 'accessToken';
-        const token = localStorage.getItem(tokenStoragePath);
-        if (!token && !currentSeller) {
-            router.push('/');
-        }
-    }, [currentSeller]);
-
-    return <div>Shop {currentSeller?.name}</div>;
+    return (
+        <div>
+            <div className="px-10 mx-auto">
+                <div className="w-full flex py-10 justify-between">
+                    <div className="w-[25%] bg-slate-50 rounded-[4px] shadow-sm overflow-y-scroll h-[90vh] sticky top-10 left-0 z-10">
+                        <ShopInfo isOwner={true} />
+                    </div>
+                    <div className="w-[72%] rounded-[4px]">
+                        <ShopProfileData isOwner={true} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
-
-// export function getServerSideProps(context: any) {
-//     // Fetch data based on the query parameters from the context object
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const { currentSeller } = useSeller();
-//     return {
-//         props: {
-//             currentSeller: currentSeller
-//         }
-//     };
-// }
 
 export default Shop;

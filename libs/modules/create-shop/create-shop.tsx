@@ -69,9 +69,9 @@ const CreateShop = () => {
 
     React.useEffect(() => {
         if (isSeller === true) {
-            router.push('/');
+            router.push(`/dashboard`);
         }
-    }, [currentSeller, router]);
+    }, [currentSeller, router, isSeller]);
 
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">
@@ -89,13 +89,13 @@ const CreateShop = () => {
                     The link in the email will expire in 24 hours.
                 </p>
                 <p className="text-gray-400 text-mb mt-5 dark:text-gray-300">
+                    After verify your email{' '}
                     <span
                         className="text-blue-500 cursor-pointer"
                         // onClick={handleNotReceiveEmail}
                     >
-                        Click here
+                        <Link href="/auth/seller-login">Login</Link>
                     </span>{' '}
-                    if you did not receive an email. If you find any issue, feel free to{' '}
                     {/* <span className="text-blue-500 cursor-pointer" onClick={handleContactUs}>
                             Contact Us
                         </span> */}
@@ -278,7 +278,7 @@ const CreateShop = () => {
 
                             <div className="flex justify-center items-center pb-4">
                                 <button
-                                    className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
+                                    className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base`}
                                     type="submit"
                                 >
                                     {isLoading ? (

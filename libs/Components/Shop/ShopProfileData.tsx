@@ -4,7 +4,8 @@ import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
 import styles from '@/styles/styles';
 
-const ShopProfileData = ({ isOwner, active, setActive }: any) => {
+const ShopProfileData = ({ isOwner }: any) => {
+    const [active, setActive] = React.useState(1);
     return (
         <div className="w-full">
             <div className="flex w-full items-center justify-between">

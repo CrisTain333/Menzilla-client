@@ -43,8 +43,6 @@ const SellerLogin = () => {
         }
     };
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-
     return (
         <div>
             <div>

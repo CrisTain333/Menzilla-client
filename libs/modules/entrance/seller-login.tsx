@@ -11,7 +11,7 @@ const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { sellerLogin, getSellerData, isSeller, currentSeller } = useSeller();
+    const { sellerLogin, getSellerData } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {
@@ -36,9 +36,10 @@ const SellerLogin = () => {
         } else {
             toast.success('Logged in successfully');
             router.push('/dashboard');
-            const tokenStoragePath = 'seller_Access_Token';
-            const token = localStorage?.getItem(tokenStoragePath);
-            getSellerData(token);
+            window.location.reload();
+            // const tokenStoragePath = 'seller_Access_Token';
+            // const token = localStorage?.getItem(tokenStoragePath);
+            // getSellerData(token);
             setIsLoading(false);
         }
     };

@@ -69,7 +69,7 @@ const CreateShop = () => {
 
     React.useEffect(() => {
         if (isSeller === true) {
-            router.push(`/shop?shop_id=${currentSeller?._id}`);
+            router.push(`/dashboard`);
         }
     }, [currentSeller, router, isSeller]);
 

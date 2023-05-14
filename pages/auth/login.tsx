@@ -1,7 +1,5 @@
-import { useAuth } from '@/libs/Context/AuthProvider';
 import Login from '@/libs/modules/entrance/login';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const login = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks

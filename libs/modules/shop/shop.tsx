@@ -3,29 +3,22 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const Shop = () => {
-    const { currentSeller } = useSeller();
+    const { currentSeller, isSeller } = useSeller();
     const router = useRouter();
 
     React.useEffect((): any => {
         const tokenStoragePath = 'accessToken';
         const token = localStorage.getItem(tokenStoragePath);
-        if (!token && !currentSeller) {
-            router.push('/');
+        if (!token) {
+            router.push('/seller-login');
+        } else if (!currentSeller) {
+            router.push('/seller-login');
+        } else if (!isSeller) {
+            router.push('/seller-login');
         }
-    }, [currentSeller]);
+    }, [currentSeller, isSeller, router]);
 
     return <div>Shop {currentSeller?.name}</div>;
 };
-
-// export function getServerSideProps(context: any) {
-//     // Fetch data based on the query parameters from the context object
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const { currentSeller } = useSeller();
-//     return {
-//         props: {
-//             currentSeller: currentSeller
-//         }
-//     };
-// }
 
 export default Shop;

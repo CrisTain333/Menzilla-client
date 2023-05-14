@@ -13,7 +13,7 @@ const index = () => {
     React.useEffect(() => {
         if (isSeller === true) {
             if (currentSeller !== null) {
-                router.push(`/shop/${currentSeller?._id}`);
+                router.push(`/shop?shop_id=${currentSeller?._id}`);
             }
         }
     }, [isSeller, router, currentSeller]);

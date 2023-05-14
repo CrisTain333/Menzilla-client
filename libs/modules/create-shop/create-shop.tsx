@@ -71,7 +71,7 @@ const CreateShop = () => {
         if (isSeller === true) {
             router.push('/shop');
         }
-    }, [currentSeller, router]);
+    }, [currentSeller, router, isSeller]);
 
     return registerSuccess ? (
         <div className="p-6 shadow-md w-full max-w-lg mx-auto mt-20">

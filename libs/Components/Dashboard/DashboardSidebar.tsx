@@ -18,8 +18,8 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard" className="w-full flex items-center">
                         <RxDashboard size={30} color={`${active === 1 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
-                                active === 1 ? 'text-[crimson]' : 'text-[#555]'
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
+                                active === 1 ? 'text-[#c83f5b]' : 'text-[#555]'
                             }`}
                         >
                             Dashboard
@@ -31,7 +31,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-orders" className="w-full flex items-center">
                         <FiShoppingBag size={30} color={`${active === 2 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 2 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -44,7 +44,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-products" className="w-full flex items-center">
                         <FiPackage size={30} color={`${active === 3 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 3 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -60,7 +60,7 @@ const DashboardSidebar = ({ active }: any) => {
                             color={`${active === 4 ? 'crimson' : '#555'}`}
                         />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 4 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -76,7 +76,7 @@ const DashboardSidebar = ({ active }: any) => {
                             color={`${active === 5 ? 'crimson' : '#555'}`}
                         />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 5 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -89,7 +89,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-create-event" className="w-full flex items-center">
                         <VscNewFile size={30} color={`${active === 6 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 6 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -102,7 +102,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-withdraw-money" className="w-full flex items-center">
                         <CiMoneyBill size={30} color={`${active === 7 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 7 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -118,7 +118,7 @@ const DashboardSidebar = ({ active }: any) => {
                             color={`${active === 8 ? 'crimson' : '#555'}`}
                         />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 8 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -131,7 +131,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-coupouns" className="w-full flex items-center">
                         <AiOutlineGift size={30} color={`${active === 9 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 9 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -147,7 +147,7 @@ const DashboardSidebar = ({ active }: any) => {
                             color={`${active === 10 ? 'crimson' : '#555'}`}
                         />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 10 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >
@@ -160,7 +160,7 @@ const DashboardSidebar = ({ active }: any) => {
                     <Link href="/dashboard-settings" className="w-full flex items-center">
                         <CiSettings size={30} color={`${active === 11 ? 'crimson' : '#555'}`} />
                         <h5
-                            className={`hidden md::block pl-2 text-[18px] font-[400] ${
+                            className={`hidden md:block pl-2 text-[18px] font-[400] ${
                                 active === 11 ? 'text-[crimson]' : 'text-[#555]'
                             }`}
                         >

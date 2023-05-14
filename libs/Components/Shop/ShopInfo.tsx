@@ -23,30 +23,36 @@ const ShopInfo = ({ isOwner }: any) => {
                                 className="w-36 h-36 rounded-full object-cover ring-4 ring-[#ff9900] "
                             />
                         </div>
-                        <h3 className="text-center py-2 text-[20px]">{currentSeller?.name}</h3>
+                        <h3 className="text-center mt-5 text-4xl font-mono font-semibold">
+                            {currentSeller?.name}
+                        </h3>
                         <p className="text-[16px] text-[#000000a6] p-[10px] flex items-center">
                             {currentSeller?.description}
                         </p>
                     </div>
                     <div className="p-3">
-                        <h5 className="font-[600]">Address</h5>
-                        <h4 className="text-[#000000a6]">{currentSeller?.address}</h4>
+                        <h5 className="text-lg font-semibold">Address</h5>
+                        <h4 className="text-[#000000a6] font-mono font-semibold">
+                            {currentSeller?.address}
+                        </h4>
                     </div>
                     <div className="p-3">
-                        <h5 className="font-[600]">Phone Number</h5>
-                        <h4 className="text-[#000000a6]">{currentSeller?.phoneNumber}</h4>
+                        <h5 className="text-lg font-semibold">Phone Number</h5>
+                        <h4 className="text-[#000000a6] text-sm font-mono font-semibold">
+                            {currentSeller?.phoneNumber}
+                        </h4>
                     </div>
                     <div className="p-3">
-                        <h5 className="font-[600]">Total Products</h5>
-                        <h4 className="text-[#000000a6]">10</h4>
+                        <h5 className="text-lg font-semibold">Total Products</h5>
+                        <h4 className="text-[#000000a6] text-sm font-mono font-semibold">10</h4>
                     </div>
                     <div className="p-3">
-                        <h5 className="font-[600]">Shop Ratings</h5>
-                        <h4 className="text-[#000000b0]">4/5</h4>
+                        <h5 className="text-lg font-semibold">Shop Ratings</h5>
+                        <h4 className="text-[#000000b0] text-sm font-mono font-semibold">4/5</h4>
                     </div>
                     <div className="p-3">
-                        <h5 className="font-[600]">Joined On</h5>
-                        <h4 className="text-[#000000b0]">
+                        <h5 className="text-lg font-semibold">Joined On</h5>
+                        <h4 className="text-[#000000b0] text-sm font-mono font-semibold">
                             {moment(currentSeller?.createdAt).format('MMM Do YY')}
                         </h4>
                     </div>

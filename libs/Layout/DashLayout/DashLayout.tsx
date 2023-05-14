@@ -1,4 +1,4 @@
-import DashboardHeader from '@/libs/Components/DashboardHeader/DashboardHeader';
+import DashboardHeader from '@/libs/Components/Dashboard/DashboardHeader';
 import React from 'react';
 
 const DashLayout = ({ children }: any) => {

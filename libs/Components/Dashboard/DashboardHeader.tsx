@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineGift } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import { FiPackage, FiShoppingBag } from 'react-icons/fi';
-import { BiMessageSquareDetail } from 'react-icons/bi';
+import { BsChatLeftDots } from 'react-icons/bs';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -58,7 +58,7 @@ const DashboardHeader = () => {
                             />
                         </Link>
                         <Link href="/dashboard-messages" className="md:block hidden">
-                            <BiMessageSquareDetail
+                            <BsChatLeftDots
                                 color="#555"
                                 size={30}
                                 className="mx-5 cursor-pointer text-black"
@@ -70,7 +70,7 @@ const DashboardHeader = () => {
                                 width={500}
                                 src={`${currentSeller ? currentSeller?.shopProfile : ''}`}
                                 alt=""
-                                className="w-12 h-12 rounded-full object-cover"
+                                className="w-12 h-12 rounded-full object-cover ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
                             />
                         </Link>
                     </div>

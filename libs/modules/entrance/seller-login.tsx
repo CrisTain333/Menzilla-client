@@ -11,7 +11,7 @@ const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { sellerLogin, getSellerData } = useSeller();
+    const { sellerLogin } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {

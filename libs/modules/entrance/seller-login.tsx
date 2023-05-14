@@ -12,7 +12,7 @@ const SellerLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { sellerLogin } = useSeller();
-    const router = useRouter();
+    // const router = useRouter();
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -35,7 +35,7 @@ const SellerLogin = () => {
             setIsLoading(false);
         } else {
             toast.success('Logged in successfully');
-            router.push('/shop');
+            window.location.reload();
             setIsLoading(false);
         }
     };

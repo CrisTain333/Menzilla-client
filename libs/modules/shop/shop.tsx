@@ -9,14 +9,10 @@ const Shop = () => {
     React.useEffect((): any => {
         const tokenStoragePath = 'accessToken';
         const token = localStorage.getItem(tokenStoragePath);
-        if (!token) {
-            router.push('/seller-login');
-        } else if (!currentSeller) {
-            router.push('/seller-login');
-        } else if (!isSeller) {
-            router.push('/seller-login');
+        if (!token && !currentSeller && !isSeller) {
+            router.push('/auth/seller-login');
         }
-    }, [currentSeller, isSeller, router]);
+    }, [currentSeller, isSeller]);
 
     return <div>Shop {currentSeller?.name}</div>;
 };

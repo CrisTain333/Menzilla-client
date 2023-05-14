@@ -278,7 +278,7 @@ const CreateShop = () => {
 
                             <div className="flex justify-center items-center pb-4">
                                 <button
-                                    className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
+                                    className={`w-44 h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base`}
                                     type="submit"
                                 >
                                     {isLoading ? (

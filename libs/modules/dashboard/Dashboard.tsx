@@ -4,11 +4,7 @@ import React from 'react';
 
 const Dashboard = () => {
     const { currentSeller } = useSeller();
-    return (
-        <DashLayout>
-            <div>dashboard {currentSeller?.name}</div>
-        </DashLayout>
-    );
+    return <DashLayout></DashLayout>;
 };
 
 export default Dashboard;

@@ -1,3 +1,4 @@
+import { createProduct } from '@/libs/Api';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import { categoriesData } from '@/libs/common/constant/Data';
 import Image from 'next/image';
@@ -39,7 +40,7 @@ const CreateProduct = () => {
         setImages((prevImages: any) => [...prevImages, ...files]);
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         const newForm = new FormData();
@@ -55,7 +56,8 @@ const CreateProduct = () => {
         newForm.append('discountPrice', discountPrice);
         newForm.append('stock', stock);
         newForm.append('shopId', currentSeller._id);
-        // dispatch(createProduct(newForm));
+        const response = await createProduct(newForm);
+        console.log(response);
     };
 
     return (

@@ -1,4 +1,4 @@
-import CreateShopProduct from '@/libs/modules/dashboard/CreateShopProduct';
+import CreateShopProduct from '@/libs/modules/shop/CreateShopProduct';
 import React from 'react';
 
 const createProduct = () => {

@@ -22,6 +22,7 @@ const CreateProduct = () => {
     const [discountPrice, setDiscountPrice] = useState<any>();
     const [stock, setStock] = useState<any>();
 
+    console.log(images);
     // useEffect(() => {
     //     if (error) {
     //         toast.error(error);
@@ -184,12 +185,12 @@ const CreateProduct = () => {
                             <AiOutlinePlusCircle size={30} className="mt-3" color="#555" />
                         </label>
                         {images &&
-                            images.map((i: any) => (
+                            images.map((i: any, index: any) => (
                                 <Image
                                     height={500}
                                     width={500}
                                     src={URL.createObjectURL(i)}
-                                    key={i}
+                                    key={index}
                                     alt=""
                                     className="h-32 w-32 object-cover m-2"
                                 />

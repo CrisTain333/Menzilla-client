@@ -1,10 +1,10 @@
-import CreateProduct from '@/libs/modules/dashboard/CreateProduct';
+import CreateShopProduct from '@/libs/modules/dashboard/CreateShopProduct';
 import React from 'react';
 
 const createProduct = () => {
     return (
         <div>
-            <CreateProduct />
+            <CreateShopProduct />
         </div>
     );
 };

@@ -25,3 +25,12 @@ export const shopLogin = async (loginDetails: object) => {
         return { error };
     }
 };
+
+export const createProduct = async (ProductData: object) => {
+    try {
+        const response = await axiosInstance.post(`/product/create-product`, ProductData);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

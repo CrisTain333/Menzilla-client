@@ -10,7 +10,7 @@ const ShopInfo = ({ isOwner }: any) => {
     return (
         <div>
             {isLoading ? (
-                <p>Loading .... </p>
+                <p>Loading .</p>
             ) : (
                 <div>
                     <div className="w-full py-5">

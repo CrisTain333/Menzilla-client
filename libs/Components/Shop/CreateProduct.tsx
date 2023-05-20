@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import SmallLoader from '../SmallLoader/SmallLoader';
 // import { createProduct } from '../../redux/actions/product';
 // import { categoriesData } from '../../static/data';
 
@@ -14,6 +15,7 @@ const CreateProduct = () => {
     const router = useRouter();
 
     const [images, setImages] = useState<any>([]);
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
@@ -21,18 +23,7 @@ const CreateProduct = () => {
     const [originalPrice, setOriginalPrice] = useState<any>();
     const [discountPrice, setDiscountPrice] = useState<any>();
     const [stock, setStock] = useState<any>();
-
-    console.log(images);
-    // useEffect(() => {
-    //     if (error) {
-    //         toast.error(error);
-    //     }
-    //     if (success) {
-    //         toast.success('Product created successfully!');
-    //         navigate('/dashboard');
-    //         window.location.reload();
-    //     }
-    // }, [error, success]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleImageChange = (e: any) => {
         e.preventDefault();
@@ -42,6 +33,7 @@ const CreateProduct = () => {
     };
 
     const handleSubmit = async (e: any) => {
+        setIsLoading(true);
         e.preventDefault();
 
         const newForm = new FormData();
@@ -58,7 +50,13 @@ const CreateProduct = () => {
         newForm.append('stock', stock);
         newForm.append('shopId', currentSeller._id);
         const response = await createProduct(newForm);
-        console.log(response);
+        if (response.status !== 201) {
+            toast.error(response?.message);
+            setIsLoading(false);
+            return;
+        }
+        toast.success(response?.message);
+        setIsLoading(false);
     };
 
     return (
@@ -198,11 +196,25 @@ const CreateProduct = () => {
                     </div>
                     <br />
                     <div>
-                        <input
+                        <button
                             type="submit"
-                            value="Create"
-                            className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        />
+                            className={`mt-2 appearance-none text-center block w-full px-3 h-[35px] border  sm:text-sm
+                            
+                            ${
+                                isLoading
+                                    ? ' bg-[#ff9900a0] text-white cursor-not-allowed'
+                                    : 'bg-[#ff9900] text-white  cursor-pointer'
+                            }
+                            `}
+                        >
+                            {isLoading ? (
+                                <>
+                                    <SmallLoader />{' '}
+                                </>
+                            ) : (
+                                <>Create</>
+                            )}
+                        </button>
                     </div>
                 </div>
             </form>

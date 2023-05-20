@@ -6,7 +6,7 @@ const DashLayout = ({ children }: any) => {
     return (
         <div>
             <DashboardHeader />
-            <div className="w-20 md:w-64">
+            <div className="w-20 md:w-72">
                 <DashboardSidebar active={1} />
             </div>
 

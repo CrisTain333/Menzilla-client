@@ -1,6 +1,6 @@
 import DashboardHeader from '@/libs/Components/Dashboard/DashboardHeader';
 import DashboardSidebar from '@/libs/Components/Dashboard/DashboardSidebar';
-import ShopPrducts from '@/libs/Components/Shop/ShopPrducts';
+import AllProducts from '@/libs/Components/Shop/AllProducts';
 import React from 'react';
 
 const ShopProducts = () => {
@@ -13,7 +13,7 @@ const ShopProducts = () => {
                         <DashboardSidebar active={3} />
                     </div>
                     <div className="w-full justify-center flex">
-                        <ShopPrducts />
+                        <AllProducts />
                     </div>
                 </div>
             </div>

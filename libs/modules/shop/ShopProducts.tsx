@@ -6,13 +6,13 @@ import React from 'react';
 const ShopProducts = () => {
     return (
         <div>
-            <div>
+            <div className="w-full">
                 <DashboardHeader />
-                <div className="flex items-center justify-between w-full">
-                    <div className="w-20 md:w-72">
+                <div className="grid grid-cols-12 ">
+                    <div className=" col-span-2">
                         <DashboardSidebar active={3} />
                     </div>
-                    <div className="w-full justify-center flex">
+                    <div className="w-full flex justify-center mt-10 col-span-10">
                         <AllProducts />
                     </div>
                 </div>

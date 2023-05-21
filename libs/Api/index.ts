@@ -34,3 +34,12 @@ export const createProduct = async (ProductData: object) => {
         return { error };
     }
 };
+
+export const getShopProduct = async (seller_id: string) => {
+    try {
+        const response = await axiosInstance.get(`/product/shop-products?sellerId=${seller_id}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

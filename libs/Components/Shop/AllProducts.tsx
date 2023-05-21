@@ -17,7 +17,7 @@ import { Button } from '@mui/material';
 
 const AllProducts = () => {
     // const { products, isLoading } = useSelector((state) => state.products);
-    const { currentSeller, isLoading, products } = useSeller();
+    const { currentSeller, products } = useSeller();
 
     return (
         <>
@@ -45,13 +45,27 @@ const AllProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        {products &&
+                            products.map((product: any, index: any) => {
+                                return (
+                                    <tr key={index}>
+                                        <th>{index + 1}</th>
+                                        <td>{product?.name}</td>
+                                        <td>${product?.discountPrice}</td>
+                                        <td>{product?.stock}</td>
+                                        <td>10</td>
+                                        <td>
+                                            {' '}
+                                            <AiOutlineEye size={20} />
+                                        </td>
+                                        <td>
+                                            {' '}
+                                            <AiOutlineDelete size={20} color="red" />
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

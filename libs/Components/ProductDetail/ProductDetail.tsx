@@ -34,41 +34,34 @@ const ProductDetail = ({ data }: any) => {
                             <div className="block w-full md:flex">
                                 <div className="w-full 800px:w-[50%]">
                                     <Image
-                                        src={data.image_Url[select].url}
+                                        src={data.images?.[select]}
                                         alt=""
                                         className="w-[90%] mx-auto rounded-md  my-5"
                                         height={500}
                                         width={500}
                                     />
                                     <div className="w-full flex space-x-5">
-                                        <div
-                                            className={`${
-                                                select === 0 ? 'border border-[#ff9900]' : 'null'
-                                            } cursor-pointer rounded-md shadow-sm p-2`}
-                                        >
-                                            <Image
-                                                src={data?.image_Url[0].url}
-                                                alt=""
-                                                className="w-32 "
-                                                onClick={() => setSelect(0)}
-                                                height={500}
-                                                width={500}
-                                            />
-                                        </div>
-                                        <div
-                                            className={`${
-                                                select === 1 ? 'border border-[#ff9900]' : 'null'
-                                            } cursor-pointer rounded-md shadow-sm p-2`}
-                                        >
-                                            <Image
-                                                src={data?.image_Url[1].url}
-                                                alt=""
-                                                className="w-32 "
-                                                onClick={() => setSelect(1)}
-                                                height={500}
-                                                width={500}
-                                            />
-                                        </div>
+                                        {data?.images?.map((e: any, index: any) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className={`${
+                                                        select === index
+                                                            ? 'border border-[#ff9900]'
+                                                            : 'null'
+                                                    } cursor-pointer rounded-md shadow-sm p-2`}
+                                                >
+                                                    <Image
+                                                        src={e}
+                                                        alt=""
+                                                        className="w-32 "
+                                                        onClick={() => setSelect(index)}
+                                                        height={500}
+                                                        width={500}
+                                                    />
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                                 <div className="w-full 800px:w-[50%] pt-5">
@@ -116,7 +109,7 @@ const ProductDetail = ({ data }: any) => {
                                         <Image
                                             height={400}
                                             width={400}
-                                            src={data.shop.shop_avatar.url}
+                                            src={data?.shop?.shopProfile}
                                             alt=""
                                             className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
                                         />

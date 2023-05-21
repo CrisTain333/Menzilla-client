@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
+import { getShopProduct } from '../Api';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -8,6 +9,7 @@ interface IAuthContextValue {
     sellerLogout: () => void;
     isSeller: boolean;
     getSellerData: any;
+    products: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -29,6 +31,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [currentSeller, setCurrentSeller] = useState<any>(null);
     const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -38,6 +41,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setSellerFetched(true);
                     setCurrentSeller(userData);
+                    getSellerProducts(userData?._id);
                     setIsSeller(true);
                     setIsLoading(false);
                 })
@@ -54,6 +58,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentSeller(response?.data?.seller);
+                getSellerProducts(response?.data?.seller?._id);
                 setIsSeller(true);
                 return null;
             } else {
@@ -85,13 +90,23 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
+    const getSellerProducts = async (_id: string) => {
+        try {
+            const response = await getShopProduct(_id);
+            setProducts(response?.data);
+        } catch (e) {
+            sellerLogout();
+        }
+    };
+
     const value: IAuthContextValue = {
         isSeller,
         currentSeller,
         isLoading,
         sellerLogin,
         sellerLogout,
-        getSellerData
+        getSellerData,
+        products
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

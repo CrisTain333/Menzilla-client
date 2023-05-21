@@ -56,7 +56,9 @@ const AllProducts = () => {
                                         <td>10</td>
                                         <td>
                                             {' '}
-                                            <AiOutlineEye size={20} />
+                                            <Link href={`/product/${product?.name}`}>
+                                                <AiOutlineEye size={20} />
+                                            </Link>
                                         </td>
                                         <td>
                                             {' '}

@@ -7,8 +7,15 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SmallLoader from '../SmallLoader/SmallLoader';
+import cloudinary from 'cloudinary';
 // import { createProduct } from '../../redux/actions/product';
 // import { categoriesData } from '../../static/data';
+const { v2: cloudinaryV2 } = cloudinary; // Use v2 for Cloudinary
+cloudinaryV2?.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+});
 
 const CreateProduct = () => {
     const { currentSeller } = useSeller();
@@ -49,13 +56,25 @@ const CreateProduct = () => {
         newForm.append('discountPrice', discountPrice);
         newForm.append('stock', stock);
         newForm.append('shopId', currentSeller._id);
-        const response = await createProduct(newForm);
-        if (response.status !== 201) {
-            toast.error(response?.message);
-            setIsLoading(false);
-            return;
+        const uploadResults = [];
+
+        for (const file of images) {
+            const uploadResult = await cloudinaryV2.uploader.upload(file.buffer, {
+                folder: 'menzilla/' // Set your desired upload folder in Cloudinary
+            });
+
+            uploadResults.push(uploadResult.secure_url);
         }
-        toast.success(response?.message);
+        console.log(uploadResults);
+
+        // const response = await createProduct(newForm);
+
+        // if (response.status !== 201) {
+        //     toast.error(response?.message);
+        //     setIsLoading(false);
+        //     return;
+        // }
+        // toast.success(response?.message);
         setIsLoading(false);
     };
 

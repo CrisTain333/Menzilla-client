@@ -32,46 +32,41 @@ const ProductDetail = ({ data }: any) => {
                     <div className={``}>
                         <div className="w-full py-5">
                             <div className="block w-full md:flex">
-                                <div className="w-full 800px:w-[50%]">
-                                    <Image
-                                        src={data.image_Url[select].url}
-                                        alt=""
-                                        className="w-[90%] mx-auto rounded-md  my-5"
-                                        height={500}
-                                        width={500}
-                                    />
+                                <div className="w-full md:w-[50%]">
+                                    <div className="">
+                                        <Image
+                                            src={data.images?.[select]}
+                                            alt=""
+                                            className="w-[80%]  mx-auto rounded-md  my-5"
+                                            height={500}
+                                            width={500}
+                                        />
+                                    </div>
                                     <div className="w-full flex space-x-5">
-                                        <div
-                                            className={`${
-                                                select === 0 ? 'border border-[#ff9900]' : 'null'
-                                            } cursor-pointer rounded-md shadow-sm p-2`}
-                                        >
-                                            <Image
-                                                src={data?.image_Url[0].url}
-                                                alt=""
-                                                className="w-32 "
-                                                onClick={() => setSelect(0)}
-                                                height={500}
-                                                width={500}
-                                            />
-                                        </div>
-                                        <div
-                                            className={`${
-                                                select === 1 ? 'border border-[#ff9900]' : 'null'
-                                            } cursor-pointer rounded-md shadow-sm p-2`}
-                                        >
-                                            <Image
-                                                src={data?.image_Url[1].url}
-                                                alt=""
-                                                className="w-32 "
-                                                onClick={() => setSelect(1)}
-                                                height={500}
-                                                width={500}
-                                            />
-                                        </div>
+                                        {data?.images?.map((e: any, index: any) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className={`${
+                                                        select === index
+                                                            ? 'border border-[#ff9900]'
+                                                            : 'null'
+                                                    } cursor-pointer rounded-md shadow-sm p-2`}
+                                                >
+                                                    <Image
+                                                        src={e}
+                                                        alt=""
+                                                        className="w-32 "
+                                                        onClick={() => setSelect(index)}
+                                                        height={500}
+                                                        width={500}
+                                                    />
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
-                                <div className="w-full 800px:w-[50%] pt-5">
+                                <div className="w-full md:w-[50%] pt-5">
                                     <h1 className={`font-bold text-lg my-2`}>{data.name}</h1>
                                     <p className="text-justify leading-8 font-medium">
                                         {' '}
@@ -79,10 +74,10 @@ const ProductDetail = ({ data }: any) => {
                                     </p>
                                     <div className="flex pt-3">
                                         <h4 className={`${styles.productDiscountPrice}`}>
-                                            {data.discount_price}$
+                                            ${data.discountPrice}
                                         </h4>
                                         <h3 className={`${styles.price}`}>
-                                            {data.price ? data.price + '$' : null}
+                                            {data?.originalPrice ? data?.originalPrice + '$' : null}
                                         </h3>
                                     </div>
 
@@ -116,7 +111,7 @@ const ProductDetail = ({ data }: any) => {
                                         <Image
                                             height={400}
                                             width={400}
-                                            src={data.shop.shop_avatar.url}
+                                            src={data?.shop?.shopProfile}
                                             alt=""
                                             className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
                                         />
@@ -154,12 +149,12 @@ const ProductDetailsInfo = ({ data }: any) => {
     const [active, setActive] = useState(1);
 
     return (
-        <div className="bg-slate-50 px-3 800px:px-14 py-2 rounded">
+        <div className="bg-slate-50 px-3 md:px-14 py-2 rounded">
             <div className="w-full flex justify-between border-b  pt-10 pb-3">
                 <div className="relative">
                     <h5
                         className={
-                            'text-[#000] text-lg px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]'
+                            'text-[#000] text-lg px-1 leading-5 font-[600] cursor-pointer md:text-[20px]'
                         }
                         onClick={() => setActive(1)}
                     >
@@ -170,7 +165,7 @@ const ProductDetailsInfo = ({ data }: any) => {
                 <div className="relative">
                     <h5
                         className={
-                            'text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]'
+                            'text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer md:text-[20px]'
                         }
                         onClick={() => setActive(2)}
                     >
@@ -181,7 +176,7 @@ const ProductDetailsInfo = ({ data }: any) => {
                 <div className="relative">
                     <h5
                         className={
-                            'text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]'
+                            'text-[#000] text-[18px] px-1 leading-5 font-[600] cursor-pointer md:text-[20px]'
                         }
                         onClick={() => setActive(3)}
                     >
@@ -230,11 +225,11 @@ const ProductDetailsInfo = ({ data }: any) => {
             ) : null}
 
             {active === 3 && (
-                <div className="w-full block 800px:flex p-5">
-                    <div className="w-full 800px:w-[50%]">
+                <div className="w-full block md:flex p-5">
+                    <div className="w-full md:w-[50%]">
                         <div className="flex items-center">
                             <Image
-                                src={data.shop.shop_avatar.url}
+                                src={data?.shop?.shopProfile}
                                 className="w-12 h-12 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
                                 alt="shopImage"
                                 height={500}
@@ -252,7 +247,7 @@ const ProductDetailsInfo = ({ data }: any) => {
                             Vel, officia similique?
                         </p>
                     </div>
-                    <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
+                    <div className="w-full md:w-[50%] mt-5 md:mt-0 md:flex flex-col items-end">
                         <div className="text-left">
                             <h5 className="font-[600]">
                                 Joined on: <span className="font-[500]">14 March,2023</span>

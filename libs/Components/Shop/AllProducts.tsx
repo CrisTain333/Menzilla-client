@@ -14,10 +14,17 @@ import SmallLoader from '../SmallLoader/SmallLoader';
 import products from '@/pages/dashboard/products';
 import { productData } from '@/libs/common/constant/Data';
 import { Button } from '@mui/material';
+import axiosInstance from '@/libs/common/utils/axios';
+import { deleteShopProduct } from '@/libs/Api';
 
 const AllProducts = () => {
     // const { products, isLoading } = useSelector((state) => state.products);
     const { currentSeller, products } = useSeller();
+
+    const handleProductDelete = async (id: string) => {
+        const response = await deleteShopProduct(id);
+        console.log(response);
+    };
 
     return (
         <>
@@ -61,8 +68,9 @@ const AllProducts = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                            {' '}
-                                            <AiOutlineDelete size={20} color="red" />
+                                            <div onClick={() => handleProductDelete(product?._id)}>
+                                                <AiOutlineDelete size={20} color="red" />
+                                            </div>{' '}
                                         </td>
                                     </tr>
                                 );

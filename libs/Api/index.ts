@@ -45,7 +45,9 @@ export const getShopProduct = async (seller_id: string) => {
 };
 export const deleteShopProduct = async (product_id: string) => {
     try {
-        const response = await axiosInstance.delete(`/delete-product?productId=${product_id}`);
+        const response = await axiosInstance.delete(
+            `/product/delete-product?productId=${product_id}`
+        );
         return response.data;
     } catch (error) {
         return { error };

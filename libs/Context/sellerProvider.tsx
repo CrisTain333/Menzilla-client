@@ -10,6 +10,7 @@ interface IAuthContextValue {
     isSeller: boolean;
     getSellerData: any;
     products: any;
+    getSellerProducts: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -84,6 +85,10 @@ export function SellerProvider({ children }: AuthProviderProps) {
             const response = await axiosInstance.get(`/shop/seller`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            if (response?.data?.status === 500) {
+                sellerLogout();
+                return;
+            }
             return response?.data?.seller;
         } catch (e) {
             sellerLogout();
@@ -106,7 +111,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         sellerLogin,
         sellerLogout,
         getSellerData,
-        products
+        products,
+        getSellerProducts
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

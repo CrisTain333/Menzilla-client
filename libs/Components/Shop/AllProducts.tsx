@@ -14,10 +14,23 @@ import SmallLoader from '../SmallLoader/SmallLoader';
 import products from '@/pages/dashboard/products';
 import { productData } from '@/libs/common/constant/Data';
 import { Button } from '@mui/material';
+import axiosInstance from '@/libs/common/utils/axios';
+import { deleteShopProduct } from '@/libs/Api';
+import { toast } from 'react-hot-toast';
 
 const AllProducts = () => {
     // const { products, isLoading } = useSelector((state) => state.products);
-    const { currentSeller, products } = useSeller();
+    const { currentSeller, products, getSellerProducts } = useSeller();
+
+    const handleProductDelete = async (id: string) => {
+        const response = await deleteShopProduct(id);
+        if (response?.status !== 200) {
+            toast.error('Product Not deleted');
+            return;
+        }
+        toast.success(response?.message);
+        getSellerProducts(currentSeller?._id);
+    };
 
     return (
         <>
@@ -61,8 +74,12 @@ const AllProducts = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                            {' '}
-                                            <AiOutlineDelete size={20} color="red" />
+                                            <div
+                                                onClick={() => handleProductDelete(product?._id)}
+                                                className="cursor-pointer"
+                                            >
+                                                <AiOutlineDelete size={20} color="red" />
+                                            </div>{' '}
                                         </td>
                                     </tr>
                                 );

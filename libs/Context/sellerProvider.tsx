@@ -84,6 +84,10 @@ export function SellerProvider({ children }: AuthProviderProps) {
             const response = await axiosInstance.get(`/shop/seller`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            if (response?.data?.status === 500) {
+                sellerLogout();
+                return;
+            }
             return response?.data?.seller;
         } catch (e) {
             sellerLogout();

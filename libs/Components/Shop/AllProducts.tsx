@@ -16,6 +16,7 @@ import { productData } from '@/libs/common/constant/Data';
 import { Button } from '@mui/material';
 import axiosInstance from '@/libs/common/utils/axios';
 import { deleteShopProduct } from '@/libs/Api';
+import { toast } from 'react-hot-toast';
 
 const AllProducts = () => {
     // const { products, isLoading } = useSelector((state) => state.products);
@@ -23,8 +24,12 @@ const AllProducts = () => {
 
     const handleProductDelete = async (id: string) => {
         const response = await deleteShopProduct(id);
+        if (response?.status !== 200) {
+            toast.error('Product Not deleted');
+            return;
+        }
+        toast.success(response?.message);
         getSellerProducts(currentSeller?._id);
-        console.log(response);
     };
 
     return (
@@ -69,7 +74,10 @@ const AllProducts = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                            <div onClick={() => handleProductDelete(product?._id)}>
+                                            <div
+                                                onClick={() => handleProductDelete(product?._id)}
+                                                className="cursor-pointer"
+                                            >
                                                 <AiOutlineDelete size={20} color="red" />
                                             </div>{' '}
                                         </td>

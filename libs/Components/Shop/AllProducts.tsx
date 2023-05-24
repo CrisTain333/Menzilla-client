@@ -19,10 +19,11 @@ import { deleteShopProduct } from '@/libs/Api';
 
 const AllProducts = () => {
     // const { products, isLoading } = useSelector((state) => state.products);
-    const { currentSeller, products } = useSeller();
+    const { currentSeller, products, getSellerProducts } = useSeller();
 
     const handleProductDelete = async (id: string) => {
         const response = await deleteShopProduct(id);
+        getSellerProducts(currentSeller?._id);
         console.log(response);
     };
 

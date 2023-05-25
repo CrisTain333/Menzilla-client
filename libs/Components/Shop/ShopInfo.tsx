@@ -10,6 +10,7 @@ const ShopInfo = ({ isOwner }: any) => {
 
     const logoutHandler = () => {
         sellerLogout();
+        window?.location?.reload();
     };
 
     return (

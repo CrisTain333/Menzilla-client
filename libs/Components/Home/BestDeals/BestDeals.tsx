@@ -1,8 +1,6 @@
-import { productData } from '@/libs/common/constant/Data';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getAllProduct } from '@/libs/Api';
-// import {} from 'rea';
 
 import { ThreeCircles } from 'react-loader-spinner';
 
@@ -10,11 +8,6 @@ const BestDeals = () => {
     const [data, setData] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    // useEffect(() => {
-    //     const d = productData && productData.sort((a, b) => b.total_sell - a.total_sell);
-    //     const bestFive = d.slice(0, 8);
-    //     setData(bestFive);
-    // }, []);
     const getProduct = async () => {
         setIsLoading(true);
         try {

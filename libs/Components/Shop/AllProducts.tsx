@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
@@ -6,10 +6,10 @@ import { deleteShopProduct } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const AllProducts = () => {
+    const { currentSeller, products, getSellerProducts, totalPages } = useSeller();
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+
     // const { products, isLoading } = useSelector((state) => state.products);
-    const { currentSeller, products, getSellerProducts } = useSeller();
 
     const handleProductDelete = async (id: string) => {
         const response = await deleteShopProduct(id);
@@ -20,6 +20,11 @@ const AllProducts = () => {
         toast.success(response?.message);
         getSellerProducts(currentSeller?._id, currentPage);
     };
+
+    useEffect(() => {
+        getSellerProducts(currentSeller?._id, currentPage);
+    }, [currentPage]);
+
     const handlePageChange = (pageNumber: any) => {
         setCurrentPage(pageNumber);
     };
@@ -31,6 +36,7 @@ const AllProducts = () => {
 
     return (
         <>
+            <p>Current page : {currentPage} </p>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <colgroup>

@@ -22,7 +22,7 @@ const ShopProducts = () => {
                     <div className="col-span-2">
                         <DashboardSidebar active={3} />
                     </div>
-                    <div className="w-full flex justify-center mt-10 col-span-10">
+                    <div className="w-full flex flex-col justify-center mt-10 col-span-10">
                         <AllProducts />
                     </div>
                 </div>

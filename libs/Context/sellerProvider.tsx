@@ -43,7 +43,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setSellerFetched(true);
                     setCurrentSeller(userData);
-                    getSellerProducts(userData?._id);
+                    getSellerProducts(userData?._id, 1);
                     setIsSeller(true);
                     setIsLoading(false);
                 })
@@ -64,7 +64,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentSeller(response?.data?.seller);
-                getSellerProducts(response?.data?.seller?._id);
+                getSellerProducts(response?.data?.seller?._id, 1);
                 setIsSeller(true);
                 return response;
             } else {
@@ -100,9 +100,9 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
-    const getSellerProducts = async (_id: string) => {
+    const getSellerProducts = async (_id: string, page: any) => {
         try {
-            const response = await getShopProduct(_id);
+            const response = await getShopProduct(_id, page);
             setProducts(response?.data);
         } catch (e) {
             sellerLogout();

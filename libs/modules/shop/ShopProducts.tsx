@@ -18,8 +18,8 @@ const ShopProducts = () => {
         <div>
             <div className="w-full">
                 <DashboardHeader />
-                <div className="grid grid-cols-12 ">
-                    <div className=" col-span-2">
+                <div className="grid grid-cols-12 gap-5">
+                    <div className="col-span-2">
                         <DashboardSidebar active={3} />
                     </div>
                     <div className="w-full flex justify-center mt-10 col-span-10">

@@ -50,7 +50,7 @@ const AllProducts = () => {
                                 return (
                                     <tr key={index}>
                                         <th>{index + 1}</th>
-                                        <td>{product?.name}</td>
+                                        <td>{product?.name?.slice(0, 40)}. . .</td>
                                         <td>${product?.discountPrice}</td>
                                         <td>{product?.stock}</td>
                                         <td>10</td>

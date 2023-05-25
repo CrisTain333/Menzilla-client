@@ -1,7 +1,6 @@
 import { getAllProduct } from '@/libs/Api';
 import ProductCard from '@/libs/Components/ProductCard/ProductCard';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
-import { productData } from '@/libs/common/constant/Data';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -19,7 +18,6 @@ const Product = () => {
             setData(result?.data);
             setIsLoading(false);
         } catch (error) {
-            console.log(error);
             setIsLoading(false);
             setData([]);
         }
@@ -45,7 +43,7 @@ const Product = () => {
         <div>
             <HeaderAndFooter>
                 <div>
-                    <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px]  xl:gap-[30px] mb-12">
+                    <div className="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px]  xl:gap-[30px] mb-12">
                         {data &&
                             data?.map((i: any, index: any) => <ProductCard data={i} key={index} />)}
                     </div>

@@ -1,15 +1,59 @@
 import { productData } from '@/libs/common/constant/Data';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../../ProductCard/ProductCard';
+import { getAllProduct } from '@/libs/Api';
+// import {} from 'rea';
+
+import { ThreeCircles } from 'react-loader-spinner';
 
 const BestDeals = () => {
     const [data, setData] = useState<any>([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // useEffect(() => {
+    //     const d = productData && productData.sort((a, b) => b.total_sell - a.total_sell);
+    //     const bestFive = d.slice(0, 8);
+    //     setData(bestFive);
+    // }, []);
+    const getProduct = async () => {
+        setIsLoading(true);
+        try {
+            const result = await getAllProduct();
+            const d =
+                result?.data && result?.data.sort((a: any, b: any) => b.sold_out - a.sold_out);
+            const bestFive = d.slice(0, 8);
+            setData(bestFive);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            setData([]);
+        }
+    };
 
     useEffect(() => {
-        const d = productData && productData.sort((a, b) => b.total_sell - a.total_sell);
-        const bestFive = d.slice(0, 8);
-        setData(bestFive);
+        getProduct();
     }, []);
+
+    if (isLoading) {
+        return (
+            <>
+                <div className="flex items-center justify-center">
+                    <ThreeCircles
+                        height="100"
+                        width="100"
+                        color="#ff9900"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="three-circles-rotating"
+                        outerCircleColor=""
+                        innerCircleColor=""
+                        middleCircleColor=""
+                    />
+                </div>
+            </>
+        );
+    }
 
     return (
         <div>

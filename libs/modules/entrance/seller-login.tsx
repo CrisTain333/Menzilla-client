@@ -37,9 +37,6 @@ const SellerLogin = () => {
             toast.success('Logged in successfully');
             router.push('/dashboard');
             window.location.reload();
-            // const tokenStoragePath = 'seller_Access_Token';
-            // const token = localStorage?.getItem(tokenStoragePath);
-            // getSellerData(token);
             setIsLoading(false);
         }
     };

@@ -12,6 +12,8 @@ interface IAuthContextValue {
     products: any;
     getSellerProducts: any;
     refresh: () => void;
+    totalPages: any;
+    setTotalPages: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -35,6 +37,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [sellerFetched, setSellerFetched] = useState(false);
     const [products, setProducts] = useState([]);
     const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [totalPages, setTotalPages] = useState(0);
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         if (token && !sellerFetched) {
@@ -104,6 +107,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
         try {
             const response = await getShopProduct(_id, page);
             setProducts(response?.data);
+            setTotalPages(response?.totalPages);
         } catch (e) {
             sellerLogout();
         }
@@ -118,7 +122,9 @@ export function SellerProvider({ children }: AuthProviderProps) {
         getSellerData,
         products,
         getSellerProducts,
-        refresh
+        refresh,
+        totalPages,
+        setTotalPages
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

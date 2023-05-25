@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
@@ -6,6 +6,8 @@ import { deleteShopProduct } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const AllProducts = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     // const { products, isLoading } = useSelector((state) => state.products);
     const { currentSeller, products, getSellerProducts } = useSeller();
 
@@ -16,8 +18,16 @@ const AllProducts = () => {
             return;
         }
         toast.success(response?.message);
-        getSellerProducts(currentSeller?._id);
+        getSellerProducts(currentSeller?._id, currentPage);
     };
+    const handlePageChange = (pageNumber: any) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <>
@@ -74,6 +84,20 @@ const AllProducts = () => {
                         {/* row 1 */}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="flex justify-center space-x-1 dark:text-gray-100 my-10">
+                {pageNumbers?.map((pageNumber, i) => (
+                    <button
+                        key={i}
+                        onClick={() => handlePageChange(pageNumber)}
+                        type="button"
+                        title="Page 1"
+                        className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-gray-900 dark:text-violet-400 dark:border-violet-400"
+                    >
+                        {pageNumber}
+                    </button>
+                ))}
             </div>
         </>
     );

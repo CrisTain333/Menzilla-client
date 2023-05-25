@@ -92,14 +92,16 @@ const AllProducts = () => {
                 </table>
             </div>
 
-            <div className="flex justify-center space-x-1 dark:text-gray-100 my-10">
+            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-5">
                 {pageNumbers?.map((pageNumber, i) => (
                     <button
                         key={i}
                         onClick={() => handlePageChange(pageNumber)}
                         type="button"
                         title="Page 1"
-                        className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md dark:bg-gray-900 dark:text-violet-400 dark:border-violet-400"
+                        className={`inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md ${
+                            pageNumber === currentPage && 'bg-[#ff9900] text-white'
+                        }`}
                     >
                         {pageNumber}
                     </button>

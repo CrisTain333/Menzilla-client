@@ -11,6 +11,7 @@ interface IAuthContextValue {
     getSellerData: any;
     products: any;
     getSellerProducts: any;
+    refresh: () => void;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -33,7 +34,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
     const [products, setProducts] = useState([]);
-
+    const [shouldRefresh, setShouldRefresh] = useState(false);
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         if (token && !sellerFetched) {
@@ -51,7 +52,11 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [shouldRefresh]);
+
+    const refresh = () => {
+        setShouldRefresh(!shouldRefresh);
+    };
 
     const sellerLogin = async (sellerData: any) => {
         try {
@@ -61,9 +66,9 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 setCurrentSeller(response?.data?.seller);
                 getSellerProducts(response?.data?.seller?._id);
                 setIsSeller(true);
-                return null;
+                return response;
             } else {
-                return 'Wrong Credential';
+                return null;
             }
         } catch (e: any) {
             if (e?.response) {
@@ -112,7 +117,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         sellerLogout,
         getSellerData,
         products,
-        getSellerProducts
+        getSellerProducts,
+        refresh
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -11,7 +11,7 @@ const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { sellerLogin } = useSeller();
+    const { sellerLogin, refresh } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {
@@ -28,15 +28,14 @@ const SellerLogin = () => {
             password
         };
 
-        const loginError = await sellerLogin(data);
-        if (loginError) {
-            toast.error(loginError);
-            setError(loginError);
-            setIsLoading(false);
-        } else {
+        const response: any = await sellerLogin(data);
+        if (response !== null) {
             toast.success('Logged in successfully');
             router.push('/dashboard');
-            window.location.reload();
+            setIsLoading(false);
+            refresh();
+        } else {
+            toast.error('Wrong Credential');
             setIsLoading(false);
         }
     };

@@ -2,7 +2,7 @@ import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiFillStar, AiOutlineEye, AiOutlineShoppingCart, AiOutlineStar } from 'react-icons/ai';
 import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 
 const ProductCard = ({ data }: any) => {
@@ -11,86 +11,64 @@ const ProductCard = ({ data }: any) => {
 
     return (
         <div>
-            <div className="relative m-10 flex w-full mx-auto max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-                <div className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
-                    <Link href={`/product/${data?.name}`} className="cursor-pointer">
-                        <Image
-                            height={300}
-                            width={300}
-                            className="object-cover"
-                            src={data?.images?.[0]}
-                            alt="product image"
-                        />
-                        ;
-                    </Link>
+            <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
+                <div className="flex justify-end"></div>
+                <Link href={`/product/${data?.product_name}`}>
+                    <Image
+                        src={`${data?.images?.[0]}`}
+                        alt="productImage"
+                        className="w-full h-44 object-contain"
+                        height={500}
+                        width={500}
+                    />
+                </Link>
+                <Link href="/">
+                    <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+                </Link>
+                <Link href={`/product/${data?.name}`}>
+                    <h4 className="pb-3 font-[500]">
+                        {data.name.length > 40 ? data.name.slice(0, 40) + '...' : data.name}
+                    </h4>
 
-                    <label
-                        htmlFor="ProductDetails"
-                        className="absolute -top-2 -left-2 m-2 rounded-full px-2 text-center text-sm font-medium"
-                        onClick={() => setProductData(data)}
-                    >
-                        <AiOutlineEye
-                            size={22}
-                            className="cursor-pointer"
-                            onClick={() => setShowProductDetails(!showProductDetails)}
-                            color="#333"
-                            title="Quick view"
-                        />
-                    </label>
-                </div>
-                <div className="mt-4 px-5 pb-5">
-                    <Link href={`/shop/preview/${data?.shop._id}`}>
-                        <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
-                    </Link>
-                    <Link href={`/product/${data?.name}`}>
-                        <h5 className="text-xl tracking-tight text-slate-900 text-fix">
-                            {data?.name}
-                        </h5>
-                    </Link>
-                    <div className="mt-2 mb-5 flex flex-col items-start justify-between">
-                        <div className="flex items-center">
-                            <svg
-                                aria-hidden="true"
-                                className="h-5 w-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
-                                {data?.rating}
-                            </span>
-                        </div>
-                        <p className="mt-2">
-                            <span className="text-3xl font-bold text-slate-900">
-                                ${data.discountPrice}
-                            </span>
-                            <span className="text-sm text-red-500 line-through">
-                                ${data?.originalPrice}
-                            </span>
-                        </p>
+                    <div className="flex">
+                        <AiFillStar className="mr-2 cursor-pointer" size={20} color="#F6BA00" />
+                        <AiFillStar className="mr-2 cursor-pointer" size={20} color="#F6BA00" />
+                        <AiFillStar className="mr-2 cursor-pointer" size={20} color="#F6BA00" />
+                        <AiFillStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
+                        <AiOutlineStar size={20} className="mr-2 cursor-pointer" color="#F6BA00" />
                     </div>
-                    <a
-                        href="#"
-                        className="flex items-center justify-center rounded-md bg-[#ff9900] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#ef9000] transition-all duration-300"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="mr-2 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
-                        Add to cart
-                    </a>
+
+                    <div className="py-2 flex items-center justify-between">
+                        <div className="flex">
+                            <h5 className={`${styles.productDiscountPrice}`}>
+                                {data.originalPrice === 0 ? data.originalPrice : data.discountPrice}
+                                $
+                            </h5>
+                            <h4 className={`${styles.price}`}>
+                                {data.originalPrice ? data.originalPrice + ' $' : null}
+                            </h4>
+                        </div>
+                        <span className="font-[400] text-[17px] text-[#68d284]">50 sold</span>
+                    </div>
+                </Link>
+
+                {/* side options */}
+                <div>
+                    <AiOutlineEye
+                        size={22}
+                        className="cursor-pointer absolute right-2 top-14"
+                        // onClick={() => setOpen(!open)}
+                        color="#333"
+                        title="Quick view"
+                    />
+                    <AiOutlineShoppingCart
+                        size={25}
+                        className="cursor-pointer absolute right-2 top-24"
+                        onClick={() => setShowProductDetails(!showProductDetails)}
+                        color="#444"
+                        title="Add to cart"
+                    />
+                    {/* {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null} */}
                 </div>
             </div>
 

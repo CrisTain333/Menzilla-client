@@ -1,20 +1,7 @@
-// import { Button } from '@material-ui/core';
-// import { DataGrid } from '@material-ui/data-grid';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
-import { DataGrid } from '@mui/x-data-grid';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import { getAllProductsShop } from '../../redux/actions/product';
-// import { deleteProduct } from '../../redux/actions/product';
-// import Loader from '../Layout/Loader';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
-import SmallLoader from '../SmallLoader/SmallLoader';
-import products from '@/pages/dashboard/products';
-import { productData } from '@/libs/common/constant/Data';
-import { Button } from '@mui/material';
-import axiosInstance from '@/libs/common/utils/axios';
 import { deleteShopProduct } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 

@@ -64,7 +64,7 @@ const ShopProfileData = ({ isOwner }: any) => {
                         <ProductCard data={i} key={index} isShop={true} />
                     ))}
             </div>
-            {productData && productData.length === 0 && (
+            {productData && productData?.length === 0 && (
                 <h5 className="w-full text-center py-5 text-[18px]">This shop has no product!</h5>
             )}
         </div>

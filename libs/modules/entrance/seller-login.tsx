@@ -10,7 +10,6 @@ import { toast } from 'react-hot-toast';
 const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
     const { sellerLogin, refresh } = useSeller();
     const router = useRouter();
 
@@ -135,9 +134,6 @@ const SellerLogin = () => {
                                     </div>
                                 </div>
                             </div>
-                            {error && (
-                                <p className="my-2 text-center text-[16px] text-red-600">{error}</p>
-                            )}
                             <div className="flex justify-center items-center pb-4">
                                 <button
                                     className={`w-full h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-5 cursor-pointer flex justify-center items-center text-base `}

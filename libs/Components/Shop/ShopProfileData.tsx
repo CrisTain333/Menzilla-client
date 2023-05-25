@@ -3,8 +3,10 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
 import { RxDashboard } from 'react-icons/rx';
+import { useSeller } from '@/libs/Context/sellerProvider';
 
 const ShopProfileData = ({ isOwner }: any) => {
+    const { products } = useSeller();
     const [active, setActive] = React.useState(1);
     return (
         <div className="w-full">
@@ -59,12 +61,12 @@ const ShopProfileData = ({ isOwner }: any) => {
 
             <br />
             <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px]  mb-12 border-0">
-                {productData &&
-                    productData.map((i, index) => (
+                {products &&
+                    products.map((i: any, index: any) => (
                         <ProductCard data={i} key={index} isShop={true} />
                     ))}
             </div>
-            {productData && productData.length === 0 && (
+            {products && products?.length === 0 && (
                 <h5 className="w-full text-center py-5 text-[18px]">This shop has no product!</h5>
             )}
         </div>

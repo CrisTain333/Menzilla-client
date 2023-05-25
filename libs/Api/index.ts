@@ -35,19 +35,30 @@ export const createProduct = async (ProductData: object) => {
     }
 };
 
-export const getShopProduct = async (seller_id: string) => {
+export const getShopProduct = async (seller_id: string, currentPage: any) => {
     try {
-        const response = await axiosInstance.get(`/product/shop-products?sellerId=${seller_id}`);
+        const response = await axiosInstance.get(
+            `/product/shop-products?sellerId=${seller_id}&page=${currentPage}`
+        );
         return response.data;
     } catch (error) {
         return { error };
     }
 };
+
 export const deleteShopProduct = async (product_id: string) => {
     try {
         const response = await axiosInstance.delete(
             `/product/delete-product?productId=${product_id}`
         );
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};
+export const getAllProduct = async () => {
+    try {
+        const response = await axiosInstance.get(`/product`);
         return response.data;
     } catch (error) {
         return { error };

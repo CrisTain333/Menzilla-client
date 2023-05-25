@@ -10,8 +10,7 @@ import { toast } from 'react-hot-toast';
 const SellerLogin = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const { sellerLogin } = useSeller();
+    const { sellerLogin, refresh } = useSeller();
     const router = useRouter();
 
     const handleShowPassword = () => {
@@ -28,18 +27,14 @@ const SellerLogin = () => {
             password
         };
 
-        const loginError = await sellerLogin(data);
-        if (loginError) {
-            toast.error(loginError);
-            setError(loginError);
-            setIsLoading(false);
-        } else {
+        const response: any = await sellerLogin(data);
+        if (response !== null) {
             toast.success('Logged in successfully');
             router.push('/dashboard');
-            window.location.reload();
-            // const tokenStoragePath = 'seller_Access_Token';
-            // const token = localStorage?.getItem(tokenStoragePath);
-            // getSellerData(token);
+            setIsLoading(false);
+            refresh();
+        } else {
+            toast.error('Wrong Credential');
             setIsLoading(false);
         }
     };
@@ -139,9 +134,6 @@ const SellerLogin = () => {
                                     </div>
                                 </div>
                             </div>
-                            {error && (
-                                <p className="my-2 text-center text-[16px] text-red-600">{error}</p>
-                            )}
                             <div className="flex justify-center items-center pb-4">
                                 <button
                                     className={`w-full h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-5 cursor-pointer flex justify-center items-center text-base `}

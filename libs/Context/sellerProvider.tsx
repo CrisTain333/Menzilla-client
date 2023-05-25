@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
-import { getShopProduct } from '../Api';
+import { getAllProduct, getShopProduct } from '../Api';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -11,6 +11,12 @@ interface IAuthContextValue {
     getSellerData: any;
     products: any;
     getSellerProducts: any;
+    refresh: () => void;
+    totalPages: any;
+    setTotalPages: any;
+    isProductLoading: any;
+    allProducts: any;
+    setAllProducts: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -33,7 +39,10 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
     const [products, setProducts] = useState([]);
-
+    const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [isProductLoading, setIsProductLoading] = useState(false);
+    const [allProducts, setAllProducts] = useState<any>([]);
+    const [totalPages, setTotalPages] = useState(0);
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         if (token && !sellerFetched) {
@@ -42,7 +51,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setSellerFetched(true);
                     setCurrentSeller(userData);
-                    getSellerProducts(userData?._id);
+                    getSellerProducts(userData?._id, 1);
                     setIsSeller(true);
                     setIsLoading(false);
                 })
@@ -50,8 +59,13 @@ export function SellerProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
+        getProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [shouldRefresh]);
+
+    const refresh = () => {
+        setShouldRefresh(!shouldRefresh);
+    };
 
     const sellerLogin = async (sellerData: any) => {
         try {
@@ -59,11 +73,11 @@ export function SellerProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentSeller(response?.data?.seller);
-                getSellerProducts(response?.data?.seller?._id);
+                getSellerProducts(response?.data?.seller?._id, 1);
                 setIsSeller(true);
-                return null;
+                return response;
             } else {
-                return 'Wrong Credential';
+                return null;
             }
         } catch (e: any) {
             if (e?.response) {
@@ -95,12 +109,25 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
-    const getSellerProducts = async (_id: string) => {
+    const getSellerProducts = async (_id: string, page: any) => {
         try {
-            const response = await getShopProduct(_id);
+            const response = await getShopProduct(_id, page);
             setProducts(response?.data);
+            setTotalPages(response?.totalPages);
         } catch (e) {
             sellerLogout();
+        }
+    };
+
+    const getProduct = async () => {
+        setIsProductLoading(true);
+        try {
+            const result = await getAllProduct();
+            setAllProducts(result?.data);
+            setIsProductLoading(false);
+        } catch (error) {
+            setIsProductLoading(false);
+            setAllProducts([]);
         }
     };
 
@@ -112,7 +139,13 @@ export function SellerProvider({ children }: AuthProviderProps) {
         sellerLogout,
         getSellerData,
         products,
-        getSellerProducts
+        getSellerProducts,
+        refresh,
+        totalPages,
+        setTotalPages,
+        allProducts,
+        isProductLoading,
+        setAllProducts
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

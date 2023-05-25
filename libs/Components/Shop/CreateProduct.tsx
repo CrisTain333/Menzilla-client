@@ -11,7 +11,7 @@ import SmallLoader from '../SmallLoader/SmallLoader';
 // import { categoriesData } from '../../static/data';
 
 const CreateProduct = () => {
-    const { currentSeller } = useSeller();
+    const { currentSeller, getSellerProducts } = useSeller();
     const router = useRouter();
 
     const [images, setImages] = useState<any>([]);
@@ -58,7 +58,9 @@ const CreateProduct = () => {
             return;
         }
         toast.success(response?.message);
+        getSellerProducts(currentSeller?._id);
         setIsLoading(false);
+        router.push('/dashboard/products');
     };
 
     return (

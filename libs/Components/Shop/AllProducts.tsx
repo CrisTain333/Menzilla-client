@@ -1,26 +1,15 @@
-// import { Button } from '@material-ui/core';
-// import { DataGrid } from '@material-ui/data-grid';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
-import { DataGrid } from '@mui/x-data-grid';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import { getAllProductsShop } from '../../redux/actions/product';
-// import { deleteProduct } from '../../redux/actions/product';
-// import Loader from '../Layout/Loader';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
-import SmallLoader from '../SmallLoader/SmallLoader';
-import products from '@/pages/dashboard/products';
-import { productData } from '@/libs/common/constant/Data';
-import { Button } from '@mui/material';
-import axiosInstance from '@/libs/common/utils/axios';
 import { deleteShopProduct } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const AllProducts = () => {
+    const { currentSeller, products, getSellerProducts, totalPages } = useSeller();
+    const [currentPage, setCurrentPage] = useState(1);
+
     // const { products, isLoading } = useSelector((state) => state.products);
-    const { currentSeller, products, getSellerProducts } = useSeller();
 
     const handleProductDelete = async (id: string) => {
         const response = await deleteShopProduct(id);
@@ -29,11 +18,25 @@ const AllProducts = () => {
             return;
         }
         toast.success(response?.message);
-        getSellerProducts(currentSeller?._id);
+        getSellerProducts(currentSeller?._id, currentPage);
     };
+
+    useEffect(() => {
+        getSellerProducts(currentSeller?._id, currentPage);
+    }, [currentPage]);
+
+    const handlePageChange = (pageNumber: any) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <>
+            <p>Current page : {currentPage} </p>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <colgroup>
@@ -63,7 +66,7 @@ const AllProducts = () => {
                                 return (
                                     <tr key={index}>
                                         <th>{index + 1}</th>
-                                        <td>{product?.name}</td>
+                                        <td>{product?.name?.slice(0, 40)}. . .</td>
                                         <td>${product?.discountPrice}</td>
                                         <td>{product?.stock}</td>
                                         <td>10</td>
@@ -87,6 +90,22 @@ const AllProducts = () => {
                         {/* row 1 */}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-5">
+                {pageNumbers?.map((pageNumber, i) => (
+                    <button
+                        key={i}
+                        onClick={() => handlePageChange(pageNumber)}
+                        type="button"
+                        title="Page 1"
+                        className={`inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md ${
+                            pageNumber === currentPage && 'bg-[#ff9900] text-white'
+                        }`}
+                    >
+                        {pageNumber}
+                    </button>
+                ))}
             </div>
         </>
     );

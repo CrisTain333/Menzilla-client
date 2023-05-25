@@ -30,6 +30,7 @@
         "react-dom": "18.2.0",
         "react-hot-toast": "^2.4.0",
         "react-icons": "^4.8.0",
+        "react-loader-spinner": "^5.3.4",
         "react-responsive-carousel": "^3.2.23",
         "sass": "^1.62.0",
         "styled-components": "^5.3.10",

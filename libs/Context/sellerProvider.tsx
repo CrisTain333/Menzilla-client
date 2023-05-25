@@ -119,7 +119,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     };
 
     const getProduct = async () => {
-        setIsLoading(true);
+        setIsProductLoading(true);
         try {
             const result = await getAllProduct();
             setAllProducts(result?.data);

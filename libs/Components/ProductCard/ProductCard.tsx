@@ -18,9 +18,10 @@ const ProductCard = ({ data }: any) => {
                             height={300}
                             width={300}
                             className="object-cover"
-                            src={data?.image_Url[0]?.url}
+                            src={data?.images?.[0]}
                             alt="product image"
                         />
+                        ;
                     </Link>
 
                     <label
@@ -63,10 +64,10 @@ const ProductCard = ({ data }: any) => {
                         </div>
                         <p className="mt-2">
                             <span className="text-3xl font-bold text-slate-900">
-                                ${data?.discount_price}
+                                ${data.discountPrice}
                             </span>
                             <span className="text-sm text-red-500 line-through">
-                                ${data?.price}
+                                ${data?.originalPrice}
                             </span>
                         </p>
                     </div>

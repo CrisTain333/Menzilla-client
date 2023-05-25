@@ -16,6 +16,7 @@ interface IAuthContextValue {
     setTotalPages: any;
     isProductLoading: any;
     allProducts: any;
+    setAllProducts: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -143,7 +144,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         totalPages,
         setTotalPages,
         allProducts,
-        isProductLoading
+        isProductLoading,
+        setAllProducts
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

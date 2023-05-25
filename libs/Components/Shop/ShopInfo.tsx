@@ -6,7 +6,12 @@ import { BiLogIn } from 'react-icons/bi';
 import moment from 'moment';
 
 const ShopInfo = ({ isOwner }: any) => {
-    const { currentSeller, isLoading } = useSeller();
+    const { currentSeller, isLoading, sellerLogout } = useSeller();
+
+    const logoutHandler = () => {
+        sellerLogout();
+    };
+
     return (
         <div>
             {isLoading ? (
@@ -68,7 +73,7 @@ const ShopInfo = ({ isOwner }: any) => {
                             </div>
                             <div
                                 className={`border  text-center bg-[#ff9900] text-white rounded-md cursor-pointer flex justify-center items-center text-base font-semibold py-3 my-5`}
-                                // onClick={logoutHandler}
+                                onClick={logoutHandler}
                             >
                                 <span className="text-white mr-1">Log Out</span>
                                 <span>

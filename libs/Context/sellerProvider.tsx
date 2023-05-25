@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
-import { getShopProduct } from '../Api';
+import { getAllProduct, getShopProduct } from '../Api';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -14,6 +14,8 @@ interface IAuthContextValue {
     refresh: () => void;
     totalPages: any;
     setTotalPages: any;
+    isProductLoading: any;
+    allProducts: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -37,6 +39,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [sellerFetched, setSellerFetched] = useState(false);
     const [products, setProducts] = useState([]);
     const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [isProductLoading, setIsProductLoading] = useState(false);
+    const [allProducts, setAllProducts] = useState<any>([]);
     const [totalPages, setTotalPages] = useState(0);
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -54,6 +58,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
+        getProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
 
@@ -113,6 +118,18 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
+    const getProduct = async () => {
+        setIsLoading(true);
+        try {
+            const result = await getAllProduct();
+            setAllProducts(result?.data);
+            setIsProductLoading(false);
+        } catch (error) {
+            setIsProductLoading(false);
+            setAllProducts([]);
+        }
+    };
+
     const value: IAuthContextValue = {
         isSeller,
         currentSeller,
@@ -124,7 +141,9 @@ export function SellerProvider({ children }: AuthProviderProps) {
         getSellerProducts,
         refresh,
         totalPages,
-        setTotalPages
+        setTotalPages,
+        allProducts,
+        isProductLoading
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -14,6 +14,7 @@ export const addToCart = (item: any) => {
             // If the item already exists, increment the quantity
             existingItem.quantity += 1;
         } else {
+            toast.success('product added');
             // If the item doesn't exist, add it to the cart
             item.quantity = 1;
             cartItems.push(item);

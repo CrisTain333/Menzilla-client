@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import styles from '@/styles/styles';
 import { productData } from '@/libs/common/constant/Data';
+import { useSeller } from '@/libs/Context/sellerProvider';
 
 const SuggestedProduct = ({ data }: any) => {
+    const { allProducts } = useSeller();
     const [products, setProducts] = useState<any>(null);
 
     useEffect(() => {
-        const d = productData && productData.filter((i: any) => i?.category === data?.category);
+        const d =
+            allProducts &&
+            allProducts.filter((i: any) => i?.category === data?.category)?.slice(0, 6);
         setProducts(d);
     }, []);
 

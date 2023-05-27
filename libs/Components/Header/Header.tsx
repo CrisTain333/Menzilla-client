@@ -13,11 +13,10 @@ import { useCart } from '@/libs/Context/CartProvider';
 const Header = () => {
     const { currentUser, logout, isLoading } = useAuth();
     const { cartItems } = useCart();
+    console.log(cartItems);
     const [searchTerm, setSearchTerm] = useState();
     const [open, setOpen] = useState(false);
     const [searchData, setSearchData] = useState<any>(null);
-
-    console.log(cartItems);
 
     const handleSearchChange = (e: any) => {
         const term = e.target.value;

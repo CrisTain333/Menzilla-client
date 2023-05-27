@@ -6,16 +6,18 @@ import { AiOutlineEye } from 'react-icons/ai';
 import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 import { BiCartAdd } from 'react-icons/bi';
 import { addToCart } from '@/libs/common/utils/addToCart';
+import { useCart } from '@/libs/Context/CartProvider';
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
     // console.log(showProductDetails);
-    // const [productData, setProductData] = useState<any>(null);
+    const { handleAddToCart } = useCart();
+    // // const [productData, setProductData] = useState<any>(null);
 
-    const handleAddToCart = () => {
-        console.log('got clicked');
-        addToCart(data);
-    };
+    // const handleAddToCart = () => {
+    //     // addToCart(data);
+    //     // setCartLength((prevLength) => prevLength + 1);
+    // };
 
     return (
         <div>
@@ -63,7 +65,7 @@ const ProductCard = ({ data }: any) => {
                 </Link>
                 <div
                     className="flex items-center justify-center rounded-sm bg-[#ff9900] px-5 py-1 text-center text-sm font-medium text-white hover:bg-[#ef9000] transition-all duration-300"
-                    onClick={handleAddToCart}
+                    onClick={() => handleAddToCart(data)}
                 >
                     <BiCartAdd size={20} className=" mr-1" color="#fff" title="Add to cart" />
                     Add to cart

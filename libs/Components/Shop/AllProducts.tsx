@@ -37,7 +37,7 @@ const AllProducts = () => {
 
     return (
         <>
-            <div className="overflow-x-auto h-[21rem]">
+            <div className="overflow-x-auto h-[21rem] w-[95%] mx-auto">
                 <table className="table w-full">
                     <colgroup>
                         <col className="w-32" />
@@ -92,7 +92,7 @@ const AllProducts = () => {
                 </table>
             </div>
 
-            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-5">
+            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
                 {pageNumbers?.map((pageNumber, i) => (
                     <button
                         key={i}

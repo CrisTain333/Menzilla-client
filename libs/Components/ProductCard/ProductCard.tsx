@@ -23,11 +23,11 @@ const ProductCard = ({ data }: any) => {
                     />
                 </Link>
                 <Link href="/">
-                    <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
+                    <h5 className={`${styles.shop_name}`}>{data?.shop?.name}</h5>
                 </Link>
                 <Link href={`/product/${data?.name}`}>
-                    <h4 className="pb-3 font-[500]">
-                        {data.name.length > 40 ? data.name.slice(0, 40) + '...' : data.name}
+                    <h4 className="pb-3 font-[500] h-16">
+                        {data?.name?.length > 40 ? data?.name?.slice(0, 40) + '...' : data?.name}
                     </h4>
 
                     <div className="flex">
@@ -38,13 +38,15 @@ const ProductCard = ({ data }: any) => {
                         <AiOutlineStar size={20} className="mr-2 cursor-pointer" color="#F6BA00" />
                     </div>
 
-                    <div className="py-2 flex items-center justify-between">
-                        <div className="flex">
-                            <h5 className={`${styles.productDiscountPrice}`}>
+                    <div className="py-3 flex items-center justify-between">
+                        <div className="flex items-center justify-center">
+                            <h5 className={`${styles?.productDiscountPrice}`}>
                                 {data.originalPrice === 0 ? data.originalPrice : data.discountPrice}
                                 $
                             </h5>
-                            <h4 className={`${styles.price}`}>
+                            <h4
+                                className={`font-[500] text-[16px] text-[#d55b45] pl-3 mt-[-4px] line-through`}
+                            >
                                 {data.originalPrice ? data.originalPrice + ' $' : null}
                             </h4>
                         </div>
@@ -57,6 +59,7 @@ const ProductCard = ({ data }: any) => {
                     <AiOutlineEye
                         size={22}
                         className="cursor-pointer absolute right-2 top-14"
+                        onClick={() => setShowProductDetails(!showProductDetails)}
                         // onClick={() => setOpen(!open)}
                         color="#333"
                         title="Quick view"
@@ -64,7 +67,7 @@ const ProductCard = ({ data }: any) => {
                     <AiOutlineShoppingCart
                         size={25}
                         className="cursor-pointer absolute right-2 top-24"
-                        onClick={() => setShowProductDetails(!showProductDetails)}
+                        // onClick={() => setShowProductDetails(!showProductDetails)}
                         color="#444"
                         title="Add to cart"
                     />
@@ -72,12 +75,9 @@ const ProductCard = ({ data }: any) => {
                 </div>
             </div>
 
-            {showProductDetails && productData && (
-                <ProductDetailsModal
-                    setShowProductDetails={setShowProductDetails}
-                    data={productData}
-                />
-            )}
+            {showProductDetails ? (
+                <ProductDetailsModal setShowProductDetails={setShowProductDetails} data={data} />
+            ) : null}
         </div>
     );
 };

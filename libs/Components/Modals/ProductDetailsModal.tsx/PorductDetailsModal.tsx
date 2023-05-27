@@ -29,19 +29,19 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                 <Image
                                     height={400}
                                     width={400}
-                                    src={data?.image_Url[0]?.url}
+                                    src={data?.images?.[0]}
                                     alt="productImage"
-                                    className="h-auto  rounded-lg"
+                                    className="h-auto w-auto  rounded-lg"
                                 />
 
                                 <div>
                                     <div className="flex ml-5 -mt-2">
                                         <Link
-                                            href={`/shop/preview/${data.shop._id}`}
+                                            href={`/shop/preview/${data?.shop._id}`}
                                             className="flex"
                                         >
                                             <Image
-                                                src={data?.shop?.shop_avatar?.url}
+                                                src={data?.shop?.shopProfile}
                                                 alt=""
                                                 height={300}
                                                 width={300}
@@ -49,7 +49,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                             />
                                             <div>
                                                 <h3 className={`${styles.shop_name}`}>
-                                                    {data.shop.name}
+                                                    {data?.name}
                                                 </h3>
                                                 <h5 className="pb-3 text-[15px]">(4.5) Ratings</h5>
                                             </div>

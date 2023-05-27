@@ -56,15 +56,15 @@ const Cart = () => {
                                                     <span className="font-bold text-sm">
                                                         {e?.product?.name?.slice(0, 40)}
                                                     </span>
-                                                    <span className="text-red-500 text-xs">
-                                                        Apple
+                                                    <span className="text-sky-500 text-xs">
+                                                        {e?.product?.shop?.name}
                                                     </span>
                                                     <button
                                                         // href="#"
                                                         onClick={() =>
                                                             removeFromCart(e?.product?._id)
                                                         }
-                                                        className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                                                        className="font-semibold text-red-500 text-gray-500 text-xs"
                                                     >
                                                         Remove
                                                     </button>
@@ -75,7 +75,11 @@ const Cart = () => {
                                                     onClick={() =>
                                                         decreaseQuantity(e?.product?._id)
                                                     }
-                                                    className="fill-current text-gray-600 w-3 cursor-pointer"
+                                                    className={`fill-current  ${
+                                                        e?.quantity === 1
+                                                            ? 'text-gray-400 w-3 cursor-not-allowed'
+                                                            : 'text-gray-600 w-3 cursor-pointer'
+                                                    }`}
                                                     viewBox="0 0 448 512"
                                                 >
                                                     <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />

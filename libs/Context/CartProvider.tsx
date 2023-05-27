@@ -29,6 +29,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const cartItems = getCartItems();
         setCartItems(cartItems);
         setCartLength(cartItems.length);
+        // eslint-disable-next-line no-console
         console.log('hello from cart provider');
     }, [cartLength, shouldRefresh]);
     // Function to add a product to the cart in local storage
@@ -112,18 +113,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }
 
         const cartItems = JSON.parse(cart);
-        const updatedCartItems = cartItems
-            .map((item: any) => {
-                if (item.product._id === productId) {
+        const updatedCartItems = cartItems.map((item: any) => {
+            if (item.product._id === productId) {
+                if (item.quantity > 1) {
                     item.quantity -= 1;
-                    // Remove the item from the cart if the quantity becomes zero
-                    if (item.quantity === 0) {
-                        return null;
-                    }
                 }
-                return item;
-            })
-            .filter(Boolean);
+            }
+            return item;
+        });
 
         refresh();
 

@@ -12,8 +12,9 @@ const ProductCard = ({ data }: any) => {
     // console.log(showProductDetails);
     // const [productData, setProductData] = useState<any>(null);
 
-    const handleAddToCart = (id: any) => {
-        addToCart(id);
+    const handleAddToCart = () => {
+        console.log('got clicked');
+        addToCart(data);
     };
 
     return (
@@ -62,9 +63,7 @@ const ProductCard = ({ data }: any) => {
                 </Link>
                 <div
                     className="flex items-center justify-center rounded-sm bg-[#ff9900] px-5 py-1 text-center text-sm font-medium text-white hover:bg-[#ef9000] transition-all duration-300"
-                    onClick={() => {
-                        handleAddToCart(data?._id);
-                    }}
+                    onClick={handleAddToCart}
                 >
                     <BiCartAdd size={20} className=" mr-1" color="#fff" title="Add to cart" />
                     Add to cart

@@ -8,12 +8,16 @@ import { IoIosArrowForward } from 'react-icons/io';
 
 import { RxCross1 } from 'react-icons/rx';
 import Navbar from './Navbar';
+import { getStoredCart } from '@/libs/common/utils/getStroedCart';
 
 const Header = () => {
     const { currentUser, logout, isLoading } = useAuth();
     const [searchTerm, setSearchTerm] = useState();
     const [open, setOpen] = useState(false);
     const [searchData, setSearchData] = useState<any>(null);
+
+    const cartItems = getStoredCart();
+    console.log(cartItems);
 
     const handleSearchChange = (e: any) => {
         const term = e.target.value;
@@ -191,7 +195,7 @@ const Header = () => {
                                             />
                                         </svg>
                                         <span className="badge badge-sm bg-[#ff9900] border-none indicator-item ">
-                                            0
+                                            {cartItems?.length}
                                         </span>
                                     </div>
                                 </label>

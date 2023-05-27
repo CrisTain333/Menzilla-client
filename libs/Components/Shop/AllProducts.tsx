@@ -31,13 +31,13 @@ const AllProducts = () => {
 
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
+        console.log(i);
         pageNumbers.push(i);
     }
 
     return (
         <>
-            <p>Current page : {currentPage} </p>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto h-[21rem] w-[95%] mx-auto">
                 <table className="table w-full">
                     <colgroup>
                         <col className="w-32" />
@@ -92,7 +92,7 @@ const AllProducts = () => {
                 </table>
             </div>
 
-            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-5">
+            <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
                 {pageNumbers?.map((pageNumber, i) => (
                     <button
                         key={i}

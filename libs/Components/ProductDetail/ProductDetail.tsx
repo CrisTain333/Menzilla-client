@@ -1,4 +1,5 @@
 import styles from '@/styles/styles';
+import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -35,7 +36,7 @@ const ProductDetail = ({ data }: any) => {
                                 <div className="w-full md:w-[50%]">
                                     <div className="">
                                         <Image
-                                            src={data.images?.[select]}
+                                            src={data?.images?.[select]}
                                             alt=""
                                             className="w-[80%]  mx-auto rounded-md  my-5"
                                             height={500}
@@ -67,14 +68,14 @@ const ProductDetail = ({ data }: any) => {
                                     </div>
                                 </div>
                                 <div className="w-full md:w-[50%] pt-5">
-                                    <h1 className={`font-bold text-lg my-2`}>{data.name}</h1>
+                                    <h1 className={`font-bold text-lg my-2`}>{data?.name}</h1>
                                     <p className="text-justify leading-8 font-medium">
                                         {' '}
                                         {data.description}
                                     </p>
                                     <div className="flex pt-3">
                                         <h4 className={`${styles.productDiscountPrice}`}>
-                                            ${data.discountPrice}
+                                            ${data?.discountPrice}
                                         </h4>
                                         <h3 className={`${styles.price}`}>
                                             {data?.originalPrice ? data?.originalPrice + '$' : null}
@@ -117,10 +118,10 @@ const ProductDetail = ({ data }: any) => {
                                         />
                                         <div className="pr-8">
                                             <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                                                {data.shop.name}
+                                                {data?.shop?.name}
                                             </h3>
                                             <h5 className="pb-3 text-[15px]">
-                                                ({data.shop.ratings}) Ratings
+                                                ({data?.shop?.ratings}) Ratings
                                             </h5>
                                         </div>
                                         <div
@@ -160,7 +161,11 @@ const ProductDetailsInfo = ({ data }: any) => {
                     >
                         Product Details
                     </h5>
-                    {active === 1 ? <div className={`${styles.active_indicator}`} /> : null}
+                    {active === 1 ? (
+                        <div
+                            className={`absolute bottom-[-27%] left-0 h-[3px] w-full bg-[crimson]`}
+                        />
+                    ) : null}
                 </div>
                 <div className="relative">
                     <h5
@@ -188,32 +193,7 @@ const ProductDetailsInfo = ({ data }: any) => {
             {active === 1 ? (
                 <>
                     <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        Product details are a crucial part of any eCommerce website or online
-                        marketplace. These details help the potential customers to make an informed
-                        decision about the product they are interested in buying. A well-written
-                        product description can also be a powerful marketing tool that can help to
-                        increase sales. Product details typically include information about the
-                        products features, specifications, dimensions, weight, materials, and other
-                        relevant information that can help language, and be honest and transparent
-                        about the products features and limitations.
-                    </p>
-                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        customers to understand the product better. The product details section
-                        should also include high-quality images and videos of the product, as well
-                        as customer reviews and ratings. When writing product details, it is
-                        essential to keep the target audience in mind. The language used should be
-                        clear and easy to understand, and technical terms should be explained in
-                        simple language. The tone of the product details should be persuasive,
-                        highlighting the unique features of the
-                    </p>
-                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        customers to understand the product better. The product details section
-                        should also include high-quality images and videos of the product, as well
-                        as customer reviews and ratings. When writing product details, it is
-                        essential to keep the target audience in mind. The language used should be
-                        clear and easy to understand, and technical terms should be explained in
-                        simple language. The tone of the product details should be persuasive,
-                        highlighting the unique features of the
+                        {data?.description}
                     </p>
                 </>
             ) : null}
@@ -236,8 +216,10 @@ const ProductDetailsInfo = ({ data }: any) => {
                                 width={500}
                             />
                             <div className="pl-3">
-                                <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
-                                <h5 className="pb-2 text-[15px]">({data.shop.ratings}) Ratings</h5>
+                                <h3 className={`${styles.shop_name}`}>{data?.shop?.name}</h3>
+                                <h5 className="pb-2 text-[15px]">
+                                    ({data?.shop?.ratings}) Ratings
+                                </h5>
                             </div>
                         </div>
                         <p className="pt-2">
@@ -250,7 +232,10 @@ const ProductDetailsInfo = ({ data }: any) => {
                     <div className="w-full md:w-[50%] mt-5 md:mt-0 md:flex flex-col items-end">
                         <div className="text-left">
                             <h5 className="font-[600]">
-                                Joined on: <span className="font-[500]">14 March,2023</span>
+                                Joined on:{' '}
+                                <span className="font-[500]">
+                                    {moment(data?.shop?.createdAt).format('LL')}
+                                </span>
                             </h5>
                             <h5 className="font-[600] pt-3">
                                 Total Products: <span className="font-[500]">1,223</span>
@@ -259,8 +244,11 @@ const ProductDetailsInfo = ({ data }: any) => {
                                 Total Reviews: <span className="font-[500]">324</span>
                             </h5>
                             <Link href="/">
-                                <div className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}>
-                                    <h4 className="text-white">Visit Shop</h4>
+                                <div
+                                    className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm flex justify-center items-center mt-5`}
+                                    // onClick={handleMessageSubmit}
+                                >
+                                    <span className="text-white flex items-center">Visit Shop</span>
                                 </div>
                             </Link>
                         </div>

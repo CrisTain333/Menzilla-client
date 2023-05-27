@@ -1,4 +1,5 @@
 import styles from '@/styles/styles';
+import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -236,8 +237,10 @@ const ProductDetailsInfo = ({ data }: any) => {
                                 width={500}
                             />
                             <div className="pl-3">
-                                <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
-                                <h5 className="pb-2 text-[15px]">({data.shop.ratings}) Ratings</h5>
+                                <h3 className={`${styles.shop_name}`}>{data?.shop?.name}</h3>
+                                <h5 className="pb-2 text-[15px]">
+                                    ({data?.shop?.ratings}) Ratings
+                                </h5>
                             </div>
                         </div>
                         <p className="pt-2">
@@ -250,7 +253,10 @@ const ProductDetailsInfo = ({ data }: any) => {
                     <div className="w-full md:w-[50%] mt-5 md:mt-0 md:flex flex-col items-end">
                         <div className="text-left">
                             <h5 className="font-[600]">
-                                Joined on: <span className="font-[500]">14 March,2023</span>
+                                Joined on:{' '}
+                                <span className="font-[500]">
+                                    {moment(data?.shop?.createdAt).format('LL')}
+                                </span>
                             </h5>
                             <h5 className="font-[600] pt-3">
                                 Total Products: <span className="font-[500]">1,223</span>
@@ -259,8 +265,11 @@ const ProductDetailsInfo = ({ data }: any) => {
                                 Total Reviews: <span className="font-[500]">324</span>
                             </h5>
                             <Link href="/">
-                                <div className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}>
-                                    <h4 className="text-white">Visit Shop</h4>
+                                <div
+                                    className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm flex justify-center items-center mt-5`}
+                                    // onClick={handleMessageSubmit}
+                                >
+                                    <span className="text-white flex items-center">Visit Shop</span>
                                 </div>
                             </Link>
                         </div>

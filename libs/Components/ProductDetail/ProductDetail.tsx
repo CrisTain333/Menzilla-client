@@ -36,7 +36,7 @@ const ProductDetail = ({ data }: any) => {
                                 <div className="w-full md:w-[50%]">
                                     <div className="">
                                         <Image
-                                            src={data.images?.[select]}
+                                            src={data?.images?.[select]}
                                             alt=""
                                             className="w-[80%]  mx-auto rounded-md  my-5"
                                             height={500}
@@ -68,14 +68,14 @@ const ProductDetail = ({ data }: any) => {
                                     </div>
                                 </div>
                                 <div className="w-full md:w-[50%] pt-5">
-                                    <h1 className={`font-bold text-lg my-2`}>{data.name}</h1>
+                                    <h1 className={`font-bold text-lg my-2`}>{data?.name}</h1>
                                     <p className="text-justify leading-8 font-medium">
                                         {' '}
                                         {data.description}
                                     </p>
                                     <div className="flex pt-3">
                                         <h4 className={`${styles.productDiscountPrice}`}>
-                                            ${data.discountPrice}
+                                            ${data?.discountPrice}
                                         </h4>
                                         <h3 className={`${styles.price}`}>
                                             {data?.originalPrice ? data?.originalPrice + '$' : null}
@@ -118,10 +118,10 @@ const ProductDetail = ({ data }: any) => {
                                         />
                                         <div className="pr-8">
                                             <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                                                {data.shop.name}
+                                                {data?.shop?.name}
                                             </h3>
                                             <h5 className="pb-3 text-[15px]">
-                                                ({data.shop.ratings}) Ratings
+                                                ({data?.shop?.ratings}) Ratings
                                             </h5>
                                         </div>
                                         <div
@@ -161,7 +161,11 @@ const ProductDetailsInfo = ({ data }: any) => {
                     >
                         Product Details
                     </h5>
-                    {active === 1 ? <div className={`${styles.active_indicator}`} /> : null}
+                    {active === 1 ? (
+                        <div
+                            className={`absolute bottom-[-27%] left-0 h-[3px] w-full bg-[crimson]`}
+                        />
+                    ) : null}
                 </div>
                 <div className="relative">
                     <h5
@@ -189,32 +193,7 @@ const ProductDetailsInfo = ({ data }: any) => {
             {active === 1 ? (
                 <>
                     <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        Product details are a crucial part of any eCommerce website or online
-                        marketplace. These details help the potential customers to make an informed
-                        decision about the product they are interested in buying. A well-written
-                        product description can also be a powerful marketing tool that can help to
-                        increase sales. Product details typically include information about the
-                        products features, specifications, dimensions, weight, materials, and other
-                        relevant information that can help language, and be honest and transparent
-                        about the products features and limitations.
-                    </p>
-                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        customers to understand the product better. The product details section
-                        should also include high-quality images and videos of the product, as well
-                        as customer reviews and ratings. When writing product details, it is
-                        essential to keep the target audience in mind. The language used should be
-                        clear and easy to understand, and technical terms should be explained in
-                        simple language. The tone of the product details should be persuasive,
-                        highlighting the unique features of the
-                    </p>
-                    <p className="py-2 text-base font-medium text-justify leading-8 pb-5 whitespace-pre-line">
-                        customers to understand the product better. The product details section
-                        should also include high-quality images and videos of the product, as well
-                        as customer reviews and ratings. When writing product details, it is
-                        essential to keep the target audience in mind. The language used should be
-                        clear and easy to understand, and technical terms should be explained in
-                        simple language. The tone of the product details should be persuasive,
-                        highlighting the unique features of the
+                        {data?.description}
                     </p>
                 </>
             ) : null}

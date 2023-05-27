@@ -7,6 +7,7 @@ import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetail
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
+    console.log(showProductDetails);
     const [productData, setProductData] = useState<any>(null);
 
     return (
@@ -56,14 +57,13 @@ const ProductCard = ({ data }: any) => {
 
                 {/* side options */}
                 <div>
-                    <AiOutlineEye
-                        size={22}
+                    <label
+                        htmlFor="ProductDetails"
                         className="cursor-pointer absolute right-2 top-14"
-                        onClick={() => setShowProductDetails(!showProductDetails)}
-                        // onClick={() => setOpen(!open)}
-                        color="#333"
-                        title="Quick view"
-                    />
+                        onClick={() => setProductData(data)}
+                    >
+                        <AiOutlineEye size={22} className="" title="Quick view" />
+                    </label>
                     <AiOutlineShoppingCart
                         size={25}
                         className="cursor-pointer absolute right-2 top-24"

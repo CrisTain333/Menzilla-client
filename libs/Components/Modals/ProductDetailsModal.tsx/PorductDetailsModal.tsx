@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
+    console.log(data);
     const [count, setCount] = useState(1);
 
     const decrementCount = () => {
@@ -37,7 +38,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                 <div>
                                     <div className="flex ml-5 -mt-2">
                                         <Link
-                                            href={`/shop/preview/${data?.shop._id}`}
+                                            href={`/shop/preview/${data?.shop?._id}`}
                                             className="flex"
                                         >
                                             <Image
@@ -78,12 +79,14 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                     <div className="flex justify-between">
                                         <div className="flex items-center">
                                             <h4 className={`text-xl font-bold`}>
-                                                {data?.discount_price}$
+                                                {data?.discountPrice}$
                                             </h4>
                                             <h3
                                                 className={`${styles.price} text-gray-500 font-semibold ml-1`}
                                             >
-                                                {data?.price ? data.price + '$' : null}
+                                                {data?.originalPrice
+                                                    ? data?.originalPrice + '$'
+                                                    : null}
                                             </h3>
                                         </div>
                                         <div className="flex">

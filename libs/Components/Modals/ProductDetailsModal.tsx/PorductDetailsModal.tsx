@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
-    console.log(data);
+    // console.log(data);
     const [count, setCount] = useState(1);
 
     const decrementCount = () => {
@@ -25,7 +25,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                 <div className="modal-box w-11/12 max-w-4xl">
                     {/* <--------------------------------------------> */}
                     <>
-                        <div className="flex flex-wrap">
+                        <div className="flex">
                             <div>
                                 <Image
                                     height={400}
@@ -36,7 +36,7 @@ const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
                                 />
 
                                 <div>
-                                    <div className="flex ml-5 -mt-2">
+                                    <div className="flex ml-5 mt-2">
                                         <Link
                                             href={`/shop/preview/${data?.shop?._id}`}
                                             className="flex"

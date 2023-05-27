@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 import { BiCartAdd } from 'react-icons/bi';
-import { addToCart } from '@/libs/common/utils/addToCart';
 import { useCart } from '@/libs/Context/CartProvider';
 
 const ProductCard = ({ data }: any) => {

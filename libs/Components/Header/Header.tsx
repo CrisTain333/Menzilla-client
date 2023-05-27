@@ -3,7 +3,7 @@ import { productData } from '@/libs/common/constant/Data';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 
 import { RxCross1 } from 'react-icons/rx';
@@ -13,7 +13,6 @@ import { useCart } from '@/libs/Context/CartProvider';
 const Header = () => {
     const { currentUser, logout, isLoading } = useAuth();
     const { cartItems } = useCart();
-    console.log(cartItems);
     const [searchTerm, setSearchTerm] = useState();
     const [open, setOpen] = useState(false);
     const [searchData, setSearchData] = useState<any>(null);

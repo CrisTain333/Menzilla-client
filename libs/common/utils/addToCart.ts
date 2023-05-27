@@ -1,3 +1,5 @@
+import { toast } from 'react-hot-toast';
+
 export const addToCart = (id: string) => {
     let shoppingCart: any = {};
 
@@ -13,6 +15,7 @@ export const addToCart = (id: string) => {
         const newQuantity = quantity + 1;
         shoppingCart[id] = newQuantity;
     } else {
+        toast.success('product added');
         shoppingCart[id] = 1;
     }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));

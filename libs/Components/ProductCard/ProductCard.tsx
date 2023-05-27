@@ -5,11 +5,16 @@ import React, { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 import ProductDetailsModal from '../Modals/ProductDetailsModal.tsx/PorductDetailsModal';
 import { BiCartAdd } from 'react-icons/bi';
+import { addToCart } from '@/libs/common/utils/addToCart';
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
     // console.log(showProductDetails);
     // const [productData, setProductData] = useState<any>(null);
+
+    const handleAddToCart = (id: any) => {
+        addToCart(id);
+    };
 
     return (
         <div>
@@ -55,7 +60,12 @@ const ProductCard = ({ data }: any) => {
                         <span className="font-[400] text-[17px] text-[#68d284]">50 sold</span>
                     </div>
                 </Link>
-                <div className="flex items-center justify-center rounded-sm bg-[#ff9900] px-5 py-1 text-center text-sm font-medium text-white hover:bg-[#ef9000] transition-all duration-300">
+                <div
+                    className="flex items-center justify-center rounded-sm bg-[#ff9900] px-5 py-1 text-center text-sm font-medium text-white hover:bg-[#ef9000] transition-all duration-300"
+                    onClick={() => {
+                        handleAddToCart(data?._id);
+                    }}
+                >
                     <BiCartAdd size={20} className=" mr-1" color="#fff" title="Add to cart" />
                     Add to cart
                 </div>

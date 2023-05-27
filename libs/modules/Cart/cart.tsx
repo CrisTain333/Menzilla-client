@@ -1,8 +1,13 @@
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Cart = () => {
+    const [totalItem, setTotalItem] = useState(0);
+    const [cartItem, setCartItem] = useState([]);
+
+    useEffect(() => {}, []);
+
     return (
         <HeaderAndFooter>
             <div>

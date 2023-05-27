@@ -31,13 +31,13 @@ const AllProducts = () => {
 
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
+        console.log(i);
         pageNumbers.push(i);
     }
 
     return (
         <>
-            <p>Current page : {currentPage} </p>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto h-[21rem]">
                 <table className="table w-full">
                     <colgroup>
                         <col className="w-32" />

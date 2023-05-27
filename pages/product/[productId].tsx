@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const ProductDetailsPage = () => {
-    const { products } = useSeller();
+    const { allProducts } = useSeller();
     const router = useRouter();
     const productName = router?.query?.productId;
-    const data = products?.find((i: any) => i.name === productName);
+    const data = allProducts?.find((i: any) => i.name === productName);
     return (
         <div>
             {' '}

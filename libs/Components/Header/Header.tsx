@@ -1,5 +1,4 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
-import { productData } from '@/libs/common/constant/Data';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';

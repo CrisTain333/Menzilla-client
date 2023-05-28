@@ -6,6 +6,15 @@ import React from 'react';
 
 const Cart = () => {
     const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+    const getTotalPrice = () => {
+        let totalPrice = 0;
+
+        cartItems.forEach((item: any) => {
+            totalPrice += item?.product?.discountPrice * item.quantity + 10;
+        });
+
+        return totalPrice;
+    };
 
     return (
         <HeaderAndFooter>
@@ -93,8 +102,7 @@ const Cart = () => {
                                                     onClick={() =>
                                                         increaseQuantity(e?.product?._id)
                                                     }
-                                                    className="fill-current text-gray-600 
-                                                    cursor-pointer w-3"
+                                                    className="fill-current text-gray-600 cursor-pointer w-3"
                                                     viewBox="0 0 448 512"
                                                 >
                                                     <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
@@ -131,7 +139,9 @@ const Cart = () => {
                                 </h1>
                                 <div className="flex justify-between mt-10 mb-5">
                                     <span className="font-semibold text-sm uppercase">Items 3</span>
-                                    <span className="font-semibold text-sm">590$</span>
+                                    <span className="font-semibold text-sm">
+                                        ${getTotalPrice()}
+                                    </span>
                                 </div>
                                 <div>
                                     <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -161,7 +171,7 @@ const Cart = () => {
                                 <div className="border-t mt-8">
                                     <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                                         <span>Total cost</span>
-                                        <span>$600</span>
+                                        <span>${getTotalPrice()}</span>
                                     </div>
                                     <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
                                         Checkout

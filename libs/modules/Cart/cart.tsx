@@ -6,11 +6,21 @@ import React from 'react';
 
 const Cart = () => {
     const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
-    const getTotalPrice = () => {
-        let totalPrice = 0;
+    let totalPrice = 0;
+    let total = 0;
+    let shippingPrice = 10;
+    let quantity = 0;
 
+    for (const item of cartItems) {
+        quantity = quantity + item?.quantity;
+        total = total + item?.product?.discountPrice * item?.quantity;
+        //   shippingPrice = shippingPrice + product.shipping;
+    }
+    const grandTotal = total + shippingPrice;
+
+    const getTotalPrice = () => {
         cartItems.forEach((item: any) => {
-            totalPrice += item?.product?.discountPrice * item.quantity + 10;
+            totalPrice += item?.product?.discountPrice * item.quantity;
         });
 
         return totalPrice;
@@ -133,51 +143,53 @@ const Cart = () => {
                                     Continue Shopping
                                 </Link>
                             </div>
-                            <div id="summary" className="col-span-12 md:col-span-3 px-8 py-10">
-                                <h1 className="font-semibold text-2xl border-b pb-8">
-                                    Order Summary
-                                </h1>
-                                <div className="flex justify-between mt-10 mb-5">
-                                    <span className="font-semibold text-sm uppercase">
-                                        Items {cartItems?.length}
-                                    </span>
-                                    <span className="font-semibold text-sm">
-                                        ${getTotalPrice()}
-                                    </span>
-                                </div>
-                                <div>
-                                    <label className="font-medium inline-block mb-3 text-sm uppercase">
-                                        Shipping
-                                    </label>
-                                    <select className="block p-2 text-gray-600 w-full text-sm">
-                                        <option>Standard shipping - $10.00</option>
-                                    </select>
-                                </div>
-                                <div className="py-5">
-                                    <label
-                                        htmlFor="promo"
-                                        className="font-semibold inline-block mb-3 text-sm uppercase"
-                                    >
-                                        Promo Code
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="promo"
-                                        placeholder="Enter your promo code"
-                                        className="p-2 text-sm w-full border-b-2"
-                                    />
-                                </div>
-                                <button className="bg-[#ff9900] px-5 py-2 text-sm text-white uppercase ">
-                                    Apply
-                                </button>
-                                <div className="border-t mt-8">
-                                    <div className="flex font-semibold justify-between py-6 text-sm uppercase">
-                                        <span>Total cost</span>
-                                        <span>${getTotalPrice()}</span>
+                            <div id="summary" className="col-span-12 md:col-span-3 px-8 py-10 ">
+                                <div className="sticky top-16">
+                                    <h1 className="font-semibold text-2xl border-b pb-8">
+                                        Order Summary
+                                    </h1>
+                                    <div className="flex justify-between mt-10 mb-5">
+                                        <span className="font-semibold text-sm uppercase">
+                                            Items {cartItems?.length}
+                                        </span>
+                                        <span className="font-semibold text-sm">
+                                            ${getTotalPrice()}
+                                        </span>
                                     </div>
-                                    <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
-                                        Checkout
+                                    <div>
+                                        <label className="font-medium inline-block mb-3 text-sm uppercase">
+                                            Shipping
+                                        </label>
+                                        <select className="block p-2 border text-gray-600 w-full text-sm">
+                                            <option>Standard shipping - $10.00</option>
+                                        </select>
+                                    </div>
+                                    <div className="py-5">
+                                        <label
+                                            htmlFor="promo"
+                                            className="font-semibold inline-block mb-3 text-sm uppercase"
+                                        >
+                                            Promo Code
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="promo"
+                                            placeholder="Enter your promo code"
+                                            className="p-2 text-sm w-full border-b-2"
+                                        />
+                                    </div>
+                                    <button className="bg-[#ff9900] px-5 py-2 text-sm text-white uppercase ">
+                                        Apply
                                     </button>
+                                    <div className="border-t mt-8">
+                                        <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                                            <span>Total cost</span>
+                                            <span>${totalPrice}</span>
+                                        </div>
+                                        <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
+                                            Checkout
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

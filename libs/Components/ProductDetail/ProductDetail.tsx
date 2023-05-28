@@ -124,7 +124,7 @@ const ProductDetail = ({ data }: any) => {
                                         </div>
                                     </div>
                                     <div
-                                        className={` !mt-6 !rounded !h-11 flex items-center justify-start`}
+                                        className={` !mt-6 !rounded !h-11 flex items-center justify-start cursor-pointer`}
                                         onClick={() => {
                                             addToCart(data, count);
                                             setCount(0);
@@ -135,13 +135,15 @@ const ProductDetail = ({ data }: any) => {
                                         </span>
                                     </div>
                                     <div className="flex items-center pt-8">
-                                        <Image
-                                            height={400}
-                                            width={400}
-                                            src={data?.shop?.shopProfile}
-                                            alt=""
-                                            className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
-                                        />
+                                        <Link href={`/shop/preview?shopId=${data?.shop._id}`}>
+                                            <Image
+                                                height={400}
+                                                width={400}
+                                                src={data?.shop?.shopProfile}
+                                                alt=""
+                                                className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
+                                            />
+                                        </Link>
                                         <div className="pr-8">
                                             <h3 className={`${styles.shop_name} pb-1 pt-1`}>
                                                 {data?.shop?.name}

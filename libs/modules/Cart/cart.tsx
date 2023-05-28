@@ -138,7 +138,9 @@ const Cart = () => {
                                     Order Summary
                                 </h1>
                                 <div className="flex justify-between mt-10 mb-5">
-                                    <span className="font-semibold text-sm uppercase">Items 3</span>
+                                    <span className="font-semibold text-sm uppercase">
+                                        Items {cartItems?.length}
+                                    </span>
                                     <span className="font-semibold text-sm">
                                         ${getTotalPrice()}
                                     </span>

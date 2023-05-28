@@ -64,7 +64,7 @@ const Cart = () => {
                                                         onClick={() =>
                                                             removeFromCart(e?.product?._id)
                                                         }
-                                                        className="font-semibold text-red-500 text-gray-500 text-xs"
+                                                        className="font-semibold text-red-500  text-xs"
                                                     >
                                                         Remove
                                                     </button>

@@ -55,8 +55,7 @@ export const categoriesData = [
         id: 5,
         title: 'Shoes',
         subTitle: '',
-        image_Url:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBQPQMVNRd6TtDkGs2dCri0Y-rxKkFOiEWw&usqp=CAU'
+        image_Url: 'https://i.ibb.co/wgSSHw4/faaae92adb073b63a98ddc10337e1fe1.jpg'
     },
     {
         id: 6,

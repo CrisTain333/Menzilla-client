@@ -1,5 +1,4 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
-import { productData } from '@/libs/common/constant/Data';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,10 +8,12 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { RxCross1 } from 'react-icons/rx';
 import Navbar from './Navbar';
 import { useCart } from '@/libs/Context/CartProvider';
+import { useSeller } from '@/libs/Context/sellerProvider';
 
 const Header = () => {
     const { currentUser, logout, isLoading } = useAuth();
     const { cartItems } = useCart();
+    const { allProducts } = useSeller();
     const [searchTerm, setSearchTerm] = useState();
     const [open, setOpen] = useState(false);
     const [searchData, setSearchData] = useState<any>(null);
@@ -22,8 +23,8 @@ const Header = () => {
         setSearchTerm(term);
 
         const filteredProducts =
-            productData &&
-            productData.filter((product) =>
+            allProducts &&
+            allProducts.filter((product: any) =>
                 product.name.toLowerCase().includes(term.toLowerCase())
             );
         setSearchData(filteredProducts);
@@ -146,12 +147,13 @@ const Header = () => {
                                                     searchData.map((i: any, index: any) => {
                                                         return (
                                                             <Link
-                                                                href={`/product/${i._id}`}
+                                                                onClick={() => setSearchData([])}
+                                                                href={`/product/${i?.name}`}
                                                                 key={index}
                                                             >
                                                                 <div className="w-full flex items-start py-2">
                                                                     <Image
-                                                                        src={i?.image_Url[0]?.url}
+                                                                        src={i?.images?.[0]}
                                                                         alt=""
                                                                         className="w-[40px] h-[40px] mr-[10px]"
                                                                         height={200}

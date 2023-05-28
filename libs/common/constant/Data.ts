@@ -55,20 +55,19 @@ export const categoriesData = [
         id: 5,
         title: 'Shoes',
         subTitle: '',
-        image_Url:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBQPQMVNRd6TtDkGs2dCri0Y-rxKkFOiEWw&usqp=CAU'
+        image_Url: 'https://i.ibb.co/wgSSHw4/faaae92adb073b63a98ddc10337e1fe1.jpg'
     },
     {
         id: 6,
-        title: 'Gifts',
+        title: 'Smart Watch',
         subTitle: '',
-        image_Url: 'https://i.ibb.co/BBH4RJ2/Pngtree-e-commerce-business-gift-box-5913543.png'
+        image_Url: 'https://i.ibb.co/LZh6VNj/2022-09-06-T14-58-41-400-Q-GIO-01.jpg'
     },
     {
         id: 7,
-        title: 'Pet Care',
+        title: 'Vape Stop',
         subTitle: '',
-        image_Url: 'https://cdn.openpr.com/T/c/Tc15444071_g.jpg'
+        image_Url: 'https://i.ibb.co/RjTzTtH/smok-mag-18-kit-vapr-1-1500x.jpg'
     },
     {
         id: 8,

@@ -1,9 +1,11 @@
+import { useCart } from '@/libs/Context/CartProvider';
 import styles from '@/styles/styles';
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiMessageDots } from 'react-icons/bi';
 
@@ -11,6 +13,7 @@ const ProductDetail = ({ data }: any) => {
     const [count, setCount] = useState(1);
     const [select, setSelect] = useState(0);
     const router = useRouter();
+    const { refresh } = useCart();
 
     const incrementCount = () => {
         setCount(count + 1);
@@ -19,6 +22,25 @@ const ProductDetail = ({ data }: any) => {
     const decrementCount = () => {
         if (count > 1) {
             setCount(count - 1);
+        }
+    };
+
+    const addToCart = (product: any, qun: number) => {
+        let cart = localStorage.getItem('cartItem');
+        if (!cart) {
+            cart = JSON.stringify([{ product, quantity: qun }]);
+            localStorage.setItem('cartItem', cart);
+        } else {
+            const cartItems = JSON.parse(cart);
+            const existingItem = cartItems.find((item: any) => item.product._id === product._id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                toast.success('Product Added');
+                cartItems.push({ product, quantity: qun });
+            }
+            localStorage.setItem('cartItem', JSON.stringify(cartItems));
+            refresh();
         }
     };
 
@@ -102,20 +124,26 @@ const ProductDetail = ({ data }: any) => {
                                         </div>
                                     </div>
                                     <div
-                                        className={` !mt-6 !rounded !h-11 flex items-center justify-start`}
+                                        className={` !mt-6 !rounded !h-11 flex items-center justify-start cursor-pointer`}
+                                        onClick={() => {
+                                            addToCart(data, count);
+                                            setCount(0);
+                                        }}
                                     >
                                         <span className=" bg-[#ff9900] py-2 px-3 rounded-sm text-white flex items-center">
                                             Add to cart <AiOutlineShoppingCart className="ml-1" />
                                         </span>
                                     </div>
                                     <div className="flex items-center pt-8">
-                                        <Image
-                                            height={400}
-                                            width={400}
-                                            src={data?.shop?.shopProfile}
-                                            alt=""
-                                            className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
-                                        />
+                                        <Link href={`/shop/preview?shopId=${data?.shop._id}`}>
+                                            <Image
+                                                height={400}
+                                                width={400}
+                                                src={data?.shop?.shopProfile}
+                                                alt=""
+                                                className="h-10 w-10 rounded-full mr-3 ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"
+                                            />
+                                        </Link>
                                         <div className="pr-8">
                                             <h3 className={`${styles.shop_name} pb-1 pt-1`}>
                                                 {data?.shop?.name}

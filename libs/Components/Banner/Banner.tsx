@@ -22,6 +22,7 @@ const Banner = () => {
                             interval={10000}
                             showArrows={false}
                             showStatus={false}
+                            swipeable={true}
                         >
                             <div>
                                 <div className="relative ">

@@ -64,3 +64,12 @@ export const getAllProduct = async () => {
         return { error };
     }
 };
+
+export const getSellerOnly = async (id: any) => {
+    try {
+        const response = await axiosInstance.get(`/shop/seller?shopId=${id}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

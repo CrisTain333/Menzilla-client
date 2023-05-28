@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
 
 const Product = () => {
-    const { allProducts, isProductLoading, setAllProducts } = useSeller();
+    const { allProducts, isProductLoading } = useSeller();
     const [data, setData] = useState([]);
     const router = useRouter();
     const { query } = router;
@@ -50,15 +50,23 @@ const Product = () => {
                     </div>
                 ) : (
                     <div>
-                        <div className="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px]  xl:gap-[30px] mb-12">
-                            {data.length > 0 ? (
-                                data.map((item, index) => <ProductCard data={item} key={index} />)
-                            ) : (
-                                <h1 className="text-center w-full font-mono font-bold text-5xl mb-40">
-                                    No products Found!
-                                </h1>
-                            )}
-                        </div>
+                        {data?.length === 0 ? (
+                            <>
+                                <div>
+                                    <h1 className="text-center w-full font-mono font-bold text-5xl mb-40">
+                                        No products Found!
+                                    </h1>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px]  xl:gap-[30px] mb-12">
+                                    {data?.map((item: any, index: any) => {
+                                        return <ProductCard data={item} key={index} />;
+                                    })}
+                                </div>
+                            </>
+                        )}
                     </div>
                 )}
             </HeaderAndFooter>

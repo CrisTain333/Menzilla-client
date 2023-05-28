@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 const ShopPreview = () => {
     const [sellerInfo, setSellerInfo] = useState<any>();
+    const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter();
     const shopId = router?.query?.shopId;
 
@@ -16,7 +17,6 @@ const ShopPreview = () => {
         getSellerDetails();
     }, []);
 
-    console.log(sellerInfo);
     return <div>Preview :{shopId}</div>;
 };
 

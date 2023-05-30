@@ -58,7 +58,7 @@ const Header = () => {
                                     />
                                 </svg>
                             </label>
-                            <ul
+                            {/* <ul
                                 tabIndex={0}
                                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                             >
@@ -90,7 +90,7 @@ const Header = () => {
                                 <li>
                                     <a>Item 3</a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                         <Link
                             href="/"
@@ -293,7 +293,7 @@ const Header = () => {
                 {/* small Device sidebar */}
                 {open && (
                     <div
-                        onClick={() => setOpen(false)}
+                        // onClick={() => setOpen(false)}
                         className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0  block md:hidden`}
                     >
                         <aside className="anime">

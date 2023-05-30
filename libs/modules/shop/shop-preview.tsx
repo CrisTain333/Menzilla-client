@@ -1,29 +1,28 @@
-import { getSellerOnly, getShopProduct } from '@/libs/Api';
-import { useSeller } from '@/libs/Context/sellerProvider';
+import { getSellerOnly, getShopPreviewProduct } from '@/libs/Api';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 const ShopPreview = () => {
-    const { allProducts } = useSeller();
     const [sellerInfo, setSellerInfo] = useState<any>();
     const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
     const router = useRouter();
     const shopId = router?.query?.shopId;
+    // const products = useShopProducts(shopId as string);
 
     const getSellerDetails = async () => {
         const seller = await getSellerOnly(shopId);
         if (seller) {
-            setSellerInfo(seller?.seller);
-            const shopProducts = allProducts?.filter(
-                (e: any) => e?.shop?.name === seller?.seller?.name
-            );
-            setProducts(shopProducts);
+            const shopProducts = await getShopPreviewProduct(shopId as string);
+            setProducts(shopProducts?.data);
         }
+        setSellerInfo(seller?.seller);
     };
 
     useEffect(() => {
         getSellerDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shopId]);
 
     return (

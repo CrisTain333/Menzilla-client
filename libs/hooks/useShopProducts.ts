@@ -7,10 +7,11 @@ const useShopProducts = (shopId: string) => {
     useEffect(() => {
         const fetchShopProducts = async () => {
             const shopProducts = await getShopPreviewProduct(shopId);
-            const filteredProducts = shopProducts.filter(
-                (product: any) => product?.shop?.id === shopId
-            );
-            setProducts(filteredProducts);
+            // console.log(shopProducts);
+            // const filteredProducts = shopProducts?.data?.filter(
+            //     (product: any) => product?.shop?.id === shopId
+            // );
+            setProducts(shopProducts);
         };
 
         fetchShopProducts();

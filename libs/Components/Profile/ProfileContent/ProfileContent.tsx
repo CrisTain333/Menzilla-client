@@ -14,7 +14,7 @@ const ProfileContent = ({ active }: any) => {
 
     const [name, setName] = useState(currentUser && currentUser?.name);
     const [email, setEmail] = useState(currentUser && currentUser?.email);
-    const [phoneNumber, setPhoneNumber] = useState();
+    const [phoneNumber, setPhoneNumber] = useState(currentUser && currentUser?.phone);
     const [zipCode, setZipCode] = useState();
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');

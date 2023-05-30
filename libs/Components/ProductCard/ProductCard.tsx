@@ -31,7 +31,7 @@ const ProductCard = ({ data }: any) => {
                         width={500}
                     />
                 </Link>
-                <Link href="/">
+                <Link href={`/shop/preview?shopId=${data?.shop._id}`}>
                     <h5 className={`${styles.shop_name}`}>{data?.shop?.name}</h5>
                 </Link>
                 <Link href={`/product/${data?._id}`}>

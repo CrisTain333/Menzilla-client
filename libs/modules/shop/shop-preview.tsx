@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { RxDashboard } from 'react-icons/rx';
+import { AiFillHome } from 'react-icons/ai';
 import { ThreeCircles } from 'react-loader-spinner';
 
 const ShopPreview = () => {
@@ -154,6 +154,13 @@ const ShopPreview = () => {
                                                 Shop Reviews
                                             </h5>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <Link href="/">
+                                            <div className="bg-[#ff9900] p-1 rounded-sm cursor-pointer">
+                                                <AiFillHome color="fff" size={20} />
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
 

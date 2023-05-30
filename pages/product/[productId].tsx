@@ -6,8 +6,8 @@ import React from 'react';
 const ProductDetailsPage = () => {
     const { allProducts } = useSeller();
     const router = useRouter();
-    const productName = router?.query?.productId;
-    const data = allProducts?.find((i: any) => i.name === productName);
+    const productId = router?.query?.productId;
+    const data = allProducts?.find((i: any) => i._id === productId);
     return (
         <div>
             {' '}

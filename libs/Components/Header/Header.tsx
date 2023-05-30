@@ -21,6 +21,10 @@ const Header = () => {
     const handleSearchChange = (e: any) => {
         const term = e.target.value;
         setSearchTerm(term);
+        if (term?.length === 0 || term === '') {
+            setSearchData([]);
+            return;
+        }
 
         const filteredProducts =
             allProducts &&
@@ -139,16 +143,42 @@ const Header = () => {
                                         <span className="sr-only">Search</span>
                                     </button>
                                     {/* Search result dropdown */}
-                                    {searchData && searchData?.length !== 0 ? (
+                                    {searchData && searchData.length !== 0 ? (
+                                        <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
+                                            {searchData &&
+                                                searchData.map((i: any, index: number) => {
+                                                    return (
+                                                        <Link
+                                                            href={`/product/${i._id}`}
+                                                            key={index}
+                                                            onClick={() => setSearchData([])}
+                                                        >
+                                                            <div className="w-full flex items-start py-2">
+                                                                <Image
+                                                                    src={i?.images?.[0]}
+                                                                    alt=""
+                                                                    className="w-[40px] h-[40px] mr-[10px]"
+                                                                    height={200}
+                                                                    width={200}
+                                                                />
+                                                                <h1>{i.name}</h1>
+                                                            </div>
+                                                        </Link>
+                                                    );
+                                                })}
+                                        </div>
+                                    ) : null}
+
+                                    {/* {searchData?.length !== 0 ? (
                                         <>
                                             {' '}
                                             <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
-                                                {searchData &&
-                                                    searchData.map((i: any, index: any) => {
+                                                {searchData?.length !== [] &&
+                                                    searchData?.map((i: any, index: any) => {
                                                         return (
                                                             <Link
                                                                 onClick={() => setSearchData([])}
-                                                                href={`/product/${i?.name}`}
+                                                                href={`/product/${i?._id}`}
                                                                 key={index}
                                                             >
                                                                 <div className="w-full flex items-start py-2">
@@ -166,7 +196,7 @@ const Header = () => {
                                                     })}
                                             </div>
                                         </>
-                                    ) : null}
+                                    ) : null} */}
                                 </div>
                             </div>
                         </form>

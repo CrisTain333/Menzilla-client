@@ -22,7 +22,7 @@ const ProductCard = ({ data }: any) => {
         <div>
             <div className="w-full h-[370px] bg-white rounded-lg shadow-md p-3 relative cursor-pointer">
                 <div className="flex justify-end"></div>
-                <Link href={`/product/${data?.product_name}`}>
+                <Link href={`/product/${data?._id}`}>
                     <Image
                         src={`${data?.images?.[0]}`}
                         alt="productImage"
@@ -34,7 +34,7 @@ const ProductCard = ({ data }: any) => {
                 <Link href="/">
                     <h5 className={`${styles.shop_name}`}>{data?.shop?.name}</h5>
                 </Link>
-                <Link href={`/product/${data?.name}`}>
+                <Link href={`/product/${data?._id}`}>
                     <h4 className="font-[500] h-14">
                         {data?.name?.length > 40 ? data?.name?.slice(0, 40) + '...' : data?.name}
                     </h4>

@@ -1,4 +1,3 @@
-import { productData } from '@/libs/common/constant/Data';
 import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';

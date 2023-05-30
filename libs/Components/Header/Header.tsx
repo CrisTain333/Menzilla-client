@@ -21,6 +21,10 @@ const Header = () => {
     const handleSearchChange = (e: any) => {
         const term = e.target.value;
         setSearchTerm(term);
+        if (term?.length === 0 || term === '') {
+            setSearchData([]);
+            return;
+        }
 
         const filteredProducts =
             allProducts &&
@@ -54,7 +58,7 @@ const Header = () => {
                                     />
                                 </svg>
                             </label>
-                            <ul
+                            {/* <ul
                                 tabIndex={0}
                                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                             >
@@ -86,7 +90,7 @@ const Header = () => {
                                 <li>
                                     <a>Item 3</a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </div>
                         <Link
                             href="/"
@@ -139,16 +143,42 @@ const Header = () => {
                                         <span className="sr-only">Search</span>
                                     </button>
                                     {/* Search result dropdown */}
-                                    {searchData && searchData?.length !== 0 ? (
+                                    {searchData && searchData.length !== 0 ? (
+                                        <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
+                                            {searchData &&
+                                                searchData.map((i: any, index: number) => {
+                                                    return (
+                                                        <Link
+                                                            href={`/product/${i._id}`}
+                                                            key={index}
+                                                            onClick={() => setSearchData([])}
+                                                        >
+                                                            <div className="w-full flex items-start py-2">
+                                                                <Image
+                                                                    src={i?.images?.[0]}
+                                                                    alt=""
+                                                                    className="w-[40px] h-[40px] mr-[10px]"
+                                                                    height={200}
+                                                                    width={200}
+                                                                />
+                                                                <h1>{i.name}</h1>
+                                                            </div>
+                                                        </Link>
+                                                    );
+                                                })}
+                                        </div>
+                                    ) : null}
+
+                                    {/* {searchData?.length !== 0 ? (
                                         <>
                                             {' '}
                                             <div className="bg-gray-50 shadow-md absolute w-full rounded-b-md h-80 overflow-y-auto top-11 p-2 z-50">
-                                                {searchData &&
-                                                    searchData.map((i: any, index: any) => {
+                                                {searchData?.length !== [] &&
+                                                    searchData?.map((i: any, index: any) => {
                                                         return (
                                                             <Link
                                                                 onClick={() => setSearchData([])}
-                                                                href={`/product/${i?.name}`}
+                                                                href={`/product/${i?._id}`}
                                                                 key={index}
                                                             >
                                                                 <div className="w-full flex items-start py-2">
@@ -166,7 +196,7 @@ const Header = () => {
                                                     })}
                                             </div>
                                         </>
-                                    ) : null}
+                                    ) : null} */}
                                 </div>
                             </div>
                         </form>
@@ -263,7 +293,7 @@ const Header = () => {
                 {/* small Device sidebar */}
                 {open && (
                     <div
-                        onClick={() => setOpen(false)}
+                        // onClick={() => setOpen(false)}
                         className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0  block md:hidden`}
                     >
                         <aside className="anime">
@@ -285,20 +315,14 @@ const Header = () => {
                                         value={searchTerm}
                                         onChange={handleSearchChange}
                                     />
-                                    {searchData && (
+                                    {searchData && searchData.length !== 0 ? (
                                         <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
                                             {searchData.map((i: any, index: any) => {
-                                                const d = i.name;
-
-                                                const Product_name = d.replace(/\s+/g, '-');
                                                 return (
-                                                    <Link
-                                                        key={index}
-                                                        href={`/product/${Product_name}`}
-                                                    >
+                                                    <Link key={index} href={`/product/${i?._id}`}>
                                                         <div className="flex items-center">
                                                             <Image
-                                                                src={i.image_Url[0].url}
+                                                                src={i?.images?.[0]}
                                                                 alt="productImage"
                                                                 height={500}
                                                                 width={500}
@@ -310,7 +334,7 @@ const Header = () => {
                                                 );
                                             })}
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
 
                                 <Navbar />

@@ -5,10 +5,13 @@ import Link from 'next/link';
 import { categoriesData } from '@/libs/common/constant/Data';
 import DropDown from './Dropdown/DropDown';
 import { useAuth } from '@/libs/Context/AuthProvider';
+import { useSeller } from '@/libs/Context/sellerProvider';
+import { RxDashboard } from 'react-icons/rx';
 
 const SimpleNav = () => {
     const [dropDown, setDropDown] = useState(false);
     const { currentUser } = useAuth();
+    const { isSeller } = useSeller();
     return (
         <div>
             <header className="p-5  bg-[#1C2B35] text-white">
@@ -95,14 +98,33 @@ const SimpleNav = () => {
                             )}
                         </ul>
 
-                        <div className="flex items-center">
-                            <Link href="/create-shop">
-                                <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-md mt-2">
-                                    Become Seller
-                                    <IoIosArrowForward className="ml-1" />
-                                </h1>
-                            </Link>
-                        </div>
+                        {isSeller ? (
+                            <>
+                                <div className="flex items-center">
+                                    <Link href="/dashboard">
+                                        <div
+                                            className={`text-center bg-[#ff9900] text-white rounded-md cursor-pointer text-base py-2 w-full px-5 flex justify-center items-center mt-2`}
+                                        >
+                                            <span>
+                                                <RxDashboard size={20} />
+                                            </span>
+                                            <span className="ml-2">Dashboard</span>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="flex items-center">
+                                    <Link href="/create-shop">
+                                        <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-md mt-2">
+                                            Become Seller
+                                            <IoIosArrowForward className="ml-1" />
+                                        </h1>
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </header>

@@ -35,7 +35,7 @@ export const createProduct = async (ProductData: object) => {
     }
 };
 
-export const getShopProduct = async (seller_id: string, currentPage: any) => {
+export const getShopProduct = async (seller_id: string, currentPage: any = 1) => {
     try {
         const response = await axiosInstance.get(
             `/product/shop-products?sellerId=${seller_id}&page=${currentPage}`
@@ -59,6 +59,15 @@ export const deleteShopProduct = async (product_id: string) => {
 export const getAllProduct = async () => {
     try {
         const response = await axiosInstance.get(`/product`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const getShopPreviewProduct = async (shopId: string) => {
+    try {
+        const response = await axiosInstance.get(`/product/preview?shopID=${shopId}`);
         return response.data;
     } catch (error) {
         return { error };

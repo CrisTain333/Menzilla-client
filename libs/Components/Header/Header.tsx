@@ -315,20 +315,14 @@ const Header = () => {
                                         value={searchTerm}
                                         onChange={handleSearchChange}
                                     />
-                                    {searchData && (
+                                    {searchData && searchData.length !== 0 ? (
                                         <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
                                             {searchData.map((i: any, index: any) => {
-                                                const d = i.name;
-
-                                                const Product_name = d.replace(/\s+/g, '-');
                                                 return (
-                                                    <Link
-                                                        key={index}
-                                                        href={`/product/${Product_name}`}
-                                                    >
+                                                    <Link key={index} href={`/product/${i?._id}`}>
                                                         <div className="flex items-center">
                                                             <Image
-                                                                src={i.image_Url[0].url}
+                                                                src={i?.images?.[0]}
                                                                 alt="productImage"
                                                                 height={500}
                                                                 width={500}
@@ -340,7 +334,7 @@ const Header = () => {
                                                 );
                                             })}
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
 
                                 <Navbar />

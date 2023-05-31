@@ -11,11 +11,10 @@ import { updateProfile, updateProfilePicture } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const ProfileContent = ({ active }: any) => {
-    const { currentUser } = useAuth();
+    const { currentUser, refresh } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
 
     const [uploadLoader, setUploadLoader] = useState(false);
-    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     const [userProfile, setUserProfile] = useState({
         email: currentUser?.email,
@@ -33,15 +32,25 @@ const ProfileContent = ({ active }: any) => {
             name: currentUser?.name,
             phone: currentUser?.phone,
             profilePicture: currentUser?.profilePicture,
-            zipCode: currentUser?.zipCode || '',
-            address1: currentUser?.address1 || '',
-            address2: currentUser?.address2 || ''
+            zipCode: currentUser?.zipCode,
+            address1: currentUser?.address1,
+            address2: currentUser?.address2
         });
-    }, [currentUser, shouldRefresh]);
+        console.log('refreshing');
+    }, [currentUser, refresh]);
 
     const handleSubmit = async () => {
-        const result = await updateProfile(userProfile, currentUser?._id);
-        console.log(result);
+        try {
+            const result = await updateProfile(userProfile, currentUser?._id);
+            if (result.status === 200) {
+                toast.success('Profile Updated');
+                refresh();
+            } else {
+                toast.error(result.message);
+            }
+        } catch (error) {
+            toast.error('Update Profile Failed');
+        }
     };
 
     // Handle Select Image
@@ -51,9 +60,9 @@ const ProfileContent = ({ active }: any) => {
         }
     };
 
-    const refresh = () => {
-        setShouldRefresh(!shouldRefresh);
-    };
+    // const refresh = () => {
+    //     setShouldRefresh(!shouldRefresh);
+    // };
 
     // Remove selected Image
     const handleCancel = () => {

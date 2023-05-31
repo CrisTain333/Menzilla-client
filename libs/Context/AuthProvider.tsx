@@ -8,6 +8,8 @@ interface AuthContextValue {
     login: (userData: any) => Promise<string | null>;
     logout: () => void;
     refresh: () => void;
+    setCurrentUser: (data: any) => void;
+    getUserData: (token: string) => void;
 }
 
 interface AuthProviderProps {
@@ -92,7 +94,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isLoading,
         login,
         logout,
-        refresh
+        refresh,
+        setCurrentUser,
+        getUserData
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

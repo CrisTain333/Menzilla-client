@@ -13,6 +13,8 @@ const ProfileContent = ({ active }: any) => {
     const { currentUser, isLoading } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
 
+    const [uploadLoader, setUploadLoader] = useState(false);
+
     const [userProfile, setUserProfile] = useState({
         email: currentUser?.email,
         name: currentUser?.name,
@@ -56,7 +58,7 @@ const ProfileContent = ({ active }: any) => {
             {active === 1 && (
                 <>
                     <div className="shadow-md w-[90%] mx-auto rounded-md p-2">
-                        <div className="flex justify-center w-full">
+                        {/* <div className="flex justify-center w-full">
                             <div className="relative">
                                 {isLoading ? (
                                     <div className="w-36 h-36 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
@@ -89,6 +91,86 @@ const ProfileContent = ({ active }: any) => {
                                         className="hidden"
                                     />
                                 </label>
+                            </div>
+                        </div> */}
+                        <div className="flex items-center flex-col justify-start space-x-5 ">
+                            <div className="relative">
+                                <div className="relative overflow-hidden h-32 w-32">
+                                    <Image
+                                        src={
+                                            selectedImage
+                                                ? URL.createObjectURL(selectedImage)
+                                                : userProfile?.profilePicture
+                                        }
+                                        // src={`${currentUser?.profilePicture || ''}`}
+                                        className="w-32 h-32 rounded-full object-cover border-[3px] border-[#ff9900]"
+                                        alt="profilePicture"
+                                        height={500}
+                                        width={500}
+                                    />
+                                </div>
+                                {selectedImage && (
+                                    <button
+                                        disabled={uploadLoader}
+                                        className={`absolute cursor-pointer font-bold -top-5 -right-2 ${
+                                            uploadLoader && 'cursor-not-allowed'
+                                        }`}
+                                        onClick={handleCancel}
+                                    >
+                                        ✕
+                                    </button>
+                                )}
+                            </div>
+
+                            <div>
+                                <div className="p-3  mt-2 space-x-5">
+                                    {selectedImage ? (
+                                        <button
+                                            className={` text-white  text-sm font-semibold px-4 py-2 rounded w-auto cursor-pointer flex items-center ${
+                                                uploadLoader
+                                                    ? 'cursor-not-allowed bg-gray-300'
+                                                    : 'bg-[#ff9900]'
+                                            }`}
+                                            disabled={uploadLoader}
+                                            // onClick={changeProfilePicture}
+                                        >
+                                            {uploadLoader ? (
+                                                <>
+                                                    <div
+                                                        className={`flex items-center justify-center`}
+                                                    >
+                                                        <div
+                                                            className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                                            role="status"
+                                                        >
+                                                            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                                                                Loading...
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <p className="ml-2">Uploading ....</p>
+                                                </>
+                                            ) : (
+                                                <>Upload</>
+                                            )}
+                                        </button>
+                                    ) : (
+                                        <label
+                                            htmlFor="profile"
+                                            className="bg-[#ff9900] text-white  text-sm font-semibold px-4 py-2 rounded w-auto cursor-pointer"
+                                            // onClick={handleProfileUpdate}
+                                        >
+                                            Change Profile
+                                        </label>
+                                    )}
+                                </div>
+                                <input
+                                    onChange={imageChange}
+                                    type="file"
+                                    id="profile"
+                                    name="profilePicture"
+                                    className=" w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 hidden"
+                                />
                             </div>
                         </div>
                         <br />

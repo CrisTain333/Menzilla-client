@@ -3,7 +3,7 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import { categoriesData } from '@/libs/common/constant/Data';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SmallLoader from '../SmallLoader/SmallLoader';

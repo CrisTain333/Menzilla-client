@@ -94,3 +94,14 @@ export const updateProfilePicture = async (profileImage: any, userId: string) =>
         return { error };
     }
 };
+export const updateProfile = async (userinfo: any, userId: string) => {
+    try {
+        const response = await axiosInstance.patch(
+            `/user/update-profile?userId=${userId}`,
+            userinfo
+        );
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

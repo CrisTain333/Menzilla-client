@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
@@ -11,6 +11,7 @@ import Address from '../Address/Address';
 
 const ProfileContent = ({ active }: any) => {
     const { currentUser, isLoading } = useAuth();
+    const [selectedImage, setSelectedImage] = useState<any>(null);
 
     const [name, setName] = useState(currentUser && currentUser?.name);
     const [email, setEmail] = useState(currentUser && currentUser?.email);
@@ -19,8 +20,43 @@ const ProfileContent = ({ active }: any) => {
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
 
+    const [userProfile, setUserProfile] = useState({
+        email: currentUser?.email,
+        name: currentUser?.name,
+        phone: currentUser?.phone,
+        profilePicture: currentUser?.profilePicture,
+        zipCode: currentUser?.zipCode,
+        address1: currentUser?.address1,
+        address2: currentUser?.address2
+    });
+
+    useEffect(() => {
+        setUserProfile({
+            email: currentUser?.email,
+            name: currentUser?.name,
+            phone: currentUser?.phone,
+            profilePicture: currentUser?.profilePicture,
+            zipCode: currentUser?.zipCode || '',
+            address1: currentUser?.address1 || '',
+            address2: currentUser?.address2 || ''
+        });
+    }, [currentUser]);
+
+    console.log(userProfile);
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
+    };
+    // Handle Select Image
+    const imageChange = (e: any) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedImage(e.target.files[0]);
+        }
+    };
+
+    // Remove selected Image
+    const handleCancel = () => {
+        setSelectedImage('');
     };
 
     return (
@@ -35,7 +71,12 @@ const ProfileContent = ({ active }: any) => {
                                     <div className="w-36 h-36 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
                                 ) : (
                                     <Image
-                                        src={`${currentUser?.profilePicture || ''}`}
+                                        src={
+                                            selectedImage
+                                                ? URL.createObjectURL(selectedImage)
+                                                : currentUser?.profilePicture
+                                        }
+                                        // src={`${currentUser?.profilePicture || ''}`}
                                         className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
                                         alt="profilePicture"
                                         height={500}
@@ -43,9 +84,20 @@ const ProfileContent = ({ active }: any) => {
                                     />
                                 )}
 
-                                <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
+                                <label
+                                    id="ProfileImage"
+                                    className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]"
+                                >
                                     <AiOutlineCamera />
-                                </div>
+
+                                    <input
+                                        onChange={imageChange}
+                                        type="file"
+                                        name="images"
+                                        id="ProfileImage"
+                                        className="hidden"
+                                    />
+                                </label>
                             </div>
                         </div>
                         <br />

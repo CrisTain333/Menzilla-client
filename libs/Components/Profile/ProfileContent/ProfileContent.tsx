@@ -13,13 +13,6 @@ const ProfileContent = ({ active }: any) => {
     const { currentUser, isLoading } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
 
-    const [name, setName] = useState(currentUser && currentUser?.name);
-    const [email, setEmail] = useState(currentUser && currentUser?.email);
-    const [phoneNumber, setPhoneNumber] = useState(currentUser && currentUser?.phone);
-    const [zipCode, setZipCode] = useState();
-    const [address1, setAddress1] = useState('');
-    const [address2, setAddress2] = useState('');
-
     const [userProfile, setUserProfile] = useState({
         email: currentUser?.email,
         name: currentUser?.name,
@@ -41,8 +34,6 @@ const ProfileContent = ({ active }: any) => {
             address2: currentUser?.address2 || ''
         });
     }, [currentUser]);
-
-    console.log(userProfile);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -74,7 +65,7 @@ const ProfileContent = ({ active }: any) => {
                                         src={
                                             selectedImage
                                                 ? URL.createObjectURL(selectedImage)
-                                                : currentUser?.profilePicture
+                                                : userProfile?.profilePicture
                                         }
                                         // src={`${currentUser?.profilePicture || ''}`}
                                         className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
@@ -113,8 +104,14 @@ const ProfileContent = ({ active }: any) => {
                                             type="text"
                                             className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                             required
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
+                                            value={userProfile?.name}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, firstName: e.target.value };
+                                                })
+                                            }
+                                            // value={name}
+                                            // onChange={(e) => setName(e.target.value)}
                                         />
                                     </div>
                                     <div className=" w-[100%] md:w-[50%]">
@@ -123,8 +120,12 @@ const ProfileContent = ({ active }: any) => {
                                             type="text"
                                             className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
                                             required
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={userProfile?.email}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, email: e.target.value };
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -136,8 +137,12 @@ const ProfileContent = ({ active }: any) => {
                                             type="number"
                                             className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                             required
-                                            value={phoneNumber}
-                                            onChange={(e: any) => setPhoneNumber(e.target.value)}
+                                            value={userProfile?.phone}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, phone: e.target.value };
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className=" w-[100%] md:w-[50%]">
@@ -146,8 +151,12 @@ const ProfileContent = ({ active }: any) => {
                                             type="number"
                                             className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                             required
-                                            value={zipCode}
-                                            onChange={(e: any) => setZipCode(e.target.value)}
+                                            value={userProfile?.zipCode}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, zipCode: e.target.value };
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -159,8 +168,12 @@ const ProfileContent = ({ active }: any) => {
                                             type="address"
                                             className={`${styles.input} !w-[95%]`}
                                             required
-                                            value={address1}
-                                            onChange={(e) => setAddress1(e.target.value)}
+                                            value={userProfile?.address1}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, address1: e.target.value };
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className=" w-[100%] md:w-[50%]">
@@ -169,8 +182,12 @@ const ProfileContent = ({ active }: any) => {
                                             type="address"
                                             className={`${styles.input} !w-[95%]`}
                                             required
-                                            value={address2}
-                                            onChange={(e) => setAddress2(e.target.value)}
+                                            value={userProfile?.address2}
+                                            onChange={(e) =>
+                                                setUserProfile((prev: any) => {
+                                                    return { ...prev, address2: e.target.value };
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>

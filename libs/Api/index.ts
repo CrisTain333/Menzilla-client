@@ -83,10 +83,10 @@ export const getSellerOnly = async (id: any) => {
     }
 };
 
-export const updateProfilePicture = async (profileImage: any, userEmail: string) => {
+export const updateProfilePicture = async (profileImage: any, userId: string) => {
     try {
         const response = await axiosInstance.patch(
-            `/user/update-profile-picture?userId=${userEmail}`,
+            `/user/update-profile-picture?userId=${userId}`,
             profileImage
         );
         return response.data;

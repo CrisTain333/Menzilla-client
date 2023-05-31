@@ -4,8 +4,10 @@ import axiosInstance from '../common/utils/axios';
 interface AuthContextValue {
     currentUser: any;
     isLoading: boolean;
+    // eslint-disable-next-line no-unused-vars
     login: (userData: any) => Promise<string | null>;
     logout: () => void;
+    refresh: () => void;
 }
 
 interface AuthProviderProps {
@@ -27,6 +29,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [currentUser, setCurrentUser] = useState<any>(null);
     const [userFetched, setUserFetched] = useState(false);
+    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -38,11 +41,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setCurrentUser(userData);
                     setIsLoading(false);
                 })
-                .catch((e) => {
+                .catch(() => {
                     setIsLoading(false);
                 });
         }
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shouldRefresh]);
+
+    const refresh = () => {
+        setShouldRefresh(!shouldRefresh);
+    };
 
     const login = async (userData: any) => {
         try {
@@ -83,7 +91,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         currentUser,
         isLoading,
         login,
-        logout
+        logout,
+        refresh
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineCamera } from 'react-icons/ai';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -9,9 +8,10 @@ import TrackOrder from '../TrackOrder/TrackOrder';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import Address from '../Address/Address';
 import { updateProfilePicture } from '@/libs/Api';
+import { toast } from 'react-hot-toast';
 
 const ProfileContent = ({ active }: any) => {
-    const { currentUser, isLoading } = useAuth();
+    const { currentUser } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
 
     const [uploadLoader, setUploadLoader] = useState(false);
@@ -59,11 +59,15 @@ const ProfileContent = ({ active }: any) => {
         newForm.append('profilePicture', selectedImage);
         try {
             const result = await updateProfilePicture(newForm, currentUser?._id);
-            console.log(result);
+            if (result?.status === 200) {
+                toast.success('Profile Picture Updated');
+                handleCancel();
+                setUploadLoader(false);
+            }
             setUploadLoader(false);
         } catch (error) {
             setUploadLoader(false);
-            console.log(error);
+            toast.error('Fail To update Profile Picture');
         }
     };
 

@@ -8,6 +8,7 @@ import AllRefundOrders from '../AllRefundOrders/AllRefundOrders';
 import TrackOrder from '../TrackOrder/TrackOrder';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import Address from '../Address/Address';
+import { updateProfilePicture } from '@/libs/Api';
 
 const ProfileContent = ({ active }: any) => {
     const { currentUser, isLoading } = useAuth();
@@ -50,6 +51,20 @@ const ProfileContent = ({ active }: any) => {
     // Remove selected Image
     const handleCancel = () => {
         setSelectedImage('');
+    };
+
+    const changeProfilePicture = async () => {
+        setUploadLoader(true);
+        const newForm = new FormData();
+        newForm.append('images', selectedImage);
+        try {
+            const result = await updateProfilePicture(newForm);
+            console.log(result);
+            setUploadLoader(false);
+        } catch (error) {
+            setUploadLoader(false);
+            console.log(error);
+        }
     };
 
     return (
@@ -132,7 +147,7 @@ const ProfileContent = ({ active }: any) => {
                                                     : 'bg-[#ff9900]'
                                             }`}
                                             disabled={uploadLoader}
-                                            // onClick={changeProfilePicture}
+                                            onClick={changeProfilePicture}
                                         >
                                             {uploadLoader ? (
                                                 <>

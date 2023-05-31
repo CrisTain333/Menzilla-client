@@ -56,9 +56,9 @@ const ProfileContent = ({ active }: any) => {
     const changeProfilePicture = async () => {
         setUploadLoader(true);
         const newForm = new FormData();
-        newForm.append('images', selectedImage);
+        newForm.append('profilePicture', selectedImage);
         try {
-            const result = await updateProfilePicture(newForm);
+            const result = await updateProfilePicture(newForm, currentUser?._id);
             console.log(result);
             setUploadLoader(false);
         } catch (error) {

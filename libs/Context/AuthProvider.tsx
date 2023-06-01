@@ -8,7 +8,9 @@ interface AuthContextValue {
     login: (userData: any) => Promise<string | null>;
     logout: () => void;
     refresh: () => void;
+    // eslint-disable-next-line no-unused-vars
     setCurrentUser: (data: any) => void;
+    // eslint-disable-next-line no-unused-vars
     getUserData: (token: string) => void;
 }
 

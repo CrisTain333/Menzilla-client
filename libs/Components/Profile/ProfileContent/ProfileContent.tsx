@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -11,40 +11,65 @@ import { updateProfile, updateProfilePicture } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const ProfileContent = ({ active }: any) => {
-    const { currentUser, refresh } = useAuth();
+    const tokenStoragePath = 'accessToken';
+    const { currentUser, refresh, getUserData, setCurrentUser } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
-
     const [uploadLoader, setUploadLoader] = useState(false);
+    // const token: any = window?.;
+    // const [count, setCount] = useState(0);
+    // let count = 0;
+    // const [userProfile, setUserProfile] = useState({
+    //     _id: currentUser?._id,
+    //     email: currentUser?.email,
+    //     name: currentUser?.name,
+    //     phone: currentUser?.phone,
+    //     profilePicture: currentUser?.profilePicture
+    // });
 
-    const [userProfile, setUserProfile] = useState({
-        email: currentUser?.email,
-        name: currentUser?.name,
-        phone: currentUser?.phone,
-        profilePicture: currentUser?.profilePicture,
-        zipCode: currentUser?.zipCode,
-        address1: currentUser?.address1,
-        address2: currentUser?.address2
-    });
+    // // const handleRefresh = () => {
+    // //     getUserData(token);
+    // // };
+    // useEffect(() => {
+    //     setUserProfile({
+    //         _id: currentUser?._id,
+    //         email: currentUser?.email,
+    //         name: currentUser?.name,
+    //         phone: currentUser?.phone,
+    //         profilePicture: currentUser?.profilePicture
+    //     });
+    //     console.log(count++);
+    //     setRun(false);
+    // }, [currentUser, run]);
 
-    useEffect(() => {
-        setUserProfile({
-            email: currentUser?.email,
-            name: currentUser?.name,
-            phone: currentUser?.phone,
-            profilePicture: currentUser?.profilePicture,
-            zipCode: currentUser?.zipCode,
-            address1: currentUser?.address1,
-            address2: currentUser?.address2
-        });
-        console.log('refreshing');
-    }, [currentUser, refresh]);
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const password = form.password.value;
+        const data = {
+            name,
+            email,
+            phone,
+            password
+        };
 
-    const handleSubmit = async () => {
+        // console.log(name, email, phone, password);
         try {
-            const result = await updateProfile(userProfile, currentUser?._id);
+            const result = await updateProfile(data, currentUser?._id);
             if (result.status === 200) {
                 toast.success('Profile Updated');
-                refresh();
+                const token = localStorage.getItem(tokenStoragePath);
+                setCurrentUser((prevUser: any) => ({
+                    ...prevUser,
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone
+                }));
+
+                // Refresh the user data to fetch the updated information from the server
+                getUserData(token as string);
             } else {
                 toast.error(result.message);
             }
@@ -59,16 +84,12 @@ const ProfileContent = ({ active }: any) => {
             setSelectedImage(e.target.files[0]);
         }
     };
-
-    // const refresh = () => {
-    //     setShouldRefresh(!shouldRefresh);
-    // };
-
     // Remove selected Image
     const handleCancel = () => {
         setSelectedImage('');
     };
 
+    // Change Profile Picture Function
     const changeProfilePicture = async () => {
         setUploadLoader(true);
         const newForm = new FormData();
@@ -94,41 +115,6 @@ const ProfileContent = ({ active }: any) => {
             {active === 1 && (
                 <>
                     <div className="shadow-md w-[90%] mx-auto rounded-md p-2">
-                        {/* <div className="flex justify-center w-full">
-                            <div className="relative">
-                                {isLoading ? (
-                                    <div className="w-36 h-36 animate-pulse bg-slate-400  rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2"></div>
-                                ) : (
-                                    <Image
-                                        src={
-                                            selectedImage
-                                                ? URL.createObjectURL(selectedImage)
-                                                : userProfile?.profilePicture
-                                        }
-                                        // src={`${currentUser?.profilePicture || ''}`}
-                                        className="w-36 h-36 rounded-full object-cover border-[5px] border-[#ff9900]"
-                                        alt="profilePicture"
-                                        height={500}
-                                        width={500}
-                                    />
-                                )}
-
-                                <label
-                                    id="ProfileImage"
-                                    className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]"
-                                >
-                                    <AiOutlineCamera />
-
-                                    <input
-                                        onChange={imageChange}
-                                        type="file"
-                                        name="images"
-                                        id="ProfileImage"
-                                        className="hidden"
-                                    />
-                                </label>
-                            </div>
-                        </div> */}
                         <div className="flex items-center flex-col justify-start space-x-5 ">
                             <div className="relative">
                                 <div className="relative overflow-hidden h-32 w-32">
@@ -136,7 +122,7 @@ const ProfileContent = ({ active }: any) => {
                                         src={
                                             selectedImage
                                                 ? URL.createObjectURL(selectedImage)
-                                                : userProfile?.profilePicture
+                                                : currentUser?.profilePicture
                                         }
                                         // src={`${currentUser?.profilePicture || ''}`}
                                         className="w-32 h-32 rounded-full object-cover border-[3px] border-[#ff9900]"
@@ -212,111 +198,87 @@ const ProfileContent = ({ active }: any) => {
                         <br />
                         <br />
                         <div className="w-full px-5">
-                            {/* <form onSubmit={handleSubmit}> */}
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block font-semibold pb-2">Full Name</label>
-                                    <input
-                                        type="text"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={userProfile?.name}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, firstName: e.target.value };
-                                            })
-                                        }
-                                        // value={name}
-                                        // onChange={(e) => setName(e.target.value)}
-                                    />
+                            <form onSubmit={handleSubmit}>
+                                <div className="w-full md:flex block pb-3">
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block font-semibold pb-2">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
+                                            required
+                                            name="name"
+                                            defaultValue={currentUser?.name}
+                                            readOnly={false}
+                                            // value={userProfile?.name}
+                                            // onChange={(e) =>
+                                            //     setUserProfile((prev: any) => {
+                                            //         return { ...prev, name: e.target.value };
+                                            //     })
+                                            // }
+                                        />
+                                    </div>
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Email Address</label>
+                                        <input
+                                            type="text"
+                                            className={`${styles.input} !w-[95%] mb-1 md:mb-0 cursor-not-allowed`}
+                                            required
+                                            readOnly
+                                            name="email"
+                                            defaultValue={currentUser?.email}
+                                            // value={userProfile?.email}
+                                            // onChange={(e) =>
+                                            //     setUserProfile((prev: any) => {
+                                            //         return { ...prev, email: e.target.value };
+                                            //     })
+                                            // }
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Email Address</label>
-                                    <input
-                                        type="text"
-                                        className={`${styles.input} !w-[95%] mb-1 md:mb-0`}
-                                        required
-                                        value={userProfile?.email}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, email: e.target.value };
-                                            })
-                                        }
-                                    />
-                                </div>
-                            </div>
 
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Phone Number</label>
-                                    <input
-                                        type="number"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={userProfile?.phone}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, phone: e.target.value };
-                                            })
-                                        }
-                                    />
-                                </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Zip Code</label>
-                                    <input
-                                        type="number"
-                                        className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
-                                        required
-                                        value={userProfile?.zipCode}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, zipCode: e.target.value };
-                                            })
-                                        }
-                                    />
-                                </div>
-                            </div>
+                                <div className="w-full md:flex block pb-3">
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Phone Number</label>
+                                        <input
+                                            type="number"
+                                            className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
+                                            required
+                                            name="phone"
+                                            defaultValue={currentUser?.phone}
+                                            // value={userProfile?.phone}
+                                            // onChange={(e) =>
+                                            //     setUserProfile((prev: any) => {
+                                            //         return { ...prev, phone: e.target.value };
+                                            //     })
+                                            // }
+                                        />
+                                    </div>
 
-                            <div className="w-full md:flex block pb-3">
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Address 1</label>
-                                    <input
-                                        type="address"
-                                        className={`${styles.input} !w-[95%]`}
-                                        required
-                                        value={userProfile?.address1}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, address1: e.target.value };
-                                            })
-                                        }
-                                    />
+                                    <div className=" w-[100%] md:w-[50%]">
+                                        <label className="block pb-2">Enter your password</label>
+                                        <input
+                                            type="password"
+                                            className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                                            // required
+                                            name="password"
+                                            // defaultValue={}
+                                            // // value={password}
+                                            // onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" w-[100%] md:w-[50%]">
-                                    <label className="block pb-2">Address 2</label>
-                                    <input
-                                        type="address"
-                                        className={`${styles.input} !w-[95%]`}
-                                        required
-                                        value={userProfile?.address2}
-                                        onChange={(e) =>
-                                            setUserProfile((prev: any) => {
-                                                return { ...prev, address2: e.target.value };
-                                            })
-                                        }
-                                    />
+                                <div className="flex justify-center items-center pb-4">
+                                    <button
+                                        // onClick={handleSubmit}
+                                        className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
+                                        type="submit"
+                                    >
+                                        Update
+                                    </button>
                                 </div>
-                            </div>
-                            <div className="flex justify-center items-center pb-4">
-                                <button
-                                    onClick={handleSubmit}
-                                    className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
-                                    type="submit"
-                                >
-                                    Update
-                                </button>
-                            </div>
-                            {/* </form> */}
+                            </form>
                         </div>
                     </div>
                 </>

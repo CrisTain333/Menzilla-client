@@ -92,7 +92,7 @@ const SimpleNav = () => {
                                         href="/profile"
                                         className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
                                     >
-                                        Dashboard
+                                        Profile
                                     </Link>
                                 </li>
                             )}

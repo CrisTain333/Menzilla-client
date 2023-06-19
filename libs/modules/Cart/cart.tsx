@@ -8,7 +8,6 @@ const Cart = () => {
     const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
     let totalPrice = 0;
     let total = 0;
-    let shippingPrice = 10;
     let quantity = 0;
 
     for (const item of cartItems) {
@@ -16,7 +15,6 @@ const Cart = () => {
         total = total + item?.product?.discountPrice * item?.quantity;
         //   shippingPrice = shippingPrice + product.shipping;
     }
-    const grandTotal = total + shippingPrice;
 
     const getTotalPrice = () => {
         cartItems.forEach((item: any) => {

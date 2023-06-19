@@ -4,7 +4,7 @@ import React from 'react';
 const CheckoutSteps = ({ active }: any) => {
     return (
         <div className="w-full flex justify-center">
-            <div className="w-[90%] 800px:w-[50%] flex items-center flex-wrap">
+            <div className="w-[90%] md:w-[50%] flex items-center flex-wrap">
                 <div className={`${styles.noramlFlex}`}>
                     <div
                         className={`px-[20px] h-[38px] rounded-[20px] bg-[#f63b60] flex items-center justify-center cursor-pointer`}

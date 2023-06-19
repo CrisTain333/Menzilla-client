@@ -107,8 +107,8 @@ const Checkouts = () => {
 
     return (
         <div className="w-full flex flex-col items-center py-8">
-            <div className="w-[90%] 1000px:w-[70%] block md:flex">
-                <div className="w-full md:w-[65%]">
+            <div className="w-[90%] 1000px:w-[70%] block md:flex space-x-0 md:space-x-5">
+                <div className="w-full md:w-[65%] shadow-md">
                     <ShippingInfo
                         user={currentUser}
                         country={country}
@@ -125,7 +125,7 @@ const Checkouts = () => {
                         setZipCode={setZipCode}
                     />
                 </div>
-                <div className="w-full md:w-[35%] md:mt-0 mt-8">
+                <div className="w-full md:w-[35%] shadow-md md:mt-0 mt-8">
                     <CartData
                         handleSubmit={handleSubmit}
                         totalPrice={grandTotal}
@@ -138,7 +138,7 @@ const Checkouts = () => {
                 </div>
             </div>
             <div
-                className={`${styles.button} w-[150px] md:w-[280px] mt-10`}
+                className={`bg-[#ff9900] flex items-center justify-center py-2  w-[150px] md:w-[280px] mt-10 rounded-md cursor-pointer`}
                 onClick={paymentSubmit}
             >
                 <h5 className="text-white">Go to Payment</h5>
@@ -315,7 +315,7 @@ const CartData = ({
     setCouponCode
 }: any) => {
     return (
-        <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
+        <div className="w-full bg-[#fff] rounded-md p-5 pb-8 h-auto">
             <div className="flex justify-between">
                 <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
                 <h5 className="text-[18px] font-[600]">${subTotalPrice}</h5>

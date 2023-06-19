@@ -234,7 +234,7 @@ const Address = () => {
                         </div>
                     </div>
                 )}
-                <div className="flex w-full items-center justify-between">
+                <div className="flex-col flex md:flex-row w-full items-center justify-between">
                     <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2">My Addresses</h1>
                     <div className={`!rounded-md cursor-pointer`}>
                         <span
@@ -250,18 +250,18 @@ const Address = () => {
                 {currentUser &&
                     currentUser.addresses.map((item: any, index: number) => (
                         <div
-                            className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 my-5"
+                            className="w-full bg-white h-auto md:h-[70px] rounded-[4px] flex    flex-col justify-start px-3 shadow md:justify-between md:items-center pr-10 my-5 space-y-3 md:space-y-0 p-1"
                             key={index}
                         >
                             <div className="flex items-center">
-                                <h5 className="pl-5 font-[600]">{item.addressType}</h5>
+                                <h5 className="md:pl-5 font-[600]">{item.addressType}</h5>
                             </div>
-                            <div className="pl-8 flex items-center">
+                            <div className="md:pl-8 flex items-center">
                                 <h6 className="text-[12px] 800px:text-[unset]">
                                     {item.address1} {item.address2}
                                 </h6>
                             </div>
-                            <div className="pl-8 flex items-center">
+                            <div className="md:pl-8 flex items-center">
                                 <h6 className="text-[12px] 800px:text-[unset]">
                                     {currentUser && currentUser.phone}
                                 </h6>

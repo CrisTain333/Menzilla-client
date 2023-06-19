@@ -8,7 +8,8 @@ import { addAddress, deleteAddress } from '@/libs/Api';
 import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Address = () => {
-    const { currentUser, refresh } = useAuth();
+    const tokenStoragePath = 'accessToken';
+    const { currentUser, refresh, getUserData } = useAuth();
     const [open, setOpen] = useState(false);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
@@ -29,6 +30,7 @@ const Address = () => {
                 currentUser?._id
             );
             if (result.status === 200) {
+                const token = localStorage.getItem(tokenStoragePath);
                 toast.success(result?.message);
                 setOpen(false);
                 setCountry('');
@@ -39,6 +41,7 @@ const Address = () => {
                 setAddressType('');
                 // Refresh the user data to fetch the updated information from the server
                 refresh();
+                getUserData(token as string);
             } else {
                 toast.error(result.message);
             }
@@ -52,9 +55,11 @@ const Address = () => {
         try {
             const result = await deleteAddress(id, currentUser?._id);
             if (result.status === 200) {
+                const token = localStorage.getItem(tokenStoragePath);
                 toast.success(result?.message);
                 // Refresh the user data to fetch the updated information from the server
                 refresh();
+                getUserData(token as string);
             } else {
                 toast.error(result.message);
             }
@@ -245,7 +250,7 @@ const Address = () => {
                 {currentUser &&
                     currentUser.addresses.map((item: any, index: number) => (
                         <div
-                            className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10"
+                            className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 my-5"
                             key={index}
                         >
                             <div className="flex items-center">

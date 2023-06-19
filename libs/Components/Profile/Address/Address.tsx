@@ -1,11 +1,14 @@
 import { AiOutlineDelete } from 'react-icons/ai';
 import React, { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
-import styles from '@/styles/styles';
 import { Country, State } from 'country-state-city';
 import { addressTypeData } from '@/libs/common/constant/Data';
+import { toast } from 'react-hot-toast';
+import { addAddress } from '@/libs/Api';
+import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Address = () => {
+    const { currentUser } = useAuth();
     const [open, setOpen] = useState(false);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
@@ -14,7 +17,18 @@ const Address = () => {
     const [address2, setAddress2] = useState('');
     const [addressType, setAddressType] = useState('');
 
-    const handleSubmit = async () => {};
+    const handleSubmit = async () => {
+        if (addressType === '' || country === '' || city === '') {
+            toast.error('Please fill all the fields!');
+            return;
+        }
+        const result = await addAddress(
+            { country, city, addressType, zipCode, address1, address2 },
+            currentUser?._id
+        );
+
+        console.log(result);
+    };
 
     return (
         <div className="shadow-md w-[90%] mx-auto">

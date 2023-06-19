@@ -105,3 +105,11 @@ export const updateProfile = async (userinfo: any, userId: string) => {
         return { error };
     }
 };
+export const addAddress = async (address: any, userId: string) => {
+    try {
+        const response = await axiosInstance.patch(`/user/add-address?userId=${userId}`, address);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

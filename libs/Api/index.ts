@@ -113,3 +113,14 @@ export const addAddress = async (address: any, userId: string) => {
         return { error };
     }
 };
+
+export const deleteAddress = async (addressId: any, userId: string) => {
+    try {
+        const response = await axiosInstance.delete(
+            `/user/delete-address?addressId=${addressId}&userId=${userId}`
+        );
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

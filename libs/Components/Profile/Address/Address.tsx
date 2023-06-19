@@ -4,7 +4,7 @@ import { RxCross1 } from 'react-icons/rx';
 import { Country, State } from 'country-state-city';
 import { addressTypeData } from '@/libs/common/constant/Data';
 import { toast } from 'react-hot-toast';
-import { addAddress } from '@/libs/Api';
+import { addAddress, deleteAddress } from '@/libs/Api';
 import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Address = () => {
@@ -44,6 +44,22 @@ const Address = () => {
             }
         } catch (error) {
             toast.error('Failed to add address');
+        }
+    };
+
+    const handleDelete = async (item: any) => {
+        const id = item._id;
+        try {
+            const result = await deleteAddress(id, currentUser?._id);
+            if (result.status === 200) {
+                toast.success(result?.message);
+                // Refresh the user data to fetch the updated information from the server
+                refresh();
+            } else {
+                toast.error(result.message);
+            }
+        } catch (error) {
+            toast.error('Failed to Delete address');
         }
     };
 

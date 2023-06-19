@@ -48,6 +48,12 @@ const ProfileContent = ({ active }: any) => {
         const email = form.email.value;
         const phone = form.phone.value;
         const password = form.password.value;
+
+        if (password === '') {
+            toast.error('Please Enter Password to update');
+            return;
+        }
+
         const data = {
             name,
             email,
@@ -69,6 +75,7 @@ const ProfileContent = ({ active }: any) => {
                 }));
 
                 // Refresh the user data to fetch the updated information from the server
+                refresh();
                 getUserData(token as string);
             } else {
                 toast.error(result.message);

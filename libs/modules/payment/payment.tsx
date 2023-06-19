@@ -1,4 +1,5 @@
 import CheckoutSteps from '@/libs/Components/Checkout/CheckoutSteps';
+import Payment from '@/libs/Components/Payment/Payment';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import React from 'react';
 
@@ -9,7 +10,7 @@ const PaymentPage = () => {
                 <br />
                 <br />
                 <CheckoutSteps active={2} />
-                {/* <Checkouts /> */}
+                <Payment />
                 <br />
                 <br />
             </HeaderAndFooter>

@@ -186,9 +186,11 @@ const Cart = () => {
                                             <span>Total cost</span>
                                             <span>${totalPrice}</span>
                                         </div>
-                                        <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
-                                            Checkout
-                                        </button>
+                                        <Link href={'/checkout'}>
+                                            <button className="bg-[#ff9900] hover:bg-[#f09000] font-semibold py-3 text-sm text-white uppercase w-full rounded-sm">
+                                                Checkout
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Country, State } from 'country-state-city';
-import axios from 'axios';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { useCart } from '@/libs/Context/CartProvider';
 import { useRouter } from 'next/router';
@@ -17,8 +16,8 @@ const Checkouts = () => {
     const [address2, setAddress2] = useState('');
     const [zipCode, setZipCode] = useState(null);
     const [couponCode, setCouponCode] = useState('');
-    const [couponCodeData, setCouponCodeData] = useState(null);
-    const [discountPrice, setDiscountPrice] = useState(null);
+    // const [couponCodeData, setCouponCodeData] = useState(null);
+    // const [discountPrice, setDiscountPrice] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -48,7 +47,7 @@ const Checkouts = () => {
                 totalPrice,
                 subTotalPrice,
                 shipping,
-                discountPrice,
+                // discountPrice,
                 shippingAddress,
                 currentUser
             };
@@ -58,18 +57,22 @@ const Checkouts = () => {
             router.push('/payment');
         }
     };
+    let totalPrice = 0;
 
-    const subTotalPrice = cartItems.reduce(
-        (acc: any, item: any) => acc + item.qty * item.discountPrice,
-        0
-    );
+    const getTotalPrice = () => {
+        cartItems.forEach((item: any) => {
+            totalPrice += item?.product?.discountPrice * item.quantity;
+        });
+
+        return totalPrice;
+    };
+    const subTotalPrice = getTotalPrice();
 
     // this is shipping cost variable
     const shipping = subTotalPrice * 0.1;
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        const name = couponCode;
 
         // await axios.get(`${server}/coupon/get-coupon-value/${name}`).then((res) => {
         //     const shopId = res.data.couponCode?.shopId;
@@ -92,19 +95,15 @@ const Checkouts = () => {
         //         }
         //     }
         //     if (res.data.couponCode === null) {
-        //         toast.error("Coupon code doesn't exists!");
+        toast.error("Coupon code doesn't exists!");
         //         setCouponCode('');
         //     }
         // });
     };
 
-    const discountPercentenge: any = couponCodeData ? discountPrice : '';
+    // const discountPercentenge: any = couponCodeData ? discountPrice : '';
 
-    const totalPrice = couponCodeData
-        ? (subTotalPrice + shipping - discountPercentenge).toFixed(2)
-        : (subTotalPrice + shipping).toFixed(2);
-
-    console.log(discountPercentenge);
+    const grandTotal = (subTotalPrice + shipping).toFixed(2);
 
     return (
         <div className="w-full flex flex-col items-center py-8">
@@ -129,12 +128,12 @@ const Checkouts = () => {
                 <div className="w-full md:w-[35%] md:mt-0 mt-8">
                     <CartData
                         handleSubmit={handleSubmit}
-                        totalPrice={totalPrice}
+                        totalPrice={grandTotal}
                         shipping={shipping}
                         subTotalPrice={subTotalPrice}
                         couponCode={couponCode}
                         setCouponCode={setCouponCode}
-                        discountPercentenge={discountPercentenge}
+                        // discountPercentenge={discountPercentenge}
                     />
                 </div>
             </div>
@@ -195,7 +194,7 @@ const ShippingInfo = ({
                         <input
                             type="number"
                             required
-                            value={user && user.phoneNumber}
+                            value={user && user.phone}
                             className={`${styles.input} !w-[95%]`}
                         />
                     </div>
@@ -276,7 +275,7 @@ const ShippingInfo = ({
                 <div></div>
             </form>
             <h5
-                className="text-[18px] cursor-pointer inline-block"
+                className="text-[18px] cursor-pointer inline-block font-semibold"
                 onClick={() => setUserInfo(!userInfo)}
             >
                 Choose From saved address
@@ -313,8 +312,7 @@ const CartData = ({
     shipping,
     subTotalPrice,
     couponCode,
-    setCouponCode,
-    discountPercentenge
+    setCouponCode
 }: any) => {
     return (
         <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
@@ -330,9 +328,7 @@ const CartData = ({
             <br />
             <div className="flex justify-between border-b pb-3">
                 <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-                <h5 className="text-[18px] font-[600]">
-                    - {discountPercentenge ? '$' + discountPercentenge.toString() : null}
-                </h5>
+                <h5 className="text-[18px] font-[600]">-</h5>
             </div>
             <h5 className="text-[18px] font-[600] text-end pt-3">${totalPrice}</h5>
             <br />

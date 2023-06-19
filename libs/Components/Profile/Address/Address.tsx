@@ -250,7 +250,7 @@ const Address = () => {
                 {currentUser &&
                     currentUser.addresses.map((item: any, index: number) => (
                         <div
-                            className="w-full bg-white h-auto md:h-[70px] rounded-[4px] flex    flex-col justify-start px-3 shadow md:justify-between md:items-center pr-10 my-5 space-y-3 md:space-y-0 p-1"
+                            className="w-full bg-white h-auto md:h-[70px] rounded-[4px] flex    flex-col md:flex-row justify-start px-3 shadow md:justify-between md:items-center pr-10 my-5 space-y-3 md:space-y-0 p-1"
                             key={index}
                         >
                             <div className="flex items-center">

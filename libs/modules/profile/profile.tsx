@@ -8,6 +8,7 @@ import { useAuth } from '@/libs/Context/AuthProvider';
 import { useRouter } from 'next/router';
 
 const Profile = () => {
+    // eslint-disable-next-line no-unused-vars
     const { currentUser, isLoading } = useAuth();
     const [active, setActive] = useState(1);
     const router = useRouter();
@@ -18,6 +19,7 @@ const Profile = () => {
         if (!token && !currentUser) {
             router.push('/');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 
     return (

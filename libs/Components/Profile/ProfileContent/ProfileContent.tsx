@@ -5,10 +5,10 @@ import Image from 'next/image';
 import AllOrders from '../AllOrder/AllOrder';
 import AllRefundOrders from '../AllRefundOrders/AllRefundOrders';
 import TrackOrder from '../TrackOrder/TrackOrder';
-import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import Address from '../Address/Address';
 import { updateProfile, updateProfilePicture } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
+import ChangePassword from '../PaymentMethod/ChangePassword';
 
 const ProfileContent = ({ active }: any) => {
     const tokenStoragePath = 'accessToken';
@@ -48,6 +48,12 @@ const ProfileContent = ({ active }: any) => {
         const email = form.email.value;
         const phone = form.phone.value;
         const password = form.password.value;
+
+        if (password === '') {
+            toast.error('Please Enter Password to update');
+            return;
+        }
+
         const data = {
             name,
             email,
@@ -69,6 +75,7 @@ const ProfileContent = ({ active }: any) => {
                 }));
 
                 // Refresh the user data to fetch the updated information from the server
+                refresh();
                 getUserData(token as string);
             } else {
                 toast.error(result.message);
@@ -308,7 +315,7 @@ const ProfileContent = ({ active }: any) => {
             {/* Payment method */}
             {active === 6 && (
                 <div>
-                    <PaymentMethod />
+                    <ChangePassword />
                 </div>
             )}
 

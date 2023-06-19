@@ -17,6 +17,7 @@ interface CartContextType {
 
     refresh: any;
 }
+// string | undefine
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 

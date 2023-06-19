@@ -13,12 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
                     <CartProvider>
                         <Toaster
                             position="top-right"
-                            containerStyle={
-                                {
-                                    // Add space at the top
-                                    // marginTop: '50px'
-                                }
-                            }
+                            containerStyle={{
+                                // Add space at the top
+                                marginTop: '57px'
+                            }}
                             toastOptions={{
                                 duration: 4000,
                                 success: {

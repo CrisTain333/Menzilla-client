@@ -5,10 +5,10 @@ import Image from 'next/image';
 import AllOrders from '../AllOrder/AllOrder';
 import AllRefundOrders from '../AllRefundOrders/AllRefundOrders';
 import TrackOrder from '../TrackOrder/TrackOrder';
-import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import Address from '../Address/Address';
 import { updateProfile, updateProfilePicture } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
+import ChangePassword from '../PaymentMethod/ChangePassword';
 
 const ProfileContent = ({ active }: any) => {
     const tokenStoragePath = 'accessToken';
@@ -315,7 +315,7 @@ const ProfileContent = ({ active }: any) => {
             {/* Payment method */}
             {active === 6 && (
                 <div>
-                    <PaymentMethod />
+                    <ChangePassword />
                 </div>
             )}
 

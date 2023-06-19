@@ -225,22 +225,41 @@ const Address = () => {
                     </div>
                 </div>
                 <br />
-                <div className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10">
-                    <div className="flex items-center">
-                        <h5 className="pl-5 font-[600]">Default</h5>
-                    </div>
-                    <div className="pl-8 flex items-center">
-                        <h6 className="text-[12px] md:text-[unset]">
-                            494 Erdman Pasaage, New Zoietown, Paraguay
-                        </h6>
-                    </div>
-                    <div className="pl-8 flex items-center">
-                        <h6 className="text-[12px] md:text-[unset]">(213) 840-9416</h6>
-                    </div>
-                    <div className="min-w-[10%] flex items-center justify-between pl-8">
-                        <AiOutlineDelete size={25} className="cursor-pointer" />
-                    </div>
-                </div>
+
+                {currentUser &&
+                    currentUser.addresses.map((item: any, index: number) => (
+                        <div
+                            className="w-full bg-white h-min md:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10"
+                            key={index}
+                        >
+                            <div className="flex items-center">
+                                <h5 className="pl-5 font-[600]">{item.addressType}</h5>
+                            </div>
+                            <div className="pl-8 flex items-center">
+                                <h6 className="text-[12px] 800px:text-[unset]">
+                                    {item.address1} {item.address2}
+                                </h6>
+                            </div>
+                            <div className="pl-8 flex items-center">
+                                <h6 className="text-[12px] 800px:text-[unset]">
+                                    {currentUser && currentUser.phone}
+                                </h6>
+                            </div>
+                            <div className="min-w-[10%] flex items-center justify-between pl-8">
+                                <AiOutlineDelete
+                                    size={25}
+                                    className="cursor-pointer"
+                                    onClick={() => handleDelete(item)}
+                                />
+                            </div>
+                        </div>
+                    ))}
+
+                {currentUser && currentUser.addresses.length === 0 && (
+                    <h5 className="text-center pt-8 text-[18px]">
+                        You not have any saved address!
+                    </h5>
+                )}
             </div>
         </div>
     );

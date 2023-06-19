@@ -124,3 +124,12 @@ export const deleteAddress = async (addressId: any, userId: string) => {
         return { error };
     }
 };
+
+export const changePassword = async (data: any, userId: string) => {
+    try {
+        const response = await axiosInstance.patch(`/user/change-password?userId=${userId}`, data);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

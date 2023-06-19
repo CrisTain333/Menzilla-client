@@ -1,12 +1,50 @@
+import { changePassword } from '@/libs/Api';
+import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import SmallLoader from '../../SmallLoader/SmallLoader';
 const ChangePassword = () => {
+    const { currentUser, refresh } = useAuth();
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const passwordChangeHandler = async (e: any) => {
         e.preventDefault();
+        setIsLoading(true);
+        setErrorMessage('');
+        if (oldPassword === '') {
+            setIsLoading(false);
+            setErrorMessage('Please enter old password');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            setIsLoading(false);
+            setErrorMessage('Password are not same');
+            return;
+        }
+        const data = { oldPassword, newPassword, newConfirmPassword: confirmPassword };
+
+        try {
+            const result = await changePassword(data, currentUser?._id);
+            if (result.status === 200) {
+                toast.success(result?.message);
+                // Refresh the user data to fetch the updated information from the server
+                refresh();
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+                setErrorMessage(result?.message);
+                toast.error(result.message);
+            }
+        } catch (error) {
+            setIsLoading(false);
+            toast.error('Failed to change password');
+        }
     };
     return (
         <div className="shadow-md w-[90%] mx-auto rounded-md p-2">
@@ -45,12 +83,23 @@ const ChangePassword = () => {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
-                            <input
-                                className={`w-[95%] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
-                                required
-                                value="Update"
+                            {errorMessage !== '' && (
+                                <>
+                                    <p className="text-md  text-red-600">{errorMessage}</p>
+                                </>
+                            )}
+                            <button
+                                className={`w-[95%] h-[40px]  text-center   text-white bg-black transition-all duration-500   rounded-[3px] mt-3 cursor-pointer`}
                                 type="submit"
-                            />
+                            >
+                                {isLoading ? (
+                                    <>
+                                        <SmallLoader />
+                                    </>
+                                ) : (
+                                    'Update'
+                                )}
+                            </button>
                         </div>
                     </form>
                 </div>

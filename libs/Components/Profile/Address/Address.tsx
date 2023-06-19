@@ -8,26 +8,43 @@ import { addAddress } from '@/libs/Api';
 import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Address = () => {
-    const { currentUser } = useAuth();
+    const { currentUser, refresh } = useAuth();
     const [open, setOpen] = useState(false);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
-    const [zipCode, setZipCode] = useState();
+    const [zipCode, setZipCode] = useState<any>();
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
     const [addressType, setAddressType] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
         if (addressType === '' || country === '' || city === '') {
             toast.error('Please fill all the fields!');
             return;
         }
-        const result = await addAddress(
-            { country, city, addressType, zipCode, address1, address2 },
-            currentUser?._id
-        );
-
-        console.log(result);
+        try {
+            const result = await addAddress(
+                { country, city, addressType, zipCode, address1, address2 },
+                currentUser?._id
+            );
+            if (result.status === 200) {
+                toast.success(result?.message);
+                setOpen(false);
+                setCountry('');
+                setCity('');
+                setAddress1('');
+                setAddress2('');
+                setZipCode('');
+                setAddressType('');
+                // Refresh the user data to fetch the updated information from the server
+                refresh();
+            } else {
+                toast.error(result.message);
+            }
+        } catch (error) {
+            toast.error('Failed to add address');
+        }
     };
 
     return (

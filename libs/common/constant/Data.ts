@@ -475,3 +475,15 @@ export const footerSupportLinks = [
         name: 'Live chat'
     }
 ];
+
+export const addressTypeData = [
+    {
+        name: 'Default'
+    },
+    {
+        name: 'Home'
+    },
+    {
+        name: 'Office'
+    }
+];

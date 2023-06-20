@@ -71,7 +71,7 @@ const Checkouts = () => {
             // update local storage with the updated orders array
             localStorage.setItem('latestOrder', JSON.stringify(orderData));
             refresh();
-            router.push('/payment');
+            router.push('/order/payment');
         }
     };
 

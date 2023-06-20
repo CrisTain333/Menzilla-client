@@ -107,7 +107,9 @@ const Payment = () => {
             if (!stripe || !elements) return;
             const cardElement = elements.getElement(CardNumberElement);
 
-            if (!cardElement) return;
+            if (!cardElement) {
+                return;
+            }
 
             const result = await stripe.confirmCardPayment(client_secret, {
                 payment_method: {
@@ -139,39 +141,9 @@ const Payment = () => {
                 }
             }
         } catch (error: any) {
-            toast.error(error);
+            console.log(error);
+            toast.error('something went wrong');
         }
-
-        //     if (!stripe || !elements) return;
-        //     const result = await stripe.confirmCardPayment(client_secret, {
-        //         payment_method: {
-        //             card: elements.getElement(CardNumberElement)
-        //         }
-        //     });
-
-        //     if (result.error) {
-        //         toast.error(result.error.message);
-        //     } else {
-        //         if (result.paymentIntent.status === 'succeeded') {
-        //             order.paymnentInfo = {
-        //                 id: result.paymentIntent.id,
-        //                 status: result.paymentIntent.status,
-        //                 type: 'Credit Card'
-        //             };
-
-        //             await axios.post(`${server}/order/create-order`, order, config).then((res) => {
-        //                 setOpen(false);
-        //                 navigate('/order/success');
-        //                 toast.success('Order successful!');
-        //                 localStorage.setItem('cartItems', JSON.stringify([]));
-        //                 localStorage.setItem('latestOrder', JSON.stringify([]));
-        //                 window.location.reload();
-        //             });
-        //         }
-        //     }
-        // } catch (error) {
-        //     toast.error(error);
-        // }
     };
 
     const cashOnDeliveryHandler = async (e: any) => {
@@ -259,9 +231,9 @@ const PaymentInfo = ({
                                     <label className="block pb-2">Name On Card</label>
                                     <input
                                         required
-                                        placeholder={user && user.name}
+                                        placeholder={user?.name}
                                         className={`${styles.input} !w-[95%] text-[#444444b9]`}
-                                        value={user && user.name}
+                                        value={user?.name}
                                     />
                                 </div>
                                 <div className="w-[50%]">

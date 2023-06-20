@@ -22,7 +22,8 @@ const nextConfig = {
         CLOUD_NAME: process.env.CLOUD_NAME,
         CLOUD_API_KEY: process.env.CLOUD_API_KEY,
         CLOUD_API_SECRET: process.env.CLOUD_API_SECRET,
-        IMAGE_API_KEY: process.env.IMAGE_API_KEY
+        IMAGE_API_KEY: process.env.IMAGE_API_KEY,
+        PAYMENT_SECRET_KEY: process.env.PAYMENT_SECRET_KEY
     }
 };
 

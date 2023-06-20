@@ -1,7 +1,6 @@
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
+import Link from 'next/link';
 import React from 'react';
-// import Lottie from 'react-lottie';
-import animationData from '../../../libs/assets/success.json';
 
 const index = () => {
     return (
@@ -9,7 +8,6 @@ const index = () => {
             <HeaderAndFooter>
                 <Success />
             </HeaderAndFooter>
-            <p>Success Page </p>
         </div>
     );
 };
@@ -18,7 +16,7 @@ export default index;
 
 const Success = () => {
     return (
-        <div className="h-[50vh]">
+        <div className="h-[60vh]">
             {/* <Lottie options={defaultOptions} width={300} height={300} /> */}
             <div className="flex items-center justify-center">
                 <svg
@@ -56,9 +54,18 @@ const Success = () => {
                     </g>
                 </svg>
             </div>
-            <h5 className="text-center mb-36 mt-10 text-[25px] text-[#000000d4] font-mono">
-                Your order is successful 😍
-            </h5>
+            <div>
+                <h5 className="text-center  mt-10  text-[#000000d4] font-mono font-bold text-4xl">
+                    Your order is successful 😍
+                </h5>
+            </div>
+            <div className="mb-36 flex items-center justify-center my-8 ">
+                <Link href="/profile?from_Success_Page=true">
+                    <button className="bg-[#ff9900] text-lg py-2 px-7 rounded-md text-white">
+                        See Order
+                    </button>
+                </Link>
+            </div>
             <br />
             <br />
         </div>

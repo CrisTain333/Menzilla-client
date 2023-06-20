@@ -8,7 +8,7 @@ import styles from '@/styles/styles';
 
 const Checkouts = () => {
     const { currentUser } = useAuth();
-    const { cartItems } = useCart();
+    const { cartItems, refresh } = useCart();
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [userInfo, setUserInfo] = useState(false);
@@ -54,6 +54,7 @@ const Checkouts = () => {
 
             // update local storage with the updated orders array
             localStorage.setItem('latestOrder', JSON.stringify(orderData));
+            refresh();
             router.push('/payment');
         }
     };
@@ -108,7 +109,7 @@ const Checkouts = () => {
     return (
         <div className="w-full flex flex-col items-center py-8">
             <div className="w-[90%] 1000px:w-[70%] block md:flex space-x-0 md:space-x-5">
-                <div className="w-full md:w-[65%] shadow-md">
+                <div className="w-full md:w-[65%] shadow-md rounded-md">
                     <ShippingInfo
                         user={currentUser}
                         country={country}
@@ -125,7 +126,7 @@ const Checkouts = () => {
                         setZipCode={setZipCode}
                     />
                 </div>
-                <div className="w-full md:w-[35%] shadow-md md:mt-0 mt-8">
+                <div className="w-full md:w-[35%] shadow-md md:mt-0 mt-8 rounded-md">
                     <CartData
                         handleSubmit={handleSubmit}
                         totalPrice={grandTotal}

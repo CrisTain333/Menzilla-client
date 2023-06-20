@@ -14,7 +14,7 @@ interface CartContextType {
     increaseQuantity: (productId: string) => any;
     // eslint-disable-next-line no-unused-vars
     decreaseQuantity: (productId: string) => any;
-
+    orderData: any;
     refresh: any;
 }
 // string | undefine
@@ -25,11 +25,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const [cartLength, setCartLength] = useState(0);
     const [cartItems, setCartItems] = useState<any>([]);
     const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [orderData, setOrderData] = useState<any>([]);
     useEffect(() => {
         // Update the cart length in the UI whenever the cart changes
         const cartItems = getCartItems();
         setCartItems(cartItems);
         setCartLength(cartItems.length);
+        const orderDatas = getOrderData();
+        setOrderData(orderDatas);
         // eslint-disable-next-line no-console
         console.log('hello from cart provider');
     }, [cartLength, shouldRefresh]);
@@ -71,6 +74,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }
 
         return JSON.parse(cart);
+    };
+
+    const getOrderData = () => {
+        const orderData = localStorage.getItem('latestOrder');
+        if (!orderData) {
+            return [];
+        }
+        return JSON.parse(orderData);
     };
 
     const handleAddToCart = (product: any) => {
@@ -139,7 +150,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 removeFromCart,
                 refresh,
                 increaseQuantity,
-                decreaseQuantity
+                decreaseQuantity,
+                orderData
             }}
         >
             {children}

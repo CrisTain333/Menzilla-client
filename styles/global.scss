@@ -121,7 +121,45 @@
         transform: translateY(0);
         opacity: 1;
     }
+    .success {
+        animation-duration: 10s;
+        animation-fill-mode: both;
+        animation-name: bounceIn;
+        animation-iteration-count: infinite;
+    }
 
+    @keyframes bounceIn {
+        0%,
+        100%,
+        20%,
+        40%,
+        60%,
+        80% {
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        0% {
+            opacity: 0;
+            transform: scale3d(0.3, 0.3, 0.3);
+        }
+        20% {
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        40% {
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+        60% {
+            opacity: 1;
+            transform: scale3d(1.03, 1.03, 1.03);
+        }
+        80% {
+            transform: scale3d(0.97, 0.97, 0.97);
+        }
+        100% {
+            opacity: 1;
+            transform: scale3d(1, 1, 1);
+        }
+    }
     /*
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -166,135 +204,3 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 8px;
     background-color: #ff9900;
 }
-
-// .container {
-//     margin-inline: auto;
-//     padding-inline: 24px;
-//     max-width: 1300px !important;
-// }
-// ::-webkit-calendar-picker-indicator {
-//     cursor: pointer;
-// }
-// .card-shine {
-//     $dot-size: 1px;
-//     $dot-space: 30px;
-//     isolation: isolate;
-//     --dot-color: rgb(189, 189, 189);
-//     --middle-color: rgb(70, 70, 70);
-//     &::before {
-//         content: '';
-//         top: 0;
-//         left: 0;
-//         bottom: 0;
-//         right: 0;
-//         position: absolute;
-//         background: linear-gradient(90deg, var(--paper) ($dot-space - $dot-size), transparent 1%)
-//                 center,
-//             linear-gradient(var(--paper) ($dot-space - $dot-size), transparent 1%) center,
-//             var(--dot-color);
-//         background-size: $dot-space $dot-space;
-//         z-index: -1;
-//     }
-//     &::after {
-//         background: linear-gradient(transparent, var(--middle-color), transparent);
-//         height: 70px;
-//         width: 1px;
-//         position: absolute;
-//         left: -1px;
-//         content: '';
-//         transition: top 600ms ease, opacity 600ms ease;
-//         top: 65%;
-//         opacity: 0;
-//     }
-//     &:hover {
-//         &::after {
-//             top: 10%;
-//             opacity: 1;
-//         }
-//     }
-// }
-// [data-mode='dark'] .card-shine {
-//     --dot-color: rgb(60, 60, 60);
-//     --middle-color: mediumslateblue;
-// }
-// // [data-mode='dark'] {
-// //     input,
-// //     textarea {
-// //         background-color: var(--input-bg) !important;
-// //         color: white;
-// //     }
-// // }
-// .active-selection {
-//     background-color: lightgray;
-// }
-
-// [data-mode='dark'] .active-selection {
-//     background-color: rgb(64, 64, 64);
-// }
-
-// :root {
-//     --default-color: rgba(0, 0, 0, 0.87);
-//     --default-bg: rgba(0, 0, 0, 0.08);
-
-//     --primary-color: rgb(255, 255, 255);
-//     --primary-bg: rgb(25, 118, 210);
-
-//     --error-color: #fff;
-//     --error-bg: rgb(211, 47, 47);
-
-//     --info-color: #fff;
-//     --info-bg: rgb(2, 136, 209);
-
-//     --success-color: #fff;
-//     --success-bg: rgb(46, 125, 50);
-
-//     --warning-color: #fff;
-//     --warning-bg: rgb(237, 108, 2);
-// }
-
-// [data-mode='dark'] {
-//     ::-webkit-calendar-picker-indicator {
-//         filter: invert(1);
-//     }
-//     shadow-sm {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-//             rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-//     }
-//     shadow {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
-//             rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
-//     }
-//     shadow-md {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,
-//             rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
-//     }
-//     shadow-lg {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
-//             rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
-//     }
-//     shadow-xl {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px,
-//             rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
-//     }
-//     shadow-2xl {
-//         box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px,
-//             rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
-//     }
-//     --default-color: #fff;
-//     --default-bg: rgba(255, 255, 255, 0.16);
-
-//     --primary-color: rgba(0, 0, 0, 0.87);
-//     --primary-bg: rgb(144, 202, 249);
-
-//     --error-color: #fff;
-//     --error-bg: rgb(244, 67, 54);
-
-//     --info-color: rgba(0, 0, 0, 0.87);
-//     --info-bg: rgb(41, 182, 246);
-
-//     --success-color: rgba(0, 0, 0, 0.87);
-//     --success-bg: rgb(102, 187, 106);
-
-//     --warning-color: rgba(0, 0, 0, 0.87);
-//     --warning-bg: rgb(255, 167, 38);
-// }

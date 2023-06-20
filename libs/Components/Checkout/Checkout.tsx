@@ -8,7 +8,7 @@ import styles from '@/styles/styles';
 
 const Checkouts = () => {
     const { currentUser } = useAuth();
-    const { cartItems } = useCart();
+    const { cartItems, refresh } = useCart();
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [userInfo, setUserInfo] = useState(false);
@@ -23,6 +23,22 @@ const Checkouts = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    let totalPrice = 0;
+
+    const getTotalPrice = () => {
+        cartItems.forEach((item: any) => {
+            totalPrice += item?.product?.discountPrice * item.quantity;
+        });
+
+        return totalPrice;
+    };
+    const subTotalPrice = getTotalPrice();
+
+    // this is shipping cost variable
+    const shipping = subTotalPrice * 0.1;
+
+    const grandTotal = (subTotalPrice + shipping).toFixed(2);
 
     const paymentSubmit = () => {
         if (
@@ -44,7 +60,7 @@ const Checkouts = () => {
 
             const orderData = {
                 cartItems,
-                totalPrice,
+                totalPrice: grandTotal,
                 subTotalPrice,
                 shipping,
                 // discountPrice,
@@ -54,22 +70,10 @@ const Checkouts = () => {
 
             // update local storage with the updated orders array
             localStorage.setItem('latestOrder', JSON.stringify(orderData));
-            router.push('/payment');
+            refresh();
+            router.push('/order/payment');
         }
     };
-    let totalPrice = 0;
-
-    const getTotalPrice = () => {
-        cartItems.forEach((item: any) => {
-            totalPrice += item?.product?.discountPrice * item.quantity;
-        });
-
-        return totalPrice;
-    };
-    const subTotalPrice = getTotalPrice();
-
-    // this is shipping cost variable
-    const shipping = subTotalPrice * 0.1;
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -103,12 +107,10 @@ const Checkouts = () => {
 
     // const discountPercentenge: any = couponCodeData ? discountPrice : '';
 
-    const grandTotal = (subTotalPrice + shipping).toFixed(2);
-
     return (
         <div className="w-full flex flex-col items-center py-8">
             <div className="w-[90%] 1000px:w-[70%] block md:flex space-x-0 md:space-x-5">
-                <div className="w-full md:w-[65%] shadow-md">
+                <div className="w-full md:w-[65%] shadow-md rounded-md">
                     <ShippingInfo
                         user={currentUser}
                         country={country}
@@ -125,7 +127,7 @@ const Checkouts = () => {
                         setZipCode={setZipCode}
                     />
                 </div>
-                <div className="w-full md:w-[35%] shadow-md md:mt-0 mt-8">
+                <div className="w-full md:w-[35%] shadow-md md:mt-0 mt-8 rounded-md">
                     <CartData
                         handleSubmit={handleSubmit}
                         totalPrice={grandTotal}

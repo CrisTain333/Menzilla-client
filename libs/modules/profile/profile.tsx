@@ -12,12 +12,18 @@ const Profile = () => {
     const { currentUser, isLoading } = useAuth();
     const [active, setActive] = useState(1);
     const router = useRouter();
+    const { query } = router;
+    const from_Success_Page = query?.from_Success_Page;
 
     useEffect((): any => {
         const tokenStoragePath = 'accessToken';
         const token = localStorage.getItem(tokenStoragePath);
         if (!token && !currentUser) {
             router.push('/');
+        }
+
+        if (from_Success_Page === 'true') {
+            setActive(2);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);

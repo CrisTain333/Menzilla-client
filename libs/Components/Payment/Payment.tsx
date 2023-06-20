@@ -15,22 +15,23 @@ import styles from '@/styles/styles';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { useCart } from '@/libs/Context/CartProvider';
 import { toast } from 'react-hot-toast';
-import { createPaymentIntent } from '@/libs/Api';
+import { createPaymentIntent, createUserOrder } from '@/libs/Api';
+import { FaAmazonPay } from 'react-icons/fa';
+import SmallLoader from '../SmallLoader/SmallLoader';
 
 const Payment = () => {
-    const { orderData } = useCart();
+    const { orderData, refresh } = useCart();
     const [open, setOpen] = useState(false);
     const { currentUser } = useAuth();
-    const navigate = useRouter();
+    const router = useRouter();
     const stripe = useStripe();
     const elements = useElements();
+    const [isLoading, setIsLoading] = useState(false);
 
     // useEffect(() => {
     //     const orderData = JSON.parse(localStorage.getItem('latestOrder'));
     //     setOrderData(orderData);
     // }, []);
-
-    console.log(orderData);
 
     const createOrder = (data: any, actions: any) => {
         return actions.order
@@ -124,6 +125,18 @@ const Payment = () => {
                         type: 'Credit Card'
                     };
                 }
+
+                const finalResult = await createUserOrder(order);
+                if (finalResult.status === 200) {
+                    setOpen(false);
+                    router.push('/order/success');
+                    toast.success('Order successful!');
+                    localStorage.setItem('cartItems', JSON.stringify([]));
+                    localStorage.setItem('latestOrder', JSON.stringify([]));
+                    refresh();
+                } else {
+                    toast.error(finalResult.message);
+                }
             }
         } catch (error: any) {
             toast.error(error);
@@ -196,6 +209,7 @@ const Payment = () => {
                         createOrder={createOrder}
                         paymentHandler={paymentHandler}
                         cashOnDeliveryHandler={cashOnDeliveryHandler}
+                        isLoading={isLoading}
                     />
                 </div>
                 <div className="w-full md:w-[35%] md:mt-0 mt-8 shadow-md  rounded-md">
@@ -213,7 +227,8 @@ const PaymentInfo = ({
     onApprove,
     createOrder,
     paymentHandler,
-    cashOnDeliveryHandler
+    cashOnDeliveryHandler,
+    isLoading
 }: any) => {
     const [select, setSelect] = useState(1);
 
@@ -319,11 +334,23 @@ const PaymentInfo = ({
                                     />
                                 </div>
                             </div>
-                            <input
+                            <button
                                 type="submit"
-                                value="Submit"
-                                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
-                            />
+                                disabled={isLoading}
+                                className={` px-12 my-2 py-2  ${
+                                    isLoading
+                                        ? '!bg-[#ff990086] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600]'
+                                        : '!bg-[#ffa217] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600]'
+                                }`}
+                            >
+                                {isLoading ? (
+                                    <SmallLoader />
+                                ) : (
+                                    <>
+                                        <div className="flex items-center justify-center">Pay</div>
+                                    </>
+                                )}
+                            </button>
                         </form>
                     </div>
                 ) : null}
@@ -365,18 +392,6 @@ const PaymentInfo = ({
                                             onClick={() => setOpen(false)}
                                         />
                                     </div>
-                                    <PayPalScriptProvider
-                                        options={{
-                                            'client-id':
-                                                'Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn'
-                                        }}
-                                    >
-                                        <PayPalButtons
-                                            style={{ layout: 'vertical' }}
-                                            onApprove={onApprove}
-                                            createOrder={createOrder}
-                                        />
-                                    </PayPalScriptProvider>
                                 </div>
                             </div>
                         )}

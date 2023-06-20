@@ -133,3 +133,12 @@ export const changePassword = async (data: any, userId: string) => {
         return { error };
     }
 };
+
+export const createPaymentIntent = async (data: any) => {
+    try {
+        const response = await axiosInstance.post(`/amount/process`, data);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

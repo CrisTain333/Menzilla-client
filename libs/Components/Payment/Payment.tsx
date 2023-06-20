@@ -14,6 +14,8 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/styles';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { useCart } from '@/libs/Context/CartProvider';
+import { toast } from 'react-hot-toast';
+import { createPaymentIntent } from '@/libs/Api';
 
 const Payment = () => {
     const { orderData } = useCart();
@@ -52,7 +54,7 @@ const Payment = () => {
             });
     };
 
-    const order = {
+    const order: any = {
         cart: orderData?.cart,
         shippingAddress: orderData?.shippingAddress,
         user: currentUser && currentUser,
@@ -98,16 +100,34 @@ const Payment = () => {
 
     const paymentHandler = async (e: any) => {
         e.preventDefault();
-        // try {
-        //     const config = {
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     };
+        try {
+            const paymentIntent = await createPaymentIntent(paymentData);
+            const client_secret = paymentIntent.client_secret;
+            if (!stripe || !elements) return;
+            const cardElement = elements.getElement(CardNumberElement);
 
-        //     const { data } = await axios.post(`${server}/payment/process`, paymentData, config);
+            if (!cardElement) return;
 
-        //     const client_secret = data.client_secret;
+            const result = await stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                    card: cardElement
+                }
+            });
+
+            if (result.error) {
+                toast.error(result?.error?.message as string);
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status,
+                        type: 'Credit Card'
+                    };
+                }
+            }
+        } catch (error: any) {
+            toast.error(error);
+        }
 
         //     if (!stripe || !elements) return;
         //     const result = await stripe.confirmCardPayment(client_secret, {
@@ -225,7 +245,7 @@ const PaymentInfo = ({
                                     <input
                                         required
                                         placeholder={user && user.name}
-                                        className={`${styles.input} !w-[95%] text-[#444]`}
+                                        className={`${styles.input} !w-[95%] text-[#444444b9]`}
                                         value={user && user.name}
                                     />
                                 </div>

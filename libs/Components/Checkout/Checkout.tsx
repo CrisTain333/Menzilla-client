@@ -24,6 +24,22 @@ const Checkouts = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    let totalPrice = 0;
+
+    const getTotalPrice = () => {
+        cartItems.forEach((item: any) => {
+            totalPrice += item?.product?.discountPrice * item.quantity;
+        });
+
+        return totalPrice;
+    };
+    const subTotalPrice = getTotalPrice();
+
+    // this is shipping cost variable
+    const shipping = subTotalPrice * 0.1;
+
+    const grandTotal = (subTotalPrice + shipping).toFixed(2);
+
     const paymentSubmit = () => {
         if (
             address1 === '' ||
@@ -44,7 +60,7 @@ const Checkouts = () => {
 
             const orderData = {
                 cartItems,
-                totalPrice,
+                totalPrice: grandTotal,
                 subTotalPrice,
                 shipping,
                 // discountPrice,
@@ -58,19 +74,6 @@ const Checkouts = () => {
             router.push('/payment');
         }
     };
-    let totalPrice = 0;
-
-    const getTotalPrice = () => {
-        cartItems.forEach((item: any) => {
-            totalPrice += item?.product?.discountPrice * item.quantity;
-        });
-
-        return totalPrice;
-    };
-    const subTotalPrice = getTotalPrice();
-
-    // this is shipping cost variable
-    const shipping = subTotalPrice * 0.1;
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -103,8 +106,6 @@ const Checkouts = () => {
     };
 
     // const discountPercentenge: any = couponCodeData ? discountPrice : '';
-
-    const grandTotal = (subTotalPrice + shipping).toFixed(2);
 
     return (
         <div className="w-full flex flex-col items-center py-8">

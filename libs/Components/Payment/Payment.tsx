@@ -54,9 +54,10 @@ const Payment = () => {
                 return orderID;
             });
     };
+    console.log(orderData);
 
     const order: any = {
-        cart: orderData?.cart,
+        cart: orderData?.cartItems,
         shippingAddress: orderData?.shippingAddress,
         user: currentUser && currentUser,
         totalPrice: orderData?.totalPrice
@@ -103,7 +104,7 @@ const Payment = () => {
         e.preventDefault();
         try {
             const paymentIntent = await createPaymentIntent(paymentData);
-            const client_secret = paymentIntent.client_secret;
+            const client_secret = paymentIntent.data;
             if (!stripe || !elements) return;
             const cardElement = elements.getElement(CardNumberElement);
 

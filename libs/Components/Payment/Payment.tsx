@@ -102,13 +102,18 @@ const Payment = () => {
 
     const paymentHandler = async (e: any) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const paymentIntent = await createPaymentIntent(paymentData);
             const client_secret = paymentIntent.data;
-            if (!stripe || !elements) return;
+            if (!stripe || !elements) {
+                setIsLoading(false);
+                return;
+            }
             const cardElement = elements.getElement(CardNumberElement);
 
             if (!cardElement) {
+                setIsLoading(false);
                 return;
             }
 
@@ -120,6 +125,7 @@ const Payment = () => {
 
             if (result.error) {
                 toast.error(result?.error?.message as string);
+                setIsLoading(false);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
                     order.paymentInfo = {
@@ -134,15 +140,18 @@ const Payment = () => {
                     setOpen(false);
                     router.push('/order/success');
                     toast.success('Order successful!');
-                    localStorage.setItem('cartItems', JSON.stringify([]));
+                    localStorage.setItem('cartItem', JSON.stringify([]));
                     localStorage.setItem('latestOrder', JSON.stringify([]));
                     refresh();
+                    setIsLoading(false);
                 } else {
+                    setIsLoading(false);
                     toast.error(finalResult.message);
                 }
             }
+            setIsLoading(false);
         } catch (error: any) {
-            console.log(error);
+            setIsLoading(false);
             toast.error('something went wrong');
         }
     };

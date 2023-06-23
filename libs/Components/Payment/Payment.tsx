@@ -27,6 +27,7 @@ const Payment = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
+    const [isCashLoading, setIsCashLoading] = useState(false);
 
     // useEffect(() => {
     //     const orderData = JSON.parse(localStorage.getItem('latestOrder'));
@@ -54,7 +55,6 @@ const Payment = () => {
                 return orderID;
             });
     };
-    console.log(orderData);
 
     const order: any = {
         cart: orderData?.cartItems,
@@ -158,25 +158,23 @@ const Payment = () => {
 
     const cashOnDeliveryHandler = async (e: any) => {
         e.preventDefault();
-
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
-
-        // order.paymentInfo = {
-        //     type: 'Cash On Delivery'
-        // };
-
-        // await axios.post(`${server}/order/create-order`, order, config).then((res) => {
-        //     setOpen(false);
-        //     navigate('/order/success');
-        //     toast.success('Order successful!');
-        //     localStorage.setItem('cartItems', JSON.stringify([]));
-        //     localStorage.setItem('latestOrder', JSON.stringify([]));
-        //     window.location.reload();
-        // });
+        setIsCashLoading(true);
+        order.paymentInfo = {
+            type: 'Cash On Delivery'
+        };
+        const finalResult = await createUserOrder(order);
+        if (finalResult.status === 200) {
+            setOpen(false);
+            router.push('/order/success');
+            toast.success('Order successful!');
+            localStorage.setItem('cartItem', JSON.stringify([]));
+            localStorage.setItem('latestOrder', JSON.stringify([]));
+            refresh();
+            setIsCashLoading(false);
+        } else {
+            setIsCashLoading(false);
+            toast.error(finalResult.message);
+        }
     };
 
     return (
@@ -192,6 +190,7 @@ const Payment = () => {
                         paymentHandler={paymentHandler}
                         cashOnDeliveryHandler={cashOnDeliveryHandler}
                         isLoading={isLoading}
+                        isCashLoading={isCashLoading}
                     />
                 </div>
                 <div className="w-full md:w-[35%] md:mt-0 mt-8 shadow-md  rounded-md">
@@ -208,6 +207,7 @@ const PaymentInfo = ({
     // setOpen,
     // onApprove,
     // createOrder,
+    isCashLoading,
     paymentHandler,
     cashOnDeliveryHandler,
     isLoading
@@ -401,11 +401,23 @@ const PaymentInfo = ({
                 {select === 3 ? (
                     <div className="w-full flex">
                         <form className="w-full" onSubmit={cashOnDeliveryHandler}>
-                            <input
+                            <button
                                 type="submit"
-                                value="Confirm"
-                                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
-                            />
+                                disabled={isCashLoading}
+                                className={` px-12 my-2 py-2  ${
+                                    isCashLoading
+                                        ? '!bg-[#ff990086] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600] cursor-not-allowed'
+                                        : '!bg-[#ffa217] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600]'
+                                }`}
+                            >
+                                {isCashLoading ? (
+                                    <SmallLoader />
+                                ) : (
+                                    <>
+                                        <div className="flex items-center justify-center">Pay</div>
+                                    </>
+                                )}
+                            </button>
                         </form>
                     </div>
                 ) : null}

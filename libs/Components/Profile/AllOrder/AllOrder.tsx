@@ -53,7 +53,7 @@ const AllOrders = () => {
                                             <td>{'US$ ' + e?.totalPrice}</td>
                                             <td>
                                                 <Link
-                                                    href={`/order/order-details?orderId=${
+                                                    href={`/order/user-order-details?orderId=${
                                                         e?._id
                                                     }&productName=${
                                                         e?.cart?.product?.name

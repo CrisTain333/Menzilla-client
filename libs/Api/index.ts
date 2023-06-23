@@ -177,9 +177,9 @@ export const getSingleOrder = async (orderId: any) => {
     }
 };
 
-export const updateOrderStatus = async (orderId: any) => {
+export const updateOrderStatus = async (orderId: any, status: string) => {
     try {
-        const response = await axiosInstance.patch(`/orders/update-status/${orderId}`);
+        const response = await axiosInstance.patch(`/orders/update-status/${orderId}`, { status });
         return response.data;
     } catch (error) {
         return { error };

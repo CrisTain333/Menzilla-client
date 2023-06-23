@@ -59,7 +59,7 @@ const AllOrders = () => {
                                         <td>{e?.cart?.length}</td>
                                         <td>{'US$ ' + e?.totalPrice}</td>
                                         <td>
-                                            <Link href={`/order/${e?._id}`}>
+                                            <Link href={`/order/order-details?orderId=${e?._id}`}>
                                                 <button className="text-blue-500 border p-2">
                                                     <AiOutlineArrowRight size={20} />
                                                 </button>

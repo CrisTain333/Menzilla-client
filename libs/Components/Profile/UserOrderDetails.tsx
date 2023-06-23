@@ -85,7 +85,7 @@ const UserOrderDetails = () => {
                                 <Image
                                     src={`${item?.product?.images?.[0]}`}
                                     alt=""
-                                    className="w-[80px] h-[80px]"
+                                    className="w-20 h-20"
                                     height={500}
                                     width={500}
                                 />

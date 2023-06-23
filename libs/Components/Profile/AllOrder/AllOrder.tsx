@@ -14,20 +14,6 @@ const AllOrders = () => {
             return data?.data;
         }
     });
-    console.log(data);
-
-    const orders = [
-        {
-            _id: '7463hvbfbhfbrtr28820221',
-            orderItems: [
-                {
-                    name: 'Iphone 14 pro max'
-                }
-            ],
-            totalPrice: 120,
-            orderStatus: 'Processing'
-        }
-    ];
 
     return (
         <div className="shadow-md w-[90%] mx-auto">
@@ -44,14 +30,14 @@ const AllOrders = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {orders &&
-                                orders?.map((e: any, i: any) => {
+                            {data &&
+                                data?.map((e: any, i: any) => {
                                     return (
                                         <tr key={i}>
                                             <th>{e?._id}</th>
-                                            <td> {e?.orderStatus}</td>
+                                            <td> {e?.status}</td>
+                                            <td>{e?.cart?.length}</td>
                                             <td>{'US$ ' + e?.totalPrice}</td>
-                                            <td>{e?.orderItems?.length}</td>
                                             <td>
                                                 <Link href={`/order/${e?._id}`}>
                                                     <button className="text-blue-500 border p-2">

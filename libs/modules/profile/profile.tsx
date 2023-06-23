@@ -14,17 +14,24 @@ const Profile = () => {
     const router = useRouter();
     const { query } = router;
     const from_Success_Page = query?.from_Success_Page;
+    const from_Order_Details_Page = query?.from_Order_Details_Page;
 
     useEffect((): any => {
         const tokenStoragePath = 'accessToken';
         const token = localStorage.getItem(tokenStoragePath);
-        if (!token && !currentUser) {
-            router.push('/');
+        if (!isLoading) {
+            if (!token && !currentUser) {
+                router.push('/');
+            }
+
+            if (from_Success_Page === 'true') {
+                setActive(2);
+            }
+            if (from_Order_Details_Page === 'true') {
+                setActive(2);
+            }
         }
 
-        if (from_Success_Page === 'true') {
-            setActive(2);
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 

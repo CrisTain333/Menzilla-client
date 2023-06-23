@@ -11,7 +11,7 @@ import { useCart } from '@/libs/Context/CartProvider';
 import { useSeller } from '@/libs/Context/sellerProvider';
 
 const Header = () => {
-    const { currentUser, logout, isLoading } = useAuth();
+    const { currentUser, logout, isLoading, profileData } = useAuth();
     const { cartItems } = useCart();
     const { allProducts } = useSeller();
     const [searchTerm, setSearchTerm] = useState();
@@ -250,7 +250,7 @@ const Header = () => {
                                                         height={300}
                                                         width={300}
                                                         className="h-10"
-                                                        src={currentUser?.profilePicture}
+                                                        src={profileData?.profilePicture}
                                                     />
                                                 </div>
                                             </label>

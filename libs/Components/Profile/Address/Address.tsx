@@ -9,7 +9,7 @@ import { useAuth } from '@/libs/Context/AuthProvider';
 
 const Address = () => {
     const tokenStoragePath = 'accessToken';
-    const { currentUser, refresh, getUserData } = useAuth();
+    const { currentUser, refresh, getUserData, refetch, profileData } = useAuth();
     const [open, setOpen] = useState(false);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
@@ -41,6 +41,7 @@ const Address = () => {
                 setAddressType('');
                 // Refresh the user data to fetch the updated information from the server
                 refresh();
+                refetch();
                 getUserData(token as string);
             } else {
                 toast.error(result.message);
@@ -60,6 +61,7 @@ const Address = () => {
                 // Refresh the user data to fetch the updated information from the server
                 refresh();
                 getUserData(token as string);
+                refetch();
             } else {
                 toast.error(result.message);
             }
@@ -247,8 +249,8 @@ const Address = () => {
                 </div>
                 <br />
 
-                {currentUser &&
-                    currentUser?.addresses.map((item: any, index: number) => (
+                {profileData &&
+                    profileData?.addresses?.map((item: any, index: number) => (
                         <div
                             className="w-full bg-white h-auto md:h-[70px] rounded-[4px] flex    flex-col md:flex-row justify-start px-3 shadow md:justify-between md:items-center pr-10 my-5 space-y-3 md:space-y-0 p-1"
                             key={index}
@@ -276,7 +278,7 @@ const Address = () => {
                         </div>
                     ))}
 
-                {currentUser && currentUser.addresses.length === 0 && (
+                {currentUser && currentUser?.addresses?.length === 0 && (
                     <h5 className="text-center pt-8 text-[18px]">
                         You not have any saved address!
                     </h5>

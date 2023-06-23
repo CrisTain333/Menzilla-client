@@ -27,6 +27,7 @@ const Payment = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
+    const [isCashLoading, setIsCashLoading] = useState(false);
 
     // useEffect(() => {
     //     const orderData = JSON.parse(localStorage.getItem('latestOrder'));
@@ -54,7 +55,6 @@ const Payment = () => {
                 return orderID;
             });
     };
-    console.log(orderData);
 
     const order: any = {
         cart: orderData?.cartItems,
@@ -158,25 +158,23 @@ const Payment = () => {
 
     const cashOnDeliveryHandler = async (e: any) => {
         e.preventDefault();
-
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
-
-        // order.paymentInfo = {
-        //     type: 'Cash On Delivery'
-        // };
-
-        // await axios.post(`${server}/order/create-order`, order, config).then((res) => {
-        //     setOpen(false);
-        //     navigate('/order/success');
-        //     toast.success('Order successful!');
-        //     localStorage.setItem('cartItems', JSON.stringify([]));
-        //     localStorage.setItem('latestOrder', JSON.stringify([]));
-        //     window.location.reload();
-        // });
+        setIsCashLoading(true);
+        order.paymentInfo = {
+            type: 'Cash On Delivery'
+        };
+        const finalResult = await createUserOrder(order);
+        if (finalResult.status === 200) {
+            setOpen(false);
+            router.push('/order/success');
+            toast.success('Order successful!');
+            localStorage.setItem('cartItem', JSON.stringify([]));
+            localStorage.setItem('latestOrder', JSON.stringify([]));
+            refresh();
+            setIsCashLoading(false);
+        } else {
+            setIsCashLoading(false);
+            toast.error(finalResult.message);
+        }
     };
 
     return (
@@ -192,6 +190,7 @@ const Payment = () => {
                         paymentHandler={paymentHandler}
                         cashOnDeliveryHandler={cashOnDeliveryHandler}
                         isLoading={isLoading}
+                        isCashLoading={isCashLoading}
                     />
                 </div>
                 <div className="w-full md:w-[35%] md:mt-0 mt-8 shadow-md  rounded-md">
@@ -204,10 +203,11 @@ const Payment = () => {
 
 const PaymentInfo = ({
     user,
-    open,
-    setOpen,
-    onApprove,
-    createOrder,
+    // open,
+    // setOpen,
+    // onApprove,
+    // createOrder,
+    isCashLoading,
     paymentHandler,
     cashOnDeliveryHandler,
     isLoading
@@ -242,8 +242,7 @@ const PaymentInfo = ({
                                     <input
                                         required
                                         placeholder={user?.name}
-                                        className={`${styles.input} !w-[95%] text-[#444444b9]`}
-                                        value={user?.name}
+                                        className={`${styles.input} !w-[95%] text-[#444444]`}
                                     />
                                 </div>
                                 <div className="w-[50%]">
@@ -253,7 +252,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: '1.5',
                                                     color: '#444'
                                                 },
@@ -261,7 +260,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }
@@ -278,7 +277,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: ' 1.5',
                                                     color: '#444'
                                                 },
@@ -286,7 +285,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }
@@ -300,7 +299,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: '1.5',
                                                     color: '#444'
                                                 },
@@ -308,7 +307,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }
@@ -341,7 +340,7 @@ const PaymentInfo = ({
             <br />
             {/* paypal payment */}
             <div>
-                <div className="flex w-full pb-5 border-b mb-2">
+                {/* <div className="flex w-full pb-5 border-b mb-2">
                     <div
                         className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
                         onClick={() => setSelect(2)}
@@ -353,10 +352,10 @@ const PaymentInfo = ({
                     <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
                         Pay with Paypal
                     </h4>
-                </div>
+                </div> */}
 
                 {/* pay with payement */}
-                {select === 2 ? (
+                {/* {select === 2 ? (
                     <div className="w-full flex border-b">
                         <div
                             className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
@@ -378,7 +377,7 @@ const PaymentInfo = ({
                             </div>
                         )}
                     </div>
-                ) : null}
+                ) : null} */}
             </div>
 
             <br />
@@ -402,11 +401,23 @@ const PaymentInfo = ({
                 {select === 3 ? (
                     <div className="w-full flex">
                         <form className="w-full" onSubmit={cashOnDeliveryHandler}>
-                            <input
+                            <button
                                 type="submit"
-                                value="Confirm"
-                                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
-                            />
+                                disabled={isCashLoading}
+                                className={` px-12 my-2 py-2  ${
+                                    isCashLoading
+                                        ? '!bg-[#ff990086] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600] cursor-not-allowed'
+                                        : '!bg-[#ffa217] text-[#fff] h-[45px] rounded-[5px]  text-[18px] font-[600]'
+                                }`}
+                            >
+                                {isCashLoading ? (
+                                    <SmallLoader />
+                                ) : (
+                                    <>
+                                        <div className="flex items-center justify-center">Pay</div>
+                                    </>
+                                )}
+                            </button>
                         </form>
                     </div>
                 ) : null}

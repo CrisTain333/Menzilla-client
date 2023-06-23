@@ -150,3 +150,38 @@ export const createUserOrder = async (data: any) => {
         return { error };
     }
 };
+export const getUserOrder = async (userId: any, currentPage: any = 1) => {
+    try {
+        const response = await axiosInstance.get(`/orders/${userId}?&page=${currentPage}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const getShopOrders = async (shopId: any, currentPage: any = 1) => {
+    try {
+        const response = await axiosInstance.get(`/orders/shop/${shopId}?&page=${currentPage}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const getSingleOrder = async (orderId: any) => {
+    try {
+        const response = await axiosInstance.get(`/orders/details/${orderId}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const updateOrderStatus = async (orderId: any, status: string) => {
+    try {
+        const response = await axiosInstance.patch(`/orders/update-status/${orderId}`, { status });
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

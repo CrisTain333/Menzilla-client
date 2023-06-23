@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { AiOutlineDelete, AiOutlineEye } from 'react-icons/ai';
 import { useSeller } from '@/libs/Context/sellerProvider';

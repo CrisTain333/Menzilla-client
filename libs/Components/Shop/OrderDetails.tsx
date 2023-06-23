@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { BiMessageDots } from 'react-icons/bi';
 import { BsFillBagFill } from 'react-icons/bs';
 import { ThreeCircles } from 'react-loader-spinner';
 
@@ -170,6 +171,22 @@ const OrderDetails = () => {
             </div>
             <br />
             <br />
+            {isSeller && (
+                <>
+                    <br />
+                    <div>
+                        <Link href="/">
+                            <div
+                                className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm w-[15%]`}
+                            >
+                                <span className="text-white flex items-center font-semibold">
+                                    Send Message <BiMessageDots size={20} className="ml-1" />
+                                </span>
+                            </div>
+                        </Link>
+                    </div>
+                </>
+            )}
 
             {!isSeller && (
                 <div>

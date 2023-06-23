@@ -2,18 +2,31 @@ import { getUserOrder } from '@/libs/Api';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 const AllOrders = () => {
     const { currentUser } = useAuth();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState<any>();
 
     const { data } = useQuery({
-        queryKey: ['orders', currentUser],
+        queryKey: ['orders', currentUser, currentPage],
         queryFn: async () => {
-            const data = await getUserOrder(currentUser?._id);
+            const data = await getUserOrder(currentUser?._id, currentPage);
+            setCurrentPage(data?.currentPage);
+            setTotalPage(data?.totalPages);
             return data?.data;
         }
     });
+
+    const handlePageChange = (pageNumber: any) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPage; i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <div className="shadow-md w-[90%] mx-auto">
@@ -50,6 +63,22 @@ const AllOrders = () => {
                                 })}
                         </tbody>
                     </table>
+                </div>
+
+                <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
+                    {pageNumbers?.map((pageNumber, i) => (
+                        <button
+                            key={i}
+                            onClick={() => handlePageChange(pageNumber)}
+                            type="button"
+                            title="Page 1"
+                            className={`inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md ${
+                                pageNumber === currentPage && 'bg-[#ff9900] text-white'
+                            }`}
+                        >
+                            {pageNumber}
+                        </button>
+                    ))}
                 </div>
             </div>
         </div>

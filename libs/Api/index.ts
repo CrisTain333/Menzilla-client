@@ -150,9 +150,9 @@ export const createUserOrder = async (data: any) => {
         return { error };
     }
 };
-export const getUserOrder = async (userId: any) => {
+export const getUserOrder = async (userId: any, currentPage: any = 1) => {
     try {
-        const response = await axiosInstance.get(`/orders/${userId}`);
+        const response = await axiosInstance.get(`/orders/${userId}?&page=${currentPage}`);
         return response.data;
     } catch (error) {
         return { error };

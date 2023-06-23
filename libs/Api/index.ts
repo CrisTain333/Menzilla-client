@@ -176,3 +176,12 @@ export const getSingleOrder = async (orderId: any) => {
         return { error };
     }
 };
+
+export const updateOrderStatus = async (orderId: any) => {
+    try {
+        const response = await axiosInstance.patch(`/orders/update-status/${orderId}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

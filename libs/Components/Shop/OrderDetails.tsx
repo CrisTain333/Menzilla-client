@@ -1,4 +1,4 @@
-import { getSingleOrder } from '@/libs/Api';
+import { getSingleOrder, updateOrderStatus } from '@/libs/Api';
 import styles from '@/styles/styles';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
@@ -17,7 +17,7 @@ const OrderDetails = () => {
     const isSeller = router?.query?.hdChIeoLkNNm76;
     // const [loading, setIsloading] = useState(true);
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ['orderId', orderId],
         queryFn: async () => {
             const data = await getSingleOrder(orderId);
@@ -26,6 +26,10 @@ const OrderDetails = () => {
     });
 
     const orderUpdateHandler = async (e: any) => {
+        e.preventDefault();
+        const result = await updateOrderStatus(orderId);
+        console.log(result);
+        refetch();
         //  await axios
         //      .put(
         //          `${server}/order/update-order-status/${id}`,

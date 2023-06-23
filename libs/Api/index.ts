@@ -158,3 +158,12 @@ export const getUserOrder = async (userId: any, currentPage: any = 1) => {
         return { error };
     }
 };
+
+export const getShopOrders = async (shopId: any, currentPage: any = 1) => {
+    try {
+        const response = await axiosInstance.get(`/orders/shop/${shopId}?&page=${currentPage}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

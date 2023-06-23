@@ -1,4 +1,4 @@
-import ShopOrders from '@/libs/modules/dashboard/shop-orders';
+import ShopOrders from '@/libs/modules/shop/shop-orders';
 import React from 'react';
 
 const allOrders = () => {

@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 interface AuthContextValue {
     currentUser: any;
@@ -12,6 +14,9 @@ interface AuthContextValue {
     setCurrentUser: (data: any) => void;
     // eslint-disable-next-line no-unused-vars
     getUserData: (token: string) => void;
+
+    refetch: () => void;
+    profileData: any;
 }
 
 interface AuthProviderProps {
@@ -34,9 +39,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [currentUser, setCurrentUser] = useState<any>(null);
     const [userFetched, setUserFetched] = useState(false);
     const [shouldRefresh, setShouldRefresh] = useState(false);
+    const [accessToken, setAccessToken] = useState<string>('');
+    const [profileData, setProfileData] = useState<any>();
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
+        setAccessToken(token as string);
         if (token && !userFetched) {
             setIsLoading(true);
             getUserData(token)
@@ -49,6 +57,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
+        refetch();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
 
@@ -80,6 +90,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         localStorage.removeItem(tokenStoragePath);
     };
 
+    // const tokenStoragePath = 'accessToken';
     const getUserData = async (token: string) => {
         try {
             const response = await axiosInstance.get(`/user/me`, {
@@ -91,6 +102,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     };
 
+    const { data, refetch } = useQuery({
+        queryKey: ['userData', accessToken],
+        queryFn: async () => {
+            try {
+                const response = await axiosInstance.get(`/user/me`, {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                });
+                setProfileData(response?.data?.user);
+                return response?.data?.user;
+            } catch (e) {
+                toast.error('Error from query');
+            }
+        }
+        // enabled: typeof window !== 'undefined'
+    });
+
     const value: AuthContextValue = {
         currentUser,
         isLoading,
@@ -98,7 +125,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         logout,
         refresh,
         setCurrentUser,
-        getUserData
+        getUserData,
+        profileData,
+        refetch
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

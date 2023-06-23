@@ -18,13 +18,16 @@ const Profile = () => {
     useEffect((): any => {
         const tokenStoragePath = 'accessToken';
         const token = localStorage.getItem(tokenStoragePath);
-        if (!token && !currentUser) {
-            router.push('/');
+        if (!isLoading) {
+            if (!token && !currentUser) {
+                router.push('/');
+            }
+
+            if (from_Success_Page === 'true') {
+                setActive(2);
+            }
         }
 
-        if (from_Success_Page === 'true') {
-            setActive(2);
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 

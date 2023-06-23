@@ -12,7 +12,7 @@ import ChangePassword from '../PaymentMethod/ChangePassword';
 
 const ProfileContent = ({ active }: any) => {
     const tokenStoragePath = 'accessToken';
-    const { currentUser, refresh, getUserData, setCurrentUser } = useAuth();
+    const { currentUser, refresh, getUserData, setCurrentUser, refetch, profileData } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [uploadLoader, setUploadLoader] = useState(false);
     // const token: any = window?.;
@@ -107,7 +107,7 @@ const ProfileContent = ({ active }: any) => {
                 toast.success('Profile Picture Updated');
                 handleCancel();
                 setUploadLoader(false);
-                refresh();
+                refetch();
             }
             setUploadLoader(false);
         } catch (error) {
@@ -129,7 +129,7 @@ const ProfileContent = ({ active }: any) => {
                                         src={
                                             selectedImage
                                                 ? URL.createObjectURL(selectedImage)
-                                                : currentUser?.profilePicture
+                                                : profileData?.profilePicture
                                         }
                                         // src={`${currentUser?.profilePicture || ''}`}
                                         className="w-32 h-32 rounded-full object-cover border-[3px] border-[#ff9900]"

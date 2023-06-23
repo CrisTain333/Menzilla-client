@@ -111,9 +111,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 });
                 setProfileData(response?.data?.user);
                 return response?.data?.user;
-            } catch (e) {
-                toast.error('Error from query');
-            }
+            } catch (e) {}
         }
         // enabled: typeof window !== 'undefined'
     });

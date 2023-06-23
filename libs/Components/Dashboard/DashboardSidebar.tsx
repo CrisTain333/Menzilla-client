@@ -28,7 +28,7 @@ const DashboardSidebar = ({ active }: any) => {
                 </div>
 
                 <div className="w-full flex items-center p-4">
-                    <Link href="/dashboard-orders" className="w-full flex items-center">
+                    <Link href="/dashboard/all-orders" className="w-full flex items-center">
                         <FiShoppingBag
                             size={28}
                             color={`${active === 2 ? '#ff9900' : '#000000'}`}

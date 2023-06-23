@@ -242,8 +242,7 @@ const PaymentInfo = ({
                                     <input
                                         required
                                         placeholder={user?.name}
-                                        className={`${styles.input} !w-[95%] text-[#444444b9]`}
-                                        value={user?.name}
+                                        className={`${styles.input} !w-[95%] text-[#444444]`}
                                     />
                                 </div>
                                 <div className="w-[50%]">
@@ -253,7 +252,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: '1.5',
                                                     color: '#444'
                                                 },
@@ -261,7 +260,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }
@@ -278,7 +277,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: ' 1.5',
                                                     color: '#444'
                                                 },
@@ -286,7 +285,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }
@@ -300,7 +299,7 @@ const PaymentInfo = ({
                                         options={{
                                             style: {
                                                 base: {
-                                                    fontSize: '19px',
+                                                    fontSize: '15px',
                                                     lineHeight: '1.5',
                                                     color: '#444'
                                                 },
@@ -308,7 +307,7 @@ const PaymentInfo = ({
                                                     color: '#3a120a',
                                                     backgroundColor: 'transparent',
                                                     '::placeholder': {
-                                                        color: '#444'
+                                                        color: '#ced4da'
                                                     }
                                                 }
                                             }

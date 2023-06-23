@@ -150,3 +150,11 @@ export const createUserOrder = async (data: any) => {
         return { error };
     }
 };
+export const getUserOrder = async (userId: any) => {
+    try {
+        const response = await axiosInstance.get(`/orders/${userId}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

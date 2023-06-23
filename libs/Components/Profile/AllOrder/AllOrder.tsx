@@ -1,7 +1,21 @@
+import { getUserOrder } from '@/libs/Api';
+import { useAuth } from '@/libs/Context/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import React from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 const AllOrders = () => {
+    const { currentUser } = useAuth();
+
+    const { data } = useQuery({
+        queryKey: ['orders', currentUser],
+        queryFn: async () => {
+            const data = await getUserOrder(currentUser?._id);
+            return data?.data;
+        }
+    });
+    console.log(data);
+
     const orders = [
         {
             _id: '7463hvbfbhfbrtr28820221',

@@ -41,6 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [shouldRefresh, setShouldRefresh] = useState(false);
     const [accessToken, setAccessToken] = useState<string>('');
     const [profileData, setProfileData] = useState<any>();
+    const [userOrders, setUsersOrders] = useState<any[]>([]);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);

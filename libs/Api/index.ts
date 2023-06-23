@@ -167,3 +167,12 @@ export const getShopOrders = async (shopId: any, currentPage: any = 1) => {
         return { error };
     }
 };
+
+export const getSingleOrder = async (orderId: any) => {
+    try {
+        const response = await axiosInstance.get(`/orders/details/${orderId}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

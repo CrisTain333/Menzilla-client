@@ -43,6 +43,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [isProductLoading, setIsProductLoading] = useState(false);
     const [allProducts, setAllProducts] = useState<any>([]);
     const [totalPages, setTotalPages] = useState(0);
+
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         if (token && !sellerFetched) {

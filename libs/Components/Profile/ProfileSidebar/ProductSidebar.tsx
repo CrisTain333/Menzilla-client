@@ -1,7 +1,7 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
 import React from 'react';
 import { AiOutlineLogin, AiOutlineMessage } from 'react-icons/ai';
-import { HiOutlineReceiptRefund, HiOutlineShoppingBag } from 'react-icons/hi';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { MdOutlinePassword, MdOutlineTrackChanges } from 'react-icons/md';
 import { TbAddressBook } from 'react-icons/tb';
 import { RxPerson } from 'react-icons/rx';
@@ -38,7 +38,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                     Orders
                 </span>
             </div>
-            <div
+            {/* <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(3)}
             >
@@ -46,7 +46,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 <span className={`pl-3 ${active === 3 ? 'text-[red]' : ''} md:block hidden`}>
                     Refunds
                 </span>
-            </div>
+            </div> */}
 
             <div
                 className="flex items-center cursor-pointer w-full mb-8"

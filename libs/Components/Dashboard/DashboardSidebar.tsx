@@ -133,7 +133,7 @@ const DashboardSidebar = ({ active }: any) => {
                     </Link>
                 </div>
 
-                <div className="w-full flex items-center p-4">
+                {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard-refunds" className="w-full flex items-center">
                         <HiOutlineReceiptRefund
                             size={28}
@@ -147,10 +147,10 @@ const DashboardSidebar = ({ active }: any) => {
                             Refunds
                         </h5>
                     </Link>
-                </div>
+                </div> */}
 
                 <div className="w-full flex items-center p-4">
-                    <Link href="/dashboard-settings" className="w-full flex items-center">
+                    <Link href="/settings" className="w-full flex items-center">
                         <CiSettings size={28} color={`${active === 11 ? '#ff9900' : '#000000'}`} />
                         <h5
                             className={`hidden md:block pl-2 text-[18px] font-semibold ${

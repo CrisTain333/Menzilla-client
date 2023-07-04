@@ -4,6 +4,7 @@ import React from 'react';
 import { TbEdit } from 'react-icons/tb';
 import { BiLogIn } from 'react-icons/bi';
 import moment from 'moment';
+import Link from 'next/link';
 
 const ShopInfo = ({ isOwner }: any) => {
     const { currentSeller, isLoading, sellerLogout } = useSeller();
@@ -69,7 +70,9 @@ const ShopInfo = ({ isOwner }: any) => {
                             >
                                 <span className="text-white mr-1">Edit Shop</span>
                                 <span>
-                                    <TbEdit size={24} />
+                                    <Link href="/settings">
+                                        <TbEdit size={24} />
+                                    </Link>
                                 </span>
                             </div>
                             <div

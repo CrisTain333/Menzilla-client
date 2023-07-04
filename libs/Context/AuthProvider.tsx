@@ -104,7 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     const { data, refetch } = useQuery({
-        queryKey: ['userData', accessToken],
+        queryKey: ['userData', accessToken, isLoading],
         queryFn: async () => {
             try {
                 const response = await axiosInstance.get(`/user/me`, {

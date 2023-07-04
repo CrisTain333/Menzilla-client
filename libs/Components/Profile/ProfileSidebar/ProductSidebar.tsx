@@ -1,7 +1,7 @@
 import { useAuth } from '@/libs/Context/AuthProvider';
 import React from 'react';
 import { AiOutlineLogin, AiOutlineMessage } from 'react-icons/ai';
-import { HiOutlineReceiptRefund, HiOutlineShoppingBag } from 'react-icons/hi';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { MdOutlinePassword, MdOutlineTrackChanges } from 'react-icons/md';
 import { TbAddressBook } from 'react-icons/tb';
 import { RxPerson } from 'react-icons/rx';

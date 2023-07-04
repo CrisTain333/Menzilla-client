@@ -40,7 +40,7 @@ const TrackOrder = () => {
                                             <td>{'US$ ' + e?.totalPrice}</td>
                                             <td>{e?.orderItems?.length}</td>
                                             <td>
-                                                <Link href={`/order/${e?._id}`}>
+                                                <Link href={`/order/track-order?orderId=${e?._id}`}>
                                                     <button className="text-blue-500 border p-2">
                                                         <MdOutlineTrackChanges size={20} />
                                                     </button>

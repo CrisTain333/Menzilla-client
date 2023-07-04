@@ -1,20 +1,33 @@
+import { getUserOrder } from '@/libs/Api';
+import { useAuth } from '@/libs/Context/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { MdOutlineTrackChanges } from 'react-icons/md';
 
 const TrackOrder = () => {
-    const orders = [
-        {
-            _id: '7463hvbfbhfbrtr28820221',
-            orderItems: [
-                {
-                    name: 'Iphone 14 pro max'
-                }
-            ],
-            totalPrice: 120,
-            orderStatus: 'Processing'
+    const { currentUser } = useAuth();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState<any>();
+
+    const { data } = useQuery({
+        queryKey: ['orders', currentUser, currentPage],
+        queryFn: async () => {
+            const data = await getUserOrder(currentUser?._id, currentPage);
+            setCurrentPage(data?.currentPage);
+            setTotalPage(data?.totalPages);
+            return data?.data;
         }
-    ];
+    });
+
+    const handlePageChange = (pageNumber: any) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPage; i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <div className="shadow-md w-[90%] mx-auto">

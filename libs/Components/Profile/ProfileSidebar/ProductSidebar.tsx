@@ -38,7 +38,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                     Orders
                 </span>
             </div>
-            <div
+            {/* <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(3)}
             >
@@ -46,7 +46,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 <span className={`pl-3 ${active === 3 ? 'text-[red]' : ''} md:block hidden`}>
                     Refunds
                 </span>
-            </div>
+            </div> */}
 
             <div
                 className="flex items-center cursor-pointer w-full mb-8"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -15,31 +15,22 @@ const ProfileContent = ({ active }: any) => {
     const { currentUser, refresh, getUserData, setCurrentUser, refetch, profileData } = useAuth();
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [uploadLoader, setUploadLoader] = useState(false);
-    // const token: any = window?.;
-    // const [count, setCount] = useState(0);
-    // let count = 0;
-    // const [userProfile, setUserProfile] = useState({
-    //     _id: currentUser?._id,
-    //     email: currentUser?.email,
-    //     name: currentUser?.name,
-    //     phone: currentUser?.phone,
-    //     profilePicture: currentUser?.profilePicture
-    // });
+    const [userProfileData, setUserProfileData] = useState({
+        name: profileData?.name,
+        email: profileData?.email,
+        phone: profileData?.phone,
+        profilePicture: profileData?.profilePicture
+    });
+    // console.log(profileData);
 
-    // // const handleRefresh = () => {
-    // //     getUserData(token);
-    // // };
-    // useEffect(() => {
-    //     setUserProfile({
-    //         _id: currentUser?._id,
-    //         email: currentUser?.email,
-    //         name: currentUser?.name,
-    //         phone: currentUser?.phone,
-    //         profilePicture: currentUser?.profilePicture
-    //     });
-    //     console.log(count++);
-    //     setRun(false);
-    // }, [currentUser, run]);
+    useEffect(() => {
+        setUserProfileData({
+            name: profileData?.name,
+            email: profileData?.email,
+            phone: profileData?.phone,
+            profilePicture: profileData?.profilePicture
+        });
+    }, [profileData]);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -129,7 +120,7 @@ const ProfileContent = ({ active }: any) => {
                                         src={
                                             selectedImage
                                                 ? URL.createObjectURL(selectedImage)
-                                                : profileData?.profilePicture
+                                                : userProfileData?.profilePicture
                                         }
                                         // src={`${currentUser?.profilePicture || ''}`}
                                         className="w-32 h-32 rounded-full object-cover border-[3px] border-[#ff9900]"

@@ -13,7 +13,6 @@ const DashLayout = () => {
     const { currentSeller, allProducts } = useSeller();
     const availableBalance = currentSeller?.availableBalance?.toFixed(2);
     const totalProduct = allProducts.filter((e: any) => e?.shopId === currentSeller?._id);
-
     const { data } = useQuery({
         queryKey: ['orders', currentSeller],
         queryFn: async () => {

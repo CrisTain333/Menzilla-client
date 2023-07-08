@@ -193,3 +193,15 @@ export const updateShop = async (shopId: any, Data: any) => {
         return { error };
     }
 };
+
+export const updateShopProfilePicture = async (profileImage: any, shopId: string) => {
+    try {
+        const response = await axiosInstance.patch(
+            `/shop/change-shop-profile?shopId=${shopId}`,
+            profileImage
+        );
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

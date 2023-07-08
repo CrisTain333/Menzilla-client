@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 import { getAllProduct, getShopProduct } from '../Api';
+import { useQuery } from '@tanstack/react-query';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -17,6 +18,7 @@ interface IAuthContextValue {
     isProductLoading: any;
     allProducts: any;
     setAllProducts: any;
+    sellerProfileData: any;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -42,10 +44,31 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [shouldRefresh, setShouldRefresh] = useState(false);
     const [isProductLoading, setIsProductLoading] = useState(false);
     const [allProducts, setAllProducts] = useState<any>([]);
+    const [sellerAccessToken, setSellerAccessToken] = useState<any>();
     const [totalPages, setTotalPages] = useState(0);
+    const [sellerProfileData, setSellerProfileData] = useState<any>();
+
+    // const { data, refetch } = useQuery({
+    //     queryKey: ['userData', tokenStoragePath, isLoading],
+    //     queryFn: async () => {
+    //         try {
+    //             const response = await axiosInstance.get(`/shop/seller`, {
+    //                 headers: { Authorization: `Bearer ${sellerAccessToken}` }
+    //             });
+    //             if (response?.data?.status === 500) {
+    //                 sellerLogout();
+    //                 return;
+    //             }
+    //             setSellerProfileData(response?.data?.seller);
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     }
+    // });
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
+        setSellerAccessToken(token as string);
         if (token && !sellerFetched) {
             setIsLoading(true);
             getSellerData(token)
@@ -146,7 +169,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         setTotalPages,
         allProducts,
         isProductLoading,
-        setAllProducts
+        setAllProducts,
+        sellerProfileData
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

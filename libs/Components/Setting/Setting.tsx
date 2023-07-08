@@ -2,6 +2,7 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const Setting = () => {
     const [selectedImage, setSelectedImage] = useState<any>(null);
@@ -39,7 +40,18 @@ const Setting = () => {
         // }
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const name = form.name.value;
+        // const
+
+        try {
+        } catch (error) {
+            toast.error('failed to update profile');
+        }
+    };
 
     return (
         <div className="shadow-md w-[60%] my-5 mx-auto rounded-md p-2">
@@ -184,7 +196,7 @@ const Setting = () => {
                                 type="text"
                                 className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                 // required
-                                name="password"
+                                name="address"
                                 defaultValue={currentSeller?.address}
                                 // // value={password}
                                 // onChange={(e) => setPassword(e.target.value)}
@@ -198,7 +210,7 @@ const Setting = () => {
                                 type="number"
                                 className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                 required
-                                name="phone"
+                                name="zipCode"
                                 defaultValue={currentSeller?.zipCode}
                                 // value={userProfile?.phone}
                                 // onChange={(e) =>
@@ -215,7 +227,7 @@ const Setting = () => {
                                 type="text"
                                 className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                 // required
-                                name="password"
+                                name="description"
                                 defaultValue={currentSeller?.description}
                                 // // value={password}
                                 // onChange={(e) => setPassword(e.target.value)}

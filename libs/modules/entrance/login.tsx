@@ -52,9 +52,9 @@ const Login = () => {
         <div>
             <section className=" min-h-screen flex items-center justify-center">
                 {/* <!-- login container --> */}
-                <div className="bg-gray-100 flex rounded-lg shadow-lg max-w-3xl p-5 items-center">
+                <div className="bg-gray-50 md:bg-gray-100 flex rounded-lg shadow-lg w-[95%] md:max-w-3xl p-5 items-center">
                     {/* <!-- form --> */}
-                    <div className="md:w-1/2 px-8 md:px-16">
+                    <div className="w-[95%] md:w-1/2 px-2 md:px-16">
                         <h2 className="font-bold text-2xl text-transparent  bg-clip-text bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] text-center">
                             Login
                         </h2>

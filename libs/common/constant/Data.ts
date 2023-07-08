@@ -10,7 +10,7 @@ export const navItems = [
     },
     {
         title: 'Products',
-        url: '/products'
+        url: '/product'
     },
     {
         title: 'Events',
@@ -19,6 +19,10 @@ export const navItems = [
     {
         title: 'FAQ',
         url: '/faq'
+    },
+    {
+        title: 'Profile',
+        url: '/profile'
     }
 ];
 

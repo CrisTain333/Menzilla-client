@@ -314,11 +314,27 @@ const Header = () => {
                     >
                         <aside className="anime">
                             <div className="fixed w-[60%] bg-[#fff] h-screen top-0 left-0 z-10 overflow-y-scroll ">
-                                <div className="w-full justify-between flex pr-3">
-                                    <div></div>
+                                <div className="w-full items-center my-2 justify-between flex pr-3">
+                                    <div className="ml-1">
+                                        <Link
+                                            href="/"
+                                            className="flex items-center justify-center font-semibold text-2xl"
+                                        >
+                                            <Image
+                                                src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
+                                                alt=""
+                                                className="w-12 "
+                                                width={200}
+                                                height={200}
+                                            />
+                                            <span className="font-sans font-bold text-black ml-[0.4px]">
+                                                enzilla
+                                            </span>
+                                        </Link>
+                                    </div>
                                     <RxCross1
-                                        size={30}
-                                        className="ml-4 mt-5 cursor-pointer"
+                                        size={25}
+                                        className=" cursor-pointer"
                                         onClick={() => setOpen(false)}
                                     />
                                 </div>
@@ -327,7 +343,7 @@ const Header = () => {
                                     <input
                                         type="search"
                                         placeholder="Search Product..."
-                                        className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
+                                        className="h-[40px] w-full px-2 border-[#ff9900] border-[2px] rounded-md"
                                         value={searchTerm}
                                         onChange={handleSearchChange}
                                     />
@@ -354,10 +370,10 @@ const Header = () => {
                                 </div>
 
                                 <Navbar />
-                                <div className={`${styles.button} ml-4 !rounded-[4px]`}>
+                                <div className={` ml-4 rounded-md`}>
                                     <Link href="/shop-create">
-                                        <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-sm">
-                                            Become Seller
+                                        <h1 className="text-[#fff] bg-[#ff9900] flex items-center justify-between p-2 rounded-sm">
+                                            <span className="ml-2">Become Seller</span>
                                             <IoIosArrowForward className="ml-1" />
                                         </h1>
                                     </Link>

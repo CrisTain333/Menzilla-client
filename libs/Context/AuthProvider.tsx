@@ -43,6 +43,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [profileData, setProfileData] = useState<any>();
     const [userOrders, setUsersOrders] = useState<any[]>([]);
 
+    const { data, refetch } = useQuery({
+        queryKey: ['userData', currentUser],
+        queryFn: async () => {
+            try {
+                const response = await axiosInstance.get(`/user/me`, {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                });
+                setProfileData(response?.data?.user);
+                return response?.data?.user;
+            } catch (e) {}
+        }
+        // enabled: typeof window !== 'undefined'
+    });
+
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         setAccessToken(token as string);
@@ -58,7 +72,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
-        refetch();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
@@ -73,6 +86,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentUser(response?.data?.user);
+                refetch();
                 return null;
             } else {
                 return 'Wrong Credential';
@@ -102,20 +116,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             logout();
         }
     };
-
-    const { data, refetch } = useQuery({
-        queryKey: ['userData', accessToken, isLoading],
-        queryFn: async () => {
-            try {
-                const response = await axiosInstance.get(`/user/me`, {
-                    headers: { Authorization: `Bearer ${accessToken}` }
-                });
-                setProfileData(response?.data?.user);
-                return response?.data?.user;
-            } catch (e) {}
-        }
-        // enabled: typeof window !== 'undefined'
-    });
 
     const value: AuthContextValue = {
         currentUser,

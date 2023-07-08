@@ -48,24 +48,6 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [totalPages, setTotalPages] = useState(0);
     const [sellerProfileData, setSellerProfileData] = useState<any>();
 
-    // const { data, refetch } = useQuery({
-    //     queryKey: ['userData', tokenStoragePath, isLoading],
-    //     queryFn: async () => {
-    //         try {
-    //             const response = await axiosInstance.get(`/shop/seller`, {
-    //                 headers: { Authorization: `Bearer ${sellerAccessToken}` }
-    //             });
-    //             if (response?.data?.status === 500) {
-    //                 sellerLogout();
-    //                 return;
-    //             }
-    //             setSellerProfileData(response?.data?.seller);
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    // });
-
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         setSellerAccessToken(token as string);

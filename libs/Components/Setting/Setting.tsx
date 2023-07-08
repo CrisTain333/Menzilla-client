@@ -1,14 +1,38 @@
 import { updateShop } from '@/libs/Api';
 import { useSeller } from '@/libs/Context/sellerProvider';
+import axiosInstance from '@/libs/common/utils/axios';
 import styles from '@/styles/styles';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import SmallLoader from '../SmallLoader/SmallLoader';
 
 const Setting = () => {
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [uploadLoader, setUploadLoader] = useState(false);
+    const [isUpdating, setIsUpdating] = useState<boolean>(false);
     const { currentSeller, refresh } = useSeller();
+
+    const { data, refetch } = useQuery({
+        queryKey: ['userData', currentSeller],
+        queryFn: async () => {
+            try {
+                const token = localStorage.getItem('seller_Access_Token');
+                const response = await axiosInstance.get(`/shop/seller`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (response?.data?.status === 500) {
+                    // sellerLogout();
+                    toast.error('error in setting page');
+                    return;
+                }
+                return response?.data?.seller;
+            } catch (e) {
+                // toast.error('Failed to load seller');
+            }
+        }
+    });
 
     // Handle Select Image
     const imageChange = (e: any) => {
@@ -43,6 +67,7 @@ const Setting = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setIsUpdating(true);
         const form = e.target;
 
         const name = form.name.value;
@@ -63,12 +88,17 @@ const Setting = () => {
 
         try {
             const result = await updateShop(sellerId, data);
-
-            refresh();
-
-            console.log(result);
+            if (result.status === 200) {
+                toast.success(result.message);
+                refetch();
+                setIsUpdating(false);
+                return;
+            }
+            toast.error(result.message);
+            setIsUpdating(false);
         } catch (error) {
             toast.error('failed to update profile');
+            setIsUpdating(false);
         }
     };
 
@@ -81,7 +111,7 @@ const Setting = () => {
                             src={
                                 selectedImage
                                     ? URL.createObjectURL(selectedImage)
-                                    : currentSeller?.shopProfile
+                                    : data?.shopProfile
                             }
                             // src={`${currentSeller?.profilePicture || ''}`}
                             className="w-32 h-32 rounded-full object-cover "
@@ -162,7 +192,7 @@ const Setting = () => {
                                 className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                 required
                                 name="name"
-                                defaultValue={currentSeller?.name}
+                                defaultValue={data?.name}
                                 readOnly={false}
                                 // value={userProfile?.name}
                                 // onChange={(e) =>
@@ -180,7 +210,7 @@ const Setting = () => {
                                 required
                                 readOnly
                                 name="email"
-                                defaultValue={currentSeller?.email}
+                                defaultValue={data?.email}
                                 // value={userProfile?.email}
                                 // onChange={(e) =>
                                 //     setUserProfile((prev: any) => {
@@ -199,7 +229,7 @@ const Setting = () => {
                                 className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                 required
                                 name="phoneNumber"
-                                defaultValue={currentSeller?.phoneNumber}
+                                defaultValue={data?.phoneNumber}
                                 // value={userProfile?.phone}
                                 // onChange={(e) =>
                                 //     setUserProfile((prev: any) => {
@@ -216,7 +246,7 @@ const Setting = () => {
                                 className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                 // required
                                 name="address"
-                                defaultValue={currentSeller?.address}
+                                defaultValue={data?.address}
                                 // // value={password}
                                 // onChange={(e) => setPassword(e.target.value)}
                             />
@@ -230,7 +260,7 @@ const Setting = () => {
                                 className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                 required
                                 name="zipCode"
-                                defaultValue={currentSeller?.zipCode}
+                                defaultValue={data?.zipCode}
                                 // value={userProfile?.phone}
                                 // onChange={(e) =>
                                 //     setUserProfile((prev: any) => {
@@ -247,7 +277,7 @@ const Setting = () => {
                                 className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                                 // required
                                 name="description"
-                                defaultValue={currentSeller?.description}
+                                defaultValue={data?.description}
                                 // // value={password}
                                 // onChange={(e) => setPassword(e.target.value)}
                             />
@@ -259,7 +289,7 @@ const Setting = () => {
                             className={`w-[250px] h-[40px] border  text-center bg-[#ff9900] text-white rounded-md mt-8 cursor-pointer flex justify-center items-center text-base `}
                             type="submit"
                         >
-                            Update
+                            {isUpdating ? <SmallLoader /> : 'Update'}
                         </button>
                     </div>
                 </form>

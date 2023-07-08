@@ -123,7 +123,11 @@
 import React from 'react';
 
 const Setting = () => {
-    return <div></div>;
+    return (
+        <div className="w-[80%] h-[80vh] shadow-md rounded-md mx-auto my-5">
+            <div className=""></div>
+        </div>
+    );
 };
 
 export default Setting;

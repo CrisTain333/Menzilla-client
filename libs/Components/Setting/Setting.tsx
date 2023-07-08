@@ -104,7 +104,7 @@ const Setting = () => {
     };
 
     return (
-        <div className="shadow-md w-[60%] my-5 mx-auto rounded-md p-2">
+        <div className="shadow-md w-[95%] md:w-[60%] my-5 mx-auto rounded-md p-2">
             <div className="flex items-center flex-col justify-start space-x-5 ">
                 <div className="relative">
                     <div className="relative overflow-hidden h-32 w-32">

@@ -185,3 +185,11 @@ export const updateOrderStatus = async (orderId: any, status: string) => {
         return { error };
     }
 };
+export const updateShop = async (shopId: any, Data: any) => {
+    try {
+        const response = await axiosInstance.patch(`/shop/update-profile/${shopId}`, { Data });
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

@@ -187,7 +187,7 @@ export const updateOrderStatus = async (orderId: any, status: string) => {
 };
 export const updateShop = async (shopId: any, Data: any) => {
     try {
-        const response = await axiosInstance.patch(`/shop/update-profile/${shopId}`, { Data });
+        const response = await axiosInstance.put(`/shop/update-profile/${shopId}`, { Data });
         return response.data;
     } catch (error) {
         return { error };

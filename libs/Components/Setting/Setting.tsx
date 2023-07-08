@@ -1,3 +1,4 @@
+import { updateShop } from '@/libs/Api';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import { toast } from 'react-hot-toast';
 const Setting = () => {
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [uploadLoader, setUploadLoader] = useState(false);
-    const { currentSeller } = useSeller();
+    const { currentSeller, refresh } = useSeller();
 
     // Handle Select Image
     const imageChange = (e: any) => {
@@ -40,14 +41,32 @@ const Setting = () => {
         // }
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         const form = e.target;
 
         const name = form.name.value;
+        const description = form.description.value;
+        const address = form.address.value;
+        const phoneNumber = form.phoneNumber.value;
+        const zipCode = form.zipCode.value;
+        const sellerId = currentSeller?._id;
+        const data = {
+            name,
+            description,
+            address,
+            phoneNumber,
+            zipCode
+        };
+
         // const
 
         try {
+            const result = await updateShop(sellerId, data);
+
+            refresh();
+
+            console.log(result);
         } catch (error) {
             toast.error('failed to update profile');
         }
@@ -179,7 +198,7 @@ const Setting = () => {
                                 type="number"
                                 className={`${styles.input} !w-[95%] mb-4 md:mb-0`}
                                 required
-                                name="phone"
+                                name="phoneNumber"
                                 defaultValue={currentSeller?.phoneNumber}
                                 // value={userProfile?.phone}
                                 // onChange={(e) =>

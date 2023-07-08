@@ -208,15 +208,16 @@ input[type=number]::-webkit-outer-spin-button {
 .page_404 {
     padding: 40px 0;
     background: #fff;
-    font-family: 'Arvo', serif;
+    font-family: 'Poppins', serif;
 }
 
 .page_404 img {
-    width: 100%;
+    width: 10%;
 }
 
 .four_zero_four_bg {
     background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    background-repeat: no-repeat;
     height: 400px;
     background-position: center;
 }

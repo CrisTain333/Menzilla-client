@@ -1,4 +1,4 @@
-import { updateShop } from '@/libs/Api';
+import { updateShop, updateShopProfilePicture } from '@/libs/Api';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import axiosInstance from '@/libs/common/utils/axios';
 import styles from '@/styles/styles';
@@ -49,20 +49,21 @@ const Setting = () => {
     const changeProfilePicture = async () => {
         setUploadLoader(true);
         const newForm = new FormData();
-        newForm.append('profilePicture', selectedImage);
-        // try {
-        //     const result = await updateProfilePicture(newForm, currentSeller?._id);
-        //     if (result?.status === 200) {
-        //         toast.success('Profile Picture Updated');
-        //         handleCancel();
-        //         setUploadLoader(false);
-        //         refetch();
-        //     }
-        //     setUploadLoader(false);
-        // } catch (error) {
-        //     setUploadLoader(false);
-        //     toast.error('Fail To update Profile Picture');
-        // }
+        newForm.append('shopProfile', selectedImage);
+        try {
+            const result = await updateShopProfilePicture(newForm, data?._id);
+            if (result?.status === 200) {
+                toast.success('Profile Picture Updated');
+                handleCancel();
+                setUploadLoader(false);
+                refetch();
+                refresh();
+            }
+            setUploadLoader(false);
+        } catch (error) {
+            setUploadLoader(false);
+            toast.error('Fail To update Profile Picture');
+        }
     };
 
     const handleSubmit = async (e: any) => {

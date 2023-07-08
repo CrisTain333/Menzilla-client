@@ -44,7 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [userOrders, setUsersOrders] = useState<any[]>([]);
 
     const { data, refetch } = useQuery({
-        queryKey: ['userData', accessToken, isLoading],
+        queryKey: ['userData', currentUser],
         queryFn: async () => {
             try {
                 const response = await axiosInstance.get(`/user/me`, {
@@ -67,13 +67,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     setUserFetched(true);
                     setCurrentUser(userData);
                     setIsLoading(false);
-                    refetch();
                 })
                 .catch(() => {
                     setIsLoading(false);
                 });
         }
-        refetch();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
@@ -88,6 +86,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentUser(response?.data?.user);
+                refetch();
                 return null;
             } else {
                 return 'Wrong Credential';

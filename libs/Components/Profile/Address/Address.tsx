@@ -75,7 +75,7 @@ const Address = () => {
             <div className="w-full px-5 pb-5">
                 {open && (
                     <div className="fixed w-full h-screen bg-[#0000004b] top-0 left-0 flex items-center justify-center ">
-                        <div className="w-[40%] h-[70vh] bg-white rounded shadow relative overflow-y-scroll">
+                        <div className="w-[95%] md:w-[40%] h-auto bg-white rounded shadow relative overflow-y-scroll">
                             <div className="w-full flex justify-end p-3">
                                 <RxCross1
                                     size={30}

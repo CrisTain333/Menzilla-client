@@ -12,7 +12,7 @@ const ShopInbox = () => {
     const { currentSeller } = useSeller();
 
     const { data: conversations, isLoading } = useQuery({
-        queryKey: ['messageList', currentSeller],
+        queryKey: ['messageList', currentSeller, open],
         queryFn: async () => {
             const response = await getSellerConversations(currentSeller?._id);
             if (response.status === 201) {
@@ -24,10 +24,14 @@ const ShopInbox = () => {
     });
     return (
         <div>
-            <div className="w-[95%] m-5 h-[83vh] overflow-y-scroll shadow-md rounded-md">
-                <h1 className="font-semibold ml-5 text-xl">
-                    All Messages <span className="text-[#ff9900] text-2xl">.</span>
-                </h1>
+            <div className="w-[95%] mt-3 h-[83vh] overflow-y-scroll shadow-md rounded-md">
+                {!open && (
+                    <>
+                        <h1 className="font-semibold ml-5 text-xl">
+                            All Messages <span className="text-[#ff9900] text-2xl">.</span>
+                        </h1>
+                    </>
+                )}
 
                 {/* All Message List */}
                 <div>
@@ -71,7 +75,7 @@ const ShopInbox = () => {
 
                     {open && (
                         <>
-                            <SellerInbox />
+                            <SellerInbox setOpen={setOpen} />
                         </>
                     )}
                 </div>

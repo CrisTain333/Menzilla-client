@@ -32,9 +32,25 @@ const SellerInbox = ({ setOpen }: any) => {
             </div>
 
             {/* Message Group  */}
-            <div className="bg-red-100  px-3 h-[60vh] py-3 overflow-y-scroll">
-                <div className="w-max h-min p-2 rounded bg-gray-300">
-                    <p>Hello World !</p>
+            <div className="px-3 h-[60vh] py-3 overflow-y-scroll">
+                <div className="flex items-baseline">
+                    <Image
+                        src={
+                            'https://res.cloudinary.com/menzilla/image/upload/v1688536977/Menzilla/User-profile/ttw93z7t7pkw3azcfpx3.jpg'
+                        }
+                        height={500}
+                        width={500}
+                        alt="user_Profile"
+                        className="h-6 w-6 rounded-full object-contain "
+                    />
+                    <div className="w-max h-min p-2 bg-blue-600 text-white rounded-lg">
+                        <p>Hi</p>
+                    </div>
+                </div>
+                <div className="flex items-baseline justify-end">
+                    <div className="w-max h-min p-2 bg-blue-600 text-white rounded-lg">
+                        <p>Hellos</p>
+                    </div>
                 </div>
             </div>
 

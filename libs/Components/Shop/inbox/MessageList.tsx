@@ -4,7 +4,7 @@ import React from 'react';
 const MessageList = () => {
     return (
         <div>
-            <div className="w-full flex py-3 my-3 p-3 bg-slate-50">
+            <div className="w-full flex py-3 p-3 bg-slate-50">
                 <div className="relative">
                     <Image
                         src={

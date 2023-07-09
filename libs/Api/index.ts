@@ -205,3 +205,12 @@ export const updateShopProfilePicture = async (profileImage: any, shopId: string
         return { error };
     }
 };
+
+export const createConversation = async (data: any) => {
+    try {
+        const response = await axiosInstance.post(`/chat/create-conversation`, data);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

@@ -1,4 +1,7 @@
+import { createConversation } from '@/libs/Api';
+import { useAuth } from '@/libs/Context/AuthProvider';
 import { useCart } from '@/libs/Context/CartProvider';
+import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import moment from 'moment';
 import Image from 'next/image';
@@ -14,6 +17,8 @@ const ProductDetail = ({ data }: any) => {
     const [select, setSelect] = useState(0);
     const router = useRouter();
     const { refresh } = useCart();
+    const { currentUser } = useAuth();
+    const { currentSeller } = useSeller();
 
     const incrementCount = () => {
         setCount(count + 1);
@@ -44,8 +49,28 @@ const ProductDetail = ({ data }: any) => {
         }
     };
 
-    const handleMessageSubmit = () => {
-        router.push('/inbox?conversation=507ebjver884ehfdjeriv84');
+    const handleMessageSubmit = async () => {
+        if (currentUser) {
+            const groupTitle = currentSeller?._id + currentUser?._id;
+            const userId = currentUser._id;
+            const sellerId = currentSeller._id;
+            const data = {
+                groupTitle,
+                userId,
+                sellerId
+            };
+
+            const result = await createConversation(data);
+            if (result.status !== 201) {
+                toast.error(result?.message);
+                return;
+            } else {
+                router.push(`/inbox?${result.data._id}`);
+                return;
+            }
+        } else {
+            toast.error('Please login to create a conversation');
+        }
     };
 
     return (
@@ -153,7 +178,7 @@ const ProductDetail = ({ data }: any) => {
                                             </h5>
                                         </div>
                                         <div
-                                            className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm`}
+                                            className={`px-5 py-2.5 font-medium bg-blue-400 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-sm text-sm cursor-pointer`}
                                             onClick={handleMessageSubmit}
                                         >
                                             <span className="text-white flex items-center">

@@ -11,9 +11,9 @@ const Inbox = () => {
                     <DashboardHeader />
                     <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-3">
-                            <DashboardSidebar active={7} />
+                            <DashboardSidebar active={8} />
                         </div>
-                        <div className="w-full flex flex-col mt-10 col-span-9">
+                        <div className="w-full flex flex-col col-span-9">
                             <ShopInbox />
                         </div>
                     </div>

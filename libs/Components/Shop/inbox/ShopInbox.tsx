@@ -4,6 +4,8 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import { useQuery } from '@tanstack/react-query';
 import { getSellerConversations } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
+import { ThreeCircles } from 'react-loader-spinner';
+import SellerInbox from './SellerInbox';
 
 const ShopInbox = () => {
     const [open, setOpen] = useState(false);
@@ -31,17 +33,45 @@ const ShopInbox = () => {
                 <div>
                     {!open && (
                         <>
-                            {conversations &&
-                                conversations?.map((item: any, index: number) => {
-                                    return (
-                                        <MessageList
-                                            key={index}
-                                            item={item}
-                                            index={index}
-                                            setOpen={setOpen}
+                            {isLoading ? (
+                                <>
+                                    {' '}
+                                    <div className="flex items-center justify-center h-[50vh]">
+                                        <ThreeCircles
+                                            height="100"
+                                            width="100"
+                                            color="#ff9900"
+                                            wrapperStyle={{}}
+                                            wrapperClass=""
+                                            visible={true}
+                                            ariaLabel="three-circles-rotating"
+                                            outerCircleColor=""
+                                            innerCircleColor=""
+                                            middleCircleColor=""
                                         />
-                                    );
-                                })}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    {conversations &&
+                                        conversations?.map((item: any, index: number) => {
+                                            return (
+                                                <MessageList
+                                                    key={index}
+                                                    item={item}
+                                                    index={index}
+                                                    setOpen={setOpen}
+                                                />
+                                            );
+                                        })}
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {open && (
+                        <>
+                            <SellerInbox />
                         </>
                     )}
                 </div>

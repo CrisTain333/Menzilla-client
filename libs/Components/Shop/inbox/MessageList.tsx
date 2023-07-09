@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-const MessageList = () => {
+const MessageList = ({ item }: any) => {
     return (
         <div>
             <div className="w-full flex py-3 p-3 bg-slate-50">

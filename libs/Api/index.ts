@@ -214,3 +214,12 @@ export const createConversation = async (data: any) => {
         return { error };
     }
 };
+
+export const getSellerConversations = async (sellerId: any) => {
+    try {
+        const response = await axiosInstance.get(`/chat/seller-conversation/${sellerId}`);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

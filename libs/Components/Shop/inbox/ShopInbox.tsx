@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MessageList from './MessageList';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +6,7 @@ import { getSellerConversations } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 
 const ShopInbox = () => {
+    const [open, setOpen] = useState(false);
     const { currentSeller } = useSeller();
 
     const { data: conversations, isLoading } = useQuery({
@@ -28,10 +29,21 @@ const ShopInbox = () => {
 
                 {/* All Message List */}
                 <div>
-                    {conversations &&
-                        conversations?.map((item: any, index: number) => {
-                            return <MessageList key={index} item={item} />;
-                        })}
+                    {!open && (
+                        <>
+                            {conversations &&
+                                conversations?.map((item: any, index: number) => {
+                                    return (
+                                        <MessageList
+                                            key={index}
+                                            item={item}
+                                            index={index}
+                                            setOpen={setOpen}
+                                        />
+                                    );
+                                })}
+                        </>
+                    )}
                 </div>
             </div>
         </div>

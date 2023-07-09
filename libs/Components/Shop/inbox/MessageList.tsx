@@ -1,10 +1,25 @@
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
-const MessageList = ({ item }: any) => {
+const MessageList = ({ item, index, setOpen }: any) => {
+    const [active, setActive] = useState<any>(0);
+    const router = useRouter();
+    const handleClick = (id: any) => {
+        setActive(index);
+        setOpen(true);
+        router.push(`?conversation_address=${id}`);
+    };
     return (
         <div>
-            <div className="w-full flex py-3 p-3 bg-slate-50">
+            <div
+                className={`w-full flex py-3 p-3 ${
+                    active === index ? 'bg-slate-100' : 'bg-transparent'
+                } cursor-pointer`}
+                onClick={() => {
+                    handleClick(item?._id);
+                }}
+            >
                 <div className="relative">
                     <Image
                         src={

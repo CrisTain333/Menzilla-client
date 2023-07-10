@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MessageList from './MessageList';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import { useQuery } from '@tanstack/react-query';
@@ -6,10 +6,44 @@ import { getSellerConversations } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
 import { ThreeCircles } from 'react-loader-spinner';
 import SellerInbox from './SellerInbox';
+import socketIO from 'socket.io-client';
+const ENDPOINT = 'http://localhost:8000/';
+const socketId = socketIO(ENDPOINT, { transports: ['websocket'] });
 
 const ShopInbox = () => {
     const [open, setOpen] = useState(false);
     const { currentSeller } = useSeller();
+    // const [arrivalMessage, setArrivalMessage] = useState<any>(null);
+    // const [currentChat, setCurrentChat] = useState<any>();
+    // const [messages, setMessages] = useState<any>([]);
+    // useEffect(() => {
+    //     socketId.on('getMessage', (data) => {
+    //         setArrivalMessage({
+    //             sender: data.senderId,
+    //             text: data.text,
+    //             createdAt: Date.now()
+    //         });
+    //     });
+    // }, []);
+
+    // useEffect(() => {
+    //     arrivalMessage &&
+    //         currentChat?.members.includes(arrivalMessage.sender) &&
+    //         setMessages((prev: any) => [...prev, arrivalMessage]);
+    // }, [arrivalMessage, currentChat]);
+
+    // const getMessage = useQuery({
+    //     queryKey: ['message'],
+    //     queryFn: () => {
+    //         socketId.on('getMessage', (data) => {
+    //             setArrivalMessage({
+    //                 sender: data.senderId,
+    //                 text: data.text,
+    //                 createdAt: Date.now()
+    //             });
+    //         });
+    //     }
+    // });
 
     const { data: conversations, isLoading } = useQuery({
         queryKey: ['messageList', currentSeller, open],

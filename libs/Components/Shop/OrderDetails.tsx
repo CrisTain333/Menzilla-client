@@ -33,6 +33,7 @@ const OrderDetails = () => {
         if (result.status === 200) {
             toast.success(result?.message);
             setLoading(false);
+            return;
         }
         toast.error(result?.message);
         setLoading(false);
@@ -55,7 +56,7 @@ const OrderDetails = () => {
         //      });
     };
 
-    const refundOrderUpdateHandler = async (e: any) => {
+    const refundOrderUpdateHandler = async () => {
         //  await axios
         //      .put(
         //          `${server}/order/order-refund-success/${id}`,

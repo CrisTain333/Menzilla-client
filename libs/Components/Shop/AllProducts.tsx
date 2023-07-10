@@ -69,7 +69,7 @@ const AllProducts = () => {
                                         <td>{product?.name?.slice(0, 40)}. . .</td>
                                         <td>${product?.discountPrice}</td>
                                         <td>{product?.stock}</td>
-                                        <td>10</td>
+                                        <td>{product?.sold_out}</td>
                                         <td>
                                             {' '}
                                             <Link href={`/product/${product?.name}`}>

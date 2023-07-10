@@ -72,7 +72,7 @@ const DashboardSidebar = ({ active }: any) => {
                     </Link>
                 </div>
 
-                <div className="w-full flex items-center p-4">
+                {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard-events" className="w-full flex items-center">
                         <MdOutlineLocalOffer
                             size={28}
@@ -86,9 +86,9 @@ const DashboardSidebar = ({ active }: any) => {
                             All Events
                         </h5>
                     </Link>
-                </div>
+                </div> */}
 
-                <div className="w-full flex items-center p-4">
+                {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard-withdraw-money" className="w-full flex items-center">
                         <CiMoneyBill size={28} color={`${active === 7 ? '#ff9900' : '#000000'}`} />
                         <h5
@@ -99,9 +99,9 @@ const DashboardSidebar = ({ active }: any) => {
                             Withdraw Money
                         </h5>
                     </Link>
-                </div>
+                </div> */}
 
-                <div className="w-full flex items-center p-4">
+                {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard/shop-inbox" className="w-full flex items-center">
                         <BiMessageSquareDetail
                             size={28}
@@ -115,9 +115,9 @@ const DashboardSidebar = ({ active }: any) => {
                             Shop Inbox
                         </h5>
                     </Link>
-                </div>
+                </div> */}
 
-                <div className="w-full flex items-center p-4">
+                {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard-coupouns" className="w-full flex items-center">
                         <AiOutlineGift
                             size={28}
@@ -131,7 +131,7 @@ const DashboardSidebar = ({ active }: any) => {
                             Discount Codes
                         </h5>
                     </Link>
-                </div>
+                </div> */}
 
                 {/* <div className="w-full flex items-center p-4">
                     <Link href="/dashboard-refunds" className="w-full flex items-center">

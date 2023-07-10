@@ -58,7 +58,7 @@ const SimpleNav = () => {
                                     Home
                                 </Link>
                             </li>
-                            <li className="flex">
+                            {/* <li className="flex">
                                 <Link
                                     rel="noopener noreferrer"
                                     href="/best-deal"
@@ -66,7 +66,7 @@ const SimpleNav = () => {
                                 >
                                     Best Selling
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="flex">
                                 <Link
                                     rel="noopener noreferrer"

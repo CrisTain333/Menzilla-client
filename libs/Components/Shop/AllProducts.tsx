@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 const AllProducts = () => {
     const { currentSeller, products, getSellerProducts, totalPages } = useSeller();
     const [currentPage, setCurrentPage] = useState(1);
+    const [filterData, setFilterData] = useState<any>(products);
 
     // const { products, isLoading } = useSelector((state) => state.products);
 
@@ -35,12 +36,23 @@ const AllProducts = () => {
         pageNumbers.push(i);
     }
 
+    // const handleSearch = (value: any) => {
+    //     if (value === '') {
+    //         setFilterData(products);
+    //     }
+    //     const filterValue = products?.find((product: any) =>
+    //         product.name.toLowerCase().includes(value.toLowerCase())
+    //     );
+    //     console.log(filterValue);
+    //     setFilterData(filterValue);
+    // };
+
     return (
         <>
             <div className="overflow-x-auto h-[25rem] w-[95%] mx-auto">
                 <table className="table w-full">
                     <colgroup>
-                        <col className="w-32" />
+                        <col className="w-36" />
                         <col className="w-32" />
                         <col className="w-32" />
                         <col className="w-32" />
@@ -52,7 +64,17 @@ const AllProducts = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th className="w-[20%]">Name</th>
+                            <th className="w-[30%]">
+                                Name
+                                <div className=" my-1">
+                                    <input
+                                        type="text"
+                                        className="p-1 rounded-md"
+                                        placeholder="Search by name"
+                                        // onChange={(e) => handleSearch(e.target.value)}
+                                    />
+                                </div>
+                            </th>
                             <th className="w-[20%]">Price</th>
                             <th className="w-[20%]">Stock</th>
                             <th className="w-[20%]">Sold</th>
@@ -62,14 +84,14 @@ const AllProducts = () => {
                     </thead>
                     <tbody>
                         {products &&
-                            products.map((product: any, index: any) => {
+                            filterData?.map((product: any, index: any) => {
                                 return (
                                     <tr key={index}>
                                         <th>{index + 1}</th>
                                         <td>{product?.name?.slice(0, 40)}. . .</td>
                                         <td>${product?.discountPrice}</td>
                                         <td>{product?.stock}</td>
-                                        <td>10</td>
+                                        <td>{product?.sold_out}</td>
                                         <td>
                                             {' '}
                                             <Link href={`/product/${product?.name}`}>

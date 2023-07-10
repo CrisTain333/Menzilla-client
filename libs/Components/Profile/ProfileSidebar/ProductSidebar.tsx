@@ -47,7 +47,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                     Refunds
                 </span>
             </div> */}
-
+            {/* 
             <div
                 className="flex items-center cursor-pointer w-full mb-8"
                 onClick={() => setActive(4) || router.push('/inbox')}
@@ -56,7 +56,7 @@ const ProfileSideBar = ({ setActive, active }: any) => {
                 <span className={`pl-3 ${active === 4 ? 'text-[red]' : ''} md:block hidden`}>
                     Inbox
                 </span>
-            </div>
+            </div> */}
 
             <div
                 className="flex items-center cursor-pointer w-full mb-8 "

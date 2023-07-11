@@ -22,7 +22,7 @@ const ShopProducts = () => {
                 <DashboardHeader />
                 <div className="grid grid-cols-12 gap-5">
                     <div className="col-span-2">
-                        <DashboardSidebar active={11} />
+                        <DashboardSidebar active={3} />
                     </div>
                     <div className="w-full flex flex-col justify-center mt-10 col-span-10">
                         <AllProducts />

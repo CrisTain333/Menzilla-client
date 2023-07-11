@@ -1,10 +1,11 @@
 import PROductCard from '@/libs/Components/ProductCard/PROUDCTcard';
-import ProductCard from '@/libs/Components/ProductCard/ProductCard';
+// import ProductCard from '@/libs/Components/ProductCard/ProductCard';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
+import { FcFilledFilter } from 'react-icons/fc';
 
 const Product = () => {
     const { allProducts, isProductLoading } = useSeller();
@@ -50,11 +51,17 @@ const Product = () => {
                         />
                     </div>
                 ) : (
-                    <div className="grid grid-cols-12">
-                        <div className="col-span-3">
-                            <div className="sidebar">
-                                <div className="widget user_widget_search">
-                                    <h2>Users search</h2>
+                    <div className="grid grid-cols-12 gap-5">
+                        <div className="col-span-3 ">
+                            <div className="sidebar w-[80%] sticky top-20">
+                                <div className="widget user_widget_search rounded-md shadow-md p-2">
+                                    <h2 className="text-center flex items-center justify-center">
+                                        <span className="mr-1">
+                                            {' '}
+                                            <FcFilledFilter size={20} />{' '}
+                                        </span>
+                                        Filters
+                                    </h2>
                                     <form
                                         id="user_wiget_search_form"
                                         className="user_wiget_search_form"
@@ -154,10 +161,10 @@ const Product = () => {
                                                 </span>
                                             </label>
                                         </div>
-                                        <div className="form-group">
+                                        <div className="form-group my-5">
                                             <button
                                                 type="submit"
-                                                className="btn btn-block btn-primary"
+                                                className="px-3 py-1 text-white  bg-[#ff9900] rounded-sm"
                                             >
                                                 Submit
                                             </button>

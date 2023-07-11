@@ -56,9 +56,9 @@ export const deleteShopProduct = async (product_id: string) => {
         return { error };
     }
 };
-export const getAllProduct = async () => {
+export const getAllProduct = async (page: number = 1) => {
     try {
-        const response = await axiosInstance.get(`/product`);
+        const response = await axiosInstance.get(`/product?page=${page}`);
         return response.data;
     } catch (error) {
         return { error };

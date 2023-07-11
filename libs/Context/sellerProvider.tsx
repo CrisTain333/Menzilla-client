@@ -19,6 +19,8 @@ interface IAuthContextValue {
     allProducts: any;
     setAllProducts: any;
     sellerProfileData: any;
+    setPage: any;
+    page: number;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -29,7 +31,7 @@ const AuthContext = createContext<IAuthContextValue | undefined>(undefined);
 export function useSeller() {
     const context = useContext(AuthContext);
     if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useSeller must be used within an SellerProvider');
     }
     return context;
 }
@@ -47,6 +49,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [sellerAccessToken, setSellerAccessToken] = useState<any>();
     const [totalPages, setTotalPages] = useState(0);
     const [sellerProfileData, setSellerProfileData] = useState<any>();
+    const [page, setPage] = useState<any>(1);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -65,9 +68,12 @@ export function SellerProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
-        getProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
+
+    useEffect(() => {
+        getProduct(page);
+    }, [page]);
 
     const refresh = () => {
         setShouldRefresh(!shouldRefresh);
@@ -125,10 +131,13 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
-    const getProduct = async () => {
+    const getProduct = async (page: number) => {
         setIsProductLoading(true);
         try {
-            const result = await getAllProduct();
+            const result = await getAllProduct(page);
+            // setAllProducts((prev: any) => {
+            //     return [...prev, ...result?.data];
+            // });
             setAllProducts(result?.data);
             setIsProductLoading(false);
         } catch (error) {
@@ -152,7 +161,9 @@ export function SellerProvider({ children }: AuthProviderProps) {
         allProducts,
         isProductLoading,
         setAllProducts,
-        sellerProfileData
+        sellerProfileData,
+        page,
+        setPage
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

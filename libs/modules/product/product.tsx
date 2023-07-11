@@ -9,7 +9,7 @@ import { FcFilledFilter } from 'react-icons/fc';
 import { categoriesData } from '@/libs/common/constant/Data';
 
 const Product = () => {
-    const { allProducts, isProductLoading } = useSeller();
+    const { allProducts, isProductLoading, page, setPage } = useSeller();
     const [searchValue, setSearchValue] = useState<string | null>(null);
     const [data, setData] = useState([]);
     const router = useRouter();
@@ -49,6 +49,19 @@ const Product = () => {
         }
     }, [allProducts, categoryData, searchValue]);
 
+    const handleNextPage = () => {
+        // e.preventDefault();
+        const newPage = page + 1;
+        setPage(newPage);
+    };
+    const handleBackPage = () => {
+        if (page === 1) {
+            return;
+        }
+        const newPage = page - 1;
+        setPage(newPage);
+    };
+
     return (
         <div>
             <HeaderAndFooter>
@@ -87,7 +100,7 @@ const Product = () => {
                                         <div className="form-group mb-1">
                                             <label
                                                 htmlFor="user_name"
-                                                className=" my-2 text-base font-semibold"
+                                                className=" mt-2 text-base font-semibold"
                                             >
                                                 Product
                                             </label>
@@ -125,13 +138,59 @@ const Product = () => {
                                                 );
                                             })}
                                         </div>
-                                        <div className="form-group my-5">
-                                            <button
-                                                type="submit"
-                                                className="px-3 py-1 text-white  bg-[#ff9900] rounded-sm"
-                                            >
-                                                Submit
-                                            </button>
+                                        <div className="form-group my-2">
+                                            <p className="text-base font-semibold">Pagination</p>
+                                            <div className="items-center space-y-2 text-xs sm:space-y-0 sm:space-x-3 sm:flex">
+                                                <span className="block">Page {page} of 4</span>
+                                                <div className="space-x-1">
+                                                    <button
+                                                        disabled={page === 1}
+                                                        onClick={() => handleBackPage()}
+                                                        title="previous"
+                                                        type="button"
+                                                        className={`inline-flex items-center justify-center w-8 h-8 py-0  rounded-md shadow ${
+                                                            page === 1 &&
+                                                            'cursor-not-allowed bg-slate-100'
+                                                        }`}
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                            strokeWidth="2"
+                                                            fill="none"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            className="w-4"
+                                                        >
+                                                            <polyline
+                                                                className="text-[#ff9900]"
+                                                                points="15 18 9 12 15 6"
+                                                            ></polyline>
+                                                        </svg>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleNextPage()}
+                                                        title="next"
+                                                        type="button"
+                                                        className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow"
+                                                    >
+                                                        <svg
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                            strokeWidth="2"
+                                                            fill="none"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            className="w-4"
+                                                        >
+                                                            <polyline
+                                                                className="text-[#ff9900]"
+                                                                points="9 18 15 12 9 6"
+                                                            ></polyline>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -150,7 +209,7 @@ const Product = () => {
                                 ) : (
                                     <>
                                         <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] mb-12">
-                                            {data?.map((item: any, index: any) => {
+                                            {data?.slice(0, 6)?.map((item: any, index: any) => {
                                                 return <PROductCard data={item} key={index} />;
                                             })}
                                         </div>

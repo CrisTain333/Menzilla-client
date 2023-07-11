@@ -20,7 +20,7 @@ const ProductCard = ({ data }: any) => {
 
     return (
         <div>
-            <div className="w-full h-[370px] bg-white rounded-lg shadow-md p-3 relative cursor-pointer">
+            <div className="w-full h-[370px] rounded-lg shadow-md p-3 relative cursor-pointer">
                 <div className="flex justify-end"></div>
                 <Link href={`/product/${data?._id}`}>
                     <Image

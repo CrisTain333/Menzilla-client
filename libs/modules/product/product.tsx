@@ -1,3 +1,4 @@
+import PROductCard from '@/libs/Components/ProductCard/PROUDCTcard';
 import ProductCard from '@/libs/Components/ProductCard/ProductCard';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
@@ -49,24 +50,29 @@ const Product = () => {
                         />
                     </div>
                 ) : (
-                    <div>
-                        {data?.length === 0 ? (
-                            <>
-                                <div>
-                                    <h1 className="text-center w-full font-mono font-bold text-5xl mb-40">
-                                        No products Found!
-                                    </h1>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px]  xl:gap-[30px] mb-12">
-                                    {data?.map((item: any, index: any) => {
-                                        return <ProductCard data={item} key={index} />;
-                                    })}
-                                </div>
-                            </>
-                        )}
+                    <div className="grid grid-cols-12">
+                        <div className="col-span-2"></div>
+                        <div className="col-span-10">
+                            <div>
+                                {data?.length === 0 ? (
+                                    <>
+                                        <div>
+                                            <h1 className="text-center w-full font-mono font-bold text-5xl mb-40">
+                                                No products Found!
+                                            </h1>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="grid grid-cols-1 gap-[20px] md:grid-cols-3 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] mb-12">
+                                            {data?.map((item: any, index: any) => {
+                                                return <PROductCard data={item} key={index} />;
+                                            })}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
             </HeaderAndFooter>

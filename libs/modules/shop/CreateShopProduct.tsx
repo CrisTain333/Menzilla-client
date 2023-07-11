@@ -6,12 +6,14 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const CreateShopProduct = () => {
-    const { currentSeller, isSeller } = useSeller();
+    const { currentSeller, isSeller, isLoading } = useSeller();
     const router = useRouter();
 
     React.useEffect((): any => {
-        if (!currentSeller && !isSeller) {
-            router.push('/auth/seller-login');
+        if (isLoading === false) {
+            if (!currentSeller) {
+                router.push('/auth/seller-login');
+            }
         }
     }, [currentSeller, isSeller, router]);
     return (

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 import { getAllProduct, getShopProduct } from '../Api';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -36,7 +36,7 @@ export function useSeller() {
 
 export function SellerProvider({ children }: AuthProviderProps) {
     const tokenStoragePath = 'seller_Access_Token';
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentSeller, setCurrentSeller] = useState<any>(null);
     const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
@@ -52,7 +52,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
         const token = localStorage.getItem(tokenStoragePath);
         setSellerAccessToken(token as string);
         if (token && !sellerFetched) {
-            setIsLoading(true);
+            // setIsLoading(true);
             getSellerData(token)
                 .then((userData) => {
                     setSellerFetched(true);

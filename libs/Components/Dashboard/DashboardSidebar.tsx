@@ -1,12 +1,12 @@
 import React from 'react';
-import { AiOutlineFolderAdd, AiOutlineGift } from 'react-icons/ai';
+import { AiOutlineFolderAdd } from 'react-icons/ai';
 import { FiPackage, FiShoppingBag } from 'react-icons/fi';
-import { MdOutlineLocalOffer } from 'react-icons/md';
+// import { MdOutlineLocalOffer } from 'react-icons/md';
 import { RxDashboard } from 'react-icons/rx';
 // import { VscNewFile } from 'react-icons/vsc';
-import { CiMoneyBill, CiSettings } from 'react-icons/ci';
-import { BiMessageSquareDetail } from 'react-icons/bi';
-import { HiOutlineReceiptRefund } from 'react-icons/hi';
+import { CiSettings } from 'react-icons/ci';
+// import { BiMessageSquareDetail } from 'react-icons/bi';
+// import { HiOutlineReceiptRefund } from 'react-icons/hi';
 import Link from 'next/link';
 
 const DashboardSidebar = ({ active }: any) => {
@@ -150,7 +150,7 @@ const DashboardSidebar = ({ active }: any) => {
                 </div> */}
 
                 <div className="w-full flex items-center p-4">
-                    <Link href="/settings" className="w-full flex items-center">
+                    <Link href="/dashboard/shop-setting" className="w-full flex items-center">
                         <CiSettings size={28} color={`${active === 11 ? '#ff9900' : '#000000'}`} />
                         <h5
                             className={`hidden md:block pl-2 text-[18px] font-semibold ${

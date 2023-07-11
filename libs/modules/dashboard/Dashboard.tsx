@@ -12,8 +12,6 @@ const Dashboard = () => {
         if (isLoading === false) {
             if (!currentSeller) {
                 router.push('/auth/seller-login');
-            } else if (!isSeller) {
-                router.push('/auth/seller-login');
             }
         }
     }, [currentSeller, isSeller, router]);

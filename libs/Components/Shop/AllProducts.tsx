@@ -9,8 +9,9 @@ import { toast } from 'react-hot-toast';
 const AllProducts = () => {
     const { currentSeller, products, getSellerProducts, totalPages } = useSeller();
     const [currentPage, setCurrentPage] = useState(1);
-    const [filterData, setFilterData] = useState<any>(products);
 
+    // const [filterText, setFilterText] = useState('');
+    // const [filteredProducts, setFilteredProducts] = useState(products);
     // const { products, isLoading } = useSelector((state) => state.products);
 
     const handleProductDelete = async (id: string) => {
@@ -26,6 +27,21 @@ const AllProducts = () => {
     useEffect(() => {
         getSellerProducts(currentSeller?._id, currentPage);
     }, [currentPage]);
+
+    useEffect(() => {
+        getSellerProducts(currentSeller?._id, currentPage);
+    }, [currentPage]);
+
+    // useEffect(() => {
+    //     if (filterText === '') {
+    //         setFilteredProducts(products);
+    //     } else {
+    //         const filtered = products.filter((product: any) =>
+    //             product.name.toLowerCase().includes(filterText.toLowerCase())
+    //         );
+    //         setFilteredProducts(filtered);
+    //     }
+    // }, [filterText, products]);
 
     const handlePageChange = (pageNumber: any) => {
         setCurrentPage(pageNumber);
@@ -67,12 +83,14 @@ const AllProducts = () => {
                             <th className="w-[30%]">
                                 Name
                                 <div className=" my-1">
-                                    <input
+                                    {/* <input
                                         type="text"
                                         className="p-1 rounded-md"
                                         placeholder="Search by name"
+                                        // value={filterText}
+                                        // onChange={(e) => setFilterText(e.target.value)}
                                         // onChange={(e) => handleSearch(e.target.value)}
-                                    />
+                                    /> */}
                                 </div>
                             </th>
                             <th className="w-[20%]">Price</th>
@@ -84,7 +102,7 @@ const AllProducts = () => {
                     </thead>
                     <tbody>
                         {products &&
-                            filterData?.map((product: any, index: any) => {
+                            products?.map((product: any, index: any) => {
                                 return (
                                     <tr key={index}>
                                         <th>{index + 1}</th>

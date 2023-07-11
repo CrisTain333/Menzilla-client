@@ -29,7 +29,7 @@ const DashboardHeader = () => {
                 </div>
                 <div className="flex items-center">
                     <div className="flex items-center mr-4">
-                        <Link href="/dashboard/cupouns" className="md:block hidden">
+                        {/* <Link href="/dashboard/cupouns" className="md:block hidden">
                             <AiOutlineGift
                                 color="#555"
                                 size={30}
@@ -63,7 +63,7 @@ const DashboardHeader = () => {
                                 size={30}
                                 className="mx-5 cursor-pointer text-black"
                             />
-                        </Link>
+                        </Link> */}
                         <Link href={`/shop/${currentSeller?._id}`}>
                             <Image
                                 height={500}

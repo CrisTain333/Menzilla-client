@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ShopInfo from '@/libs/Components/Shop/ShopInfo';
 import ShopProfileData from '@/libs/Components/Shop/ShopProfileData';
 import { useSeller } from '@/libs/Context/sellerProvider';
@@ -5,12 +6,14 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const Shop = () => {
-    const { currentSeller, isSeller } = useSeller();
+    const { currentSeller, isSeller, isLoading } = useSeller();
     const router = useRouter();
 
     React.useEffect((): any => {
-        if (!currentSeller && !isSeller) {
-            router.push('/auth/seller-login');
+        if (isLoading === false) {
+            if (!currentSeller) {
+                router.push('/auth/seller-login');
+            }
         }
     }, [currentSeller, isSeller, router]);
     return (

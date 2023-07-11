@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 import { getAllProduct, getShopProduct } from '../Api';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 interface IAuthContextValue {
     currentSeller: any;
     isLoading: boolean;
@@ -19,6 +19,9 @@ interface IAuthContextValue {
     allProducts: any;
     setAllProducts: any;
     sellerProfileData: any;
+    setPage: any;
+    page: number;
+    allProductsTotalPage: number;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -29,14 +32,14 @@ const AuthContext = createContext<IAuthContextValue | undefined>(undefined);
 export function useSeller() {
     const context = useContext(AuthContext);
     if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useSeller must be used within an SellerProvider');
     }
     return context;
 }
 
 export function SellerProvider({ children }: AuthProviderProps) {
     const tokenStoragePath = 'seller_Access_Token';
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentSeller, setCurrentSeller] = useState<any>(null);
     const [isSeller, setIsSeller] = useState(false);
     const [sellerFetched, setSellerFetched] = useState(false);
@@ -47,12 +50,14 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [sellerAccessToken, setSellerAccessToken] = useState<any>();
     const [totalPages, setTotalPages] = useState(0);
     const [sellerProfileData, setSellerProfileData] = useState<any>();
+    const [allProductsTotalPage, setAllProductsTotalPage] = useState(0);
+    const [page, setPage] = useState<any>(1);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
         setSellerAccessToken(token as string);
         if (token && !sellerFetched) {
-            setIsLoading(true);
+            // setIsLoading(true);
             getSellerData(token)
                 .then((userData) => {
                     setSellerFetched(true);
@@ -65,9 +70,12 @@ export function SellerProvider({ children }: AuthProviderProps) {
                     setIsLoading(false);
                 });
         }
-        getProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
+
+    useEffect(() => {
+        getProduct(page);
+    }, [page]);
 
     const refresh = () => {
         setShouldRefresh(!shouldRefresh);
@@ -125,11 +133,15 @@ export function SellerProvider({ children }: AuthProviderProps) {
         }
     };
 
-    const getProduct = async () => {
+    const getProduct = async (page: number) => {
         setIsProductLoading(true);
         try {
-            const result = await getAllProduct();
+            const result = await getAllProduct(page);
+            // setAllProducts((prev: any) => {
+            //     return [...prev, ...result?.data];
+            // });
             setAllProducts(result?.data);
+            setAllProductsTotalPage(result?.totalPages);
             setIsProductLoading(false);
         } catch (error) {
             setIsProductLoading(false);
@@ -152,7 +164,10 @@ export function SellerProvider({ children }: AuthProviderProps) {
         allProducts,
         isProductLoading,
         setAllProducts,
-        sellerProfileData
+        sellerProfileData,
+        page,
+        setPage,
+        allProductsTotalPage
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -4,5 +4,6 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${process.env.BACKEND_BASE_URL}`
     }),
+    tagTypes: ['user'],
     endpoints: () => ({})
 });

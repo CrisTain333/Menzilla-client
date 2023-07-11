@@ -21,6 +21,7 @@ interface IAuthContextValue {
     sellerProfileData: any;
     setPage: any;
     page: number;
+    allProductsTotalPage: number;
 }
 interface AuthProviderProps {
     children: ReactNode;
@@ -49,6 +50,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
     const [sellerAccessToken, setSellerAccessToken] = useState<any>();
     const [totalPages, setTotalPages] = useState(0);
     const [sellerProfileData, setSellerProfileData] = useState<any>();
+    const [allProductsTotalPage, setAllProductsTotalPage] = useState(0);
     const [page, setPage] = useState<any>(1);
 
     useEffect(() => {
@@ -139,6 +141,7 @@ export function SellerProvider({ children }: AuthProviderProps) {
             //     return [...prev, ...result?.data];
             // });
             setAllProducts(result?.data);
+            setAllProductsTotalPage(result?.totalPages);
             setIsProductLoading(false);
         } catch (error) {
             setIsProductLoading(false);
@@ -163,7 +166,8 @@ export function SellerProvider({ children }: AuthProviderProps) {
         setAllProducts,
         sellerProfileData,
         page,
-        setPage
+        setPage,
+        allProductsTotalPage
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

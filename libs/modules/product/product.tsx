@@ -9,7 +9,7 @@ import { FcFilledFilter } from 'react-icons/fc';
 import { categoriesData } from '@/libs/common/constant/Data';
 
 const Product = () => {
-    const { allProducts, isProductLoading, page, setPage } = useSeller();
+    const { allProducts, isProductLoading, page, setPage, allProductsTotalPage } = useSeller();
     const [searchValue, setSearchValue] = useState<string | null>(null);
     const [data, setData] = useState([]);
     const router = useRouter();
@@ -127,7 +127,9 @@ const Product = () => {
                                     <div className="form-group my-2">
                                         <p className="text-base font-semibold">Pagination</p>
                                         <div className="items-center space-y-2 text-xs sm:space-y-0 sm:space-x-3 sm:flex">
-                                            <span className="block">Page {page} of 4</span>
+                                            <span className="block">
+                                                Page {page} of {allProductsTotalPage}
+                                            </span>
                                             <div className="space-x-1">
                                                 <button
                                                     disabled={page === 1}
@@ -136,7 +138,7 @@ const Product = () => {
                                                     type="button"
                                                     className={`inline-flex items-center justify-center w-8 h-8 py-0  rounded-md shadow ${
                                                         page === 1 &&
-                                                        'cursor-not-allowed bg-slate-100'
+                                                        'cursor-not-allowed bg-slate-50'
                                                     }`}
                                                 >
                                                     <svg
@@ -156,9 +158,13 @@ const Product = () => {
                                                 </button>
                                                 <button
                                                     onClick={() => handleNextPage()}
+                                                    disabled={page === allProductsTotalPage}
                                                     title="next"
                                                     type="button"
-                                                    className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow"
+                                                    className={`inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow ${
+                                                        page === allProductsTotalPage &&
+                                                        'cursor-not-allowed bg-slate-50'
+                                                    }`}
                                                 >
                                                     <svg
                                                         viewBox="0 0 24 24"

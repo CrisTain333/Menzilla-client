@@ -17,7 +17,19 @@ const Product = () => {
     const categoryData = query?.category;
 
     useEffect(() => {
-        if (categoryData) {
+        if (categoryData && searchValue) {
+            const filteredProducts = allProducts.filter((i: any) => i.category === categoryData);
+            if (searchValue?.length === 0 || searchValue === '') {
+                setData(filteredProducts);
+                return;
+            }
+            const filteredProductsWithSearch =
+                filteredProducts &&
+                filteredProducts.filter((product: any) =>
+                    product.name.toLowerCase().includes(searchValue.toLowerCase())
+                );
+            setData(filteredProductsWithSearch);
+        } else if (categoryData) {
             const filteredProduct = allProducts.filter((i: any) => i.category === categoryData);
             setData(filteredProduct);
             // categoriesData;
@@ -26,7 +38,6 @@ const Product = () => {
                 setData(allProducts);
                 return;
             }
-
             const filteredProducts =
                 allProducts &&
                 allProducts.filter((product: any) =>
@@ -37,15 +48,6 @@ const Product = () => {
             setData(allProducts);
         }
     }, [allProducts, categoryData, searchValue]);
-
-    // useEffect(() => {
-    //     if (categoryData !== null) {
-    //         const filteredProduct =
-    //             allProducts && allProducts.filter((i: any) => i.category === categoryData);
-    //         setData(filteredProduct);
-    //     }
-    //     //    window.scrollTo(0,0);
-    // }, [allProducts]);
 
     return (
         <div>
@@ -85,8 +87,7 @@ const Product = () => {
                                         <div className="form-group mb-1">
                                             <label
                                                 htmlFor="user_name"
-                                                className=" my-2 
-                                                 text-base font-semibold"
+                                                className=" my-2 text-base font-semibold"
                                             >
                                                 Product
                                             </label>

@@ -6,9 +6,11 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
 import { FcFilledFilter } from 'react-icons/fc';
+import { categoriesData } from '@/libs/common/constant/Data';
 
 const Product = () => {
     const { allProducts, isProductLoading } = useSeller();
+    const [searchValue, setSearchValue] = useState<string | null>(null);
     const [data, setData] = useState([]);
     const router = useRouter();
     const { query } = router;
@@ -18,10 +20,23 @@ const Product = () => {
         if (categoryData) {
             const filteredProduct = allProducts.filter((i: any) => i.category === categoryData);
             setData(filteredProduct);
+            // categoriesData;
+        } else if (searchValue) {
+            if (searchValue?.length === 0 || searchValue === '') {
+                setData(allProducts);
+                return;
+            }
+
+            const filteredProducts =
+                allProducts &&
+                allProducts.filter((product: any) =>
+                    product.name.toLowerCase().includes(searchValue.toLowerCase())
+                );
+            setData(filteredProducts);
         } else {
             setData(allProducts);
         }
-    }, [allProducts, categoryData]);
+    }, [allProducts, categoryData, searchValue]);
 
     // useEffect(() => {
     //     if (categoryData !== null) {
@@ -53,7 +68,7 @@ const Product = () => {
                 ) : (
                     <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-3 ">
-                            <div className="sidebar w-[80%] sticky top-20">
+                            <div className="sidebar w-[90%] sticky top-20">
                                 <div className="widget user_widget_search rounded-md shadow-md p-2">
                                     <h2 className="text-center flex items-center justify-center">
                                         <span className="mr-1">
@@ -67,99 +82,47 @@ const Product = () => {
                                         className="user_wiget_search_form"
                                         method="GET"
                                     >
-                                        <div className="form-group">
-                                            <label htmlFor="user_name">User name</label>
+                                        <div className="form-group mb-1">
+                                            <label
+                                                htmlFor="user_name"
+                                                className=" my-2 
+                                                 text-base font-semibold"
+                                            >
+                                                Product
+                                            </label>
                                             <input
                                                 type="email"
-                                                className="form-control"
+                                                className="form-control border rounded-sm p-1"
                                                 id="user_name"
-                                                placeholder="User name"
+                                                value={searchValue as string}
+                                                onChange={(e) => setSearchValue(e.target.value)}
+                                                placeholder="e.g Product name"
                                             />
                                         </div>
-                                        <div className="form-group">
-                                            <label htmlFor="user_gender">Gender</label>
-                                            <select
-                                                className="form-control custom-select"
-                                                id="user_gender"
+                                        <div className="form-group mt-3">
+                                            <label
+                                                htmlFor="user_gender"
+                                                className="text-base font-semibold"
                                             >
-                                                <option></option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="user_age">Age</label>
-                                            <div id="user_age">
-                                                <div
-                                                    id="user_age_handler_min"
-                                                    className="ui-slider-handle"
-                                                ></div>
-                                                <div
-                                                    id="user_age_handler_max"
-                                                    className="ui-slider-handle"
-                                                ></div>
-                                            </div>
-                                            <input
-                                                type="hidden"
-                                                id="user_age_min"
-                                                name="user_age_min"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                id="user_age_max"
-                                                name="user_age_max"
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="user_sort">Sort</label>
-                                            <select
-                                                className="form-control custom-select"
-                                                id="user_sort"
-                                            >
-                                                <option>A-Z</option>
-                                                <option>Z-A</option>
-                                                <option>New users</option>
-                                                <option>Most viewed</option>
-                                                <option>Most liked</option>
-                                                <option>Popular</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="user_filter">Filter</label>
-                                            <select
-                                                className="form-control custom-select"
-                                                id="user_filter"
-                                            >
-                                                <option>All users</option>
-                                                <option>My friends</option>
-                                                <option>My network</option>
-                                                <option>Featured</option>
-                                                <option>Liked by me</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="custom-control custom-checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    className="custom-control-input"
-                                                />
-                                                <span className="custom-control-indicator"></span>
-                                                <span className="custom-control-description">
-                                                    With photo
-                                                </span>
+                                                Category
                                             </label>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="custom-control custom-checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    className="custom-control-input"
-                                                />
-                                                <span className="custom-control-indicator"></span>
-                                                <span className="custom-control-description">
-                                                    Online
-                                                </span>
-                                            </label>
+                                            {categoriesData.map((category) => {
+                                                return (
+                                                    <div key={category?.title}>
+                                                        <label className="custom-control custom-checkbox">
+                                                            <input
+                                                                type="checkbox"
+                                                                className="custom-control-input"
+                                                                value={category?.title}
+                                                            />
+                                                            <span className="custom-control-indicator"></span>
+                                                            <span className="custom-control-description ml-1 my-1">
+                                                                {category?.title}
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                         <div className="form-group my-5">
                                             <button

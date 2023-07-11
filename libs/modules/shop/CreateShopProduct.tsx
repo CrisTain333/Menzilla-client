@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import DashboardHeader from '@/libs/Components/Dashboard/DashboardHeader';
 import DashboardSidebar from '@/libs/Components/Dashboard/DashboardSidebar';
 import CreateProduct from '@/libs/Components/Shop/CreateProduct';

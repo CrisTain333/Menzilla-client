@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import DashboardHeader from '@/libs/Components/Dashboard/DashboardHeader';
+import DashboardSidebar from '@/libs/Components/Dashboard/DashboardSidebar';
 import Setting from '@/libs/Components/Setting/Setting';
 import { useSeller } from '@/libs/Context/sellerProvider';
-import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -17,9 +19,17 @@ const Settings = () => {
     }, [currentSeller, isSeller, router]);
     return (
         <div>
-            <HeaderAndFooter>
-                <Setting />
-            </HeaderAndFooter>
+            <div>
+                <DashboardHeader />
+                <div className="flex justify-between w-full">
+                    <div className="w-20 md:w-72">
+                        <DashboardSidebar active={4} />
+                    </div>
+                    <div className="w-full">
+                        <Setting />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

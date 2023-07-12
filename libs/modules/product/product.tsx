@@ -5,18 +5,16 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
 import { FcFilledFilter } from 'react-icons/fc';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { categoriesData } from '@/libs/common/constant/Data';
-import { Slider } from '@/components/ui/slider';
 
 const Product = () => {
     const { allProducts, isProductLoading } = useSeller();
-    console.log(allProducts);
     const [searchValue, setSearchValue] = useState<string | null>(null);
     const [data, setData] = useState<any[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [priceRange, setPriceRange] = useState<any>(0); // Initial price range
-    console.log(priceRange);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]); // Initial price range
     const router = useRouter();
     const { query } = router;
     const categoryData: any = query?.category;
@@ -26,11 +24,7 @@ const Product = () => {
             let filteredProducts = allProducts;
 
             if (categoryData) {
-                const categories = categoryData.split(',');
-                setSelectedCategories(categories);
-                filteredProducts = filteredProducts.filter((product: any) =>
-                    categories.includes(product.category)
-                );
+                filteredProducts = filteredProducts.filter((i: any) => i.category === categoryData);
             }
 
             if (searchValue) {
@@ -42,7 +36,8 @@ const Product = () => {
             if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
                 filteredProducts = filteredProducts.filter(
                     (product: any) =>
-                        product.price >= priceRange[0] && product.price <= priceRange[1]
+                        product.discountPrice >= priceRange[0] &&
+                        product.discountPrice <= priceRange[1]
                 );
             }
 
@@ -144,41 +139,25 @@ const Product = () => {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="form-group mt-3">
+                                    <div className="form-group mt-3 w-[80%] p-1">
                                         <label
                                             htmlFor="price_range"
                                             className="text-base font-semibold"
                                         >
                                             Price Range
                                         </label>
-                                        <div className="mt-2">
-                                            <Slider
-                                                range
-                                                min={0}
-                                                max={10000}
-                                                step={10}
-                                                value={priceRange}
-                                                onChange={handlePriceChange}
-                                            />
+                                        <Slider
+                                            range
+                                            min={0}
+                                            max={10000}
+                                            step={10}
+                                            value={priceRange}
+                                            onChange={handlePriceChange}
+                                        />
+                                        <div className="flex justify-between">
+                                            <span className="ml-2">${priceRange[0]}</span>
+                                            <span className="ml-2">${priceRange[1]}</span>
                                         </div>
-                                        <fieldset className="space-y-1 sm:w-60 text-black">
-                                            <input
-                                                type="range"
-                                                className="w-full text-[#68d284]"
-                                                min="1"
-                                                max="10000"
-                                                value={priceRange}
-                                                onChange={handlePriceChange}
-                                            />
-                                            <div
-                                                aria-hidden="true"
-                                                className="flex justify-between px-1"
-                                            >
-                                                <span>$0</span>
-
-                                                <span>$10000</span>
-                                            </div>
-                                        </fieldset>
                                     </div>
                                 </form>
                             </div>

@@ -32,7 +32,7 @@ const Success = () => {
                     <title>Group</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
                         <g
                             id="kuittaus---maksu-onnistui"
                             transform="translate(-81.000000, -239.000000)"
@@ -41,7 +41,7 @@ const Success = () => {
                                 <polyline
                                     id="Stroke-52"
                                     stroke="#00C6BA"
-                                    stroke-width="18"
+                                    strokeWidth="18"
                                     points="44 76.578 71.37 103.058 114.816 56"
                                 ></polyline>
                                 <path

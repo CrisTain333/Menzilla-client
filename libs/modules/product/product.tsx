@@ -12,42 +12,79 @@ const Product = () => {
     const { allProducts, isProductLoading, page, setPage, allProductsTotalPage } = useSeller();
     const [searchValue, setSearchValue] = useState<string | null>(null);
     const [data, setData] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const router = useRouter();
     const { query } = router;
     const categoryData = query?.category;
 
+    // useEffect(() => {
+    //     if (categoryData && searchValue) {
+    //         const filteredProducts = allProducts.filter((i: any) => i.category === categoryData);
+    //         if (searchValue?.length === 0 || searchValue === '') {
+    //             setData(filteredProducts);
+    //             return;
+    //         }
+    //         const filteredProductsWithSearch =
+    //             filteredProducts &&
+    //             filteredProducts.filter((product: any) =>
+    //                 product.name.toLowerCase().includes(searchValue.toLowerCase())
+    //             );
+    //         setData(filteredProductsWithSearch);
+    //     } else if (categoryData) {
+    //         const filteredProduct = allProducts.filter((i: any) => i.category === categoryData);
+    //         setData(filteredProduct);
+    //         // categoriesData;
+    //     } else if (searchValue) {
+    //         if (searchValue?.length === 0 || searchValue === '') {
+    //             setData(allProducts);
+    //             return;
+    //         }
+    //         const filteredProducts =
+    //             allProducts &&
+    //             allProducts.filter((product: any) =>
+    //                 product.name.toLowerCase().includes(searchValue.toLowerCase())
+    //             );
+    //         setData(filteredProducts);
+    //     } else {
+    //         setData(allProducts);
+    //     }
+    // }, [allProducts, categoryData, searchValue]);
+
     useEffect(() => {
-        if (categoryData && searchValue) {
-            const filteredProducts = allProducts.filter((i: any) => i.category === categoryData);
-            if (searchValue?.length === 0 || searchValue === '') {
-                setData(filteredProducts);
-                return;
+        const filterProducts = () => {
+            let filteredProducts = allProducts;
+
+            if (categoryData) {
+                filteredProducts = filteredProducts.filter((i: any) => i.category === categoryData);
             }
-            const filteredProductsWithSearch =
-                filteredProducts &&
-                filteredProducts.filter((product: any) =>
+
+            if (searchValue) {
+                filteredProducts = filteredProducts.filter((product: any) =>
                     product.name.toLowerCase().includes(searchValue.toLowerCase())
                 );
-            setData(filteredProductsWithSearch);
-        } else if (categoryData) {
-            const filteredProduct = allProducts.filter((i: any) => i.category === categoryData);
-            setData(filteredProduct);
-            // categoriesData;
-        } else if (searchValue) {
-            if (searchValue?.length === 0 || searchValue === '') {
-                setData(allProducts);
-                return;
             }
-            const filteredProducts =
-                allProducts &&
-                allProducts.filter((product: any) =>
-                    product.name.toLowerCase().includes(searchValue.toLowerCase())
+
+            if (selectedCategories.length > 0) {
+                filteredProducts = filteredProducts.filter((product: any) =>
+                    selectedCategories.includes(product.category)
                 );
+            }
+
             setData(filteredProducts);
+        };
+
+        filterProducts();
+    }, [allProducts, categoryData, searchValue, selectedCategories]);
+
+    const handleCategoryChange = (category: string) => {
+        if (selectedCategories.includes(category)) {
+            setSelectedCategories((prevSelected) =>
+                prevSelected.filter((selected) => selected !== category)
+            );
         } else {
-            setData(allProducts);
+            setSelectedCategories((prevSelected) => [...prevSelected, category]);
         }
-    }, [allProducts, categoryData, searchValue]);
+    };
 
     const handleNextPage = () => {
         // e.preventDefault();
@@ -114,6 +151,14 @@ const Product = () => {
                                                             type="checkbox"
                                                             className="custom-control-input"
                                                             value={category?.title}
+                                                            checked={selectedCategories.includes(
+                                                                category?.title
+                                                            )}
+                                                            onChange={() =>
+                                                                handleCategoryChange(
+                                                                    category?.title
+                                                                )
+                                                            }
                                                         />
                                                         <span className="custom-control-indicator"></span>
                                                         <span className="custom-control-description ml-1 my-1">
@@ -220,7 +265,7 @@ const Product = () => {
                                     ) : (
                                         <>
                                             <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] mb-12">
-                                                {data?.slice(0, 6)?.map((item: any, index: any) => {
+                                                {data?.map((item: any, index: any) => {
                                                     return <PROductCard data={item} key={index} />;
                                                 })}
                                             </div>

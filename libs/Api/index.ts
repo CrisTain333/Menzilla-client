@@ -223,3 +223,12 @@ export const getSellerConversations = async (sellerId: any) => {
         return { error };
     }
 };
+
+export const sendContactMessage = async (Data: any) => {
+    try {
+        const response = await axiosInstance.postForm(`/contact-us`, Data);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

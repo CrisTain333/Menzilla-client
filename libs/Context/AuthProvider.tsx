@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 import { useQuery } from '@tanstack/react-query';
@@ -40,8 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [userFetched, setUserFetched] = useState(false);
     const [shouldRefresh, setShouldRefresh] = useState(false);
     const [accessToken, setAccessToken] = useState<string>('');
-    const [profileData, setProfileData] = useState<any>();
-    const [userOrders, setUsersOrders] = useState<any[]>([]);
+    const [profileData, setProfileData] = useState<any>(null);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -52,6 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setUserFetched(true);
                     setCurrentUser(userData);
+                    setProfileData(userData);
                     setIsLoading(false);
                     refetch();
                 })
@@ -73,7 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 setProfileData(response?.data?.user);
                 return response?.data?.user;
             } catch (e) {
-                console.log(e, ':from useQuery');
+                /* empty */
             }
         },
         enabled: accessToken !== ''
@@ -107,6 +108,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const logout = () => {
         setCurrentUser(null);
+        setProfileData(null);
         localStorage.removeItem(tokenStoragePath);
     };
 
@@ -118,7 +120,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             });
             return response?.data?.user;
         } catch (e) {
-            console.log(e, ':from getUserData function');
             logout();
         }
     };

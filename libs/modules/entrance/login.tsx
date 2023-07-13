@@ -8,7 +8,7 @@ import { useAuth } from '@/libs/Context/AuthProvider';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 
 const Login = () => {
-    const { login, currentUser } = useAuth();
+    const { login, currentUser, isLoading: loading } = useAuth();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -43,8 +43,10 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if (currentUser) {
-            router.push('/');
+        if (loading === false) {
+            if (currentUser) {
+                router.push('/');
+            }
         }
     }, [currentUser, router]);
 

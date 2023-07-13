@@ -41,6 +41,12 @@ const Product = () => {
                 );
             }
 
+            if (selectedCategories.length > 0) {
+                filteredProducts = filteredProducts.filter((product: any) =>
+                    selectedCategories.includes(product.category)
+                );
+            }
+
             setData(filteredProducts);
         };
         filterProducts();

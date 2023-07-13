@@ -283,9 +283,6 @@ const Header = () => {
                                                         Profile
                                                     </Link>
                                                 </li>
-                                                <li>
-                                                    <a>Settings</a>
-                                                </li>
                                                 <li onClick={logout}>
                                                     <p>Logout</p>
                                                 </li>

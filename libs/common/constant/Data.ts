@@ -21,6 +21,10 @@ export const navItems = [
         url: '/faq'
     },
     {
+        title: 'Contact Us',
+        url: '/contact-us'
+    },
+    {
         title: 'Profile',
         url: '/profile'
     }

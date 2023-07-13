@@ -85,6 +85,15 @@ const SimpleNav = () => {
                                     FAQ
                                 </Link>
                             </li>
+                            <li className="flex">
+                                <Link
+                                    rel="noopener noreferrer"
+                                    href="/contact-us"
+                                    className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+                                >
+                                    Contact Us
+                                </Link>
+                            </li>
                             {currentUser && (
                                 <li className="flex">
                                     <Link

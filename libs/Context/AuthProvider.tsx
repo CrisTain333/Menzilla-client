@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axiosInstance from '../common/utils/axios';
 import { useQuery } from '@tanstack/react-query';
@@ -40,22 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [userFetched, setUserFetched] = useState(false);
     const [shouldRefresh, setShouldRefresh] = useState(false);
     const [accessToken, setAccessToken] = useState<string>('');
-    const [profileData, setProfileData] = useState<any>();
-    const [userOrders, setUsersOrders] = useState<any[]>([]);
-
-    const { data, refetch } = useQuery({
-        queryKey: ['userData', currentUser],
-        queryFn: async () => {
-            try {
-                const response = await axiosInstance.get(`/user/me`, {
-                    headers: { Authorization: `Bearer ${accessToken}` }
-                });
-                setProfileData(response?.data?.user);
-                return response?.data?.user;
-            } catch (e) {}
-        }
-        // enabled: typeof window !== 'undefined'
-    });
+    const [profileData, setProfileData] = useState<any>(null);
 
     useEffect(() => {
         const token = localStorage.getItem(tokenStoragePath);
@@ -66,7 +52,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 .then((userData) => {
                     setUserFetched(true);
                     setCurrentUser(userData);
+                    setProfileData(userData);
                     setIsLoading(false);
+                    refetch();
                 })
                 .catch(() => {
                     setIsLoading(false);
@@ -75,6 +63,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shouldRefresh]);
+
+    const { data, refetch } = useQuery({
+        queryKey: ['userData'],
+        queryFn: async () => {
+            try {
+                const response = await axiosInstance.get(`/user/me`, {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                });
+                setProfileData(response?.data?.user);
+                return response?.data?.user;
+            } catch (e) {
+                /* empty */
+            }
+        },
+        enabled: accessToken !== ''
+        // enabled: typeof window !== 'undefined'
+    });
 
     const refresh = () => {
         setShouldRefresh(!shouldRefresh);
@@ -86,6 +91,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             if (response?.data && response?.data?.token) {
                 localStorage.setItem(tokenStoragePath, response?.data?.token);
                 setCurrentUser(response?.data?.user);
+                setProfileData(response?.data?.user);
                 refetch();
                 return null;
             } else {
@@ -102,6 +108,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const logout = () => {
         setCurrentUser(null);
+        setProfileData(null);
         localStorage.removeItem(tokenStoragePath);
     };
 

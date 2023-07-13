@@ -1,4 +1,5 @@
-import { registerUser } from '@/libs/Api';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { registerUser, resendEmail } from '@/libs/Api';
 import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import Link from 'next/link';
@@ -12,6 +13,8 @@ const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [resendEnabled, setResendEnabled] = useState(true);
+    const [waitingTime, setWaitingTime] = useState(60);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -45,11 +48,45 @@ const Register = () => {
         }
     };
 
+    // useEffect(() => {
+    //     console.log('ok');
+    //     let timer: any;
+
+    //     if (!resendEnabled && waitingTime > 0) {
+    //         timer = setTimeout(() => {
+    //             setWaitingTime((prevTime) => prevTime - 1);
+    //         }, 1000);
+    //     }
+
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [resendEnabled, waitingTime]);
     useEffect(() => {
         if (currentUser) {
             router.push('/');
         }
     }, [currentUser]);
+
+    const handleResendEmail = async () => {
+        // Logic to resend the email
+        // setResendEnabled(false);
+        // setWaitingTime(60); // Reset waiting time to initial value
+        // try {
+        //     // Call the resend API or trigger the email sending process
+        //     const result = await resendEmail(registerSuccess);
+        //     console.log(registerSuccess);
+        //     console.log(result);
+        //     // Assuming the API call is successful, you can enable the resend button again
+        //     // and start the waiting timer.
+        //     setResendEnabled(true);
+        // } catch (error) {
+        //     // Handle any errors from the API call or email sending process
+        //     console.error('Error resending email:', error);
+        //     // Optionally, you can show an error message to the user
+        // }
+    };
+    // console.log(waitingTime);
 
     return registerSuccess ? (
         <>
@@ -75,16 +112,23 @@ const Register = () => {
                         email will expire in 24 hours.
                     </p>
                     <p className="text-gray-400 text-mb mt-5 dark:text-gray-300">
-                        <span
-                            className="text-blue-500 cursor-pointer"
-                            // onClick={handleNotReceiveEmail}
-                        >
-                            Click here
-                        </span>{' '}
-                        if you did not receive an email. If you find any issue, feel free to{' '}
-                        {/* <span className="text-blue-500 cursor-pointer" onClick={handleContactUs}>
-                            Contact Us
-                        </span> */}
+                        {resendEnabled ? (
+                            <>
+                                <span
+                                    className="text-blue-500 cursor-pointer"
+                                    // onClick={handleResendEmail}
+                                >
+                                    Click here
+                                </span>{' '}
+                                if you did not receive an email. If you find any issue, feel free to{' '}
+                                <Link href="/contact-us">
+                                    <span className="text-blue-500 cursor-pointer">Contact Us</span>
+                                    .
+                                </Link>
+                            </>
+                        ) : (
+                            <>Resend email in {waitingTime} seconds.</>
+                        )}
                     </p>
                 </div>
             </div>

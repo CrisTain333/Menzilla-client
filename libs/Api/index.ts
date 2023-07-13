@@ -232,3 +232,11 @@ export const sendContactMessage = async (Data: any) => {
         return { error };
     }
 };
+export const resendEmail = async (Data: any) => {
+    try {
+        const response = await axiosInstance.postForm(`/auth/resend-email`, Data);
+        return response.data;
+    } catch (error) {
+        return { error };
+    }
+};

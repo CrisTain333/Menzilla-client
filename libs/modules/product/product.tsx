@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PROductCard from '@/libs/Components/ProductCard/PROUDCTcard';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
@@ -20,42 +21,55 @@ const Product = () => {
     const categoryData: any = query?.category;
     const [shouldRefresh, setShouldRefresh] = useState(false);
     useEffect(() => {
-        const filterProducts = () => {
-            let filteredProducts = allProducts;
-
-            if (categoryData) {
-                const categories = categoryData.split(',');
-                setSelectedCategories(categories);
-                filteredProducts = filteredProducts.filter((product: any) =>
-                    categories.includes(product.category)
-                );
-            }
-
-            if (searchValue) {
-                filteredProducts = filteredProducts.filter((product: any) =>
-                    product.name.toLowerCase().includes(searchValue.toLowerCase())
-                );
-            }
-
-            if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
-                filteredProducts = filteredProducts.filter(
-                    (product: any) =>
-                        product.discountPrice >= priceRange[0] &&
-                        product.discountPrice <= priceRange[1]
-                );
-            }
-
-            if (selectedCategories.length > 0 && !categoryData) {
-                console.log('i am in ');
-                filteredProducts = filteredProducts.filter((product: any) =>
-                    selectedCategories.includes(product.category)
-                );
-            }
-
-            setData(filteredProducts);
-        };
         filterProducts();
     }, [allProducts, categoryData, searchValue, priceRange, shouldRefresh]);
+
+    const filterProducts = () => {
+        let filteredProducts = allProducts;
+
+        if (categoryData) {
+            const categories = categoryData.split(',');
+            setSelectedCategories(categories);
+            filteredProducts = filteredProducts.filter((product: any) =>
+                categories.includes(product.category)
+            );
+        }
+
+        if (searchValue) {
+            filteredProducts = filteredProducts.filter((product: any) =>
+                product.name.toLowerCase().includes(searchValue.toLowerCase())
+            );
+        }
+
+        if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
+            filteredProducts = filteredProducts.filter(
+                (product: any) =>
+                    product.discountPrice >= priceRange[0] && product.discountPrice <= priceRange[1]
+            );
+        }
+
+        if (selectedCategories.length > 0 && !categoryData) {
+            filteredProducts = filteredProducts.filter((product: any) =>
+                selectedCategories.includes(product.category)
+            );
+        }
+
+        // Maintain the order based on selected categories
+        filteredProducts.sort((a: any, b: any) => {
+            const aIndex = selectedCategories.indexOf(a.category);
+            const bIndex = selectedCategories.indexOf(b.category);
+
+            if (aIndex < bIndex) {
+                return -1;
+            } else if (aIndex > bIndex) {
+                return 1;
+            }
+
+            return 0;
+        });
+
+        setData(filteredProducts);
+    };
 
     const refresh = () => {
         setShouldRefresh(!shouldRefresh);
@@ -82,7 +96,6 @@ const Product = () => {
         refresh();
     };
 
-    console.log(selectedCategories);
     const handlePriceChange = (value: any) => {
         setPriceRange(value);
     };

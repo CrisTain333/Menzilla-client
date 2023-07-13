@@ -16,15 +16,19 @@ const Product = () => {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]); // Initial price range
     const router = useRouter();
-    const { query } = router;
+    const { query, replace } = router;
     const categoryData: any = query?.category;
-
+    const [shouldRefresh, setShouldRefresh] = useState(false);
     useEffect(() => {
         const filterProducts = () => {
             let filteredProducts = allProducts;
 
             if (categoryData) {
-                filteredProducts = filteredProducts.filter((i: any) => i.category === categoryData);
+                const categories = categoryData.split(',');
+                setSelectedCategories(categories);
+                filteredProducts = filteredProducts.filter((product: any) =>
+                    categories.includes(product.category)
+                );
             }
 
             if (searchValue) {
@@ -41,7 +45,8 @@ const Product = () => {
                 );
             }
 
-            if (selectedCategories.length > 0) {
+            if (selectedCategories.length > 0 && !categoryData) {
+                console.log('i am in ');
                 filteredProducts = filteredProducts.filter((product: any) =>
                     selectedCategories.includes(product.category)
                 );
@@ -50,18 +55,34 @@ const Product = () => {
             setData(filteredProducts);
         };
         filterProducts();
-    }, [allProducts, categoryData, searchValue, selectedCategories, priceRange]);
+    }, [allProducts, categoryData, searchValue, priceRange, shouldRefresh]);
 
-    const handleCategoryChange = (category: string) => {
-        if (selectedCategories.includes(category)) {
-            setSelectedCategories((prevSelected) =>
-                prevSelected.filter((selected) => selected !== category)
-            );
-        } else {
-            setSelectedCategories((prevSelected) => [...prevSelected, category]);
-        }
+    const refresh = () => {
+        setShouldRefresh(!shouldRefresh);
     };
 
+    const handleCategoryChange = (category: string) => {
+        const updatedSelectedCategories = [...selectedCategories];
+        const categoryIndex = updatedSelectedCategories.indexOf(category);
+
+        if (categoryIndex > -1) {
+            updatedSelectedCategories.splice(categoryIndex, 1);
+        } else {
+            updatedSelectedCategories.push(category);
+        }
+
+        setSelectedCategories(updatedSelectedCategories);
+
+        if (updatedSelectedCategories.length === 0) {
+            replace('/product');
+        } else {
+            const updatedCategoryData = updatedSelectedCategories.join(',');
+            replace(`/product?category=${updatedCategoryData}`);
+        }
+        refresh();
+    };
+
+    console.log(selectedCategories);
     const handlePriceChange = (value: any) => {
         setPriceRange(value);
     };

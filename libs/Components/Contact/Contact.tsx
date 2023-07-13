@@ -13,6 +13,14 @@ const Contact = () => {
         const phone = e.target.phone.value;
         const message = e.target.details.value;
 
+        // function ValidateEmail(mail: any) {
+        //     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+        //         return true;
+        //     }
+        //     // alert('You have entered an invalid email address!');
+        //     return false;
+        // }
+
         if (name === '') {
             toast.error('Name Is Required');
             return;
@@ -147,7 +155,7 @@ const Contact = () => {
                                         placeholder="Your Name"
                                     />
                                     <ContactInputBox
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         placeholder="Your Email"
                                     />

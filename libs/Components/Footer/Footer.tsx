@@ -1,9 +1,28 @@
 import Link from 'next/link';
-
+import Image from 'next/image';
+// import brandLogo from '../../../public/';
 export const Footer = () => {
+    const footerNav = [
+        {
+            href: '/',
+            name: 'Home'
+        },
+        {
+            href: '/product',
+            name: 'Product'
+        },
+        {
+            href: '/faq',
+            name: 'FAQ'
+        },
+        {
+            href: '/contact-us',
+            name: 'Contact-us'
+        }
+    ];
     return (
         <div className="bg-[#1C2B35]">
-            <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+            {/* <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="grid row-gap-10 mb-8 lg:grid-cols-6">
                     <div className="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
                         <div>
@@ -227,7 +246,36 @@ export const Footer = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
+            <footer className="text-white px-4 py-5 max-w-screen-xl mx-auto md:px-8">
+                <div className="max-w-lg sm:mx-auto sm:text-center">
+                    <p className="leading-relaxed mt-2 text-[15px]">
+                        Lorem Ipsum has been the standard dummy text ever since the 1500s, when an
+                        unknown printer took a galley of type and scrambled it to make a type
+                        specimen book.
+                    </p>
+                </div>
+                <ul className="items-center justify-center mt-8 space-y-5 sm:flex sm:space-x-4 sm:space-y-0">
+                    {footerNav.map((item: any, idx: number) => (
+                        <li className=" text-white" key={idx}>
+                            <Link href={item.href}>{item.name}</Link>
+                        </li>
+                    ))}
+                </ul>
+                <div className="mt-8 items-center justify-between sm:flex">
+                    <div className="mt-4 sm:mt-0 text-center text-white">
+                        &copy; 2023 Menzilla All rights reserved.
+                    </div>
+                </div>
+                <style jsx>{`
+                    .svg-icon path,
+                    .svg-icon polygon,
+                    .svg-icon rect {
+                        fill: currentColor;
+                    }
+                `}</style>
+            </footer>
         </div>
     );
 };

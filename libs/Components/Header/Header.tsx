@@ -293,7 +293,7 @@ const Header = () => {
                             ) : (
                                 <>
                                     <Link href="/auth/login">
-                                        <button className="bg-[#ff9900] p-2 rounded-md text-white px-4">
+                                        <button className="bg-[#ff9900] p-2 rounded-sm text-white px-4">
                                             Login
                                         </button>
                                     </Link>

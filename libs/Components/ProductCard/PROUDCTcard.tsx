@@ -45,6 +45,7 @@ const PROductCard = ({ data }: any) => {
                         className="w-full h-[170px] object-contain"
                         height={500}
                         width={500}
+                        loading="lazy"
                     />
                 </Link>
                 <Link href={`/shop/preview/${data?.shop._id}`}>

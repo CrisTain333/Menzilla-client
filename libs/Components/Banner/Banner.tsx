@@ -15,15 +15,15 @@ const Banner = () => {
                 {/* left side */}
                 <div className="col-span-12 md:col-span-12 lg:col-span-6">
                     <div>
-                        <Carousel
-                            showThumbs={false}
-                            infiniteLoop={true}
-                            autoPlay={true}
-                            interval={10000}
-                            showArrows={false}
-                            showStatus={false}
-                            swipeable={true}
-                            showIndicators={false}
+                        <div
+                        // showThumbs={false}
+                        // infiniteLoop={true}
+                        // autoPlay={true}
+                        // interval={10000}
+                        // showArrows={false}
+                        // showStatus={false}
+                        // swipeable={true}
+                        // showIndicators={false}
                         >
                             <div>
                                 <div className="relative ">
@@ -59,39 +59,7 @@ const Banner = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="relative ">
-                                <Image
-                                    src={Banner2}
-                                    alt="banner_1"
-                                    className="w-full rounded-lg"
-                                    height={2000}
-                                    width={2000}
-                                />
-                                {/* top-8 left-8 */}
-                                <div className="text-start absolute top-2 left-2 md:top-16  md:left-10   lg:top-8 lg:left-7">
-                                    <p className="text-red-500 text-sm md:text-base lg:text-sm font-medium ">
-                                        SUPERCHARGED FOR PROS
-                                    </p>
-
-                                    <h2 className="text-3xl md:text-6xl lg:text-5xl font-bold mt-5">
-                                        Special Deal{' '}
-                                    </h2>
-
-                                    <p className="text-sm md:text-2xl lg:text-lg font-semibold mt-3 md:mt-8">
-                                        From $999.00 or $41.62
-                                    </p>
-                                    <p className="text-sm md:text-2xl lg:text-lg  font-semibold mt-3 font-[Roboto]">
-                                        For 24 mo. Footnote $
-                                    </p>
-
-                                    <div className="mt-4  md:mt-14 lg:mt-10">
-                                        <button className="py-2 px-3 md:py-4 md:px-5 rounded-md text-lg md:text-xl lg:py-2 lg:px-3 lg:text-lg bg-[#1C2B35] text-white">
-                                            Buy Now
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </Carousel>
+                        </div>
                     </div>
                 </div>
 

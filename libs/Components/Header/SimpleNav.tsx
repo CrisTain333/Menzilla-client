@@ -112,7 +112,7 @@ const SimpleNav = () => {
                                 <div className="flex items-center">
                                     <Link href="/dashboard">
                                         <div
-                                            className={`text-center bg-[#ff9900] text-white rounded-md cursor-pointer text-base py-2 w-full px-5 flex justify-center items-center mt-2`}
+                                            className={`text-center bg-[#ff9900b7] text-white rounded-md cursor-pointer text-base py-2 w-full px-5 flex justify-center items-center mt-2`}
                                         >
                                             <span>
                                                 <RxDashboard size={20} />
@@ -126,7 +126,7 @@ const SimpleNav = () => {
                             <>
                                 <div className="flex items-center">
                                     <Link href="/create-shop">
-                                        <h1 className="text-[#fff] bg-[#ff9900] flex items-center p-2 rounded-md mt-2">
+                                        <h1 className="text-[#ffffff] bg-[#ff9900] flex items-center p-2 rounded-sm mt-2">
                                             Become Seller
                                             <IoIosArrowForward className="ml-1" />
                                         </h1>

@@ -20,6 +20,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/3800/3800024.png"
                                 alt="Adidas"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl ">
@@ -30,6 +31,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/187/187902.png"
                                 alt="Chanel"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
@@ -40,6 +42,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/3845/3845877.png"
                                 alt="Nike"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
@@ -50,6 +53,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/732/732242.png"
                                 alt="Toyota"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
@@ -60,6 +64,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/187/187868.png"
                                 alt="Toyota"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                         <div className="w-1/3 sm:w-1/6 flex justify-center xl:pb-10 pb-16 items-center inset-0 transform  hover:scale-75 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
@@ -70,6 +75,7 @@ const Sponsor = () => {
                                 src="https://cdn-icons-png.flaticon.com/128/685/685680.png"
                                 alt="Toyota"
                                 role="img"
+                                loading="lazy"
                             />
                         </div>
                     </div>

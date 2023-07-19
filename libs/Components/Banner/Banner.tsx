@@ -23,6 +23,7 @@ const Banner = () => {
                             showArrows={false}
                             showStatus={false}
                             swipeable={true}
+                            showIndicators={false}
                         >
                             <div>
                                 <div className="relative ">

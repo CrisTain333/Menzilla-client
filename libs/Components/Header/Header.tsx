@@ -23,7 +23,6 @@ const Header = () => {
         phone: profileData?.phone,
         profilePicture: profileData?.profilePicture
     });
-    // console.log(profileData);
 
     useEffect(() => {
         setUserProfileData({

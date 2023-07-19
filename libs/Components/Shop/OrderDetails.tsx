@@ -37,7 +37,6 @@ const OrderDetails = () => {
         }
         toast.error(result?.message);
         setLoading(false);
-        // console.log(result);
         // refetch();
         //  await axios
         //      .put(

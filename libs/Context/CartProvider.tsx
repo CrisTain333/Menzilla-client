@@ -34,7 +34,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const orderDatas = getOrderData();
         setOrderData(orderDatas);
         // eslint-disable-next-line no-console
-        console.log('hello from cart provider');
     }, [cartLength, shouldRefresh]);
     // Function to add a product to the cart in local storage
     const addToCart = (product: any) => {

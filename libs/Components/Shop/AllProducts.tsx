@@ -59,7 +59,6 @@ const AllProducts = () => {
     //     const filterValue = products?.find((product: any) =>
     //         product.name.toLowerCase().includes(value.toLowerCase())
     //     );
-    //     console.log(filterValue);
     //     setFilterData(filterValue);
     // };
 

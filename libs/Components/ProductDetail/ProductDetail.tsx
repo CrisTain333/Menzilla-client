@@ -4,6 +4,7 @@ import { useCart } from '@/libs/Context/CartProvider';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import moment from 'moment';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,6 +20,8 @@ const ProductDetail = ({ data }: any) => {
     const { refresh } = useCart();
     const { currentUser } = useAuth();
     const { currentSeller } = useSeller();
+
+    // console.log(`https://menzilla.vercel.app${router.asPath}`);
 
     const incrementCount = () => {
         setCount(count + 1);
@@ -75,6 +78,27 @@ const ProductDetail = ({ data }: any) => {
 
     return (
         <div>
+            {/* Head Section */}
+            <Head>
+                <title>{data?.name}</title>
+                <meta name="description" content={data?.description} />
+                <meta property="og:title" content={data?.name} />
+                <meta property="og:description" content={data?.description} />
+                <meta property="og:url" content={`https://menzilla.vercel.app${router.asPath}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={data?.images?.[0]} />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta
+                    property="twitter:url"
+                    content={`https://menzilla.vercel.app${router.asPath}`}
+                />
+                <meta property="twitter:title" content={data?.name} />
+                <meta property="twitter:description" content={data?.description} />
+                <meta property="twitter:image" content={data?.images?.[0]} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@menzilla" />
+                <meta name="twitter:creator" content="@menzilla" />
+            </Head>
             <div className="">
                 {data ? (
                     <div className={``}>

@@ -1,9 +1,15 @@
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
+import Head from 'next/head';
 import React from 'react';
 
 const FaqPage = () => {
     return (
         <div>
+            {/* Head Section */}
+            <Head>
+                <title>FAQ</title>
+                <meta name="description" content={'Faq Page Of Menzilla'} />
+            </Head>
             <HeaderAndFooter>
                 <section className="dark:bg-gray-800 dark:text-gray-100">
                     <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">

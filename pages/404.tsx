@@ -1,8 +1,14 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 const ErrorPage = () => {
     return (
         <div>
+            {/* Head Section */}
+            <Head>
+                <title>404 Page Not Found</title>
+                <meta name="description" content={'404 Page Of Menzilla'} />
+            </Head>
             <section className="page_404">
                 <div className="container">
                     <div className="row">

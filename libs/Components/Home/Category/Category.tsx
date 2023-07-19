@@ -209,10 +209,10 @@ const Categories = () => {
                                     key={i.id}
                                     onClick={() => handleSubmit(i)}
                                 >
-                                    <h5 className={`text-[18px] leading-[1.3]`}>{i.title}</h5>
+                                    <h5 className={`text-base`}>{i.title}</h5>
                                     <Image
-                                        height={400}
-                                        width={400}
+                                        height={100}
+                                        width={100}
                                         src={i.image_Url}
                                         className="w-[120px] object-cover"
                                         alt=""

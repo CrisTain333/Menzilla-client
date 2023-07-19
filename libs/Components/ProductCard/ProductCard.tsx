@@ -9,7 +9,6 @@ import { useCart } from '@/libs/Context/CartProvider';
 
 const ProductCard = ({ data }: any) => {
     const [showProductDetails, setShowProductDetails] = useState(false);
-    // console.log(showProductDetails);
     const { handleAddToCart } = useCart();
     // // const [productData, setProductData] = useState<any>(null);
 

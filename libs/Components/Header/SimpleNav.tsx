@@ -112,7 +112,7 @@ const SimpleNav = () => {
                                 <div className="flex items-center">
                                     <Link href="/dashboard">
                                         <div
-                                            className={`text-center bg-[#ff9900b7] text-white rounded-md cursor-pointer text-base py-2 w-full px-5 flex justify-center items-center mt-2`}
+                                            className={`text-center text-[#ffffff] bg-[#ff9900] rounded-sm cursor-pointer text-base py-2 w-full px-5 flex justify-center items-center mt-2`}
                                         >
                                             <span>
                                                 <RxDashboard size={20} />

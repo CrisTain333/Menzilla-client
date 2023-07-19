@@ -1,11 +1,11 @@
 // import React, { useState } from 'react';
 import {
-    AiFillHeart,
-    AiFillStar,
+    // AiFillHeart,
+    // AiFillStar,
     AiOutlineEye,
-    AiOutlineHeart,
-    AiOutlineShoppingCart,
-    AiOutlineStar
+    // AiOutlineHeart,
+    AiOutlineShoppingCart
+    // AiOutlineStar
 } from 'react-icons/ai';
 // import { Link } from 'react-router-dom';
 // import styles from '../../../styles/styles';
@@ -43,12 +43,12 @@ const PROductCard = ({ data }: any) => {
                         src={`${data?.images?.[0]}`}
                         alt="productImage"
                         className="w-full h-[170px] object-contain"
-                        height={500}
-                        width={500}
+                        height={200}
+                        width={200}
                         loading="lazy"
                     />
                 </Link>
-                <Link href={`/shop/preview/${data?.shop._id}`}>
+                <Link href={`/shop/preview?shopId=${data?.shop._id}`}>
                     <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
                 </Link>
                 <Link href={`${`/product/${data._id}`}`}>

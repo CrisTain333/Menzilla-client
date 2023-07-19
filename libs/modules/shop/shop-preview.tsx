@@ -1,6 +1,7 @@
 import { getSellerOnly, getShopPreviewProduct } from '@/libs/Api';
 import ProductCard from '@/libs/Components/ProductCard/ProductCard';
 import moment from 'moment';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -34,8 +35,31 @@ const ShopPreview = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shopId]);
 
+    console.log(router.asPath);
+
     return (
         <div>
+            {/* Head Section */}
+            <Head>
+                <title>{sellerInfo?.name}</title>
+                <meta name="description" content={sellerInfo?.description} />
+                <meta property="og:title" content={sellerInfo?.name} />
+                <meta property="og:description" content={sellerInfo?.description} />
+                <meta property="og:url" content={`https://menzilla.vercel.app${router.asPath}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={sellerInfo?.shopProfile} />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta
+                    property="twitter:url"
+                    content={`https://menzilla.vercel.app${router.asPath}`}
+                />
+                <meta property="twitter:title" content={sellerInfo?.name} />
+                <meta property="twitter:description" content={sellerInfo?.description} />
+                <meta property="twitter:image" content={sellerInfo?.shopProfile} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@menzilla" />
+                <meta name="twitter:creator" content="@menzilla" />
+            </Head>
             <div>
                 <div className="px-10 mx-auto">
                     <div className="w-full flex py-10 justify-between">

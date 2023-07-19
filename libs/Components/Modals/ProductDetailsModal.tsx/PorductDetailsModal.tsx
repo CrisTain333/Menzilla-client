@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { AiOutlineMessage, AiOutlineShoppingCart } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 const ProductDetailsModal = ({ data, setShowProductDetails }: any) => {
-    // console.log(data);
     const [count, setCount] = useState(1);
 
     const decrementCount = () => {

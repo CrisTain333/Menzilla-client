@@ -49,7 +49,6 @@ const Register = () => {
     };
 
     // useEffect(() => {
-    //     console.log('ok');
     //     let timer: any;
 
     //     if (!resendEnabled && waitingTime > 0) {
@@ -75,8 +74,6 @@ const Register = () => {
         // try {
         //     // Call the resend API or trigger the email sending process
         //     const result = await resendEmail(registerSuccess);
-        //     console.log(registerSuccess);
-        //     console.log(result);
         //     // Assuming the API call is successful, you can enable the resend button again
         //     // and start the waiting timer.
         //     setResendEnabled(true);
@@ -86,7 +83,6 @@ const Register = () => {
         //     // Optionally, you can show an error message to the user
         // }
     };
-    // console.log(waitingTime);
 
     return registerSuccess ? (
         <>

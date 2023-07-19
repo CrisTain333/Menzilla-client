@@ -4,6 +4,7 @@ import DashboardSidebar from '@/libs/Components/Dashboard/DashboardSidebar';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import styles from '@/styles/styles';
 import { useQuery } from '@tanstack/react-query';
+import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import { AiOutlineMoneyCollect } from 'react-icons/ai';
@@ -24,6 +25,22 @@ const DashLayout = () => {
 
     return (
         <div>
+            {/* Head Section */}
+            <Head>
+                <title>{currentSeller?.name}&apos;Dashboard</title>
+                <meta name="description" content={currentSeller?.description} />
+                <meta property="og:title" content={currentSeller?.name} />
+                <meta property="og:description" content={currentSeller?.description} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={currentSeller?.shopProfile} />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content={currentSeller?.name} />
+                <meta property="twitter:description" content={currentSeller?.description} />
+                <meta property="twitter:image" content={currentSeller?.shopProfile} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@menzilla" />
+                <meta name="twitter:creator" content="@menzilla" />
+            </Head>
             <DashboardHeader />
             <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-2">

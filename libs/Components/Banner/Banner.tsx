@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 import Banner1 from '../../../public/images/Banner-1.png';
-import Banner2 from '../../../public/images/Banner-2.png';
+// import Banner2 from '../../../public/images/Banner-2.png';
 import MackBook_Banner from '../../../public/images/MacBook_Air_banner (2).png';
 import iPad_Banner from '../../../public/images/ipad.png';
 import watch_Banner from '../../../public/images/watch.png';
 import earphone_Banner from '../../../public/images/earphone.png';
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const Banner = () => {
     return (
@@ -31,8 +31,8 @@ const Banner = () => {
                                         src={Banner1}
                                         alt="banner_1"
                                         className="w-full rounded-lg"
-                                        height={2000}
-                                        width={2000}
+                                        height={300}
+                                        width={300}
                                     />
                                     {/* top-8 left-8 */}
                                     <div className="text-start absolute top-2 left-2 md:top-16  md:left-10   lg:top-8 lg:left-7     ">
@@ -73,8 +73,8 @@ const Banner = () => {
                                     src={MackBook_Banner}
                                     alt="banner_1"
                                     className="w-full rounded-lg"
-                                    height={2000}
-                                    width={2000}
+                                    height={300}
+                                    width={300}
                                 />
                                 <div className="text-start absolute top-14 left-5 md:top-14 md:left-4  lg:top-8 lg:left-3">
                                     <p className="text-red-500 text-base md:text-base           lg:text-xs font-semibold ">
@@ -101,8 +101,8 @@ const Banner = () => {
                                     src={iPad_Banner}
                                     alt="banner_1"
                                     className="w-full rounded-lg"
-                                    height={2000}
-                                    width={2000}
+                                    height={300}
+                                    width={300}
                                 />
                                 <div className="text-start absolute top-14 left-5 md:top-14 md:left-4  lg:top-8 lg:left-3">
                                     <p className="text-red-500 text-base md:text-base           lg:text-xs font-semibold">
@@ -129,8 +129,8 @@ const Banner = () => {
                                     src={watch_Banner}
                                     alt="banner_1"
                                     className="w-full rounded-lg"
-                                    height={2000}
-                                    width={2000}
+                                    height={300}
+                                    width={300}
                                 />
                                 <div className="text-start absolute top-14 left-5 md:top-14 md:left-4  lg:top-8 lg:left-3 ">
                                     <p className="text-red-500 text-base md:text-base           lg:text-xs font-semibold">
@@ -156,8 +156,8 @@ const Banner = () => {
                                     src={earphone_Banner}
                                     alt="banner_1"
                                     className="w-full rounded-lg"
-                                    height={2000}
-                                    width={2000}
+                                    height={300}
+                                    width={300}
                                 />
                                 <div className="text-start absolute top-14 left-5 md:top-14 md:left-4  lg:top-8 lg:left-3">
                                     <p className="text-red-500 text-base md:text-base           lg:text-xs font-semibold">

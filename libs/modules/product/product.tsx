@@ -9,6 +9,7 @@ import { FcFilledFilter } from 'react-icons/fc';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { categoriesData } from '@/libs/common/constant/Data';
+import Head from 'next/head';
 
 const Product = () => {
     const { allProducts, isProductLoading } = useSeller();
@@ -117,6 +118,10 @@ const Product = () => {
 
     return (
         <div>
+            <Head>
+                <title>Menzilla Product</title>
+                <meta name="description" content="Menzilla Product Page" />
+            </Head>
             <HeaderAndFooter>
                 <div className="grid grid-cols-12 gap-5">
                     <div className="col-span-12 md:col-span-3">

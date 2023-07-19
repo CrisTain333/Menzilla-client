@@ -43,8 +43,8 @@ const PROductCard = ({ data }: any) => {
                         src={`${data?.images?.[0]}`}
                         alt="productImage"
                         className="w-full h-[170px] object-contain"
-                        height={500}
-                        width={500}
+                        height={200}
+                        width={200}
                         loading="lazy"
                     />
                 </Link>

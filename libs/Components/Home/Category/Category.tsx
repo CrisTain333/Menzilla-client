@@ -211,8 +211,8 @@ const Categories = () => {
                                 >
                                     <h5 className={`text-base`}>{i.title}</h5>
                                     <Image
-                                        height={400}
-                                        width={400}
+                                        height={100}
+                                        width={100}
                                         src={i.image_Url}
                                         className="w-[120px] object-cover"
                                         alt=""

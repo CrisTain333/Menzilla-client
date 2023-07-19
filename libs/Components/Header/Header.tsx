@@ -115,8 +115,8 @@ const Header = () => {
                                 src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
                                 alt=""
                                 className="w-12 "
-                                width={200}
-                                height={200}
+                                width={100}
+                                height={100}
                             />
                             <span className="font-sans font-bold text-black ml-[0.4px]">
                                 enzilla
@@ -173,8 +173,8 @@ const Header = () => {
                                                                     src={i?.images?.[0]}
                                                                     alt=""
                                                                     className="w-[40px] h-[40px] mr-[10px]"
-                                                                    height={200}
-                                                                    width={200}
+                                                                    height={100}
+                                                                    width={100}
                                                                 />
                                                                 <h1>{i.name}</h1>
                                                             </div>
@@ -262,8 +262,8 @@ const Header = () => {
                                                 <div className="w-11 rounded-full ring ring-[#ff9900] ring-offset-base-100 ring-offset-2">
                                                     <Image
                                                         alt="user_Profile"
-                                                        height={300}
-                                                        width={300}
+                                                        height={100}
+                                                        width={100}
                                                         className="h-10"
                                                         src={userProfileData?.profilePicture}
                                                     />
@@ -320,8 +320,8 @@ const Header = () => {
                                                 src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
                                                 alt=""
                                                 className="w-12 "
-                                                width={200}
-                                                height={200}
+                                                width={100}
+                                                height={100}
                                             />
                                             <span className="font-sans font-bold text-black ml-[0.4px]">
                                                 enzilla
@@ -352,8 +352,8 @@ const Header = () => {
                                                             <Image
                                                                 src={i?.images?.[0]}
                                                                 alt="productImage"
-                                                                height={500}
-                                                                width={500}
+                                                                height={100}
+                                                                width={100}
                                                                 className="w-12 mr-2"
                                                             />
                                                             <h5>{i.name}</h5>

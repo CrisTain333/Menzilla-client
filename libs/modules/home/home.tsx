@@ -1,17 +1,16 @@
+/* eslint-disable prettier/prettier */
+import { getAllProduct } from '@/libs/Api';
 import Banner from '@/libs/Components/Banner/Banner';
 import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
 import Categories from '@/libs/Components/Home/Category/Category';
 import Sponsor from '@/libs/Components/Home/Sponser/Sponser';
 // import useOnScreen from '@/libs/Hooks/useOnScreen';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
+import axiosInstance from '@/libs/common/utils/axios';
 import Head from 'next/head';
 import React from 'react';
 
-const Home = () => {
-    // const categoriesRef: any = useRef();
-    // const bestDealsRef: any = useRef();
-    // const categoriesRefValue = useOnScreen(categoriesRef);
-    // const bestDealsRefValue = useOnScreen(bestDealsRef);
+const Home = ({ data }: any) => {
     return (
         <div className="">
             <Head>
@@ -22,10 +21,8 @@ const Home = () => {
                 {/* MAIN DIV  */}
                 <div className="main_div">
                     <Banner />
-                    {/* <div ref={categoriesRef}>{categoriesRefValue && <Categories />}</div>
-                    <div ref={bestDealsRef}>{bestDealsRefValue && <BestDeals />}</div> */}
                     <Categories />
-                    <BestDeals />
+                    <BestDeals data={data} />
                     <Sponsor />
                 </div>
             </HeaderAndFooter>

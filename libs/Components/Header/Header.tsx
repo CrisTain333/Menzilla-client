@@ -50,7 +50,7 @@ const Header = () => {
     };
     return (
         <div>
-            <div className="fixed top-0 w-full z-50 bg-white  shadow-md">
+            <div className="fixed top-0 w-full z-50   shadow-md bg-white ">
                 <div className=" navbar w-[90%] mx-auto">
                     <div className="navbar-start">
                         <div className="dropdown">

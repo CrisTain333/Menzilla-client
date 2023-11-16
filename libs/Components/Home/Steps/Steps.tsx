@@ -30,7 +30,7 @@ const Steps = () => {
                                 </p>
                             </div>
                             <p className="text-sm text-gray-900">
-                                Create Your Account By Email Password Or Login By Google Account
+                                Create Your Account By Email Password and verify email address
                             </p>
                         </div>
                         <div className="rounded lg:p-5 lg:transition lg:duration-300 lg:hover:bg-teal-50">
@@ -43,7 +43,7 @@ const Steps = () => {
                                 </p>
                             </div>
                             <p className="text-sm text-gray-900">
-                                Browse items by category And Book Your Product
+                                Browse items by category And add to cart then start checkout process
                             </p>
                         </div>
                         <div className="rounded lg:p-5 lg:transition lg:duration-300 lg:hover:bg-teal-50">
@@ -56,7 +56,7 @@ const Steps = () => {
                             <p className="text-sm text-gray-900">
                                 Pay By Our Secure Payment System . With Visa Card, Master Card ,
                                 Google Card, Discovery Card, or by Any International Online Banking
-                                Card
+                                Card or Cash on delivery
                             </p>
                         </div>
                         <div className="rounded lg:p-5 lg:transition lg:duration-300 lg:hover:bg-indigo-50">
@@ -65,12 +65,12 @@ const Steps = () => {
                                     4
                                 </span>
                                 <p className="text-lg font-semibold sm:text-base">
-                                    Go to Meeting Location
+                                    Track Order In the Profile
                                 </p>
                             </div>
                             <p className="text-sm text-gray-900">
-                                Go to Meeting Location & Verify The Product And After Geting The
-                                Product In Hand Please Feel Free To Add A review
+                                Product will be delivered in 5 Days on Your Location And After
+                                Getting The Product In Hand Please Feel Free To Add A review
                             </p>
                         </div>
                     </div>

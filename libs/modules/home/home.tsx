@@ -25,7 +25,6 @@ const Home = ({ data }: any) => {
                     <Categories />
                     <BestDeals data={data} />
                     <Steps />
-                    <Sponsor />
                 </div>
             </HeaderAndFooter>
         </div>

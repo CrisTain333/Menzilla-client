@@ -4,6 +4,7 @@ import Banner from '@/libs/Components/Banner/Banner';
 import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
 import Categories from '@/libs/Components/Home/Category/Category';
 import Sponsor from '@/libs/Components/Home/Sponser/Sponser';
+import Steps from '@/libs/Components/Home/Steps/Steps';
 // import useOnScreen from '@/libs/Hooks/useOnScreen';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import axiosInstance from '@/libs/common/utils/axios';
@@ -23,6 +24,7 @@ const Home = ({ data }: any) => {
                     <Banner />
                     <Categories />
                     <BestDeals data={data} />
+                    <Steps />
                     <Sponsor />
                 </div>
             </HeaderAndFooter>

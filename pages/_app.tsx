@@ -5,13 +5,12 @@ import '@/styles/global.scss';
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Provider } from 'react-redux';
-import { store } from '@/libs/Redux/store';
+import CustomProvider from '@/libs/providers/custom-provider';
 const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
-            <Provider store={store}>
+            <CustomProvider>
                 <QueryClientProvider client={queryClient}>
                     <AuthProvider>
                         <SellerProvider>
@@ -43,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         </SellerProvider>
                     </AuthProvider>
                 </QueryClientProvider>
-            </Provider>
+            </CustomProvider>
         </>
     );
 }

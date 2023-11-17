@@ -1,3 +1,4 @@
+import SearchBar from '@/components/SearchBar/SearchBar';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -6,7 +7,30 @@ const NewNavbar = () => {
     return (
         <div className="fixed top-0 w-full z-50   shadow-md bg-white ">
             <div className="navbar w-[90%] mx-auto">
-                <header className="text-slate-700 container relative mx-auto flex flex-col overflow-hidden px-4 py-2  lg:flex-row lg:items-center">
+                <div className="flex items-center py-2 justify-between">
+                    {/*  : Start Div : */}
+                    <div>
+                        <Link
+                            href="/"
+                            className="flex items-center justify-center font-semibold text-2xl"
+                        >
+                            <Image
+                                src="https://i.ibb.co/yd69Dkw/letter-m-logo-design-with-black-orange-color-and-circle-cool-modern-icon-letters-logo-vector-removeb.png"
+                                alt="brand_image"
+                                className="w-12 "
+                                width={100}
+                                height={100}
+                            />
+                            <span className="font-sans font-bold text-black ml-[0.4px]">
+                                enzilla
+                            </span>
+                        </Link>
+                    </div>
+
+                    {/* Center Div Search bar */}
+                    <SearchBar />
+                </div>
+                {/* <header className="text-slate-700 container relative mx-auto flex flex-col overflow-hidden px-4 py-2  lg:flex-row lg:items-center">
                     <Link
                         href="/"
                         className="flex items-center justify-center font-semibold text-2xl"
@@ -23,7 +47,7 @@ const NewNavbar = () => {
                     <input type="checkbox" className="peer hidden" id="navbar-open" />
                     <label
                         className="absolute top-5 right-5 cursor-pointer lg:hidden"
-                        for="navbar-open"
+                        htmlFor="navbar-open"
                     >
                         <svg
                             className="h-7 w-7"
@@ -44,41 +68,7 @@ const NewNavbar = () => {
                         aria-label="Header Navigation"
                         className="peer-checked:pt-8 peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
                     >
-                        <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
-                            <li className="lg:mr-12">
-                                <a
-                                    className="rounded text-gray-700 transition focus:outline-none focus:ring-1 focus:ring-blue-700 focus:ring-offset-2"
-                                    href="#"
-                                >
-                                    Components
-                                </a>
-                            </li>
-                            <li className="lg:mr-12">
-                                <a
-                                    className="rounded text-gray-700 transition focus:outline-none focus:ring-1 focus:ring-blue-700 focus:ring-offset-2"
-                                    href="#"
-                                >
-                                    Pricing
-                                </a>
-                            </li>
-                            <li className="lg:mr-12">
-                                <a
-                                    className="rounded text-gray-700 transition focus:outline-none focus:ring-1 focus:ring-blue-700 focus:ring-offset-2"
-                                    href="#"
-                                >
-                                    Contact
-                                </a>
-                            </li>
-                            <li className="lg:mr-12">
-                                <a
-                                    className="rounded text-gray-700 transition focus:outline-none focus:ring-1 focus:ring-blue-700 focus:ring-offset-2"
-                                    href="#"
-                                >
-                                    FAQ
-                                </a>
-                            </li>
-                        </ul>
-                        <hr className="mt-4 w-full lg:hidden" />
+                        <SearchBar />
                         <div className="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
                             <a
                                 href="#"
@@ -97,7 +87,7 @@ const NewNavbar = () => {
                             </a>
                         </div>
                     </nav>
-                </header>
+                </header> */}
             </div>
         </div>
     );

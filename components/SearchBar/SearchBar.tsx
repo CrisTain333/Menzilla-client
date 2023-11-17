@@ -36,7 +36,7 @@ const SearchBar = () => {
                                 id="search-dropdown"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                className="block p-[0.7rem] w-full z-20 text-sm text-gray-900  rounded-r-lg bg-gray-100 rounded-l-lg focus:border-none"
+                                className="block p-[0.7rem] w-full z-20 text-sm text-gray-900  rounded-r-lg bg-gray-100 rounded-l-lg focus:border-none outline-none"
                                 placeholder="Search products . . . "
                                 required
                             />

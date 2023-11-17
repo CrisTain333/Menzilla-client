@@ -1,3 +1,4 @@
+import NewNavbar from '@/components/ui/NewNavbar/NewNavbar';
 import { Footer } from '@/libs/Components/Footer/Footer';
 import Header from '@/libs/Components/Header/Header';
 import SimpleNav from '@/libs/Components/Header/SimpleNav';
@@ -9,7 +10,8 @@ interface LayoutProps {
 const HeaderAndFooter = ({ children }: LayoutProps) => {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
+            <NewNavbar />
             <div className="mt-14">
                 <div className="hidden md:block">
                     <SimpleNav />

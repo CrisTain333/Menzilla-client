@@ -1,13 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getUserProfile } from '@/lib/api';
-import { IInitialState } from '@/types';
-import { authKey } from '@/constants/storageKey';
-import { getFromLocalStorage } from '@/lib/localStorage/localStorage';
+import { getFromLocalStorage } from '@/libs/common/Helper/localStorage';
+import { IInitialState } from '@/libs/types/common';
+import { authKey } from '@/libs/common/constant/storageKey';
+import axiosInstance from '@/libs/common/utils/axios';
 
 export const getUser = createAsyncThunk('auth/getUser', async () => {
     const response = await getUserProfile();
@@ -69,3 +64,13 @@ const authSlice = createSlice({
 export const { setUser, setToken, logout, setLoadingFalse } = authSlice.actions;
 
 export default authSlice.reducer;
+
+const getUserProfile = async () => {
+    try {
+        const response = await axiosInstance.get(`/user/me`);
+        return response?.data;
+    } catch (e: any) {
+        throw new Error(e?.response?.data?.message);
+        // return e;
+    }
+};

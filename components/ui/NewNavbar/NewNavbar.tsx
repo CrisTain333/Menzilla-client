@@ -8,6 +8,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { RxCross1 } from 'react-icons/rx';
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
 
 const NewNavbar = () => {
     const { currentUser, logout, isLoading, profileData } = useAuth();
@@ -127,7 +128,7 @@ const NewNavbar = () => {
                                         </>
                                     ) : (
                                         <>
-                                            <label
+                                            {/* <label
                                                 tabIndex={0}
                                                 className="btn btn-ghost btn-circle avatar"
                                             >
@@ -157,7 +158,16 @@ const NewNavbar = () => {
                                                 <li onClick={logout}>
                                                     <p>Logout</p>
                                                 </li>
-                                            </ul>
+                                            </ul> */}
+                                            <Avatar>
+                                                <AvatarImage
+                                                    className="h-10 w-10"
+                                                    src={userProfileData?.profilePicture}
+                                                />
+                                                <AvatarFallback>
+                                                    {userProfileData?.name}
+                                                </AvatarFallback>
+                                            </Avatar>
                                         </>
                                     )}
                                 </>

@@ -326,12 +326,22 @@ const NewNavbar = () => {
                                                             </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem className="cursor-pointer">
-                                                            <ShoppingBag className="mr-2 h-4 w-4" />
-                                                            <span>Orders</span>
+                                                            <Link
+                                                                className="flex items-center"
+                                                                href="/profile?selected_path=2"
+                                                            >
+                                                                <ShoppingBag className="mr-2 h-4 w-4" />
+                                                                <span>Orders</span>
+                                                            </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem className="cursor-pointer">
-                                                            <BookUser className="mr-2 h-4 w-4" />
-                                                            <span>Address</span>
+                                                            <Link
+                                                                className="flex items-center"
+                                                                href="/profile?selected_path=7"
+                                                            >
+                                                                <BookUser className="mr-2 h-4 w-4" />
+                                                                <span>Address</span>
+                                                            </Link>
                                                         </DropdownMenuItem>
                                                     </DropdownMenuGroup>
                                                     <DropdownMenuSeparator />

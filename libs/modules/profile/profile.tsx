@@ -15,6 +15,9 @@ const Profile = () => {
     const { query } = router;
     const from_Success_Page = query?.from_Success_Page;
     const from_Order_Details_Page = query?.from_Order_Details_Page;
+    const slugNumber: unknown | number | any = query?.selected_path;
+    const selected_path = parseFloat(slugNumber);
+    console.log(selected_path);
 
     useEffect((): any => {
         const tokenStoragePath = 'accessToken';
@@ -30,10 +33,15 @@ const Profile = () => {
             if (from_Order_Details_Page === 'true') {
                 setActive(2);
             }
+            if (selected_path || selected_path === undefined || selected_path === null) {
+                setActive(selected_path);
+            }
         }
 
+        // if()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser]);
+    }, [currentUser, selected_path]);
 
     return (
         <div className="min-h-screen ">

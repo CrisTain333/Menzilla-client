@@ -1,6 +1,5 @@
 import NewNavbar from '@/components/ui/NewNavbar/NewNavbar';
 import { Footer } from '@/libs/Components/Footer/Footer';
-import Header from '@/libs/Components/Header/Header';
 import SimpleNav from '@/libs/Components/Header/SimpleNav';
 import React, { ReactNode } from 'react';
 
@@ -17,7 +16,7 @@ const HeaderAndFooter = ({ children }: LayoutProps) => {
                     <SimpleNav />
                 </div>
             </div>
-            <div className="w-[90%] mx-auto mt-20 md:mt-10">{children}</div>
+            <div className="w-[90%] mx-auto mt-16 md:mt-10">{children}</div>
             <Footer />
         </div>
     );

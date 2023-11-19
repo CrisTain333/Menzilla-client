@@ -109,7 +109,7 @@ const ProfileContent = ({ active }: any) => {
     return (
         <>
             <Head>
-                <title>{userProfileData?.name}&apos;Profile</title>
+                <title>{userProfileData?.name}- Profile</title>
                 <meta name="description" content={`${userProfileData?.name} Profile In Menzilla`} />
                 <meta property="twitter:image" content={userProfileData?.profilePicture} />
                 <meta name="twitter:card" content="summary_large_image" />

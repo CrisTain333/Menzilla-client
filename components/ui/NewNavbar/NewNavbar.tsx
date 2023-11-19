@@ -317,8 +317,13 @@ const NewNavbar = () => {
                                                     <DropdownMenuSeparator />
                                                     <DropdownMenuGroup>
                                                         <DropdownMenuItem className="cursor-pointer">
-                                                            <User className="mr-2 h-4 w-4" />
-                                                            <span>Profile</span>
+                                                            <Link
+                                                                className="flex items-center"
+                                                                href="/profile?selected_path=1"
+                                                            >
+                                                                <User className="mr-2 h-4 w-4" />
+                                                                <span>Profile</span>
+                                                            </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem className="cursor-pointer">
                                                             <ShoppingBag className="mr-2 h-4 w-4" />

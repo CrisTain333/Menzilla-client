@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Button } from '@/components/ui/button';
 import { getAllProduct } from '@/libs/Api';
 import Banner from '@/libs/Components/Banner/Banner';
 import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
@@ -22,6 +23,7 @@ const Home = ({ data }: any) => {
                 {/* MAIN DIV  */}
                 <div className="main_div">
                     <Banner />
+                    <Button>Click me</Button>
                     <Categories />
                     <BestDeals data={data} />
                     <Steps />

@@ -10,6 +10,16 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { RxCross1 } from 'react-icons/rx';
 import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
 import { Sheet, SheetContent, SheetTrigger } from '../sheet';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '../dropdown-menu';
+import { BookUser, LogOut, ShoppingBag, User } from 'lucide-react';
 
 const NewNavbar = () => {
     const { currentUser, logout, isLoading, profileData } = useAuth();
@@ -288,15 +298,49 @@ const NewNavbar = () => {
                                                     <p>Logout</p>
                                                 </li>
                                             </ul> */}
-                                            <Avatar>
-                                                <AvatarImage
-                                                    className="h-10 w-10"
-                                                    src={userProfileData?.profilePicture}
-                                                />
-                                                <AvatarFallback>
-                                                    {userProfileData?.name}
-                                                </AvatarFallback>
-                                            </Avatar>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Avatar className="border-green-500 cursor-pointer">
+                                                        <AvatarImage
+                                                            className="h-10 w-10"
+                                                            src={userProfileData?.profilePicture}
+                                                        />
+                                                        <AvatarFallback>
+                                                            {userProfileData?.name}
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent className="w-56">
+                                                    <DropdownMenuLabel>
+                                                        My Account
+                                                    </DropdownMenuLabel>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuGroup>
+                                                        <DropdownMenuItem className="cursor-pointer">
+                                                            <User className="mr-2 h-4 w-4" />
+                                                            <span>Profile</span>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="cursor-pointer">
+                                                            <ShoppingBag className="mr-2 h-4 w-4" />
+                                                            <span>Orders</span>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="cursor-pointer">
+                                                            <BookUser className="mr-2 h-4 w-4" />
+                                                            <span>Address</span>
+                                                        </DropdownMenuItem>
+                                                    </DropdownMenuGroup>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuItem className="cursor-pointer">
+                                                        <LogOut className="mr-2 h-4 w-4" />
+                                                        <span
+                                                            className="cursor-pointer"
+                                                            onClick={() => logout()}
+                                                        >
+                                                            Log out
+                                                        </span>
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
                                         </>
                                     )}
                                 </>
@@ -315,7 +359,7 @@ const NewNavbar = () => {
             </div>
 
             {/*  small device sidebar  */}
-            {open && (
+            {/* {open && (
                 <div
                     className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0 transform ${
                         open
@@ -392,7 +436,7 @@ const NewNavbar = () => {
                         </div>
                     </aside>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

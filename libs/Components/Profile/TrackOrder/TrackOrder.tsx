@@ -4,6 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { MdOutlineTrackChanges } from 'react-icons/md';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
+} from '@/components/ui/table';
 
 const TrackOrder = () => {
     const { currentUser } = useAuth();
@@ -32,7 +41,7 @@ const TrackOrder = () => {
     return (
         <div className="shadow-md w-[90%] mx-auto">
             <div className="pl-5 pr-2 pt-1 pb-5">
-                <div className="overflow-x-auto scrollbar-hide">
+                {/* <div className="overflow-x-auto scrollbar-hide">
                     <table className="table table-compact w-full">
                         <thead>
                             <tr className="lowercase">
@@ -64,7 +73,39 @@ const TrackOrder = () => {
                                 })}
                         </tbody>
                     </table>
-                </div>
+                </div> */}
+                <Table>
+                    <TableCaption>Track Orders</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[100px]">OrderId</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>itemsQty</TableHead>
+                            <TableHead>total</TableHead>
+                            <TableHead className="text-right"></TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {data &&
+                            data?.map((e: any, i: any) => {
+                                return (
+                                    <TableRow key={i}>
+                                        <TableCell>{e?._id}</TableCell>
+                                        <TableCell> {e?.status}</TableCell>
+                                        <TableCell>{e?.cart?.length}</TableCell>
+                                        <TableCell>{'US$ ' + e?.totalPrice}</TableCell>
+                                        <TableCell>
+                                            <Link href={`/order/track-order?orderId=${e?._id}`}>
+                                                <button className="text-blue-500 border p-2">
+                                                    <MdOutlineTrackChanges size={20} />
+                                                </button>
+                                            </Link>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                    </TableBody>
+                </Table>
 
                 <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
                     {pageNumbers?.map((pageNumber, i) => (

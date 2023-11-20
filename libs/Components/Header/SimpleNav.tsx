@@ -73,7 +73,7 @@ const SimpleNav = () => {
                                     href="/product"
                                     className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
                                 >
-                                    Product
+                                    Products
                                 </Link>
                             </li>
                             <li className="flex">

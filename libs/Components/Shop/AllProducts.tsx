@@ -5,6 +5,15 @@ import { useSeller } from '@/libs/Context/sellerProvider';
 import Link from 'next/link';
 import { deleteShopProduct } from '@/libs/Api';
 import { toast } from 'react-hot-toast';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
+} from '@/components/ui/table';
 
 const AllProducts = () => {
     const { currentSeller, products, getSellerProducts, totalPages } = useSeller();
@@ -64,72 +73,46 @@ const AllProducts = () => {
 
     return (
         <>
-            <div className="overflow-x-auto h-[25rem] w-[95%] mx-auto">
-                <table className="table w-full">
-                    <colgroup>
-                        <col className="w-36" />
-                        <col className="w-32" />
-                        <col className="w-32" />
-                        <col className="w-32" />
-                        <col className="w-32" />
-                        <col className="w-32" />
-                        <col className="w-32" />
-                    </colgroup>
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th className="w-[30%]">
-                                Name
-                                <div className=" my-1">
-                                    {/* <input
-                                        type="text"
-                                        className="p-1 rounded-md"
-                                        placeholder="Search by name"
-                                        // value={filterText}
-                                        // onChange={(e) => setFilterText(e.target.value)}
-                                        // onChange={(e) => handleSearch(e.target.value)}
-                                    /> */}
-                                </div>
-                            </th>
-                            <th className="w-[20%]">Price</th>
-                            <th className="w-[20%]">Stock</th>
-                            <th className="w-[20%]">Sold</th>
-                            <th>preview</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products &&
-                            products?.map((product: any, index: any) => {
-                                return (
-                                    <tr key={index}>
-                                        <th>{index + 1}</th>
-                                        <td>{product?.name?.slice(0, 40)}. . .</td>
-                                        <td>${product?.discountPrice}</td>
-                                        <td>{product?.stock}</td>
-                                        <td>{product?.sold_out}</td>
-                                        <td>
-                                            {' '}
-                                            <Link href={`/product/${product?.name}`}>
-                                                <AiOutlineEye size={20} />
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <div
-                                                onClick={() => handleProductDelete(product?._id)}
-                                                className="cursor-pointer"
-                                            >
-                                                <AiOutlineDelete size={20} color="red" />
-                                            </div>{' '}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        {/* row 1 */}
-                    </tbody>
-                </table>
-            </div>
+            <Table>
+                <TableCaption>A list of your products</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[400px]">Name</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead>Stock</TableHead>
+                        <TableHead>Sold</TableHead>
+                        <TableHead>Preview</TableHead>
+                        <TableHead>Delete</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {products &&
+                        products?.map((product: any, index: any) => {
+                            return (
+                                <TableRow key={index}>
+                                    <TableCell>{product?.name?.slice(0, 40)}. . .</TableCell>
+                                    <TableCell>${product?.discountPrice}</TableCell>
+                                    <TableCell>{product?.stock}</TableCell>
+                                    <TableCell>{product?.sold_out}</TableCell>
+                                    <TableCell>
+                                        {' '}
+                                        <Link href={`/product/${product?.name}`}>
+                                            <AiOutlineEye size={20} />
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div
+                                            onClick={() => handleProductDelete(product?._id)}
+                                            className="cursor-pointer"
+                                        >
+                                            <AiOutlineDelete size={20} color="red" />
+                                        </div>{' '}
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                </TableBody>
+            </Table>
 
             <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
                 {pageNumbers?.map((pageNumber, i) => (

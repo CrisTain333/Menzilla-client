@@ -10,12 +10,12 @@ import { toast } from 'react-hot-toast';
 const Register = () => {
     const { currentUser } = useAuth();
     const router = useRouter();
-    const [isVisible, setIsVisible] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState<any>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [resendEnabled, setResendEnabled] = useState(true);
     const [waitingTime, setWaitingTime] = useState(60);
 
+    const [isVisible, setIsVisible] = useState(false);
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
     };

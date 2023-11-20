@@ -1,6 +1,6 @@
 import { api } from '../../api/index';
 
-export const userApi = api.injectEndpoints({
+export const userApi: any = api.injectEndpoints({
     endpoints: (builder) => ({
         getUser: builder.query({
             query: () => ({
@@ -10,9 +10,24 @@ export const userApi = api.injectEndpoints({
                 }
             }),
             providesTags: ['user']
+        }),
+        registerUser: builder.mutation({
+            query: (data: any) => ({
+                url: `/auth/register`,
+                method: `POST`,
+                body: data
+            }),
+            invalidatesTags: ['user']
+        }),
+        loginUser: builder.mutation({
+            query: (credential: any) => ({
+                url: '/auth/login',
+                method: `POST`,
+                body: credential
+            })
         })
     }),
     overrideExisting: false
 });
 
-export {};
+export const { useRegisterUserMutation, useLoginUserMutation } = userApi;

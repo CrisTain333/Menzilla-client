@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
                                     position="top-right"
                                     containerStyle={{
                                         // Add space at the top
-                                        marginTop: '55px'
+                                        marginTop: '30px'
                                     }}
                                     toastOptions={{
                                         duration: 4000,

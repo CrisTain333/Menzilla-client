@@ -1,5 +1,10 @@
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Register from '@/libs/modules/entrance/register';
 import React from 'react';
+import Banner from '../../public/images/new_banner.jpg';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const register = () => {
     return (
@@ -8,13 +13,14 @@ const register = () => {
             <div className="flex flex-wrap">
                 <div className="flex w-full flex-col md:w-1/2">
                     <div className="lg:w-[28rem] mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0">
-                        <form className="flex flex-col pt-3 md:pt-8">
+                        <form className="flex flex-col pt-8 md:pt-8">
                             <div className="flex flex-col pt-4">
-                                <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input
+                                <div className="grid w-full max-w-sm items-center gap-1.5">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input
                                         type="email"
-                                        id="login-email"
-                                        className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                                        id="email"
+                                        className="outline-none focus-within:border-white"
                                         placeholder="Email"
                                     />
                                 </div>
@@ -51,17 +57,22 @@ const register = () => {
                 </div>
                 <div className="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-1/2">
                     <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
-                        <p className="mb-8 text-3xl font-semibold leading-10">
-                            We work 10x faster than our compeititors and stay consistant. While
-                            they're bogged won with techincal debt, we're realeasing new features.
-                        </p>
-                        <p className="mb-4 text-3xl font-semibold">John Elmond</p>
-                        <p className="">Founder, Emogue</p>
-                        <p className="mb-7 text-sm opacity-70">Web Design Agency</p>
+                        <Link
+                            href="https://github.com/cristain333"
+                            target="_blank"
+                            className="mb-4 text-3xl font-semibold"
+                        >
+                            Sukanta Das
+                        </Link>
+                        <p className="">Founder Menzilla</p>
+                        <p className="mb-7 text-sm opacity-70">Full Stack Developer</p>
                     </div>
-                    <img
+                    <Image
                         className="-z-1 absolute top-0 h-full w-full object-cover opacity-90"
-                        src="https://images.unsplash.com/photo-1565301660306-29e08751cc53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                        src={Banner}
+                        height={500}
+                        width={500}
+                        alt="register_image"
                     />
                 </div>
             </div>

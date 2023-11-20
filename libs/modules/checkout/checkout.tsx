@@ -2,6 +2,7 @@ import Checkouts from '@/libs/Components/Checkout/Checkout';
 import CheckoutSteps from '@/libs/Components/Checkout/CheckoutSteps';
 import { useAuth } from '@/libs/Context/AuthProvider';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
@@ -20,6 +21,10 @@ const Checkout = () => {
     }, [currentUser]);
     return (
         <div>
+            <Head>
+                <title>Checkout - Menzilla</title>
+            </Head>
+
             <HeaderAndFooter>
                 <br />
                 <br />

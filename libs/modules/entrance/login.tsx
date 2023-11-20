@@ -1,18 +1,26 @@
-import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
-import LoginBanner from '../../../public/images/loginBanner.jpg';
-import Link from 'next/link';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/libs/Context/AuthProvider';
-import SmallLoader from '@/libs/Components/SmallLoader/SmallLoader';
+import { Loader2 } from 'lucide-react';
+// import Login from '@/libs/modules/entrance/login';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-    const { login, currentUser, isLoading: loading } = useAuth();
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const { currentUser, login } = useAuth();
     const router = useRouter();
+
+    useEffect(() => {
+        if (currentUser) {
+            router.push('/');
+        }
+    }, [currentUser, router]);
 
     const handleShowPassword = () => {
         setIsVisible(!isVisible);
@@ -42,45 +50,40 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {
-        if (loading === false) {
-            if (currentUser) {
-                router.push('/');
-            }
-        }
-    }, [currentUser, router]);
-
     return (
         <div>
-            <section className=" min-h-screen flex items-center justify-center">
-                {/* <!-- login container --> */}
-                <div className="bg-gray-50 md:bg-gray-100 flex rounded-lg shadow-lg w-[95%] md:max-w-3xl p-5 items-center">
-                    {/* <!-- form --> */}
-                    <div className="w-[95%] md:w-1/2 px-2 md:px-16">
-                        <h2 className="font-bold text-2xl text-transparent  bg-clip-text bg-gradient-to-r from-[#ff6a94]  to-[#ff6992] text-center">
-                            Login
-                        </h2>
-                        {error && (
-                            <p className="my-2 text-center text-[16px] text-red-600">{error}</p>
-                        )}
-
-                        <form onSubmit={handleLogin} className="flex flex-col gap-4">
-                            <input
-                                className="p-2 mt-8 rounded-sm border"
+            {/* <Login /> */}
+            <div className="mx-auto w-full sm:w-2/3 sm:py-10 xl:w-1/3">
+                <div className="space-y-8 rounded-md bg-white px-8 py-10 shadow">
+                    <div className="flex justify-center">
+                        {/* <Image src={Logo} width={200} height={50} alt="Talent Pro Logo" /> */}
+                    </div>
+                    <h2 className="mt-10 text-center text-3xl font-semibold tracking-tight ">
+                        Sign In to Your Account
+                    </h2>
+                    <form className="space-y-4" onSubmit={handleLogin}>
+                        <div>
+                            <Label htmlFor="email">Email</Label>
+                            <Input
                                 type="email"
+                                id="email"
                                 name="email"
-                                placeholder="Email"
+                                placeholder="example@gmail.com"
                             />
-                            <div className="relative">
-                                <input
-                                    className="p-2 rounded-sm border w-full"
+                        </div>
+                        <div>
+                            <div className="relative w-full ">
+                                <Label htmlFor="password">Password</Label>
+                                <Input
                                     type={isVisible ? 'text' : 'password'}
+                                    id="password"
                                     name="password"
-                                    placeholder="Password"
+                                    className="outline-none rounded-sm focus-within:border-white"
+                                    placeholder="min 6 password"
                                 />
                                 <span
                                     onClick={handleShowPassword}
-                                    className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                                    className="absolute top-11 right-3 -translate-y-1/2 cursor-pointer"
                                 >
                                     {isVisible ? (
                                         <>
@@ -124,37 +127,42 @@ const Login = () => {
                                     )}
                                 </span>
                             </div>
-
-                            <button className="bg-gradient-to-r from-[#ff6a94] to-[#ff6992]  rounded-sm text-white py-2 hover:scale-105 duration-300">
-                                {isLoading ? <SmallLoader /> : 'Login'}
-                            </button>
-                        </form>
-
-                        <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
-                            <a href="#">Forgot your password?</a>
+                            {/* <p className="flex justify-end">
+                                <Button variant="link" className="p-0 font-semibold">
+                                    Forget Password
+                                </Button>
+                            </p> */}
                         </div>
-
-                        <div className="mt-3 text-xs flex justify-center items-center text-[#002D74]">
-                            <p>don&apos;t have an account ? </p>
-                            <Link href="/auth/register" className="ml-1 underline text-blue-500">
-                                {' '}
-                                Register
+                        {error && (
+                            <p className="my-2 text-center text-[14px] text-red-600 font-semibold">
+                                {error}
+                            </p>
+                        )}
+                        <Button
+                            disabled={isLoading}
+                            type="submit"
+                            className="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-sm font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
+                        >
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Signing in . . .
+                                </>
+                            ) : (
+                                <>Sign in</>
+                            )}
+                        </Button>
+                        <p className="text-center text-sm font-medium leading-none">
+                            Don’t have an account?{' '}
+                            <Link href={'/auth/register'}>
+                                <Button variant="link" className="p-0 font-bold">
+                                    Create Account
+                                </Button>
                             </Link>
-                        </div>
-                    </div>
-
-                    {/* <!-- image --> */}
-                    <div className="md:block hidden w-1/2">
-                        <Image
-                            height={500}
-                            width={500}
-                            alt="loginImage"
-                            className="rounded-2xl"
-                            src={LoginBanner}
-                        />
-                    </div>
+                        </p>
+                    </form>
                 </div>
-            </section>
+            </div>
         </div>
     );
 };

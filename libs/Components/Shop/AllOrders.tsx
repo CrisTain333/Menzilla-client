@@ -1,3 +1,12 @@
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
+} from '@/components/ui/table';
 import { getShopOrders } from '@/libs/Api';
 import { useSeller } from '@/libs/Context/sellerProvider';
 import { useQuery } from '@tanstack/react-query';
@@ -31,7 +40,7 @@ const AllOrders = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto h-[25rem] w-[95%] scrollbar-hide">
+            {/* <div className="overflow-x-auto h-[25rem] w-[95%] scrollbar-hide">
                 <table className="table  w-full">
                     <colgroup>
                         <col className="w-20" />
@@ -70,7 +79,43 @@ const AllOrders = () => {
                             })}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
+
+            <Table>
+                <TableCaption>A list of your recent orders.</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[100px]">OrderId</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>itemsQty</TableHead>
+                        <TableHead className="text-right">total</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {data &&
+                        data?.map((e: any, i: any) => {
+                            return (
+                                <TableRow key={i}>
+                                    <TableCell>{e?._id}</TableCell>
+                                    <TableCell> {e?.status}</TableCell>
+                                    <TableCell>{e?.cart?.length}</TableCell>
+                                    <TableCell>{'US$ ' + e?.totalPrice}</TableCell>
+                                    <TableCell>
+                                        <Link href={`/order/order-details?orderId=${e?._id}`}>
+                                            <button className="text-blue-500 border p-2">
+                                                <AiOutlineArrowRight size={20} />
+                                            </button>
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    {/* <TableCell className="font-medium">INV001</TableCell>
+                        <TableCell>Paid</TableCell>
+                        <TableCell>Credit Card</TableCell>
+                        <TableCell className="text-right">$250.00</TableCell> */}
+                </TableBody>
+            </Table>
 
             <div className="flex justify-start space-x-1 dark:text-gray-100 my-10 ml-10">
                 {pageNumbers?.map((pageNumber, i) => (

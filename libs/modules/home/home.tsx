@@ -1,13 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { getAllProduct } from '@/libs/Api';
+
 import Banner from '@/libs/Components/Banner/Banner';
 import BestDeals from '@/libs/Components/Home/BestDeals/BestDeals';
 import Categories from '@/libs/Components/Home/Category/Category';
-import Sponsor from '@/libs/Components/Home/Sponser/Sponser';
 import Steps from '@/libs/Components/Home/Steps/Steps';
 // import useOnScreen from '@/libs/Hooks/useOnScreen';
 import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
-import axiosInstance from '@/libs/common/utils/axios';
 import Head from 'next/head';
 import React from 'react';
 

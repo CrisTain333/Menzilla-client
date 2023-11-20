@@ -1,4 +1,4 @@
-import Header from '@/libs/Components/Header/Header';
+import NewNavbar from '@/components/ui/NewNavbar/NewNavbar';
 import SimpleNav from '@/libs/Components/Header/SimpleNav';
 import React, { ReactNode } from 'react';
 
@@ -8,7 +8,8 @@ interface LayoutProps {
 const HeaderOnly = ({ children }: LayoutProps) => {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
+            <NewNavbar />
             <div className="hidden md:block mt-14">
                 <SimpleNav />
             </div>

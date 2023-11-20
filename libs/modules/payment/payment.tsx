@@ -4,10 +4,14 @@ import HeaderAndFooter from '@/libs/Layout/HeaderAndFooter/headerAndFooter';
 import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Head from 'next/head';
 const PaymentPage = () => {
     const stripePromise = loadStripe(process.env.PAYMENT_SECRET_KEY as string);
     return (
         <div>
+            <Head>
+                <title>Payment - Menzilla</title>
+            </Head>
             <HeaderAndFooter>
                 <br />
                 <br />

@@ -8,6 +8,7 @@ export default function Document() {
                 href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css"
                 rel="stylesheet"
             ></link>
+            <link rel="manifest" href="/manifest.json" />
 
             <link
                 rel="icon"
